@@ -1,0 +1,3 @@
+[submodule "docs.konghq.com"]
+	path = docs.konghq.com
+	url = git@github.com:Kong/docs.konghq.com.git
