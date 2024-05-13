@@ -1,3 +1,4 @@
 [submodule "docs.konghq.com"]
-	path = docs.konghq.com
-	url = https://github.com/Kong/docs.konghq.com.git
+  path = docs.konghq.com
+  url = https://github.com/Kong/docs.konghq.com.git
+  recursive = true
