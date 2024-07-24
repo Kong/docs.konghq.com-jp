@@ -1,0 +1,7 @@
+locale: ja-JP
+
+links:
+  web: https://docs.jp.konghq.com
+  share: https://docs.jp.konghq.com
+
+disable_search: true
