@@ -19,7 +19,7 @@ jobs:
         uses: mheap/submodule-sync-action@v1
         with:
           token: ${{ secrets.PAT }}
-          path: ./docs.konghq.com
+          path: docs.konghq.com
           ref: i18n-spike
           pr_branch: automated-docs-update
           base_branch: main
