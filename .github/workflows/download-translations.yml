@@ -1,0 +1,47 @@
+name: Download Job Translations
+on:
+  workflow_dispatch:
+    inputs:
+      locale:
+        type: string
+        default: 'ja-JP'
+        description: "Target locale, it must match the same format that the Job has, e.g. `ja-JP`."
+      jobId:
+        type: string
+        required: true
+        description: "Smarting's JobUId of the Job containing the translations to be downloaded."
+
+jobs:
+  download-translations:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: 'recursive'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install dependencies
+        run: |
+          cd ./docs.konghq.com/tools/smartling-integration
+          npm ci
+      - name: Run download tool
+        run: |
+          node ./docs.konghq.com/tools/smartling-integration/download.js
+        env:
+          PROJECT_ID: ${{ secrets.SMARTLING_PROJECT_ID }}
+          USER_IDENTIFIER: ${{ secrets.SMARTLING_USER_IDENTIFIER }}
+          USER_SECRET: ${{ secrets.SMARTLING_USER_SECRET }}
+          TRANSLATED_CONTENT_PATH: '_translated_content/'
+          JOB_ID: ${{ github.event.inputs.jobId }}
+          LOCALE: ${{ github.event.inputs.locale }}
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.PAT }}
+          title: "Download ${{ github.event.inputs.locale }} translations from JobId ${{ github.events.inputs.jobId }}"
+          branch: "download-translations-job-${{ github.event.inputs.jobId }}"
+          commit-message: "Download translations - JobId: ${{ github.events.inputs.jobId }}"
+          delete-branch: true
+          add-paths: _translated_content/
