@@ -28,19 +28,12 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           working-directory: ./docs.konghq.com
+          bundler-cache: true
           ruby-version: .ruby-version
+        env:
+          BUNDLE_JOBS: 4
+          BUNDLE_RETRY: 3
 
-      - name: Ruby gem cache
-        uses: actions/cache@v4
-        with:
-          path: ${{ github.workspace }}/vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-gems-
-      - name: Bundle Setup
-        run: bundle config path ${{ github.workspace }}/vendor/bundle
-      - name: Bundle Install
-        run: bundle install --jobs 4 --retry 3 --gemfile=./docs.konghq.com/Gemfile
       # Configure Node to build assets
       - uses: actions/setup-node@v4
         with:
