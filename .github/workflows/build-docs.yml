@@ -28,7 +28,7 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           working-directory: ./docs.konghq.com
-          ruby-version: 3.3
+          ruby-version: .ruby-version
 
       - name: Ruby gem cache
         uses: actions/cache@v4
