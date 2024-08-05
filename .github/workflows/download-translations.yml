@@ -40,8 +40,8 @@ jobs:
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.PAT }}
-          title: "Download ${{ github.event.inputs.locale }} translations from JobId ${{ github.events.inputs.jobId }}"
+          title: "Download ${{ github.event.inputs.locale }} translations from JobId ${{ github.event.inputs.jobId }}"
           branch: "download-translations-job-${{ github.event.inputs.jobId }}"
-          commit-message: "Download translations - JobId: ${{ github.events.inputs.jobId }}"
+          commit-message: "Download translations - JobId: ${{ github.event.inputs.jobId }}"
           delete-branch: true
           add-paths: _translated_content/
