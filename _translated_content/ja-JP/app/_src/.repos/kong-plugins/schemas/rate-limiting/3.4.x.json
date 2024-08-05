@@ -1,0 +1,305 @@
+{
+  "fields" : [
+  {
+    "protocols" : {
+      "default" : ["grpc", "grpcs", "http", "https"],
+      "required" : true,
+      "description" : "HTTP プロトコルを表す文字列のセット。",
+      "type" : "set",
+      "elements" : {
+        "type" : "string",
+        "one_of" : ["grpc", "grpcs", "http", "https"]
+      }
+    }
+  },
+
+  {
+    "consumer_group" : {
+      "reference" : "consumer_groups",
+      "description" : "null 値が許可されている外部キーを表すカスタム型。",
+      "eq" : null,
+      "type" : "foreign"
+    }
+  },
+
+  {
+    "config" : {
+      "fields" : [
+      {
+        "second" : {
+          "gt" : 0,
+          "type" : "number",
+          "description" : "1 秒あたりに実行可能な HTTP リクエストの数。"
+        }
+      },
+
+      {
+        "minute" : {
+          "gt" : 0,
+          "type" : "number",
+          "description" : "1 分あたりに実行可能な HTTP リクエストの数。"
+        }
+      },
+
+      {
+        "hour" : {
+          "gt" : 0,
+          "type" : "number",
+          "description" : "1 時間あたりに実行可能な HTTP リクエストの数。"
+        }
+      },
+
+      {
+        "day" : {
+          "gt" : 0,
+          "type" : "number",
+          "description" : "1 日あたりに実行可能な HTTP リクエストの数。"
+        }
+      },
+
+      {
+        "month" : {
+          "gt" : 0,
+          "type" : "number",
+          "description" : "1 月あたりに実行可能な HTTP リクエストの数。"
+        }
+      },
+
+      {
+        "year" : {
+          "gt" : 0,
+          "type" : "number",
+          "description" : "1 年あたりに実行可能な HTTP リクエストの数。"
+        }
+      },
+
+      {
+        "limit_by" : {
+          "default" : "consumer",
+          "one_of" : ["consumer", "credential", "ip", "service", "header", "path"],
+          "type" : "string",
+          "description" : "制限を集計するときに使用されるエンティティ。"
+        }
+      },
+
+      {
+        "header_name" : {
+          "type" : "string",
+          "description" : "HTTP ヘッダー名を表す文字列。"
+        }
+      },
+
+      {
+        "path" : {
+          "starts_with" : "/",
+          "description" : "URL パスを表す文字列 (/path/to/resource など)。フォワードスラッシュ (/) で開始する必要があり、空のセグメント (フォワードスラッシュが 2 つ連続) を含めることはできません。",
+          "match_none" : [
+          {
+            "pattern" : "//",
+            "err" : "must not have empty segments"
+          }],
+          "type" : "string"
+        }
+      },
+
+      {
+        "policy" : {
+          "default" : "local",
+          "description" : "制限値の取得とインクリメントに使用するレート制限ポリシー。",
+          "len_min" : 0,
+          "one_of" : ["local", "cluster", "redis"],
+          "type" : "string"
+        }
+      },
+
+      {
+        "fault_tolerant" : {
+          "default" : true,
+          "type" : "boolean",
+          "description" : "Kong がサードパーティのデータストアに接続できない場合でも、リクエストをプロキシするかどうかを決定するブール値。`true` の場合、リクエストはどのような状況でもプロキシされ、データストアが再び機能するまでレート制限機能が事実上無効になります。`false` の場合、クライアントには `500` エラーが表示されます。",
+          "required" : true
+        }
+      },
+
+      {
+        "redis_host" : {
+          "type" : "string",
+          "description" : "ホスト名を表す文字列 (example.com など)。"
+        }
+      },
+
+      {
+        "redis_port" : {
+          "default" : 6379,
+          "description" : "0 から 65535 (両端入れ) までのポート番号を表す整数。",
+          "between" : [0, 65535],
+          "type" : "integer"
+        }
+      },
+
+      {
+        "redis_password" : {
+          "len_min" : 0,
+          "referenceable" : true,
+          "type" : "string",
+          "description" : "`redis` ポリシーを使用する場合、このプロパティで Redis サーバーに接続するためのパスワードが指定されます。"
+        }
+      },
+
+      {
+        "redis_username" : {
+          "referenceable" : true,
+          "type" : "string",
+          "description" : "`redis` ポリシーを使用し、かつ ACL 認証が必要な場合には、このプロパティで Redis サーバーに接続するためのユーザー名が指定されます。"
+        }
+      },
+
+      {
+        "redis_ssl" : {
+          "default" : false,
+          "type" : "boolean",
+          "description" : "`redis` ポリシーを使用する場合、このプロパティで Redis サーバーへの接続に SSL を使用するかどうかが指定されます。",
+          "required" : true
+        }
+      },
+
+      {
+        "redis_ssl_verify" : {
+          "default" : false,
+          "type" : "boolean",
+          "description" : "`redis` ポリシーを使用し、かつ `redis_ssl` を `true` に設定する場合、このプロパティでサーバー SSL 証明書が検証されるかどうかが指定されます。注: Redis サーバーが使用する CA (またはサーバー) 証明書を指定するには、lua_ssl_trusted_certificat を構成する必要があります。その結果、lua_ssl_verify_depth の構成も必要になる場合があります。",
+          "required" : true
+        }
+      },
+
+      {
+        "redis_server_name" : {
+          "type" : "string",
+          "description" : "TLS の SNI (サーバー名表示) 値を表す文字列。"
+        }
+      },
+
+      {
+        "redis_timeout" : {
+          "default" : 2000,
+          "type" : "number",
+          "description" : "`redis` ポリシーを使用する場合、このプロパティで、Redis サーバーに送信されるコマンドのタイムアウトがミリ秒単位で指定されます。"
+        }
+      },
+
+      {
+        "redis_database" : {
+          "default" : 0,
+          "type" : "integer",
+          "description" : "`redis` ポリシーを使用する場合、このプロパティで使用する Redis データベースが指定されます。"
+        }
+      },
+
+      {
+        "hide_client_headers" : {
+          "default" : false,
+          "type" : "boolean",
+          "description" : "オプションで参考になるレスポンスヘッダーを非表示にします。",
+          "required" : true
+        }
+      },
+
+      {
+        "error_code" : {
+          "default" : 429,
+          "gt" : 0,
+          "type" : "number",
+          "description" : "レート制限の超過時に返されるカスタムエラーコードを設定します。"
+        }
+      },
+
+      {
+        "error_message" : {
+          "default" : "API rate limit exceeded",
+          "type" : "string",
+          "description" : "レート制限の超過時に返されるカスタムエラーメッセージを設定します。"
+        }
+      },
+
+      {
+        "sync_rate" : {
+          "default" : -1,
+          "type" : "number",
+          "description" : "カウンターデータを中央のデータストアに同期する頻度。「-1」を指定すると、同期動作になります。",
+          "required" : true
+        }
+      }],
+      "type" : "record",
+      "required" : true
+    }
+  }],
+  "entity_checks" : [
+  {
+    "at_least_one_of" : ["config.second", "config.minute", "config.hour", "config.day", "config.month", "config.year"]
+  },
+
+  {
+    "conditional" : {
+      "then_field" : "config.redis_host",
+      "if_match" : {
+        "eq" : "redis"
+      },
+      "then_match" : {
+        "required" : true
+      },
+      "if_field" : "config.policy"
+    }
+  },
+
+  {
+    "conditional" : {
+      "then_field" : "config.redis_port",
+      "if_match" : {
+        "eq" : "redis"
+      },
+      "then_match" : {
+        "required" : true
+      },
+      "if_field" : "config.policy"
+    }
+  },
+
+  {
+    "conditional" : {
+      "then_field" : "config.header_name",
+      "if_match" : {
+        "eq" : "header"
+      },
+      "then_match" : {
+        "required" : true
+      },
+      "if_field" : "config.limit_by"
+    }
+  },
+
+  {
+    "conditional" : {
+      "then_field" : "config.path",
+      "if_match" : {
+        "eq" : "path"
+      },
+      "then_match" : {
+        "required" : true
+      },
+      "if_field" : "config.limit_by"
+    }
+  },
+
+  {
+    "conditional" : {
+      "then_field" : "config.redis_timeout",
+      "if_match" : {
+        "eq" : "redis"
+      },
+      "then_match" : {
+        "required" : true
+      },
+      "if_field" : "config.policy"
+    }
+  }]
+}
