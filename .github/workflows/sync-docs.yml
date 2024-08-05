@@ -1,0 +1,26 @@
+name: Sync Docs
+on:
+  workflow_dispatch:
+    inputs: {}
+  repository_dispatch:
+    types: [DOCS_UPDATED]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  submodule-sync:
+    name: Submodule Sync
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Submodule Sync
+        uses: mheap/submodule-sync-action@v1
+        with:
+          token: ${{ secrets.PAT }}
+          path: ./docs.konghq.com
+          ref: i18n-spike
+          pr_branch: automated-docs-update
+          base_branch: main
+          target_branch: main
