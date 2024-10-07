@@ -1,0 +1,73 @@
+{
+  "fields" : [
+  {
+    "protocols" : {
+      "type" : "set",
+      "required" : true,
+      "elements" : {
+        "type" : "string",
+        "description" : "HTTPやHTTPSなどのプロトコルを表す文字列。",
+        "one_of" : ["grpc", "grpcs", "http", "https", "tcp", "tls", "tls_passthrough", "udp", "ws", "wss"]
+      },
+      "description" : "プロトコルを表す文字列のセット。",
+      "default" : ["grpc", "grpcs", "http", "https"]
+    }
+  },
+
+  {
+    "consumer_group" : {
+      "reference" : "consumer_groups",
+      "type" : "foreign",
+      "description" : "null 値が許可されている外部キーを表すカスタム型。",
+      "eq" : null
+    }
+  },
+
+  {
+    "config" : {
+      "fields" : [
+      {
+        "per_consumer" : {
+          "description" : "コンシューマごとのメトリクスを収集するかどうかを決定するブール値。有効にすると、`kong_http_requests_total`および`kong_bandwidth_bytes`メトリクスが、コンシューマラベルに入力されます（利用可能な場合）。",
+          "type" : "boolean",
+          "default" : false
+        }
+      },
+
+      {
+        "status_code_metrics" : {
+          "description" : "ステータスコードのメトリクスを収集するかどうかを決定するブール値。有効にすると、`http_requests_total`、`stream_sessions_total`メトリクスがエクスポートされます。",
+          "type" : "boolean",
+          "default" : false
+        }
+      },
+
+      {
+        "latency_metrics" : {
+          "description" : "レイテンシのメトリクスを収集するかどうかを決定するブール値。有効にすると、`kong_latency_ms`、`upstream_latency_ms`、および`request_latency_ms`メトリクスがエクスポートされます。",
+          "type" : "boolean",
+          "default" : false
+        }
+      },
+
+      {
+        "bandwidth_metrics" : {
+          "description" : "帯域幅メトリクスを収集するかどうかを決定するブール値。有効にすると、`bandwidth_bytes`と`stream_sessions_total`メトリクスがエクスポートされます。",
+          "type" : "boolean",
+          "default" : false
+        }
+      },
+
+      {
+        "upstream_health_metrics" : {
+          "description" : "アップストリームのメトリクスを収集するかどうかを決定するブール値。有効にすると、`upstream_target_health`メトリクスがエクスポートされます。",
+          "type" : "boolean",
+          "default" : false
+        }
+      }],
+      "type" : "record",
+      "required" : true
+    }
+  }],
+  "entity_checks" : []
+}

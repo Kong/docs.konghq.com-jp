@@ -1,0 +1,20 @@
+# smartling.sltrans = notranslate
+---
+name: "Proxy Cache"
+search_aliases: 
+    - "proxy caching"
+    - "proxy-cache"
+dbless_compatible: yes
+free: true
+enterprise: true
+konnect: true
+network_config_opts: "All"
+# smartling.sltrans = translate
+notes: "--"
+# smartling.sltrans = notranslate
+categories: 
+    - "traffic-control"
+publisher: "Kong Inc."
+# smartling.sltrans = translate
+desc: "Kongで一般的にリクエストされる応答をキャッシュして提供する"
+# smartling.sltrans = notranslate

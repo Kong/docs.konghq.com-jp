@@ -1,0 +1,22 @@
+# smartling.sltrans = notranslate
+---
+name: "Prometheus"
+dbless_compatible: yes
+# smartling.sltrans = translate
+dbless_explanation: "DB-lessでは、データベースは常にPrometheusで到達可能として報告されます。\nさらに、DBエンティティ数メトリクス（`kong_db_entities_total`）はDB-lessモードでは出力されません。\n"
+# smartling.sltrans = notranslate
+free: true
+enterprise: true
+paid: true
+konnect: true
+cloud_gateways: false
+network_config_opts: "traditional, hybrid, konnect hybrid, and db-less"
+# smartling.sltrans = translate
+notes: "<b>Dedicated Cloud Gateways</b>: このプラグインは、Admin APIとStatus APIに依存するため、Dedicated Cloud Gatewaysではサポートされていません（Admin APIとStatus APIはこの設定ではアクセスできないため）。\n"
+# smartling.sltrans = notranslate
+categories: 
+    - "analytics-monitoring"
+publisher: "Kong Inc."
+# smartling.sltrans = translate
+desc: "Kongおよびプロキシされたアップストリームサービスに関連するメトリクスをPrometheus exposition formatで公開します。"
+# smartling.sltrans = notranslate
