@@ -1,0 +1,2647 @@
+{
+  "fields" : [
+  {
+    "consumer" : {
+      "reference" : "consumers",
+      "type" : "foreign",
+      "description" : "null 値が許可されている外部キーを表すカスタム型。",
+      "eq" : null
+    }
+  },
+
+  {
+    "protocols" : {
+      "type" : "set",
+      "required" : true,
+      "elements" : {
+        "type" : "string",
+        "one_of" : ["grpc", "grpcs", "http", "https"]
+      },
+      "description" : "HTTP プロトコルを表す文字列のセット。",
+      "default" : ["grpc", "grpcs", "http", "https"]
+    }
+  },
+
+  {
+    "consumer_group" : {
+      "reference" : "consumer_groups",
+      "type" : "foreign",
+      "description" : "null 値が許可されている外部キーを表すカスタム型。",
+      "eq" : null
+    }
+  },
+
+  {
+    "config" : {
+      "fields" : [
+      {
+        "issuer" : {
+          "required" : true,
+          "type" : "string",
+          "description" : "検出エンドポイント（または発行者識別子）。検出エンドポイントがない場合は、`config.using_pseudo_issuer=true` も構成してください。"
+        }
+      },
+
+      {
+        "using_pseudo_issuer" : {
+          "required" : false,
+          "description" : "プラグインが擬似発行者を使用している場合。trueに設定すると、プラグインは`config.issuer`で指定された発行者URLから構成を検出しません。",
+          "type" : "boolean",
+          "default" : false
+        }
+      },
+
+      {
+        "discovery_headers_names" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "検出エンドポイントに渡される追加のヘッダー名。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "discovery_headers_values" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "検出エンドポイントに渡される追加のヘッダー値。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "extra_jwks_uris" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string",
+            "description" : "URLを表す文字列（https://example.com/path/to/resource?q=searchなど）。"
+          },
+          "description" : "（検出で見つかった鍵に加えて）公開鍵の信頼性が高いJWKS URI。",
+          "type" : "set"
+        }
+      },
+
+      {
+        "rediscovery_lifetime" : {
+          "required" : false,
+          "description" : "プラグインが検出の試行中に待機する時間（秒単位）を指定します。検出は、必要に応じてトリガーされます。",
+          "type" : "number",
+          "default" : 30
+        }
+      },
+
+      {
+        "auth_methods" : {
+          "type" : "array",
+          "required" : false,
+          "elements" : {
+            "type" : "string",
+            "one_of" : ["password", "client_credentials", "authorization_code", "bearer", "introspection", "userinfo", "kong_oauth2", "refresh_token", "session"]
+          },
+          "description" : "有効にする認証情報/グラントコマンドの種類。",
+          "default" : ["password", "client_credentials", "authorization_code", "bearer", "introspection", "userinfo", "kong_oauth2", "refresh_token", "session"]
+        }
+      },
+
+      {
+        "client_id" : {
+          "encrypted" : true,
+          "required" : false,
+          "elements" : {
+            "referenceable" : true,
+            "type" : "string"
+          },
+          "description" : "プラグインがIDプロバイダ上の認証済みエンドポイントを呼び出すときに使用するクライアントID。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "client_secret" : {
+          "encrypted" : true,
+          "required" : false,
+          "elements" : {
+            "referenceable" : true,
+            "type" : "string"
+          },
+          "description" : "クライアントシークレット。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "client_auth" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string",
+            "one_of" : ["client_secret_basic", "client_secret_post", "client_secret_jwt", "private_key_jwt", "tls_client_auth", "self_signed_tls_client_auth", "none"]
+          },
+          "description" : "デフォルトのOpenID Connectクライアント認証方法は、'client_secret_basic'（'Authorization: Basic' ヘッダーを使用）、'client_secret_post'（本文内の認証情報）、'client_secret_jwt'（本文内の署名付きクライアントアサーション）, 'private_key_jwt'（プライベート鍵で署名されたアサーション）、'tls_client_auth'（クライアント証明書）、 'self_signed_tls_client_auth'（自己署名済みクライアント証明書）、および'none'（認証なし）です。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "client_jwk" : {
+          "required" : false,
+          "elements" : {
+            "required" : false,
+            "type" : "record",
+            "fields" : [
+            {
+              "issuer" : {
+                "type" : "string",
+                "required" : false
+              }
+            },
+
+            {
+              "kty" : {
+                "type" : "string",
+                "required" : false
+              }
+            },
+
+            {
+              "use" : {
+                "type" : "string",
+                "required" : false
+              }
+            },
+
+            {
+              "key_ops" : {
+                "required" : false,
+                "elements" : {
+                  "type" : "string",
+                  "required" : false
+                },
+                "type" : "array"
+              }
+            },
+
+            {
+              "alg" : {
+                "type" : "string",
+                "required" : false
+              }
+            },
+
+            {
+              "kid" : {
+                "type" : "string",
+                "required" : false
+              }
+            },
+
+            {
+              "x5u" : {
+                "type" : "string",
+                "required" : false
+              }
+            },
+
+            {
+              "x5c" : {
+                "required" : false,
+                "elements" : {
+                  "type" : "string",
+                  "required" : false
+                },
+                "type" : "array"
+              }
+            },
+
+            {
+              "x5t" : {
+                "type" : "string",
+                "required" : false
+              }
+            },
+
+            {
+              "x5t#S256" : {
+                "type" : "string",
+                "required" : false
+              }
+            },
+
+            {
+              "k" : {
+                "required" : false,
+                "encrypted" : true,
+                "type" : "string",
+                "referenceable" : true
+              }
+            },
+
+            {
+              "x" : {
+                "type" : "string",
+                "required" : false
+              }
+            },
+
+            {
+              "y" : {
+                "type" : "string",
+                "required" : false
+              }
+            },
+
+            {
+              "crv" : {
+                "type" : "string",
+                "required" : false
+              }
+            },
+
+            {
+              "n" : {
+                "type" : "string",
+                "required" : false
+              }
+            },
+
+            {
+              "e" : {
+                "type" : "string",
+                "required" : false
+              }
+            },
+
+            {
+              "d" : {
+                "required" : false,
+                "encrypted" : true,
+                "type" : "string",
+                "referenceable" : true
+              }
+            },
+
+            {
+              "p" : {
+                "required" : false,
+                "encrypted" : true,
+                "type" : "string",
+                "referenceable" : true
+              }
+            },
+
+            {
+              "q" : {
+                "required" : false,
+                "encrypted" : true,
+                "type" : "string",
+                "referenceable" : true
+              }
+            },
+
+            {
+              "dp" : {
+                "required" : false,
+                "encrypted" : true,
+                "type" : "string",
+                "referenceable" : true
+              }
+            },
+
+            {
+              "dq" : {
+                "required" : false,
+                "encrypted" : true,
+                "type" : "string",
+                "referenceable" : true
+              }
+            },
+
+            {
+              "qi" : {
+                "required" : false,
+                "encrypted" : true,
+                "type" : "string",
+                "referenceable" : true
+              }
+            },
+
+            {
+              "oth" : {
+                "required" : false,
+                "encrypted" : true,
+                "type" : "string",
+                "referenceable" : true
+              }
+            },
+
+            {
+              "r" : {
+                "required" : false,
+                "encrypted" : true,
+                "type" : "string",
+                "referenceable" : true
+              }
+            },
+
+            {
+              "t" : {
+                "required" : false,
+                "encrypted" : true,
+                "type" : "string",
+                "referenceable" : true
+              }
+            }]
+          },
+          "description" : "private_key_jwt認証に使用されるJWK。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "client_alg" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string",
+            "one_of" : ["HS256", "HS384", "HS512", "RS256", "RS384", "RS512", "ES256", "ES384", "ES512", "PS256", "PS384", "PS512", "EdDSA"]
+          },
+          "description" : "client_secret_jwt（HS***のみ）またはprivate_key_jwt認証に使用するアルゴリズム。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "client_arg" : {
+          "required" : false,
+          "description" : "このリクエストに使用するクライアント（選択は同じ名前のリクエストパラメータで行われます）。",
+          "type" : "string",
+          "default" : "client_id"
+        }
+      },
+
+      {
+        "redirect_uri" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string",
+            "description" : "URLを表す文字列（https://example.com/path/to/resource?q=searchなど）。"
+          },
+          "description" : "認可とトークンのエンドポイントに渡されるリダイレクトURI。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "login_redirect_uri" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string",
+            "description" : "URLを表す文字列（https://example.com/path/to/resource?q=searchなど）。",
+            "referenceable" : true
+          },
+          "description" : "`login_action`が`redirect`に設定されている場合のクライアントのリダイレクト先。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "logout_redirect_uri" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string",
+            "description" : "URLを表す文字列（https://example.com/path/to/resource?q=searchなど）。",
+            "referenceable" : true
+          },
+          "description" : "ログアウト後のクライアントのリダイレクト先。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "forbidden_redirect_uri" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string",
+            "description" : "URLを表す文字列（https://example.com/path/to/resource?q=searchなど）。"
+          },
+          "description" : "禁止されているリクエストでのクライアントのリダイレクト先。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "forbidden_error_message" : {
+          "required" : false,
+          "description" : "禁止されているリクエストに対するエラーメッセージ（リダイレクトを使用していない場合）。",
+          "type" : "string",
+          "default" : "Forbidden"
+        }
+      },
+
+      {
+        "forbidden_destroy_session" : {
+          "required" : false,
+          "description" : "禁止されているリクエストに対してアクティブなセッションがあれば破棄します。",
+          "type" : "boolean",
+          "default" : true
+        }
+      },
+
+      {
+        "unauthorized_destroy_session" : {
+          "required" : false,
+          "description" : "不正なリクエストに対してアクティブなセッションがあれば破棄します。",
+          "type" : "boolean",
+          "default" : true
+        }
+      },
+
+      {
+        "unauthorized_redirect_uri" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string",
+            "description" : "URLを表す文字列（https://example.com/path/to/resource?q=searchなど）。"
+          },
+          "description" : "不正なリクエストでのクライアントのリダイレクト先。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "unauthorized_error_message" : {
+          "required" : false,
+          "description" : "不正なリクエストに対するエラーメッセージ（リダイレクトを使用していない場合）。",
+          "type" : "string",
+          "default" : "Unauthorized"
+        }
+      },
+
+      {
+        "unexpected_redirect_uri" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string",
+            "description" : "URLを表す文字列（https://example.com/path/to/resource?q=searchなど）。"
+          },
+          "description" : "リクエストで予期しないエラーが発生した場合のクライアントのリダイレクト先。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "response_mode" : {
+          "default" : "query",
+          "required" : false,
+          "description" : "認可エンドポイントに渡される応答モード: - `query`: クエリ文字列のパラメーター用 - `form_post`: リクエスト本文のパラメーター用 - `fragment`: URIフラグメント内のパラメーター用（プラグイン自体が読み取れないため、めったに役に立たない）- `query.jwt`、`form_post.jwt`、`fragment.jwt`: `query`、`form_post`、`fragment` に似ていますが、パラメータはJWTでエンコードされます - `jwt`: 要求された応答タイプに対してデフォルトのエンコードを示すショートカット。",
+          "type" : "string",
+          "one_of" : ["query", "form_post", "fragment", "query.jwt", "form_post.jwt", "fragment.jwt", "jwt"]
+        }
+      },
+
+      {
+        "response_type" : {
+          "type" : "array",
+          "required" : false,
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "認可エンドポイントに渡される応答のタイプ。",
+          "default" : ["code"]
+        }
+      },
+
+      {
+        "scopes" : {
+          "type" : "array",
+          "required" : false,
+          "elements" : {
+            "referenceable" : true,
+            "type" : "string"
+          },
+          "description" : "認可とトークンのエンドポイントに渡されるリダイレクトURI。",
+          "default" : ["openid"]
+        }
+      },
+
+      {
+        "audience" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "認可エンドポイントに渡されるオーディエンス。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "issuers_allowed" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "トークン内に存在することを許可された発行者（`iss`クレーム）。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "scopes_required" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "認可を成功させるには、アクセストークン（またはイントロスペクション結果）にスコープ（`scopes_claim` クレーム）が含まれている必要があります。この構成パラメータは、**AND** / **OR** の両方のケースで機能します。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "scopes_claim" : {
+          "type" : "array",
+          "required" : false,
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "スコープを含んでいるクレーム。複数の値が設定されている場合、クレームはトークンペイロードのネストされたオブジェクト内にあることを意味します。",
+          "default" : ["scope"]
+        }
+      },
+
+      {
+        "audience_required" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "認可を成功させるには、アクセストークン（またはイントロスペクション結果）にオーディエンス（`audience_claim` クレーム）が含まれている必要があります。この構成パラメータは、**AND** / **OR** の両方のケースで機能します。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "audience_claim" : {
+          "type" : "array",
+          "required" : false,
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "オーディエンスを含んでいるクレーム。複数の値が設定されている場合、クレームはトークンペイロードのネストされたオブジェクト内にあることを意味します。",
+          "default" : ["aud"]
+        }
+      },
+
+      {
+        "groups_required" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "認可を成功させるには、アクセストークン（またはイントロスペクション結果）にグループ（`groups_claim` クレーム）が含まれている必要があります。この構成パラメータは、**AND** / **OR** の両方のケースで機能します。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "groups_claim" : {
+          "type" : "array",
+          "required" : false,
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "グループを含んでいるクレーム。複数の値が設定されている場合、クレームはトークンペイロードのネストされたオブジェクト内にあることを意味します。",
+          "default" : ["groups"]
+        }
+      },
+
+      {
+        "roles_required" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "認可を成功させるには、アクセストークン（またはイントロスペクション結果）にロール（`roles_claim` クレーム）が含まれている必要があります。この構成パラメータは、**AND** / **OR** の両方のケースで機能します。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "roles_claim" : {
+          "type" : "array",
+          "required" : false,
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "ロールを含んでいるクレーム。複数の値が設定されている場合、クレームはトークンペイロードのネストされたオブジェクト内にあることを意味します。",
+          "default" : ["roles"]
+        }
+      },
+
+      {
+        "domains" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "'hd'クレームに使用できる値。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "max_age" : {
+          "required" : false,
+          "description" : "`auth_time`クレームと比較した最大経過時間（秒単位）。",
+          "type" : "number"
+        }
+      },
+
+      {
+        "authenticated_groups_claim" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "認証済みのグループを含んでいるクレーム。この設定はACLプラグインと一緒に使用できますが、他のアプリケーションやインテグレーションでIdP管理グループを有効にすることもできるようになります。複数の値が設定されている場合、クレームはトークンペイロードのネストされたオブジェクト内にあることを意味します。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "pushed_authorization_request_endpoint" : {
+          "required" : false,
+          "type" : "string",
+          "description" : "プッシュされた認可エンドポイント。設定されている場合、検出エンドポイントによって返される`pushed_authorization_request_endpoint`の値が上書きされます。"
+        }
+      },
+
+      {
+        "pushed_authorization_request_endpoint_auth_method" : {
+          "required" : false,
+          "description" : "プッシュされた認可リクエストのエンドポイント認証方法：`client_secret_basic`、`client_secret_post`、`client_secret_jwt`、`private_key_jwt`、`tls_client_auth`、`self_signed_tls_client_auth`、または `none`: 認証しないでください",
+          "type" : "string",
+          "one_of" : ["client_secret_basic", "client_secret_post", "client_secret_jwt", "private_key_jwt", "tls_client_auth", "self_signed_tls_client_auth", "none"]
+        }
+      },
+
+      {
+        "require_pushed_authorization_requests" : {
+          "required" : false,
+          "description" : "プッシュされた認可リクエストを強制的に有効または無効にします。設定されていない場合、値は`require_pushed_authorization_requests`の値（デフォルトは`false`）を使用して検出によって決定されます。",
+          "type" : "boolean"
+        }
+      },
+
+      {
+        "require_proof_key_for_code_exchange" : {
+          "required" : false,
+          "description" : "コード交換用のプルーフキーを強制的に有効または無効にします。設定されていない場合、値は`code_challenge_method_supported`の値を使用して検出によって決定され、自動的に有効になります（`code_challenge_methods_supported`が見つからない場合、PKCEは有効になりません）。",
+          "type" : "boolean"
+        }
+      },
+
+      {
+        "require_signed_request_object" : {
+          "required" : false,
+          "description" : "認可エンドポイントまたはプッシュされた認可エンドポイントでの署名付きリクエストオブジェクトの使用を強制的に有効または無効にします。設定されていない場合、値は`require_signed_request_object`の値を使用して検出され、自動的に有効になります（`require_signed_request_object`が見つからない場合、この機能は有効になりません）。",
+          "type" : "boolean"
+        }
+      },
+
+      {
+        "authorization_endpoint" : {
+          "required" : false,
+          "type" : "string",
+          "description" : "認可エンドポイント。設定されている場合、検出エンドポイントによって返される`authorization_endpoint`の値が上書きされます。"
+        }
+      },
+
+      {
+        "authorization_query_args_names" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "認可エンドポイントに渡される追加のクエリ引数名。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "authorization_query_args_values" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "認可エンドポイントに渡される追加のクエリ引数値。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "authorization_query_args_client" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "クライアントから認可エンドポイントに渡される追加のクエリ引数。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "authorization_rolling_timeout" : {
+          "required" : false,
+          "description" : "認可コードフローに使用されるセッションを使用できる時間（更新が必要になるまで）を秒単位で指定します。0を指定すると、チェックとローリングが無効になります。",
+          "type" : "number",
+          "default" : 600
+        }
+      },
+
+      {
+        "authorization_cookie_name" : {
+          "required" : false,
+          "description" : "認可Cookieの名前。",
+          "type" : "string",
+          "default" : "authorization"
+        }
+      },
+
+      {
+        "authorization_cookie_path" : {
+          "match_none" : [
+          {
+            "pattern" : "//",
+            "err" : "must not have empty segments"
+          }],
+          "description" : "認可CookieのPathフラグ。",
+          "required" : false,
+          "type" : "string",
+          "starts_with" : "/",
+          "default" : "/"
+        }
+      },
+
+      {
+        "authorization_cookie_domain" : {
+          "required" : false,
+          "description" : "認可CookieのDomainフラグ。",
+          "type" : "string"
+        }
+      },
+
+      {
+        "authorization_cookie_same_site" : {
+          "default" : "Default",
+          "required" : false,
+          "description" : "クロス・オリジン・リクエストでCookieを送信するかどうかを制御し、クロスサイト・リクエスト・フォージェリに対する保護を提供します。",
+          "type" : "string",
+          "one_of" : ["Strict", "Lax", "None", "Default"]
+        }
+      },
+
+      {
+        "authorization_cookie_http_only" : {
+          "required" : false,
+          "description" : "JavaScriptが、たとえば`Document.cookie`プロパティを通じてCookieにアクセスすることを禁止します。",
+          "type" : "boolean",
+          "default" : true
+        }
+      },
+
+      {
+        "authorization_cookie_secure" : {
+          "required" : false,
+          "description" : "Cookieは、リクエストがhttps: スキーム（localhostを除く）で行われた場合にのみサーバーに送信されるため、中間者攻撃に対する耐性が高まります。",
+          "type" : "boolean"
+        }
+      },
+
+      {
+        "preserve_query_args" : {
+          "required" : false,
+          "description" : "このパラメータを使用すると、認可コードフローを実行しているときでもリクエストクエリの引数を保持できます。",
+          "type" : "boolean",
+          "default" : false
+        }
+      },
+
+      {
+        "token_endpoint" : {
+          "required" : false,
+          "type" : "string",
+          "description" : "トークンエンドポイント。設定されている場合、検出エンドポイントによって返される`token_endpoint`の値が上書きされます。"
+        }
+      },
+
+      {
+        "token_endpoint_auth_method" : {
+          "required" : false,
+          "description" : "トークンエンドポイント認証方法：`client_secret_basic`、`client_secret_post`、`client_secret_jwt`、`private_key_jwt`、`tls_client_auth`、`self_signed_tls_client_auth`、または `none`: 認証しないでください",
+          "type" : "string",
+          "one_of" : ["client_secret_basic", "client_secret_post", "client_secret_jwt", "private_key_jwt", "tls_client_auth", "self_signed_tls_client_auth", "none"]
+        }
+      },
+
+      {
+        "token_headers_names" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "トークンエンドポイントに渡される追加のヘッダー名。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "token_headers_values" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "トークンエンドポイントに渡される追加のヘッダー値。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "token_headers_client" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "クライアントからトークンエンドポイントに渡される追加ヘッダー。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "token_headers_replay" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "ダウンストリームクライアントに転送するトークンエンドポイント応答ヘッダーの名前。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "token_headers_prefix" : {
+          "required" : false,
+          "description" : "ダウンストリームのクライアントに転送する前に、トークンエンドポイントの応答ヘッダーにプレフィックス（接頭辞）を追加してください。",
+          "type" : "string"
+        }
+      },
+
+      {
+        "token_headers_grants" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string",
+            "one_of" : ["password", "client_credentials", "authorization_code", "refresh_token"]
+          },
+          "description" : "特定のグラントでのみ、トークンエンドポイントの応答ヘッダーの送信を有効にします。-`password`: OAuthパスワードグラント - `client_credentials`: OAuthクライアント認証情報グラント - `authorization_code`: 認証コードフロー - `refresh_token`: トークン更新のグラント。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "token_post_args_names" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "トークンエンドポイントに渡される追加のpost引数名。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "token_post_args_values" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "トークンエンドポイントに渡される追加のpost引数値。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "token_post_args_client" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "クライアントからOpenID-Connectプラグインに追加の引数を渡します。引数が存在する場合、クライアントは以下を使って引数を渡すことができます: - クエリパラメータ - リクエスト本文 - リクエストヘッダー このパラメータは次のように`scope`値と一緒に使うことができます:  `config.token_post_args_client=scope`この場合、トークンはクエリパラメータ、リクエスト本文、またはヘッダーから`scope`値を取得して、トークンのエンドポイントに送信します。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "introspection_endpoint" : {
+          "required" : false,
+          "type" : "string",
+          "description" : "イントロスペクション・エンドポイント。設定されている場合、検出エンドポイントによって返される`introspection_endpoint`の値が上書きされます。"
+        }
+      },
+
+      {
+        "introspection_endpoint_auth_method" : {
+          "required" : false,
+          "description" : "イントロスぺクションエンドポイント認証方法：`client_secret_basic`、`client_secret_post`、`client_secret_jwt`、`private_key_jwt`、`tls_client_auth`、`self_signed_tls_client_auth`、または `none`: 認証しないでください",
+          "type" : "string",
+          "one_of" : ["client_secret_basic", "client_secret_post", "client_secret_jwt", "private_key_jwt", "tls_client_auth", "self_signed_tls_client_auth", "none"]
+        }
+      },
+
+      {
+        "introspection_hint" : {
+          "required" : false,
+          "description" : "イントロスペクションエンドポイントに渡されるイントロスペクションヒントパラメータ値。",
+          "type" : "string",
+          "default" : "access_token"
+        }
+      },
+
+      {
+        "introspection_check_active" : {
+          "required" : false,
+          "description" : "イントロスペクションの応答に、値が`true`の`active` クレームがあることを確認してください。",
+          "type" : "boolean",
+          "default" : true
+        }
+      },
+
+      {
+        "introspection_accept" : {
+          "default" : "application/json",
+          "required" : false,
+          "description" : "イントロスペクション要求の`Accept`ヘッダーの値: - `application/json`: JSONとしてのイントロスペクション応答 - `application/token-introspection+jwt`: JWTとしてのイントロスペクション応答（現在のIETFドラフトドキュメントから）- `application/jwt`: JWTとしてのイントロスペクション応答（古いIETFドラフトドキュメントから）。",
+          "type" : "string",
+          "one_of" : ["application/json", "application/token-introspection+jwt", "application/jwt"]
+        }
+      },
+
+      {
+        "introspection_headers_names" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "イントロスペクションエンドポイントに渡される追加のヘッダー名。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "introspection_headers_values" : {
+          "encrypted" : true,
+          "required" : false,
+          "elements" : {
+            "referenceable" : true,
+            "type" : "string"
+          },
+          "description" : "イントロスペクションエンドポイントに渡される追加のヘッダー値。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "introspection_headers_client" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "クライアントからイントロスペクションエンドポイントに渡される追加ヘッダー。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "introspection_post_args_names" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "イントロスペクションエンドポイントに渡される追加post引数名。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "introspection_post_args_values" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "イントロスペクションエンドポイントに渡される追加post引数値。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "introspection_post_args_client" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "クライアントからイントロスペクションエンドポイントに渡される追加post引数。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "introspect_jwt_tokens" : {
+          "required" : false,
+          "description" : "JWTアクセストークンをイントロスペクトするかどうかを指定します（取り消しの確認に使用できます）。",
+          "type" : "boolean",
+          "default" : false
+        }
+      },
+
+      {
+        "revocation_endpoint" : {
+          "required" : false,
+          "type" : "string",
+          "description" : "失効エンドポイント。設定されている場合、検出エンドポイントによって返される`revocation_endpoint`の値が上書きされます。"
+        }
+      },
+
+      {
+        "revocation_endpoint_auth_method" : {
+          "required" : false,
+          "description" : "失効エンドポイント認証方法：`client_secret_basic`、`client_secret_post`、`client_secret_jwt`、`private_key_jwt`、`tls_client_auth`、`self_signed_tls_client_auth`、または `none`: 認証しないでください",
+          "type" : "string",
+          "one_of" : ["client_secret_basic", "client_secret_post", "client_secret_jwt", "private_key_jwt", "tls_client_auth", "self_signed_tls_client_auth", "none"]
+        }
+      },
+
+      {
+        "end_session_endpoint" : {
+          "required" : false,
+          "type" : "string",
+          "description" : "セッション終了エンドポイント。設定されている場合、検出エンドポイントによって返される`end_session_endpoint`の値が上書きされます。"
+        }
+      },
+
+      {
+        "userinfo_endpoint" : {
+          "required" : false,
+          "type" : "string",
+          "description" : "ユーザー情報エンドポイント。設定されている場合、検出エンドポイントによって返される`userinfo_endpoint`の値が上書きされます。"
+        }
+      },
+
+      {
+        "userinfo_accept" : {
+          "default" : "application/json",
+          "required" : false,
+          "description" : "ユーザー情報リクエストの`Accept`ヘッダーの値: - `application/json`: JSONとしてのユーザー情報応答 - `application/jwt`: JWT としてのユーザー情報応答（廃止されたIETFドラフトドキュメントから）。",
+          "type" : "string",
+          "one_of" : ["application/json", "application/jwt"]
+        }
+      },
+
+      {
+        "userinfo_headers_names" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "ユーザー情報エンドポイントに渡される追加のヘッダー名。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "userinfo_headers_values" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "ユーザー情報エンドポイントに渡される追加のヘッダー値。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "userinfo_headers_client" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "クライアントからユーザー情報エンドポイントに渡される追加ヘッダー。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "userinfo_query_args_names" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "ユーザー情報エンドポイントに渡される追加のクエリ引数名。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "userinfo_query_args_values" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "ユーザー情報エンドポイントに渡される追加のクエリ引数値。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "userinfo_query_args_client" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "クライアントからユーザー情報エンドポイントに渡される追加のクエリ引数。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "token_exchange_endpoint" : {
+          "required" : false,
+          "type" : "string",
+          "description" : "トークン交換エンドポイント。"
+        }
+      },
+
+      {
+        "session_secret" : {
+          "encrypted" : true,
+          "referenceable" : true,
+          "required" : false,
+          "description" : "セッションシークレット。",
+          "type" : "string"
+        }
+      },
+
+      {
+        "session_audience" : {
+          "required" : false,
+          "description" : "セッションのオーディエンス（意図されたターゲットアプリケーション）。たとえば、`\"my-application\"`など。",
+          "type" : "string",
+          "default" : "default"
+        }
+      },
+
+      {
+        "session_cookie_name" : {
+          "required" : false,
+          "description" : "セッションCookieの名前。",
+          "type" : "string",
+          "default" : "session"
+        }
+      },
+
+      {
+        "session_remember" : {
+          "required" : false,
+          "description" : "永続セッションを有効または無効にします。",
+          "type" : "boolean",
+          "default" : false
+        }
+      },
+
+      {
+        "session_remember_cookie_name" : {
+          "required" : false,
+          "description" : "永続セッションCookieの名前。`remember`構成パラメータと一緒に使用します。",
+          "type" : "string",
+          "default" : "remember"
+        }
+      },
+
+      {
+        "session_remember_rolling_timeout" : {
+          "required" : false,
+          "description" : "永続セッションが有効とみなされる時間を秒単位で指定します。0を指定すると、チェックとローリングが無効になります。",
+          "type" : "number",
+          "default" : 604800
+        }
+      },
+
+      {
+        "session_remember_absolute_timeout" : {
+          "required" : false,
+          "description" : "再認証が必要になるまで、永続セッションを更新できる時間を秒単位で制限します。0を指定すると、チェックが無効になります。",
+          "type" : "number",
+          "default" : 2592000
+        }
+      },
+
+      {
+        "session_idling_timeout" : {
+          "required" : false,
+          "description" : "セッションが無効とみなされるまでの非アクティブ期間を秒単位で指定します。0を指定すると、チェックとタッチングが無効になります。",
+          "type" : "number",
+          "default" : 900
+        }
+      },
+
+      {
+        "session_rolling_timeout" : {
+          "required" : false,
+          "description" : "セッションの更新が必要になるまでのセッション使用可能時間を秒単位で指定します。0を指定すると、チェックとローリングが無効になります。",
+          "type" : "number",
+          "default" : 3600
+        }
+      },
+
+      {
+        "session_absolute_timeout" : {
+          "required" : false,
+          "description" : "再認証が必要になるまで、セッションを更新できる時間を秒単位で制限します。0を指定すると、チェックが無効になります。",
+          "type" : "number",
+          "default" : 86400
+        }
+      },
+
+      {
+        "session_cookie_path" : {
+          "match_none" : [
+          {
+            "pattern" : "//",
+            "err" : "must not have empty segments"
+          }],
+          "description" : "セッションCookieのPathフラグ。",
+          "required" : false,
+          "type" : "string",
+          "starts_with" : "/",
+          "default" : "/"
+        }
+      },
+
+      {
+        "session_cookie_domain" : {
+          "required" : false,
+          "description" : "セッションCookieのDomainフラグ。",
+          "type" : "string"
+        }
+      },
+
+      {
+        "session_cookie_same_site" : {
+          "default" : "Lax",
+          "required" : false,
+          "description" : "クロス・オリジン・リクエストでCookieを送信するかどうかを制御し、クロスサイト・リクエスト・フォージェリに対する保護を提供します。",
+          "type" : "string",
+          "one_of" : ["Strict", "Lax", "None", "Default"]
+        }
+      },
+
+      {
+        "session_cookie_http_only" : {
+          "required" : false,
+          "description" : "JavaScriptが、たとえば`Document.cookie`プロパティを通じてCookieにアクセスすることを禁止します。",
+          "type" : "boolean",
+          "default" : true
+        }
+      },
+
+      {
+        "session_cookie_secure" : {
+          "required" : false,
+          "description" : "Cookieは、リクエストがhttps: スキーム（localhostを除く）で行われた場合にのみサーバーに送信されるため、中間者攻撃に対する耐性が高まります。",
+          "type" : "boolean"
+        }
+      },
+
+      {
+        "session_request_headers" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string",
+            "one_of" : ["id", "audience", "subject", "timeout", "idling-timeout", "rolling-timeout", "absolute-timeout"]
+          },
+          "description" : "アップストリーム、ユーザーID、オーディエンス、件名、タイムアウト、アイドリングタイムアウト、ローリングタイムアウト、絶対的タイムアウトに送信するヘッダーのセット。たとえば、`[ \"id\", \"timeout\" ]` は、Session-IdおよびSession-Timeoutのリクエストヘッダーを設定します。",
+          "type" : "set"
+        }
+      },
+
+      {
+        "session_response_headers" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string",
+            "one_of" : ["id", "audience", "subject", "timeout", "idling-timeout", "rolling-timeout", "absolute-timeout"]
+          },
+          "description" : "ダウンストリーム、ユーザーID、オーディエンス、件名、タイムアウト、アイドリングタイムアウト、ローリングタイムアウト、絶対的タイムアウトに送信するヘッダーのセット。たとえば、`[ \"id\", \"timeout\" ]` は、Session-IdおよびSession-Timeoutの応答ヘッダーを設定します。",
+          "type" : "set"
+        }
+      },
+
+      {
+        "session_storage" : {
+          "default" : "cookie",
+          "required" : false,
+          "description" : "セッションデータ用のセッションストレージ: - `cookie`: セッションデータをセッションCookieとともに保存します（セッションシークレットを変更せずにセッションを無効化または取り消すことはできませんが、セッションはステートレスでありデータベースを必要としません）- `memcache`: セッションデータをmemcachedに保存します - `redis`: セッションデータをRedisに保存します。",
+          "type" : "string",
+          "one_of" : ["cookie", "memcache", "memcached", "redis"]
+        }
+      },
+
+      {
+        "session_store_metadata" : {
+          "required" : false,
+          "description" : "セッションメタデータを保存するかどうかを構成します。このメタデータには、特定のテーマに属する特定のオーディエンスのアクティブなセッションに関する情報が含まれています。",
+          "type" : "boolean",
+          "default" : false
+        }
+      },
+
+      {
+        "session_enforce_same_subject" : {
+          "required" : false,
+          "description" : "`true`に設定すると、オーディエンスは同じsubjectを共有するよう強制されます。",
+          "type" : "boolean",
+          "default" : false
+        }
+      },
+
+      {
+        "session_hash_subject" : {
+          "required" : false,
+          "description" : "`true`に設定すると、subjectの値は保存される前にハッシュ化されます。`session_store_metadata`が有効な場合にのみ適用されます。",
+          "type" : "boolean",
+          "default" : false
+        }
+      },
+
+      {
+        "session_hash_storage_key" : {
+          "required" : false,
+          "description" : "`true`に設定すると、セキュリティを強化するためにストレージキー（セッションID）がハッシュ化されます。ストレージキーをハッシュ化するということは、Cookieなしではストレージからデータを復号化できないということです。",
+          "type" : "boolean",
+          "default" : false
+        }
+      },
+
+      {
+        "session_memcached_prefix" : {
+          "required" : false,
+          "description" : "memcachedセッションキー接頭辞。",
+          "type" : "string"
+        }
+      },
+
+      {
+        "session_memcached_socket" : {
+          "required" : false,
+          "description" : "memcached unixソケットパス。",
+          "type" : "string"
+        }
+      },
+
+      {
+        "session_memcached_host" : {
+          "required" : false,
+          "description" : "memcachedホスト。",
+          "type" : "string",
+          "default" : "127.0.0.1"
+        }
+      },
+
+      {
+        "session_memcached_port" : {
+          "default" : 11211,
+          "required" : false,
+          "description" : "memcachedポート。",
+          "type" : "integer",
+          "between" : [0, 65535]
+        }
+      },
+
+      {
+        "session_redis_prefix" : {
+          "required" : false,
+          "description" : "Redisセッションキー接頭辞。",
+          "type" : "string"
+        }
+      },
+
+      {
+        "session_redis_socket" : {
+          "required" : false,
+          "description" : "Redis unixソケットパス。",
+          "type" : "string"
+        }
+      },
+
+      {
+        "session_redis_host" : {
+          "required" : false,
+          "description" : "Redisホスト。",
+          "type" : "string",
+          "default" : "127.0.0.1"
+        }
+      },
+
+      {
+        "session_redis_port" : {
+          "default" : 6379,
+          "required" : false,
+          "description" : "Redisポート。",
+          "type" : "integer",
+          "between" : [0, 65535]
+        }
+      },
+
+      {
+        "session_redis_username" : {
+          "required" : false,
+          "description" : "`redis`セッションストレージが定義され、ACL認証が必要な場合に、Redis接続に使用するユーザー名。未定義の場合、ACL認証は実行されません。これにはRedis v6.0.0+が必要です。Redis v5.xyとの互換性を持たせるには、`default`に設定できます。",
+          "type" : "string",
+          "referenceable" : true
+        }
+      },
+
+      {
+        "session_redis_password" : {
+          "encrypted" : true,
+          "referenceable" : true,
+          "required" : false,
+          "description" : "`redis`セッションストレージが定義されている場合にRedis接続に使用するパスワード。定義されていない場合、AUTHコマンドはRedisに送信されません。",
+          "type" : "string"
+        }
+      },
+
+      {
+        "session_redis_connect_timeout" : {
+          "required" : false,
+          "description" : "Session redis接続タイムアウト（ミリ秒単位）。",
+          "type" : "integer"
+        }
+      },
+
+      {
+        "session_redis_read_timeout" : {
+          "required" : false,
+          "description" : "Session redis読み取りタイムアウト（ミリ秒単位）。",
+          "type" : "integer"
+        }
+      },
+
+      {
+        "session_redis_send_timeout" : {
+          "required" : false,
+          "description" : "Session Redis送信タイムアウト (ミリ秒単位)。",
+          "type" : "integer"
+        }
+      },
+
+      {
+        "session_redis_ssl" : {
+          "required" : false,
+          "description" : "Redis接続にはSSL/TLSを使用します。",
+          "type" : "boolean",
+          "default" : false
+        }
+      },
+
+      {
+        "session_redis_ssl_verify" : {
+          "required" : false,
+          "description" : "IDプロバイダーサーバー証明書を確認します。",
+          "type" : "boolean",
+          "default" : false
+        }
+      },
+
+      {
+        "session_redis_server_name" : {
+          "required" : false,
+          "description" : "Redisサーバの接続に使用されるSNI。",
+          "type" : "string"
+        }
+      },
+
+      {
+        "session_redis_cluster_nodes" : {
+          "required" : false,
+          "elements" : {
+            "type" : "record",
+            "fields" : [
+            {
+              "ip" : {
+                "required" : true,
+                "type" : "string",
+                "description" : "ホスト名を表す文字列 (example.com など)。",
+                "default" : "127.0.0.1"
+              }
+            },
+
+            {
+              "port" : {
+                "default" : 6379,
+                "description" : "0 から 65535 (両端入れ) までのポート番号を表す整数。",
+                "type" : "integer",
+                "between" : [0, 65535]
+              }
+            }]
+          },
+          "description" : "Redisクラスタノードホスト。`ip`または`host`、および`port`値を持つホストレコードの配列を受け取ります。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "session_redis_cluster_max_redirections" : {
+          "required" : false,
+          "description" : "Redisクラスタの最大リダイレクト数。",
+          "type" : "integer"
+        }
+      },
+
+      {
+        "reverify" : {
+          "required" : false,
+          "description" : "セッションに保存されているトークンを常に検証するかどうかを指定します。",
+          "type" : "boolean",
+          "default" : false
+        }
+      },
+
+      {
+        "jwt_session_claim" : {
+          "required" : false,
+          "description" : "JWTセッションcookieと照合するクレーム。",
+          "type" : "string",
+          "default" : "sid"
+        }
+      },
+
+      {
+        "jwt_session_cookie" : {
+          "required" : false,
+          "description" : "JWTセッションcookieの名前。",
+          "type" : "string"
+        }
+      },
+
+      {
+        "bearer_token_param_type" : {
+          "type" : "array",
+          "required" : false,
+          "elements" : {
+            "type" : "string",
+            "one_of" : ["header", "cookie", "query", "body"]
+          },
+          "description" : "bearerトークンを探す場所: - `header`: HTTPヘッダーを検索します - `query`: URLのクエリ文字列を検索します - `body`: HTTPリクエスト本文を検索します - `cookie`: `config.bearer_token_cookie_name`で指定されたHTTPリクエストcookieを検索します。",
+          "default" : ["header", "query", "body"]
+        }
+      },
+
+      {
+        "bearer_token_cookie_name" : {
+          "required" : false,
+          "description" : "bearerトークンが渡されるcookieの名前。",
+          "type" : "string"
+        }
+      },
+
+      {
+        "client_credentials_param_type" : {
+          "type" : "array",
+          "required" : false,
+          "elements" : {
+            "type" : "string",
+            "one_of" : ["header", "query", "body"]
+          },
+          "description" : "クライアント認証情報を探す場所: - `header`: HTTPヘッダーを検索します - `query`: URLのクエリ文字列を検索します - `body`: HTTPリクエスト本文から検索します。",
+          "default" : ["header", "query", "body"]
+        }
+      },
+
+      {
+        "password_param_type" : {
+          "type" : "array",
+          "required" : false,
+          "elements" : {
+            "type" : "string",
+            "one_of" : ["header", "query", "body"]
+          },
+          "description" : "ユーザー名とパスワードを探す場所: - `header`: HTTPへッダーを検索します - `query`: URLのクエリ文字列を検索します - `body`: HTTPリクエスト本文を検索します。",
+          "default" : ["header", "query", "body"]
+        }
+      },
+
+      {
+        "id_token_param_type" : {
+          "type" : "array",
+          "required" : false,
+          "elements" : {
+            "type" : "string",
+            "one_of" : ["header", "query", "body"]
+          },
+          "description" : "idトークンを探す場所: - `header`: HTTPヘッダーを検索します - `query`: URLのクエリ文字列を検索します - `body`: HTTPリクエスト本文を検索します。",
+          "default" : ["header", "query", "body"]
+        }
+      },
+
+      {
+        "id_token_param_name" : {
+          "required" : false,
+          "description" : "idトークンを渡すために使用されるパラメータの名前。",
+          "type" : "string"
+        }
+      },
+
+      {
+        "refresh_token_param_type" : {
+          "type" : "array",
+          "required" : false,
+          "elements" : {
+            "type" : "string",
+            "one_of" : ["header", "query", "body"]
+          },
+          "description" : "リフレッシュトークンを探す場所: - `header`: HTTPヘッダーを検索します - `query`: URLのクエリ文字列を検索します - `body`: HTTPリクエスト本文を検索します。",
+          "default" : ["header", "query", "body"]
+        }
+      },
+
+      {
+        "refresh_token_param_name" : {
+          "required" : false,
+          "description" : "リフレッシュトークンを渡すために使用されるパラメータの名前。",
+          "type" : "string"
+        }
+      },
+
+      {
+        "refresh_tokens" : {
+          "required" : false,
+          "description" : "プラグインに`refresh_token`がある場合に、期限切れのアクセストークンのリフレッシュを試みるかどうかを指定します。",
+          "type" : "boolean",
+          "default" : true
+        }
+      },
+
+      {
+        "upstream_headers_claims" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "アップストリームヘッダーのクレーム。複数の値が設定されている場合、クレームはトークンペイロードのネストされたオブジェクト内にあることを意味します。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "upstream_headers_names" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "クレーム値のアップストリームヘッダー名。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "upstream_access_token_header" : {
+          "required" : false,
+          "description" : "アップストリームアクセストークンヘッダー。",
+          "type" : "string",
+          "default" : "authorization:bearer"
+        }
+      },
+
+      {
+        "upstream_access_token_jwk_header" : {
+          "required" : false,
+          "description" : "アップストリームアクセストークンJWKヘッダー。",
+          "type" : "string"
+        }
+      },
+
+      {
+        "upstream_id_token_header" : {
+          "required" : false,
+          "description" : "アップストリームidトークンヘッダー。",
+          "type" : "string"
+        }
+      },
+
+      {
+        "upstream_id_token_jwk_header" : {
+          "required" : false,
+          "description" : "アップストリームidトークンJWKヘッダー。",
+          "type" : "string"
+        }
+      },
+
+      {
+        "upstream_refresh_token_header" : {
+          "required" : false,
+          "description" : "アップストリームリフレッシュトークンヘッダー。",
+          "type" : "string"
+        }
+      },
+
+      {
+        "upstream_user_info_header" : {
+          "required" : false,
+          "description" : "アップストリームユーザー情報ヘッダー。",
+          "type" : "string"
+        }
+      },
+
+      {
+        "upstream_user_info_jwt_header" : {
+          "required" : false,
+          "description" : "アップストリームユーザー情報JWTヘッダー（ユーザー情報がJWT応答を返す場合）。",
+          "type" : "string"
+        }
+      },
+
+      {
+        "upstream_introspection_header" : {
+          "required" : false,
+          "description" : "アップストリームイントロスペクションヘッダー。",
+          "type" : "string"
+        }
+      },
+
+      {
+        "upstream_introspection_jwt_header" : {
+          "required" : false,
+          "description" : "アップストリームイントロスペクションJWTヘッダー。",
+          "type" : "string"
+        }
+      },
+
+      {
+        "upstream_session_id_header" : {
+          "required" : false,
+          "description" : "アップストリームセッションidヘッダー。",
+          "type" : "string"
+        }
+      },
+
+      {
+        "downstream_headers_claims" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "ダウンストリームヘッダークレーム。複数の値が設定されている場合、クレームはトークンペイロードのネストされたオブジェクト内にあることを意味します。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "downstream_headers_names" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "クレーム値のダウンストリームヘッダー名。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "downstream_access_token_header" : {
+          "required" : false,
+          "description" : "ダウンストリームアクセストークンヘッダー。",
+          "type" : "string"
+        }
+      },
+
+      {
+        "downstream_access_token_jwk_header" : {
+          "required" : false,
+          "description" : "ダウンストリームアクセストークンJWKヘッダー。",
+          "type" : "string"
+        }
+      },
+
+      {
+        "downstream_id_token_header" : {
+          "required" : false,
+          "description" : "ダウンストリームIDトークンヘッダー。",
+          "type" : "string"
+        }
+      },
+
+      {
+        "downstream_id_token_jwk_header" : {
+          "required" : false,
+          "description" : "ダウンストリームIDトークンJWKヘッダー。",
+          "type" : "string"
+        }
+      },
+
+      {
+        "downstream_refresh_token_header" : {
+          "required" : false,
+          "description" : "ダウンストリームリフレッシュトークンヘッダー。",
+          "type" : "string"
+        }
+      },
+
+      {
+        "downstream_user_info_header" : {
+          "required" : false,
+          "description" : "ダウンストリームユーザー情報ヘッダー。",
+          "type" : "string"
+        }
+      },
+
+      {
+        "downstream_user_info_jwt_header" : {
+          "required" : false,
+          "description" : "ダウンストリームユーザー情報JWTヘッダー（ユーザー情報がJWT応答を返す場合）。",
+          "type" : "string"
+        }
+      },
+
+      {
+        "downstream_introspection_header" : {
+          "required" : false,
+          "description" : "ダウンストリームイントロスペクションヘッダー。",
+          "type" : "string"
+        }
+      },
+
+      {
+        "downstream_introspection_jwt_header" : {
+          "required" : false,
+          "description" : "ダウンストリームイントロスペクションJWTヘッダー。",
+          "type" : "string"
+        }
+      },
+
+      {
+        "downstream_session_id_header" : {
+          "required" : false,
+          "description" : "ダウンストリームセッションIDヘッダー。",
+          "type" : "string"
+        }
+      },
+
+      {
+        "login_methods" : {
+          "type" : "array",
+          "required" : false,
+          "elements" : {
+            "type" : "string",
+            "one_of" : ["password", "client_credentials", "authorization_code", "bearer", "introspection", "userinfo", "kong_oauth2", "refresh_token", "session"]
+          },
+          "description" : "特定のグラントでログイン機能を有効にします。",
+          "default" : ["authorization_code"]
+        }
+      },
+
+      {
+        "login_action" : {
+          "default" : "upstream",
+          "required" : false,
+          "description" : "ログイン成功後の処理: - `upstream`: リクエストをアップストリームサービスにプロキシします - `response`: レスポンスでリクエストを終了します - `redirect`: 別の場所にリダイレクトします。",
+          "type" : "string",
+          "one_of" : ["upstream", "response", "redirect"]
+        }
+      },
+
+      {
+        "login_tokens" : {
+          "type" : "array",
+          "required" : false,
+          "elements" : {
+            "type" : "string",
+            "one_of" : ["id_token", "access_token", "refresh_token", "tokens", "introspection"]
+          },
+          "description" : "`response`本文または`redirect`クエリ文字列またはフラグメントに含めるトークン: - `id_token`: IDトークンを含めます - `access_token`: アクセストークンを含めます - `refresh_token`: リフレッシュトークンを含めます - `tokens`: 完全なトークンエンドポイントレスポンスを含めます - `introspection`: イントロスペクションレスポンスを含めます。",
+          "default" : ["id_token"]
+        }
+      },
+
+      {
+        "login_redirect_mode" : {
+          "default" : "fragment",
+          "required" : false,
+          "description" : "`redirect` `login_action`を使用するときに`login_tokens`を配置する場所：-`query`: トークンをクエリ文字列に配置します - `fragment`: トークンをURLフラグメントに配置します（サーバーでは読み取り不可）。",
+          "type" : "string",
+          "one_of" : ["query", "fragment"]
+        }
+      },
+
+      {
+        "logout_query_arg" : {
+          "required" : false,
+          "description" : "ログアウトをアクティブ化するリクエストクエリ引数。",
+          "type" : "string"
+        }
+      },
+
+      {
+        "logout_post_arg" : {
+          "required" : false,
+          "description" : "ログアウトをアクティブ化するリクエスト本文の引数。",
+          "type" : "string"
+        }
+      },
+
+      {
+        "logout_uri_suffix" : {
+          "required" : false,
+          "description" : "ログアウトをアクティブ化するリクエストURIサフィックス。",
+          "type" : "string"
+        }
+      },
+
+      {
+        "logout_methods" : {
+          "type" : "array",
+          "required" : false,
+          "elements" : {
+            "type" : "string",
+            "one_of" : ["POST", "GET", "DELETE"]
+          },
+          "description" : "ログアウトをアクティブ化できるリクエストメソッド: - `POST`: HTTP POSTメソッド - `GET`: HTTP GETメソッド - `DELETE`: HTTP DELETEメソッド。",
+          "default" : ["POST", "DELETE"]
+        }
+      },
+
+      {
+        "logout_revoke" : {
+          "required" : false,
+          "description" : "ログアウトの一部としてトークンを取り消します。\n\nより詳細にトークンの取り消しを行うには、 `logout_revoke_access_token`と`logout_revoke_refresh_token`パラメータを調整します。",
+          "type" : "boolean",
+          "default" : false
+        }
+      },
+
+      {
+        "logout_revoke_access_token" : {
+          "required" : false,
+          "description" : "ログアウトの一環としてアクセストークンを取り消します。`logout_revoke`を`true`に設定する必要があります。",
+          "type" : "boolean",
+          "default" : true
+        }
+      },
+
+      {
+        "logout_revoke_refresh_token" : {
+          "required" : false,
+          "description" : "ログアウトの一環としてリフレッシュトークンを取り消します。`logout_revoke`を`true`に設定する必要があります。",
+          "type" : "boolean",
+          "default" : true
+        }
+      },
+
+      {
+        "consumer_claim" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "コンシューママッピングに使用されるクレーム。複数の値が設定されている場合、クレームはトークンペイロードのネストされたオブジェクト内にあることを意味します。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "consumer_by" : {
+          "type" : "array",
+          "required" : false,
+          "elements" : {
+            "type" : "string",
+            "one_of" : ["id", "username", "custom_id"]
+          },
+          "description" : "マッピングに使用されるコンシューマフィールド: - `id`: `id`で一致するコンシューマを探します - `username`: `username`で一致するコンシューマを探します - `custom_id`: `custom_id`で一致するコンシューマを探します。",
+          "default" : ["username", "custom_id"]
+        }
+      },
+
+      {
+        "consumer_optional" : {
+          "required" : false,
+          "description" : "コンシューママッピングが失敗した場合でも、リクエストを終了しないでください。",
+          "type" : "boolean",
+          "default" : false
+        }
+      },
+
+      {
+        "credential_claim" : {
+          "type" : "array",
+          "required" : false,
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "コンシューママッピングが使用されていない場合に備えて、仮想認証情報を取得するために使用されるクレーム（レート制限プラグインによって使用されるなど）。複数の値が設定されている場合、クレームはトークンペイロードのネストされたオブジェクト内にあることを意味します。",
+          "default" : ["sub"]
+        }
+      },
+
+      {
+        "anonymous" : {
+          "required" : false,
+          "description" : "認証に失敗した場合に「匿名」コンシューマとして機能するオプションの文字列（消費者のUUIDまたはユーザー名）の値。空の場合（デフォルトは null）、認証に失敗したリクエストは `4xx` HTTP ステータス コードを返します。この値はコンシューマの`custom_id`**ではなく**、`id`または`username`属性を参照している必要があります。",
+          "type" : "string"
+        }
+      },
+
+      {
+        "run_on_preflight" : {
+          "required" : false,
+          "description" : "このプラグインをプリフライト（`OPTIONS`）リクエストで実行するかどうかを指定します。",
+          "type" : "boolean",
+          "default" : true
+        }
+      },
+
+      {
+        "leeway" : {
+          "required" : false,
+          "description" : "`auth_time`、`exp`、`iat`、および`nbf`クレームの余裕時間（秒単位）を定義します。",
+          "type" : "number",
+          "default" : 0
+        }
+      },
+
+      {
+        "verify_parameters" : {
+          "required" : false,
+          "description" : "検出に対してプラグイン構成を確認します。",
+          "type" : "boolean",
+          "default" : false
+        }
+      },
+
+      {
+        "verify_nonce" : {
+          "required" : false,
+          "description" : "認可コードフローでnonceを確認します。",
+          "type" : "boolean",
+          "default" : true
+        }
+      },
+
+      {
+        "verify_claims" : {
+          "required" : false,
+          "description" : "標準クレームのトークンを確認します。",
+          "type" : "boolean",
+          "default" : true
+        }
+      },
+
+      {
+        "verify_signature" : {
+          "required" : false,
+          "description" : "トークンの署名を確認します。",
+          "type" : "boolean",
+          "default" : true
+        }
+      },
+
+      {
+        "ignore_signature" : {
+          "type" : "array",
+          "required" : false,
+          "elements" : {
+            "type" : "string",
+            "one_of" : ["password", "client_credentials", "authorization_code", "refresh_token", "session", "introspection", "userinfo"]
+          },
+          "description" : "特定の付与に対するトークン署名検証をスキップします: - `password`: OAuthパスワードグラント - `client_credentials`: OAuthクライアント資格情報グラント - `authorization_code`: 認証コードフロー - `refresh_token`: OAuthトークン更新グラント - `session`: セッションCookie認証 - `introspection`: OAuthイントロスペクション - `userinfo`: OpenID Connectユーザー情報エンドポイント認証。",
+          "default" : []
+        }
+      },
+
+      {
+        "enable_hs_signatures" : {
+          "required" : false,
+          "description" : "共有シークレット（例：HS256など）署名を有効にします （無効にすると受け入れられなくなります）。",
+          "type" : "boolean",
+          "default" : false
+        }
+      },
+
+      {
+        "disable_session" : {
+          "required" : false,
+          "elements" : {
+            "type" : "string",
+            "one_of" : ["password", "client_credentials", "authorization_code", "bearer", "introspection", "userinfo", "kong_oauth2", "refresh_token", "session"]
+          },
+          "description" : "指定されたグラントでのセッションCookieの発行を無効にします。",
+          "type" : "array"
+        }
+      },
+
+      {
+        "cache_ttl" : {
+          "required" : false,
+          "description" : "キャッシュされたオブジェクトが有効期限を指定していない場合に使用されるデフォルトのキャッシュTTL（秒単位）。",
+          "type" : "number",
+          "default" : 3600
+        }
+      },
+
+      {
+        "cache_ttl_max" : {
+          "required" : false,
+          "description" : "秒単位での最大キャッシュTTL（適用済み）。",
+          "type" : "number"
+        }
+      },
+
+      {
+        "cache_ttl_min" : {
+          "required" : false,
+          "description" : "秒単位での最小キャッシュTTL（適用済み）。",
+          "type" : "number"
+        }
+      },
+
+      {
+        "cache_ttl_neg" : {
+          "required" : false,
+          "description" : "秒単位でのネガティブキャッシュTTL。",
+          "type" : "number"
+        }
+      },
+
+      {
+        "cache_ttl_resurrect" : {
+          "required" : false,
+          "description" : "秒単位での復活TTL。",
+          "type" : "number"
+        }
+      },
+
+      {
+        "cache_tokens" : {
+          "required" : false,
+          "description" : "トークンエンドポイントリクエストをキャッシュします。",
+          "type" : "boolean",
+          "default" : true
+        }
+      },
+
+      {
+        "cache_tokens_salt" : {
+          "required" : false,
+          "auto" : true,
+          "type" : "string",
+          "description" : "トークンエンドポイントリクエストのキャッシュに使用されるキャッシュキーを生成するために使用されるソルト。"
+        }
+      },
+
+      {
+        "cache_introspection" : {
+          "required" : false,
+          "description" : "イントロスペクションエンドポイントリクエストをキャッシュします。",
+          "type" : "boolean",
+          "default" : true
+        }
+      },
+
+      {
+        "cache_token_exchange" : {
+          "required" : false,
+          "description" : "トークン交換エンドポイントリクエストをキャッシュします。",
+          "type" : "boolean",
+          "default" : true
+        }
+      },
+
+      {
+        "cache_user_info" : {
+          "required" : false,
+          "description" : "ユーザー情報リクエストをキャッシュします。",
+          "type" : "boolean",
+          "default" : true
+        }
+      },
+
+      {
+        "search_user_info" : {
+          "required" : false,
+          "description" : "ユーザー情報エンドポイントを使用して、コンシューママッピング、認証情報マッピング、認証グループ、上流と下流のヘッダーに関する追加のクレームを取得するかどうかを指定します。",
+          "type" : "boolean",
+          "default" : false
+        }
+      },
+
+      {
+        "hide_credentials" : {
+          "required" : false,
+          "description" : "認証に使われた認証情報をリクエストから削除します。同じリクエストで複数の認証情報が送信された場合、認証の成功に使用された認証情報がこのプラグインによって削除されます。",
+          "type" : "boolean",
+          "default" : false
+        }
+      },
+
+      {
+        "http_version" : {
+          "required" : false,
+          "type" : "number",
+          "description" : "このプラグインによるリクエストに使用されるHTTPバージョン: - `1.1`: HTTP 1.1（デフォルト）- `1.0`: HTTP 1.0。",
+          "default" : 1.1
+        }
+      },
+
+      {
+        "http_proxy" : {
+          "required" : false,
+          "type" : "string",
+          "description" : "HTTPプロキシ。"
+        }
+      },
+
+      {
+        "http_proxy_authorization" : {
+          "required" : false,
+          "description" : "HTTPプロキシ認証。",
+          "type" : "string"
+        }
+      },
+
+      {
+        "https_proxy" : {
+          "required" : false,
+          "type" : "string",
+          "description" : "HTTPSプロキシ。"
+        }
+      },
+
+      {
+        "https_proxy_authorization" : {
+          "required" : false,
+          "description" : "HTTPSプロキシ認証。",
+          "type" : "string"
+        }
+      },
+
+      {
+        "no_proxy" : {
+          "required" : false,
+          "description" : "これらのホストではプロキシを使用しないでください。",
+          "type" : "string"
+        }
+      },
+
+      {
+        "keepalive" : {
+          "required" : false,
+          "description" : "HTTPクライアントでkeepaliveを使用します。",
+          "type" : "boolean",
+          "default" : true
+        }
+      },
+
+      {
+        "ssl_verify" : {
+          "required" : false,
+          "description" : "IDプロバイダーサーバー証明書を確認します。`true`に設定すると、プラグインは`kong.conf`で設定されたCA証明書を使用します。 設定パラメータ `lua_ssl_trusted_certificate`。",
+          "type" : "boolean",
+          "default" : false
+        }
+      },
+
+      {
+        "timeout" : {
+          "required" : false,
+          "description" : "ネットワークIOタイムアウト（ミリ秒単位）。",
+          "type" : "number",
+          "default" : 10000
+        }
+      },
+
+      {
+        "display_errors" : {
+          "required" : false,
+          "description" : "失敗応答のエラーを表示します。",
+          "type" : "boolean",
+          "default" : false
+        }
+      },
+
+      {
+        "by_username_ignore_case" : {
+          "required" : false,
+          "description" : "`consumer_by` が`username`に設定されている場合、`username`が大文字と小文字を区別せずにコンシューマと照合できるかどうかを指定します。",
+          "type" : "boolean",
+          "default" : false
+        }
+      },
+
+      {
+        "resolve_distributed_claims" : {
+          "required" : false,
+          "description" : "分散クレームは、クレームを含むJSONオブジェクトの`_claim_names`と`_claim_sources`メンバーによって表されます。このパラメータが`true`に設定されている場合、プラグインはこれらの分散クレームを明示的に解決します。",
+          "type" : "boolean",
+          "default" : false
+        }
+      },
+
+      {
+        "expose_error_code" : {
+          "description" : "RFC 6750で定義されているエラーコードヘッダーを公開するかどうかを指定します。認可リクエストが失敗した場合、このヘッダーが応答で送信されます。無効にするには'false'に設定します。",
+          "type" : "boolean",
+          "default" : true
+        }
+      },
+
+      {
+        "token_cache_key_include_scope" : {
+          "description" : "トークンのキャッシュキーにスコープを含めます。これにより、スコープの異なるトークンは別のトークンとみなされます。",
+          "type" : "boolean",
+          "default" : false
+        }
+      },
+
+      {
+        "introspection_token_param_name" : {
+          "required" : false,
+          "description" : "イントロスペクション用のトークンのパラメータ名を指定します。",
+          "type" : "string",
+          "default" : "token"
+        }
+      },
+
+      {
+        "revocation_token_param_name" : {
+          "required" : false,
+          "description" : "トークンのパラメータ名を取り消し用に指定します。",
+          "type" : "string",
+          "default" : "token"
+        }
+      },
+
+      {
+        "proof_of_possession_mtls" : {
+          "default" : "off",
+          "required" : false,
+          "description" : "mtlsの所持証明を有効にします。strictに設定すると、すべてのトークン（サポートされているauth_methodsから: bearer、introspection、およびbearerまたはintrospectionで許可されたセッション）が検証されます。optionalに設定すると、証明書ハッシュ要求を含むトークンのみが検証されます。検証に失敗した場合、リクエストは401で拒否されます。",
+          "type" : "string",
+          "one_of" : ["off", "strict", "optional"]
+        }
+      },
+
+      {
+        "proof_of_possession_auth_methods_validation" : {
+          "required" : false,
+          "description" : "trueに設定すると、所持証明（PoP）が有効な場合に、PoPと互換性のあるauth_methodsのみを構成できます。falseに設定すると、すべてのauth_methodsが構成可能になり、PoPと互換性のないauth_methodsについてはPoPチェックがスキップされます。",
+          "type" : "boolean",
+          "default" : true
+        }
+      },
+
+      {
+        "tls_client_auth_cert_id" : {
+          "uuid" : true,
+          "required" : false,
+          "description" : "Kongと認証サーバー間の接続のmTLSクライアント認証に使用するクライアント証明書を表す証明書エンティティのID。",
+          "type" : "string",
+          "auto" : false
+        }
+      },
+
+      {
+        "tls_client_auth_ssl_verify" : {
+          "required" : false,
+          "description" : "mTLSクライアント認証中にIDプロバイダーサーバー証明書を検証します。",
+          "type" : "boolean",
+          "default" : true
+        }
+      },
+
+      {
+        "mtls_token_endpoint" : {
+          "required" : false,
+          "type" : "string",
+          "description" : "mTLSクライアント認証に使用されるトークンエンドポイントのエイリアス。設定されている場合、検出エンドポイントによって返される`mtls_endpoint_aliases`の値が上書きされます。"
+        }
+      },
+
+      {
+        "mtls_introspection_endpoint" : {
+          "required" : false,
+          "type" : "string",
+          "description" : "mTLSクライアント認証に使用されるイントロスペクションエンドポイントのエイリアス。設定されている場合、検出エンドポイントによって返される`mtls_endpoint_aliases`の値が上書きされます。"
+        }
+      },
+
+      {
+        "mtls_revocation_endpoint" : {
+          "required" : false,
+          "type" : "string",
+          "description" : "mTLSクライアント認証に使用されるイントロスペクションエンドポイントのエイリアス。設定されている場合、検出エンドポイントによって返される`mtls_endpoint_aliases`の値が上書きされます。"
+        }
+      },
+
+      {
+        "proof_of_possession_dpop" : {
+          "default" : "off",
+          "required" : false,
+          "description" : "所持証明（DPoP）を有効にします。strictに設定すると、DPoPキークレーム（cnf.jkt）が存在するかどうかにかかわらず、すべてのリクエストが検証されます。optionalに設定した場合、DPoPのキーにバインドされたトークンのみが証明で検証されます。",
+          "type" : "string",
+          "one_of" : ["off", "strict", "optional"]
+        }
+      },
+
+      {
+        "dpop_use_nonce" : {
+          "required" : false,
+          "description" : "DPoP証明のためにnonce値を使用してクライアントにチャレンジするかどうかを指定します。有効にすると、DPoP証明の有効期間の計算にも使用されます。",
+          "type" : "boolean",
+          "default" : false
+        }
+      },
+
+      {
+        "dpop_proof_lifetime" : {
+          "required" : false,
+          "type" : "number",
+          "description" : "DPoP証明の有効期間を秒単位で指定します。これにより、作成後に同じ証明を使用できる期間が決定されます。作成時間は、nonceが使用されている場合はnonce作成時間、それ以外の場合はiatクレームによって決まります。",
+          "default" : 300
+        }
+      }],
+      "required" : true,
+      "shorthand_fields" : [
+      {
+        "authorization_cookie_lifetime" : {
+          "type" : "number",
+          "deprecation" : {
+            "removal_in_version" : "4.0",
+            "message" : "openid-connect: config.authorization_cookie_lifetimeは非推奨となっています。代わりにconfig.authorization_rolling_timeoutを使用してください"
+          }
+        }
+      },
+
+      {
+        "authorization_cookie_samesite" : {
+          "type" : "string",
+          "deprecation" : {
+            "removal_in_version" : "4.0",
+            "message" : "openid-connect: config.authorization_cookie_samesiteは非推奨となっています。代わりにconfig.authorization_cookie_same_siteを使用してください"
+          }
+        }
+      },
+
+      {
+        "authorization_cookie_httponly" : {
+          "type" : "boolean",
+          "deprecation" : {
+            "removal_in_version" : "4.0",
+            "message" : "openid-connect: config.authorization_cookie_httponlyは非推奨となっています。代わりにconfig.authorization_cookie_http_onlyを使用してください"
+          }
+        }
+      },
+
+      {
+        "session_cookie_lifetime" : {
+          "type" : "number",
+          "deprecation" : {
+            "removal_in_version" : "4.0",
+            "message" : "openid-connect: config.session_cookie_lifetimeは非推奨となっています。代わりにconfig.session_rolling_timeoutを使用してください"
+          }
+        }
+      },
+
+      {
+        "session_cookie_idletime" : {
+          "type" : "number",
+          "deprecation" : {
+            "removal_in_version" : "4.0",
+            "message" : "openid-connect: config.session_cookie_idletimeは非推奨となっています。代わりにconfig.session_idling_timeoutを使用してください"
+          }
+        }
+      },
+
+      {
+        "session_cookie_samesite" : {
+          "type" : "string",
+          "deprecation" : {
+            "removal_in_version" : "4.0",
+            "message" : "openid-connect: config.session_cookie_samesiteは非推奨となっています。代わりにconfig.session_cookie_same_siteを使用してください"
+          }
+        }
+      },
+
+      {
+        "session_cookie_httponly" : {
+          "type" : "boolean",
+          "deprecation" : {
+            "removal_in_version" : "4.0",
+            "message" : "openid-connect: config.session_cookie_httponlyは非推奨となっています。代わりにconfig.session_cookie_http_onlyを使用してください"
+          }
+        }
+      },
+
+      {
+        "session_memcache_prefix" : {
+          "type" : "string",
+          "deprecation" : {
+            "removal_in_version" : "4.0",
+            "message" : "openid-connect: config.session_memcache_prefixは非推奨となっています。代わりにconfig.session_memcached_prefixを使用してください"
+          }
+        }
+      },
+
+      {
+        "session_memcache_socket" : {
+          "type" : "string",
+          "deprecation" : {
+            "removal_in_version" : "4.0",
+            "message" : "openid-connect: config.session_memcache_socketは非推奨となっています。代わりにconfig.session_memcached_socketを使用してください"
+          }
+        }
+      },
+
+      {
+        "session_memcache_host" : {
+          "type" : "string",
+          "deprecation" : {
+            "removal_in_version" : "4.0",
+            "message" : "openid-connect: config.session_memcache_hostは非推奨となっています。代わりにconfig.session_memcached_hostを使用してください"
+          }
+        }
+      },
+
+      {
+        "session_memcache_port" : {
+          "type" : "integer",
+          "deprecation" : {
+            "removal_in_version" : "4.0",
+            "message" : "openid-connect: config.session_memcache_portは非推奨となっています。代わりにconfig.session_memcached_portを使用してください"
+          }
+        }
+      },
+
+      {
+        "session_redis_cluster_maxredirections" : {
+          "type" : "integer",
+          "deprecation" : {
+            "removal_in_version" : "4.0",
+            "message" : "openid-connect: config.session_redis_cluster_maxredirectionsは非推奨となっています。代わりにconfig.session_redis_cluster_max_redirectionsを使用してください"
+          }
+        }
+      },
+
+      {
+        "session_cookie_renew" : {
+          "type" : "number",
+          "deprecation" : {
+            "removal_in_version" : "4.0",
+            "message" : "openid-connect: config.session_cookie_renew オプションはもう存在しません"
+          }
+        }
+      },
+
+      {
+        "session_cookie_maxsize" : {
+          "type" : "integer",
+          "deprecation" : {
+            "removal_in_version" : "4.0",
+            "message" : "openid-connect: config.session_cookie_maxsize オプションはもう存在しません"
+          }
+        }
+      },
+
+      {
+        "session_strategy" : {
+          "type" : "string",
+          "deprecation" : {
+            "removal_in_version" : "4.0",
+            "message" : "openid-connect: config.session_strategy オプションはもう存在しません"
+          }
+        }
+      },
+
+      {
+        "session_compressor" : {
+          "type" : "string",
+          "deprecation" : {
+            "removal_in_version" : "4.0",
+            "message" : "openid-connect: config.session_compressor オプションはもう存在しません"
+          }
+        }
+      }],
+      "type" : "record"
+    }
+  }],
+  "entity_checks" : []
+}

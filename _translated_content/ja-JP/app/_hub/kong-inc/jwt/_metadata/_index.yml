@@ -1,0 +1,22 @@
+# smartling.sltrans = notranslate
+---
+name: "JWT"
+search_aliases: 
+    - "json web tokens"
+dbless_compatible: "partially"
+# smartling.sltrans = translate
+dbless_explanation: "コンシューマとJWTシークレットは宣言型構成で作成できます。\n\nシークレットに対してPOST、PUT、PATCH、DELETEを実行するAdmin APIエンドポイントは、DB-lessモードでは使用できません。\n"
+# smartling.sltrans = notranslate
+free: true
+enterprise: true
+konnect: true
+network_config_opts: "All"
+# smartling.sltrans = translate
+notes: "--"
+# smartling.sltrans = notranslate
+categories: 
+    - "authentication"
+publisher: "Kong Inc."
+# smartling.sltrans = translate
+desc: "JSON Webトークンの検証と認証を行う"
+# smartling.sltrans = notranslate

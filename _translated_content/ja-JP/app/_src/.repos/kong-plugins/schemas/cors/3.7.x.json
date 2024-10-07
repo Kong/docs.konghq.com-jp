@@ -1,0 +1,119 @@
+{
+  "fields" : [
+  {
+    "consumer" : {
+      "reference" : "consumers",
+      "type" : "foreign",
+      "description" : "null 値が許可されている外部キーを表すカスタム型。",
+      "eq" : null
+    }
+  },
+
+  {
+    "protocols" : {
+      "type" : "set",
+      "required" : true,
+      "elements" : {
+        "required" : true,
+        "type" : "string",
+        "len_min" : 1,
+        "one_of" : ["grpc", "grpcs", "http", "https"]
+      },
+      "description" : "HTTP プロトコルを表す文字列のセット。",
+      "default" : ["grpc", "grpcs", "http", "https"]
+    }
+  },
+
+  {
+    "consumer_group" : {
+      "reference" : "consumer_groups",
+      "type" : "foreign",
+      "description" : "null 値が許可されている外部キーを表すカスタム型。",
+      "eq" : null
+    }
+  },
+
+  {
+    "config" : {
+      "fields" : [
+      {
+        "origins" : {
+          "elements" : {
+            "type" : "string"
+          },
+          "type" : "array",
+          "description" : "`Access-Control-Allow-Origin`ヘッダーで許可されるドメインのリスト。すべてのオリジンを許可したい場合は、この設定フィールドに`*`を単一の値として追加してください。受け入れられる値は、flat文字列またはPCRE正規表現のいずれかです。"
+        }
+      },
+
+      {
+        "headers" : {
+          "elements" : {
+            "type" : "string"
+          },
+          "type" : "array",
+          "description" : "`Access-Control-Allow-Headers`ヘッダーの値。"
+        }
+      },
+
+      {
+        "exposed_headers" : {
+          "elements" : {
+            "type" : "string"
+          },
+          "type" : "array",
+          "description" : "`Access-Control-Expose-Headers`ヘッダーの値。指定しない場合、カスタムヘッダーは公開されません。"
+        }
+      },
+
+      {
+        "methods" : {
+          "type" : "array",
+          "elements" : {
+            "type" : "string",
+            "one_of" : ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE", "OPTIONS", "TRACE", "CONNECT"]
+          },
+          "description" : "'`Access-Control-Allow-Methods`ヘッダーの値。使用可能なオプションには、`GET`、`HEAD`、`PUT`、`PATCH`、`POST`、`DELETE`、`OPTIONS`、`TRACE`、`CONNECT` などがあります。デフォルトでは、すべてのオプションが許可されています。",
+          "default" : ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE", "OPTIONS", "TRACE", "CONNECT"]
+        }
+      },
+
+      {
+        "max_age" : {
+          "type" : "number",
+          "description" : "プリフライトリクエストの結果をキャッシュできる期間を`seconds`（秒）単位で示します。"
+        }
+      },
+
+      {
+        "credentials" : {
+          "required" : true,
+          "type" : "boolean",
+          "description" : "`Access-Control-Allow-Credentials`ヘッダーを値として`true`で送信するかどうかを決定するフラグ。",
+          "default" : false
+        }
+      },
+
+      {
+        "private_network" : {
+          "required" : true,
+          "type" : "boolean",
+          "description" : "`Access-Control-Allow-Private-Network`ヘッダーを値として`true`で送信するかどうかを決定するフラグ。",
+          "default" : false
+        }
+      },
+
+      {
+        "preflight_continue" : {
+          "required" : true,
+          "type" : "boolean",
+          "description" : "プラグインに`OPTIONS`プリフライトリクエストをアップストリームサービスにプロキシするように指示するブール値。",
+          "default" : false
+        }
+      }],
+      "type" : "record",
+      "required" : true
+    }
+  }],
+  "entity_checks" : []
+}

@@ -1,0 +1,22 @@
+# smartling.sltrans = notranslate
+---
+name: "Rate Limiting"
+search_aliases: 
+    - "rate-limiting"
+dbless_compatible: "partially"
+# smartling.sltrans = translate
+dbless_explanation: "プラグインは、(データベースを使用しない) `local` ポリシー、または (独立的な Redis を使用するため DB レス構成と互換性がある) `redis` ポリシーを使用して正常に実行されます。\n\nデータベースへの書き込みを必要とする `cluster` ポリシーでは動作しません。\n"
+# smartling.sltrans = notranslate
+free: true
+enterprise: true
+konnect: true
+network_config_opts: "All"
+# smartling.sltrans = translate
+notes: "Konnect の DB レスモードとハイブリッドモードでは、<code>cluster</code> 設定ポリシー\nはサポートされていません。<br><br>\nDB レスモードの場合は、<code>redis</code> または <code>local</code> のいずれかを使用します。\nKonnect モードとハイブリッドモードの場合は、<code>redis</code> を使用しますが、データプレーンでのみ <code>local</code> を使用します。\n"
+# smartling.sltrans = notranslate
+categories: 
+    - "traffic-control"
+publisher: "Kong Inc."
+# smartling.sltrans = translate
+desc: "一定期間内に実行可能な HTTP リクエスト数のレート制限を設定する"
+# smartling.sltrans = notranslate

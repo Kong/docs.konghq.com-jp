@@ -1,0 +1,22 @@
+# smartling.sltrans = notranslate
+---
+name: "ACL"
+dbless_compatible: "partially"
+# smartling.sltrans = translate
+dbless_explanation: "コンシューマとACLは宣言型構成で作成できます。\n\nACLをPOST、PUT、PATCH、またはDELETEする管理APIエンドポイントは、DB-lessモードでは機能しません。\n"
+# smartling.sltrans = notranslate
+free: true
+enterprise: true
+paid: true
+konnect: true
+network_config_opts: "All"
+# smartling.sltrans = translate
+notes: "--"
+# smartling.sltrans = notranslate
+categories: 
+    - "traffic-control"
+publisher: "Kong Inc."
+# smartling.sltrans = translate
+desc: "どのコンシューマがサービスにアクセスできるかを制御する"
+# smartling.sltrans = notranslate
+type: "plugin"
