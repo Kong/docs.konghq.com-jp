@@ -1,0 +1,113 @@
+{
+  "fields" : [
+  {
+    "consumer" : {
+      "reference" : "consumers",
+      "type" : "foreign",
+      "description" : "null 値が許可されている外部キーを表すカスタム型。",
+      "eq" : null
+    }
+  },
+
+  {
+    "protocols" : {
+      "required" : true,
+      "elements" : {
+        "type" : "string",
+        "one_of" : ["grpc", "grpcs", "http", "https", "ws", "wss"]
+      },
+      "type" : "set",
+      "default" : ["grpc", "grpcs", "http", "https", "ws", "wss"]
+    }
+  },
+
+  {
+    "consumer_group" : {
+      "reference" : "consumer_groups",
+      "type" : "foreign",
+      "description" : "null 値が許可されている外部キーを表すカスタム型。",
+      "eq" : null
+    }
+  },
+
+  {
+    "config" : {
+      "fields" : [
+      {
+        "key_names" : {
+          "description" : "プラグインがキーを探すパラメータ名の配列を記述します。キー名には、[a-z]、[A-Z]、[0-9]、[_] アンダースコア、および [-] ハイフンのみを含めることができます。",
+          "required" : true,
+          "elements" : {
+            "type" : "string",
+            "description" : "HTTP ヘッダー名を表す文字列。"
+          },
+          "type" : "array",
+          "default" : ["apikey"]
+        }
+      },
+
+      {
+        "hide_credentials" : {
+          "required" : true,
+          "description" : "アップストリームサービスの認証情報を表示または非表示にするようにプラグインに指示するオプションのブール値。`true`の場合、プラグインはリクエストから認証情報を削除します。",
+          "type" : "boolean",
+          "default" : false
+        }
+      },
+
+      {
+        "anonymous" : {
+          "description" : "認証に失敗した場合に「匿名」コンシューマとして使用するオプションの文字列（消費者のUUIDまたはユーザー名）の値。空の場合（デフォルトはnull）、リクエストは認証失敗 `4xx` で失敗します。",
+          "type" : "string"
+        }
+      },
+
+      {
+        "key_in_header" : {
+          "required" : true,
+          "description" : "有効になっている場合（デフォルト）、プラグインはリクエストヘッダーを読み取り、その中のキーを見つけようとします。",
+          "type" : "boolean",
+          "default" : true
+        }
+      },
+
+      {
+        "key_in_query" : {
+          "required" : true,
+          "description" : "有効にすると（デフォルト）、プラグインはリクエストのクエリパラメータを読み取り、その中のキーを見つけようとします。",
+          "type" : "boolean",
+          "default" : true
+        }
+      },
+
+      {
+        "key_in_body" : {
+          "required" : true,
+          "description" : "有効にすると、プラグインはリクエスト本文を読み取ります。サポートされているMIMEタイプ: `application/www-form-urlencoded`、`application/json`、および`multipart/form-data`。",
+          "type" : "boolean",
+          "default" : false
+        }
+      },
+
+      {
+        "run_on_preflight" : {
+          "required" : true,
+          "description" : "`OPTIONS`プリフライトリクエストでプラグインを実行する（そして認証を試みる）かどうかを示すブール値。`false` に設定すると、`OPTIONS`リクエストは常に許可されます。",
+          "type" : "boolean",
+          "default" : true
+        }
+      },
+
+      {
+        "realm" : {
+          "required" : false,
+          "description" : "認証が失敗すると、プラグインは`realm`属性値を含む`WWW-Authenticate`ヘッダーを送信します。",
+          "type" : "string"
+        }
+      }],
+      "type" : "record",
+      "required" : true
+    }
+  }],
+  "entity_checks" : []
+}

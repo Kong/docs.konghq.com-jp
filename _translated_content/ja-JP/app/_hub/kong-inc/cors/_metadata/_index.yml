@@ -1,0 +1,17 @@
+# smartling.sltrans = notranslate
+---
+name: "CORS"
+dbless_compatible: yes
+free: true
+enterprise: true
+konnect: true
+network_config_opts: "All"
+# smartling.sltrans = translate
+notes: "--"
+# smartling.sltrans = notranslate
+categories: 
+    - "security"
+publisher: "Kong Inc."
+# smartling.sltrans = translate
+desc: "開発者がブラウザーからリクエストを作成できるようにする"
+# smartling.sltrans = notranslate

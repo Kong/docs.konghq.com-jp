@@ -1,0 +1,139 @@
+{
+  "fields" : [
+  {
+    "consumer" : {
+      "reference" : "consumers",
+      "type" : "foreign",
+      "description" : "null 値が許可されている外部キーを表すカスタム型。",
+      "eq" : null
+    }
+  },
+
+  {
+    "protocols" : {
+      "type" : "set",
+      "required" : true,
+      "elements" : {
+        "type" : "string",
+        "one_of" : ["grpc", "grpcs", "http", "https"]
+      },
+      "description" : "HTTP プロトコルを表す文字列のセット。",
+      "default" : ["grpc", "grpcs", "http", "https"]
+    }
+  },
+
+  {
+    "consumer_group" : {
+      "reference" : "consumer_groups",
+      "type" : "foreign",
+      "description" : "null 値が許可されている外部キーを表すカスタム型。",
+      "eq" : null
+    }
+  },
+
+  {
+    "config" : {
+      "fields" : [
+      {
+        "uri_param_names" : {
+          "type" : "set",
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "KongがJWTを取得するために検査するクエリ文字列パラメータのリスト。",
+          "default" : ["jwt"]
+        }
+      },
+
+      {
+        "cookie_names" : {
+          "type" : "set",
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "KongがJWTを取得するために検査するCookie名のリスト。",
+          "default" : []
+        }
+      },
+
+      {
+        "key_claim_name" : {
+          "type" : "string",
+          "description" : "シークレットを特定する鍵を渡さなければならないクレームの名前。プラグインは、このクレームをJWTペイロードとヘッダーの順序で読み取ろうとします。",
+          "default" : "iss"
+        }
+      },
+
+      {
+        "secret_is_base64" : {
+          "required" : true,
+          "type" : "boolean",
+          "description" : "true の場合、プラグインは認証情報のシークレットがbase64でエンコードされていると想定します。コンシューマ用にbase64でエンコードされたシークレットを作成し、元のシークレットでJWTに署名する必要があります。",
+          "default" : false
+        }
+      },
+
+      {
+        "claims_to_verify" : {
+          "elements" : {
+            "type" : "string",
+            "one_of" : ["exp", "nbf"]
+          },
+          "type" : "set",
+          "description" : "Kongが検証できる登録済みクレームのリスト（RFC 7519に準拠）。使用可能な値: expまたはnbfのいずれか。"
+        }
+      },
+
+      {
+        "anonymous" : {
+          "type" : "string",
+          "description" : "認証に失敗した場合に「匿名」コンシューマとして使用するオプションの文字列（消費者のUUIDまたはユーザー名）の値。"
+        }
+      },
+
+      {
+        "run_on_preflight" : {
+          "required" : true,
+          "type" : "boolean",
+          "description" : "OPTIONSプリフライトリクエストでプラグインを実行する（そして認証を試みる）かどうかを示すブール値。falseに設定すると、OPTIONSリクエストは常に許可されます。",
+          "default" : true
+        }
+      },
+
+      {
+        "maximum_expiration" : {
+          "default" : 0,
+          "type" : "number",
+          "description" : "0から31536000（365日）までの値で、JWTの有効期間を将来の maximum_expiration秒に制限します。",
+          "between" : [0, 31536000]
+        }
+      },
+
+      {
+        "header_names" : {
+          "type" : "set",
+          "elements" : {
+            "type" : "string"
+          },
+          "description" : "KongがJWTを取得するために検査するHTTPヘッダー名のリスト。",
+          "default" : ["authorization"]
+        }
+      }],
+      "type" : "record",
+      "required" : true
+    }
+  }],
+  "entity_checks" : [
+  {
+    "conditional" : {
+      "if_field" : "config.maximum_expiration",
+      "if_match" : {
+        "gt" : 0
+      },
+      "then_field" : "config.claims_to_verify",
+      "then_match" : {
+        "contains" : "exp"
+      }
+    }
+  }]
+}

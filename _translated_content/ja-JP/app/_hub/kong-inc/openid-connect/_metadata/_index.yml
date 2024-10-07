@@ -1,0 +1,24 @@
+# smartling.sltrans = notranslate
+---
+name: "OpenID Connect"
+search_aliases: 
+    - "oidc"
+    - "oauth2"
+    - "openid-connect"
+    - "idp"
+    - "identity provider"
+dbless_compatible: yes
+free: false
+enterprise: true
+premium: true
+konnect: true
+network_config_opts: "All"
+# smartling.sltrans = translate
+notes: "--"
+# smartling.sltrans = notranslate
+categories: 
+    - "authentication"
+publisher: "Kong Inc."
+# smartling.sltrans = translate
+desc: "KongをサードパーティのOpenID Connectプロバイダーと統合する"
+# smartling.sltrans = notranslate
