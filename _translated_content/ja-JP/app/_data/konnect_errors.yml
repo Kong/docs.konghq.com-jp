@@ -1,0 +1,32 @@
+---
+- 
+    title: "ベースエラー"
+    description: "次のエラーは、Konnect API によって返される可能性があります。これらは主に認証とリクエストの検証に関するもので、アプリケーション内で一貫して処理する必要があります\n"
+    errors: 
+        unauthenticated: 
+            title: "未認証"
+            description: "このアクションを実行するには、認証を受ける必要があります。"
+            resolution: "リクエストで有効なBearerアクセストークンを送信します"
+            link: 
+                url: "/konnect/api/#authentication"
+                text: "認証について詳しく見る"
+        unauthorized: 
+            title: "無許可"
+            description: "この操作を実行する権限がありません。"
+            resolution: "必要な権限を付与してもらうには、組織の管理者に問い合わせてください。"
+        not-found: 
+            title: "見つかりません"
+            description: "要求されたリソースが存在しないか、認証されたユーザーが所属する組織によって所有されていません"
+            resolution: "提供されたリソースIDを確認し、再試行してください。"
+        bad-request: 
+            title: "悪いリクエスト"
+            description: "リクエストは理解されましたが、ペイロード内のデータが無効であるため処理できません"
+            resolution: "詳細については、レスポンスの「invalid_parameters」セクションをご参照ください。"
+        conflict: 
+            title: "紛争"
+            description: "要求されたアクションは有効ですが、サーバーの現在の状態により実行できません"
+            resolution: "該当なし"
+        too-many-requests: 
+            title: "リクエストが多すぎます"
+            description: "一定時間内に送信されたリクエストが多すぎます。"
+            resolution: "この応答には、新しいリクエストを行う前に待機する時間を示す Retry-Afterヘッダーが含まれる場合があります。"

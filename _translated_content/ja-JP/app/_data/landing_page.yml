@@ -1,0 +1,126 @@
+---
+features: 
+    - 
+        title: "主な特徴"
+        items: 
+            - 
+                name: "Service Hub"
+                description: "サービスの包括的なカタログを構築し、アーキテクチャ全体にわたってあらゆるAPIの発見、消費、管理を可能にします。"
+                icon: "/assets/images/landing-page/card-icons/service-hub.svg"
+                links: 
+                    - 
+                        text: "概要"
+                        icon: "/assets/images/icons/icn-doc.svg"
+                        url: "/konnect/servicehub/"
+            - 
+                name: "Dev Portal"
+                description: "セルフサービスの開発者経験によって開発者のオンボーディングを合理化し、開発者が公開サービスを発見、登録、利用できるようにします。"
+                icon: "/assets/images/landing-page/card-icons/dev-portal.svg"
+                links: 
+                    - 
+                        text: "概要（クラウド）"
+                        icon: "/assets/images/icons/icn-doc.svg"
+                        url: "/konnect/dev-portal/"
+                    - 
+                        text: "自主管理型"
+                        icon: "/assets/images/icons/icn-doc.svg"
+                        url: "/gateway/latest/kong-enterprise/dev-portal/"
+            - 
+                name: "Advanced Analytics"
+                description: "Konnect Advanced Analyticsを使用して詳細な分析を表示し、環境とクラスターの健全性を監視します。サービス、ルート、アプリケーションの使用状況に関する詳細な情報を得ることができます。"
+                icon: "/assets/images/landing-page/card-icons/analytics.svg"
+                links: 
+                    - 
+                        text: "概要"
+                        icon: "/assets/images/icons/icn-doc.svg"
+                        url: "/konnect/vitals/"
+            - 
+                name: "Gateway Manager"
+                description: "選択した環境とプラットフォームで Kong Gateway データプレーン（DP）とサービスをプロビジzニング、管理します。"
+                icon: "/assets/images/landing-page/card-icons/runtime.svg"
+                links: 
+                    - 
+                        text: "概要"
+                        icon: "/assets/images/icons/icn-doc.svg"
+                        url: "/konnect/gateway-manager/"
+            - 
+                name: "API Products"
+                description: "APIプロダクトを通じて複数のAPIをバンドルし管理することで、ドキュメント化、アプリケーション登録、デベロッパーポータルへの公開を可能にします。"
+                icon: "/assets/images/landing-page/card-icons/api-product.svg"
+                links: 
+                    - 
+                        text: "概要"
+                        icon: "/assets/images/icons/icn-doc.svg"
+                        url: "/konnect/api-products/"
+            - 
+                name: "Mesh Manager"
+                description: "Kong Mesh サービスメッシュを管理するためのグローバルコントロールプレーン（CP）プレーンを作成します。"
+                icon: "/assets/images/landing-page/card-icons/mesh-manager.svg"
+                links: 
+                    - 
+                        text: "概要"
+                        icon: "/assets/images/icons/icn-doc.svg"
+                        url: "/konnect/mesh-manager/"
+    - 
+        title: "拡張機能とツール"
+        items: 
+            - 
+                name: "decK"
+                description: "decKを使用してKong Gatewayを宣言的に管理します。Kong Gatewayクラスター間で YAML または JSON 構成を同期し、実行中のクラスターに構成をプッシュし、ドリフトを検出し、バックアップを作成します。"
+                links: 
+                    - 
+                        text: "概要"
+                        icon: "/assets/images/icons/icn-doc.svg"
+                        url: "/deck/latest/"
+                    - 
+                        text: "始める"
+                        icon: "/assets/images/icons/icn-doc.svg"
+                        url: "/deck/latest/guides/getting-started/"
+                    - 
+                        text: "decK による APIOps"
+                        icon: "/assets/images/icons/icn-doc.svg"
+                        url: "/deck/latest/guides/apiops/"
+            - 
+                name: "Kong Gateway Operator"
+                description: "Kubernetes上で実行する場合、Kong Ingress Controller、Kong Gateway Data Planes、またはその両方を一緒に管理します。"
+                links: 
+                    - 
+                        text: "概要"
+                        icon: "/assets/images/icons/icn-doc.svg"
+                        url: "/gateway-operator/latest/"
+            - 
+                name: "Kong Ingress Controller"
+                description: "ダウンタイムなしでKubernetesクラスタ全体に認証、変換、その他の機能を実装します。"
+                links: 
+                    - 
+                        text: "概要"
+                        icon: "/assets/images/icons/icn-doc.svg"
+                        url: "/kubernetes-ingress-controller/latest/"
+                    - 
+                        text: "始める"
+                        icon: "/assets/images/icons/icn-doc.svg"
+                        url: "/kubernetes-ingress-controller/latest/guides/getting-started/"
+            - 
+                name: "Insomnia"
+                description: "ユーザーがInsomniaに即座にドロップして、APIやマイクロサービスを設計、文書化、テストできるようにすることで、ワークフローを合理化します。"
+                links: 
+                    - 
+                        text: "概要"
+                        icon: "/assets/images/icons/icn-doc.svg"
+                        url: "https://docs.insomnia.rest"
+            - 
+                name: "Plugin Hub"
+                description: "プラグインを使用して高度な機能を提供し、Kong Gatewayの使用を拡張します。"
+                links: 
+                    - 
+                        text: "概要"
+                        icon: "/assets/images/icons/icn-doc.svg"
+                        url: "/hub/plugins/overview/"
+                    - 
+                        text: "プラグイン開発"
+                        icon: "/assets/images/icons/icn-doc.svg"
+                        url: "/hub/plugins/overview/#developing-custom-plugins"
+                    - 
+                        text: "ハブ"
+                        icon: "/assets/images/icons/icn-doc.svg"
+                        url: "/hub/"

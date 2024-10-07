@@ -1,0 +1,257 @@
+# smartling.sltrans = notranslate
+---
+0: 
+    name: "Amazon Linux 1"
+    enterprise: true
+    enterprise_versions: 
+        first_version: "1.5.x"
+        last_version: "2.8.x"
+    oss: true
+    oss_versions: 
+        first_version: "0.10.x"
+        last_version: "2.8.x"
+    status: "deprecated"
+  # smartling.sltrans = translate
+    deprecation_date: "2020年12月31日"
+  # smartling.sltrans = notranslate
+    eol_link: "https://aws.amazon.com/blogs/aws/update-on-amazon-linux-ami-end-of-life"
+1: 
+    name: "Amazon Linux 2"
+    enterprise: true
+    enterprise_versions: 
+        first_version: "1.5.x"
+        last_version: null
+    oss: true
+    oss_versions: 
+        first_version: "2.0.x"
+        last_version: null
+    status: "active"
+  # smartling.sltrans = translate
+    deprecation_date: null
+  # smartling.sltrans = notranslate
+    eol_link: null
+2: 
+    name: "CentOS 6"
+    enterprise: true
+    enterprise_versions: 
+        first_version: null
+        last_version: "2.3.x"
+    oss: true
+    oss_versions: 
+        first_version: "0.10.x"
+        last_version: "2.3.x"
+    status: "deprecated"
+  # smartling.sltrans = translate
+    deprecation_date: "2020年11月30日"
+  # smartling.sltrans = notranslate
+    eol_link: "https://endoflife.software/operating-systems/linux/centos"
+3: 
+    name: "CentOS 7"
+    enterprise: true
+    enterprise_versions: 
+        first_version: "2.1.x"
+        last_version: "2.8.x"
+    oss: true
+    oss_versions: 
+        first_version: "0.10.x"
+        last_version: "2.7.x"
+    status: "deprecated"
+  # smartling.sltrans = translate
+    deprecation_date: "2021年12月31日"
+  # smartling.sltrans = notranslate
+    eol_link: "https://www.centos.org/centos-linux-eol/"
+4: 
+    name: "CentOS 8"
+    enterprise: true
+    enterprise_versions: 
+        first_version: "1.5.x"
+        last_version: "2.8.x"
+    oss: true
+    oss_versions: 
+        first_version: "1.4.x"
+        last_version: "2.7.x"
+    status: "deprecated"
+  # smartling.sltrans = translate
+    deprecation_date: "2021年12月31日"
+  # smartling.sltrans = notranslate
+    eol_link: "https://www.centos.org/centos-linux-eol/"
+5: 
+    name: "Debian 8 (Jessie)"
+    enterprise: true
+    enterprise_versions: 
+        first_version: "1.5.x"
+        last_version: "2.8.x"
+    oss: true
+    oss_versions: 
+        first_version: "0.2.x"
+        last_version: "2.8.x"
+    status: "deprecated"
+  # smartling.sltrans = translate
+    deprecation_date: "2020年6月30日"
+  # smartling.sltrans = notranslate
+    eol_link: "https://www.debian.org/News/2020/20200709"
+6: 
+    name: "Debian 9 (Stretch)"
+    enterprise: true
+    enterprise_versions: 
+        first_version: "2.1.x"
+        last_version: null
+    oss: true
+    oss_versions: 
+        first_version: "0.11.x"
+        last_version: null
+    status: "active"
+  # smartling.sltrans = translate
+    deprecation_date: null
+  # smartling.sltrans = notranslate
+    eol_link: null
+7: 
+    name: "Debian 10 (Buster)"
+    enterprise: true
+    enterprise_versions: 
+        first_version: "2.7.x"
+        last_version: null
+    oss: true
+    oss_versions: 
+        first_version: "1.4.x"
+        last_version: null
+    status: "active"
+  # smartling.sltrans = translate
+    deprecation_date: null
+  # smartling.sltrans = notranslate
+    eol_link: null
+8: 
+    name: "Debian 11 (Bullseye)"
+    enterprise: true
+    enterprise_versions: 
+        first_version: "2.7.x"
+        last_version: null
+    oss: true
+    oss_versions: 
+        first_version: "1.4.x"
+        last_version: null
+    status: "active"
+  # smartling.sltrans = translate
+    deprecation_date: null
+  # smartling.sltrans = notranslate
+    eol_link: null
+9: 
+    name: "RHEL 6"
+    enterprise: false
+    enterprise_versions: 
+        first_version: null
+        last_version: null
+    oss: true
+    oss_versions: 
+        first_version: "0.14.x"
+        last_version: "1.5.x"
+    status: "deprecated"
+  # smartling.sltrans = translate
+    deprecation_date: "2020年11月30日"
+  # smartling.sltrans = notranslate
+    eol_link: "https://access.redhat.com/support/policy/updates/errata"
+10: 
+    name: "RHEL 7.9"
+    enterprise: true
+    enterprise_versions: 
+        first_version: "1.5.x"
+        last_version: null
+    oss: true
+    oss_versions: 
+        first_version: "0.14.x"
+        last_version: null
+    status: "active"
+  # smartling.sltrans = translate
+    deprecation_date: null
+  # smartling.sltrans = notranslate
+    eol_link: null
+11: 
+    name: "RHEL 8"
+    enterprise: true
+    enterprise_versions: 
+        first_version: "1.5.x"
+        last_version: null
+    oss: true
+    oss_versions: 
+        first_version: "1.4.x"
+        last_version: null
+    status: "active"
+  # smartling.sltrans = translate
+    deprecation_date: null
+  # smartling.sltrans = notranslate
+    eol_link: null
+12: 
+    name: "Ubuntu 16.04 (Xenial)"
+    enterprise: true
+    enterprise_versions: 
+        first_version: "1.5.x"
+        last_version: "2.8.x"
+    oss: true
+    oss_versions: 
+        first_version: "0.10.x"
+        last_version: "2.8.x"
+    status: "deprecated"
+  # smartling.sltrans = translate
+    deprecation_date: "2021年4月"
+  # smartling.sltrans = notranslate
+    eol_link: "https://wiki.ubuntu.com/Releases"
+13: 
+    name: "Ubuntu 18.04 (Bionic)"
+    enterprise: true
+    enterprise_versions: 
+        first_version: "1.5.x"
+        last_version: null
+    oss: true
+    oss_versions: 
+        first_version: "0.14.x"
+        last_version: null
+    status: "active"
+  # smartling.sltrans = translate
+    deprecation_date: null
+  # smartling.sltrans = notranslate
+    eol_link: null
+14: 
+    name: "Ubuntu 20.04 (Focal)"
+    enterprise: true
+    enterprise_versions: 
+        first_version: "2.1.x"
+        last_version: null
+    oss: true
+    oss_versions: 
+        first_version: "2.1.x"
+        last_version: null
+    status: "active"
+  # smartling.sltrans = translate
+    deprecation_date: null
+  # smartling.sltrans = notranslate
+    eol_link: null
+15: 
+    name: "Ubuntu 22.04 (Jammy)"
+    enterprise: true
+    enterprise_versions: 
+        first_version: "3.1.x"
+        last_version: null
+    oss: true
+    oss_versions: 
+        first_version: "3.1.x"
+        last_version: null
+    status: "active"
+  # smartling.sltrans = translate
+    deprecation_date: null
+  # smartling.sltrans = notranslate
+    eol_link: null
+16: 
+    name: "Amazon Linux 2022"
+    enterprise: true
+    enterprise_versions: 
+        first_version: "3.1.x"
+        last_version: null
+    oss: true
+    oss_versions: 
+        first_version: "3.1.x"
+        last_version: null
+    status: "active"
+  # smartling.sltrans = translate
+    deprecation_date: null
+  # smartling.sltrans = notranslate
+    eol_link: null

@@ -1,0 +1,96 @@
+# smartling.sltrans = notranslate
+---
+categories: 
+
+    # smartling.sltrans = translate
+    - 
+        name: "AI"
+    # smartling.sltrans = notranslate
+        slug: "ai"
+    # smartling.sltrans = translate
+        desc: "マルチ LLM AI Gatewayプラグインを使用してAIトラフィックを管理、保護、制御する"
+    # smartling.sltrans = notranslate
+        icon: "/assets/images/nav/hub/ai.svg"
+
+    # smartling.sltrans = translate
+    - 
+        name: "認証"
+    # smartling.sltrans = notranslate
+        slug: "authentication"
+    # smartling.sltrans = translate
+        desc: "認証レイヤーでサービスを保護する"
+    # smartling.sltrans = notranslate
+        icon: "/assets/images/nav/hub/lock_person.svg"
+
+    # smartling.sltrans = translate
+    - 
+        name: "セキュリティ"
+    # smartling.sltrans = notranslate
+        slug: "security"
+    # smartling.sltrans = translate
+        desc: "追加のセキュリティレイヤーでサービスを保護する"
+    # smartling.sltrans = notranslate
+        icon: "/assets/images/nav/hub/shield.svg"
+
+    # smartling.sltrans = translate
+    - 
+        name: "トラフィック制御"
+    # smartling.sltrans = notranslate
+        slug: "traffic-control"
+    # smartling.sltrans = translate
+        desc: "インバウンドおよびアウトバウンドAPIトラフィックの管理、スロットル、制限"
+    # smartling.sltrans = notranslate
+        icon: "/assets/images/nav/hub/route.svg"
+
+    # smartling.sltrans = translate
+    - 
+        name: "サーバーレス"
+    # smartling.sltrans = notranslate
+        slug: "serverless"
+    # smartling.sltrans = translate
+        desc: "他のプラグインと組み合わせてサーバーレス関数を呼び出します"
+    # smartling.sltrans = notranslate
+        icon: "/assets/images/nav/hub/serverless.svg"
+
+    # smartling.sltrans = translate
+    - 
+        name: "分析と監視"
+    # smartling.sltrans = notranslate
+        slug: "analytics-monitoring"
+    # smartling.sltrans = translate
+        desc: "APIとマイクロサービストラフィックを視覚化、検査、監視"
+    # smartling.sltrans = notranslate
+        icon: "/assets/images/nav/hub/bar_chart.svg"
+
+    # smartling.sltrans = translate
+    - 
+        name: "変革"
+    # smartling.sltrans = notranslate
+        slug: "transformations"
+    # smartling.sltrans = translate
+        desc: "Kongでリクエストとレスポンスをその場で変換"
+    # smartling.sltrans = notranslate
+        icon: "/assets/images/nav/hub/swap_horiz.svg"
+
+    # smartling.sltrans = translate
+    - 
+        name: "ログ記録"
+    # smartling.sltrans = notranslate
+        slug: "logging"
+    # smartling.sltrans = translate
+        desc: "インフラストラクチャに最適なトランスポートを使用して、リクエストと応答データをログに記録します"
+    # smartling.sltrans = notranslate
+        icon: "/assets/images/nav/hub/list_alt.svg"
+types: 
+
+    # smartling.sltrans = translate
+    - 
+        name: "プラグイン"
+    # smartling.sltrans = notranslate
+        slug: "plugin"
+
+    # smartling.sltrans = translate
+    - 
+        name: "統合"
+    # smartling.sltrans = notranslate
+        slug: "integration"

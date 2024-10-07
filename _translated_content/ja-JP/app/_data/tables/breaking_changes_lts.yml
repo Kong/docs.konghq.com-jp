@@ -1,0 +1,645 @@
+# smartling.sltrans = notranslate
+---
+categories: 
+
+    # smartling.sltrans = translate
+    - 
+        name: "新機能"
+    # smartling.sltrans = notranslate
+        key: 1
+    # smartling.sltrans = translate
+        desc: "次の表に、3.xリリースで導入された新機能を示します。\nこれらの機能は、既存の構成に影響を与える可能性があります。\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        name: "削除または非推奨"
+    # smartling.sltrans = notranslate
+        key: 2
+    # smartling.sltrans = translate
+        desc: "次の表の機能は、完全に削除されました。\n以下の表に基づいて設定を更新することで、\n非推奨のエイリアスを使用することで発生する可能性のある問題を回避し、Kongインスタンスが最新の変更と改善で正しく機能するようにすることができます。\n\nシステムの安定性、セキュリティ、最適なパフォーマンスを維持するためには、\nコンフィギュレーションを常に最新の状態に保つことが不可欠です。\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        name: "互換性"
+    # smartling.sltrans = notranslate
+        key: 3
+    # smartling.sltrans = translate
+        desc: "以下の表は、データベース設定や「kong.conf」が失敗する原因となる可能性のある動作の変更を以下に挙げています。\nこれには、非推奨の（ただし削除されない）機能も含まれます。\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        name: "相談可能"
+    # smartling.sltrans = notranslate
+        key: 4
+    # smartling.sltrans = translate
+        desc: "次の機能を使用するアップグレードには Kong のサポートが必要になる場合があります。\n\nKongのサポートチームは、\nデータ移行、カスタムプラグインの統合、既存の設定PDKとのシームレスな連携など、\n特定のビジネスニーズに合わせた高度な機能とプロフェッショナルサービスを提供します。\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        name: "動作の変更に関する通知"
+    # smartling.sltrans = notranslate
+        key: 5
+    # smartling.sltrans = translate
+        desc: "次の表には、知っておく必要はあるものの、アクションを必要としない変更点が掲載されています。\n"# smartling.sltrans = notranslate
+entries: 
+
+    # smartling.sltrans = translate
+    - 
+        area: "プラグイン"
+    # smartling.sltrans = notranslate
+        category: 1
+    # smartling.sltrans = translate
+        description: "**Request Validatorプラグイン**\n\nRequest Validatorプラグインは、パラメータ付きの\n「content-type」を持つリクエストが、パラメータなしの「content-type」とマッチすることを許可するようになりました。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "いいえ\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "DB設定"
+    # smartling.sltrans = notranslate
+        category: 1
+    # smartling.sltrans = translate
+        description: "データプレーン（DP）構成キャッシュが削除されました。\n構成の永続化は、LMDB によって自動的に実行されるようになりました。\n\nデータプレーン（DP）の設定キャッシュメカニズムとそれに関連する設定任意 \n(data_plane_config_cache_modeとdata_plane_config_cache_path) は削除され、LMDBが優先されました。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "Kong構成からパラメーターを削除します。\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "DB設定"
+    # smartling.sltrans = notranslate
+        category: 1
+    # smartling.sltrans = translate
+        description: "route.pathの変更に合わせて、宣言型構成のバージョン番号を 3.0 に上げました。\n\n古いバージョンを使用した宣言型構成は、移行中に 3.0 にアップグレードされます。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "もし設定が（GitOps モデルに従って）リポジトリに保存されているなら、[deck convert](/deck/latest reference/deck_convert/) を使ってアップグレードする必要があります、これらは[deck convert](/deck/latest/reference/deck_convert/) を使ってアップグレードする必要があります。"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "DB設定"
+    # smartling.sltrans = notranslate
+        category: 1
+    # smartling.sltrans = translate
+        description: "タグにスペースを含めることができるようになりました。"
+    # smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "いいえ\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "kong.conf"
+    # smartling.sltrans = notranslate
+        category: 1
+    # smartling.sltrans = translate
+        description: "lua_ssl_trusted_certificateのデフォルト値がsystemに変更され、システムCAストアから\n信頼済みCAリストを自動的にロードするようになりました。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "このフィールドを明示的に構成していない場合は、サーバー上のすべての証明書を自動的に取り込むという\n新しいデフォルト値の動作が、デプロイメントに適していることをご確認ください。それ以外の場合は、設定を調整します。\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "プラグイン"
+    # smartling.sltrans = notranslate
+        category: 1
+    # smartling.sltrans = translate
+        description: "**流量制限、Rate Limiting Advanced、およびResponse Rate Limitingプラグイン**。\n\nこれらのプラグインのデフォルトポリシーは、すべてのデプロイモードで localになりました。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "いいえ\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "プラグイン"
+    # smartling.sltrans = notranslate
+        category: 1
+    # smartling.sltrans = translate
+        description: "プラグインのバッチキューイング **HTTPログ、StatsD、OpenTelemetry、Datadogプラグイン**。\n\nキューイングシステムが作り直され、いくつかのプラグインパラメータが期待通りに機能しなくなりました。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "これらのプラグインでキューを使用する場合は、新しいパラメータを構成する必要があります。\n詳細については、各プラグインのドキュメントをご参照ください。\n\nモジュール kong.tools.batch_queueがkong.tools.batch に変更され、APIが変更されました。\nカスタムプラグインがキューを使用している場合は、新しいパラメータを使用するように更新する必要があります。\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "OpenSSL"
+    # smartling.sltrans = notranslate
+        category: 1
+    # smartling.sltrans = translate
+        description: "> _3.4.3.5 以降のバージョンに適用されます。_\n\nOpenSSL 3.2では、デフォルトのSSL/TLSセキュリティレベルが1から2に変更されました。\n\nこれは、セキュリティレベルが112ビットに設定されることを意味します。\nその結果、以下の行為は禁止されます。\n * 2048ビット未満のRSA、DSA、DHキー\n* 224ビットより短いECCキー\n* RC4を使用する任意の暗号スイート\n* SSLバージョン3\nさらに、圧縮は無効になります。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "構成が新しいセキュリティレベル要件に準拠していることを確認します。\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "デプロイメント"
+    # smartling.sltrans = notranslate
+        category: 2
+    # smartling.sltrans = translate
+        description: "Debian 8 (Jessie) コンテナおよびパッケージの生産を非推奨とし、停止しました。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "Debian10と11が利用可能です。Kong 3.4にアップグレードする前に、これらのバージョンのいずれかにアップグレードしてください。\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "デプロイメント"
+    # smartling.sltrans = notranslate
+        category: 2
+    # smartling.sltrans = translate
+        description: "Amazon Linux 1のコンテナとパッケージは非推奨となり、製造が中止された。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "AWSからのアップデート、セキュリティパッチ、サポートを継続的に受けるために、\nAmazon Linux 2またはサポートされている他のオペレーティングシステムに移行することをお勧めします。\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "デプロイメント"
+    # smartling.sltrans = notranslate
+        category: 2
+    # smartling.sltrans = translate
+        description: "非推奨となり、Alpine Linuxのイメージとパッケージの生産を停止しました。\n\n便利なDockerタグの基礎となるオペレーティングシステム(OS)\n(例えば、`latest`、`3.4.0.0`、`3.4`）はAlpineからUbuntuに変更されました。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "OS 固有の構成についてDockerfileを確認し、必要に応じて調整します。\n\n便利なイメージのいずれかを使用している場合は、Ubuntu用に設定を調整してください。\nそうでない場合は、特定のOSタグ\n(例えば3.4.0.0-debian)を使ったイメージに切り替えてください。\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "デプロイメント"
+    # smartling.sltrans = notranslate
+        category: 2
+    # smartling.sltrans = translate
+        description: "Ubuntu 18.04 (「Bionic」) の標準サポートが2023年6月をもって終了したため、\nUbuntu 18.04 (「Bionic」) パッケージを非推奨とし、生産を停止しました。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "Ubuntu 20.04 および 22.04 が利用可能です。Kong 3.4 にアップグレードする前に、これらのバージョンのいずれかにアップグレードしてください。\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "プラグイン"
+    # smartling.sltrans = notranslate
+        category: 2
+    # smartling.sltrans = translate
+        description: "KongプラグインやDAOスキーマの\n非推奨のshorthandsフィールドは削除されました。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "カスタムスキーマでまだ「shorthands」を使用している場合は、「shorthand_fields」を\n使用するように更新する必要があります。このアップデートは\nKongの最新バージョンとの互換性を確保するために必要です。\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: null
+    # smartling.sltrans = notranslate
+        category: 2
+    # smartling.sltrans = translate
+        description: "Kongスキーマと\nKongフィールドスキーマから「legacy = true | false」属性のサポートが削除されました。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "スキーマ内でlegacy属性は使用できなくなりました。\n\nカスタムスキーマの中で「legacy=true | false」を参照している場合は、\n「legacy」属性なしで最新のスキーマ仕様に適合するように更新する必要があります。\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "Nginxテンプレート"
+    # smartling.sltrans = notranslate
+        category: 2
+    # smartling.sltrans = translate
+        description: "Kong.serve_admin_apiの非推奨のエイリアスが削除されました。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "Nginxのカスタムテンプレートでエイリアスを使用している場合は、「Kong.admin_content」に変更してください。"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "PDK"
+    # smartling.sltrans = notranslate
+        category: 2
+    # smartling.sltrans = translate
+        description: "Kongシングルトモジュールkong.singletonsPDK 'kong.*' を支持して削除されました。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "「kong.singletons」を削除します。モジュールの代わりにkongグローバル変数を使用してください。\n\n例：'singletons.db.daos' -> 'kong.db.daos'\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "トレース"
+    # smartling.sltrans = notranslate
+        category: 2
+    # smartling.sltrans = translate
+        description: "ngx.ctx.balancer_address は削除され、 ngx.ctx.balancer_dataが採用されました。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "以前に ngx.ctx.balancer_address を使用していた場合、代わりに「ngx.ctx.balancer_data」を使用してください。\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "ルーター"
+    # smartling.sltrans = notranslate
+        category: 2
+    # smartling.sltrans = translate
+        description: "「route.path」の正規化ルールが変更となりました。 \nKong Gatewayは正規化されていないパスを保存しますが、正規表現パスは常に\n正規化されたURIとパターンマッチします。\n\n以前、Kong Gatewayは、異なる形式のURIマッチを確実にするために、\n正規表現パスパターンでパーセントエンコーディングを置き換えていました。これはサポートされなくなりました。\n[RFC 3986](https://datatracker.ietf.org/doc/html/rfc3986)で定義されている予約文字を除き、\nその他のすべての文字はパーセントエンコードなしで書き込みます。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "アップグレード後、\n古い方法でルートを設定するとアラートが表示され、\n新しいルート設定方法で影響を受けるルートを再設定する必要があります。\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "ルーター"
+    # smartling.sltrans = notranslate
+        category: 2
+    # smartling.sltrans = translate
+        description: "Kong Gateway は、ルートパスが正規表現パターンであるかどうかを推測するためにヒューリスティックを使用しなくなりました。\n3.0以降では、\nすべての正規表現パスは接頭辞「~」で始まる必要があり、「~」で始まらないパスはすべてプレーンテキストとみなされます。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "手動での移行は必要ありません。\n2.8から3.4にアップグレードすると、移行プロセスで正規表現パスが自動的に変換されるはずです。 \n\n今後、正規表現を記述するときは、「~」記号で始める必要があります。\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: null
+    # smartling.sltrans = notranslate
+        category: 2
+    # smartling.sltrans = translate
+        description: "nginx-opentracingモジュールのサポートは 3.0 で非推奨となり、Kong 4.0 では削除される予定です。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "いいえ\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "Admin API"
+    # smartling.sltrans = notranslate
+        category: 2
+    # smartling.sltrans = translate
+        description: "Admin API エンドポイント「/vitals/reports」と「/vitals/reports/:entity_type」が削除されました。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "アップグレード後は、代わりに Vitals API の次のいずれかのエンドポイントを使用します。\n\n* '/vitals/reports/consumer' の場合は、代わりに '/<workspace_name>/vitals/status_codes/by_consumer' を使用\n* '/vitals/reports/service' の場合は、代わりに '/<workspace_name>/vitals/status_codes/by_service' を使用\n* '/vitals/reports/hostname' の場合は、代わりに '/<workspace_name>/vitals/nodes' を使用\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "Admin API"
+    # smartling.sltrans = notranslate
+        category: 2
+    # smartling.sltrans = translate
+        description: "「/targets」エンドポイントのPOSTリクエストでは、既存のエンティティを更新できなくなりました。\n新しいものを作ることしかできません。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "POSTリクエストを使って「/targets」を変更するスクリプトがある場合は、Kong Gateway 3.4にアップデートする前に、\n適切なエンドポイントへのPUTリクエストに変更してください。\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "Admin API"
+    # smartling.sltrans = notranslate
+        category: null
+    # smartling.sltrans = translate
+        description: "重複したターゲットに対する挿入および更新操作では409エラーが返されます。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "重複するターゲットがある場合は、削除します。\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "PDK"
+    # smartling.sltrans = notranslate
+        category: 2
+    # smartling.sltrans = translate
+        description: "'kong.request.get_path()'PDK 関数は、呼び出し元に返される文字列に対してパスの正規化を実行するようになりました。\nリクエストパスの生の非正規化バージョンは、 kong.request.get_raw_path() を介して取得できます。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "いいえ\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "PDK"
+    # smartling.sltrans = notranslate
+        category: 2
+    # smartling.sltrans = translate
+        description: "`pdk.response.set_header()`,'pdk.response.set_headers()',とpdk.response.exit ()手動で設定された Transfer Encoding ヘッダを無視して\n警告を出すようになりました。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "いいえ\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "Go PDK"
+    # smartling.sltrans = notranslate
+        category: 2
+    # smartling.sltrans = translate
+        description: "「go_pluginserver_exe」ディレクティブと「go_plugins_dir」ディレクティブはサポートされなくなりました。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "Goプラグインサーバーを使用している場合は、アップグレードする前にプラグインを移行してGo PDKを使用するようにしてください。\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "プラグイン"
+    # smartling.sltrans = notranslate
+        category: 2
+    # smartling.sltrans = translate
+        description: "X-Credential-Usernameの値を持つ Kong 定数CREDENTIAL_USERNAMEが削除されました。\n\nKongプラグインもこの定数をサポートしていません。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "認証情報のアップストリームヘッダを設定する際には、定数 `CREDENTIAL_IDENTIFIER` (`X-Credential-Identifier`) を使用します。"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "宣言型構成"
+    # smartling.sltrans = notranslate
+        category: 2
+    # smartling.sltrans = translate
+        description: "KongのCLIツールで`.lua`形式を使用して宣言型コンフィギュレーションファイルを\nインポートすることができなくなりました。JSON形式とYAML形式のみがサポートされています。 \n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "Kong Gatewayのアップデート手順に「Kong config db_import config.lua」の実行が含まれる場合は、アップグレードする前にconfig.luaのファイルを「config.json」または「config.yml」ファイルに変換します。"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "プラグイン"
+    # smartling.sltrans = notranslate
+        category: 2
+    # smartling.sltrans = translate
+        description: "プラグイン内の DAO は、読み込み順序が明示的になるように配列にリストする必要があります。\nハッシュのようなテーブルにそれらをロードすることはサポートされなくなりました。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "カスタムプラグインを確認します。DAOをリストするためにハッシュのようなテーブルを使うプラグインがある場合、それらを配列に変換しましょう。\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "プラグイン"
+    # smartling.sltrans = notranslate
+        category: 2
+    # smartling.sltrans = translate
+        description: "プラグインは「handler.lua」に有効な PRIORITY (整数) と VERSION (`x.y.z` フォーマット) フィールドを持つ必要があります。\nファイルがない場合、プラグインの読み込みに失敗します。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "カスタムプラグインを確認します。すべてのカスタムプラグインに、それぞれの形式で PRIORITY と VERSION を追加します。\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "PDK"
+    # smartling.sltrans = notranslate
+        category: 2
+    # smartling.sltrans = translate
+        description: "'kong.plugins.log-serializers.basic' ライブラリは削除され、代わりに PDK 関数kong.log.serializeが導入されました。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "新しいPDK機能を使用するには、プラグインをアップグレードしてください。\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "プラグイン"
+    # smartling.sltrans = notranslate
+        category: 2
+    # smartling.sltrans = translate
+        description: "非推奨のレガシープラグインスキーマのサポートは削除されました。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "カスタムプラグインがまだ古い（0.x era）スキーマを使用している場合は、それらをアップグレードする必要があります。 \n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "プラグイン"
+    # smartling.sltrans = notranslate
+        category: 2
+    # smartling.sltrans = translate
+        description: "一部のプラグインの優先度を更新しました。\n\nプラグインが実行される順序に影響する可能性があるため、カスタムプラグインを実行する人にとって重要です。\nこれにより、標準の Kong Gateway インストールにおけるプラグインの実行順序は変更されません。\n\n新旧のプラグイン優先度の値：\n- acme` は `1007` から `1705` に変更。\n- basic-auth` は `1001` から `1100` に変更。- canary` は `13` から `20` に変更。- degraphql` は `1005` から `1500` に変更。- graphql-proxy-cache-advanced` は `100` から `99` に変更。- hmac-auth` は `1000` から `1030` に変更。- jwt` は `1005` から `1450` に変更。- jwt-signer` は `999` から `1020` に変更。-  key-auth  が  1003  から  1250  に変更されました\n-  key-auth-advanced  が  1003  から  1250  に変更されました\n-  ldap-auth  が  1002  から  1200  に変更されました\n-  ldap-auth-advanced  が  1002  から  1200  に変更されました\n-  mtls-auth  が  1006  から  1600  に変更されました\n-  oauth2  が  1004  から  1400  に変更されました\n-  openid-connect  が  1000  から  1050  に変更されました\n-  rate-limiting  が  901  から  910  に変更されました\n-  rate-limiting-advanced  が  902  から  910  に変更されました\n-  route-by-header  が  2000  から  850  に変更されました\n-  route-transformer-advanced  が  800  から  780  に変更されました\n-  pre-function  が  +inf  から  1000000  に変更されました\n-  vault-auth  が  1003  から  1350  に変更されました\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "カスタムプラグインの優先順位を確認します。\n優先順位を変更した結果、期待された動作が損なわれた場合は、必要に応じて調整します。\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "プラグイン"
+    # smartling.sltrans = notranslate
+        category: 2
+    # smartling.sltrans = translate
+        description: "**JWT プラグイン**\n\n認証された JWT は、Nginx コンテキスト (ngx.ctx.authenticated_jwt_token) に配置されなくなりました。"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "この名前で設定された値に依存しているカスタムプラグインは、3.4 にアップグレードする前に代わりにKongの共有コンテキスト\n（`kong.ctx.shared.authenticated_jwt_token`）を使うように更新する必要があります。\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "プラグイン"
+    # smartling.sltrans = notranslate
+        category: 2
+    # smartling.sltrans = translate
+        description: "**JWTプラグイン (jwt)**\n\nJWTプラグインは、\nJWTトークンの検索場所に異なるトークンがあるリクエストを拒否するようになりました。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "いいえ\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "プラグイン"
+    # smartling.sltrans = notranslate
+        category: 2
+    # smartling.sltrans = translate
+        description: "** StatsD プラグイン**\n\nサービスに関連するメトリクス名にはすべて「service」が付くようになりました。接頭辞：\n\n'kong.service.<service_identifier>.request.count'です。\n* メトリック 'kong.<service_identifier>.request.status<status>は\nkong.service.<service_identifier>.status<status>に変更されました。\n*メトリクスkong<service_identifier>.user.<consumer_identifier>.request.status.<status>は\n'kong.service.<service_identifier>.user.<consumer_identifier>.status.<status>に変更されました。\nメトリクス`status_count`と `status_count_per_user`から`*.status.<status>.total が削除されました。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "いいえ\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "プラグイン"
+    # smartling.sltrans = notranslate
+        category: 2
+    # smartling.sltrans = translate
+        description: "**Proxy Cache、Proxy Cache Advanced、および GraphQL Proxy Cache Advanced プラグイン**。\n\nこれらのプラグインはレスポンスデータを `ngx.ctx.proxy_cache_hit` に保存しません。\nkong.ctx.shared.proxy_cache_hit に保存されます。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "応答データを必要とするログプラグインは、 kong.ctx.shared.proxy_cache_hitからそれを読み取る必要があります。\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "DB設定"
+    # smartling.sltrans = notranslate
+        category: 2
+    # smartling.sltrans = translate
+        description: "デバッグ用のKong-Debugヘッダーを制限するために、 kong.confにallow_debug_header構成プロパティを追加しました。\nこの任意のデフォルトはoffです。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "デバッグ情報を提供するためにKong-Debugヘッダーに依存していた場合は、\n`allow_debug_header=on`を設定してください。\n\nヘッダーを削除するための回避策としてResponse Transformerプラグインを使用している場合は、\nプラグインは必要ありません。無効にして削除します。\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "プラグイン"
+    # smartling.sltrans = notranslate
+        category: 2
+    # smartling.sltrans = translate
+        description: "lua-resty-sessionライブラリが v4.0.0 にアップグレードされました。このバージョンには完全版が含まれています \nセッションライブラリの書き換えで、下位互換性がありません。\n\nこのライブラリは、Session、OpenID Connect、SAML などのプラグインによって使用されます。これらのプラグインで使用される多くのセッションパラメータは、名前が変更されたり削除されました。 \n\nこれは、セッションまたはOpenID Connectを使用するセッション構成にも影響します。\n Kong Manager および Dev Portal のセッションを含む、バックグラウンドでのプラグイン。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "このバージョンにアップグレードすると、既存のセッションはすべて無効になります。\nこのバージョンでセッションが期待どおりに機能するには、すべてのノードで Kong Gateway 3.4.x を実行する必要があります。\n\nそのため、アップグレード中は、バージョンが混在しているプロキシノードはできるだけ短時間実行することをお勧めします。 \nその間、無効なセッションが原因で障害が発生したり、部分的なダウンタイムが発生する可能性があります。\n\n次のような動作が予想されます。\n * **コントロールプレーンをアップグレードした後**: 既存のKong ManagerとDev Portalセッションは\n無効になり、すべてのユーザーは再度ログインする必要があります。\n***データプレーン（DP）をアップグレード後**: 既存のプロキシセッションは無効になります。\nIdP が設定されている場合、ユーザーは IdP に再度ログインする必要があります。\n\n**すべてのCPおよびDPノードを3.4にアップグレードし、環境が安定していることを確認した後、\nパラメータを新しい名前に変更したバージョンに更新できます。設定は以前と同じように機能しますが、\n将来の予期せぬ動作を避けるため、設定を調整することをお勧めします。\n\nすべてのセッション設定の変更と、既存のセッション設定の変換方法については、\n[下位互換性のない変更に関する書類](/gateway/latest/breaking-changes/32x/) をご確認ください。\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "DB設定"
+    # smartling.sltrans = notranslate
+        category: 2
+    # smartling.sltrans = translate
+        description: "Cassandra DB のサポートは削除されました。Kong Gateway のデータストアとしてはサポートされなくなりました。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "[PostgreSQL に移行](/gateway/latest/migrate-cassandra-to-postgres/)。\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "ルーター"
+    # smartling.sltrans = notranslate
+        category: 3
+    # smartling.sltrans = translate
+        description: "atc-router での正規表現のルックアラウンドとバック参照のサポートが削除されました。\nこれらはめったに使用されない機能であり、それらのサポートを削除すると、正規表現のマッチングの速度が向上します。\n\n現在使用している正規表現がルックアラウンドや後方参照を使用している場合、Kongを起動しようとすると、\n互換性のない正規表現を示すエラーが表示されます。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "アップグレード後の動作の一貫性を確保するために、router_flavor = traditional\nに設定するか、正規表現を変更してルックアラウンドや後方参照を削除してください。\n\n正規表現パスを確認し、削除された機能が使用されていないことを確認します。\nそれに応じて正規表現ルーターを更新します。"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "プラグイン"
+    # smartling.sltrans = notranslate
+        category: 3
+    # smartling.sltrans = translate
+        description: "**ACL、ボット検知、IP制限プラグイン**\n\n非推奨の「blacklist」と「whitelist」設定パラメータを削除しました。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "非推奨のblacklistおよびwhitelist構成パラメータを削除します。\n代わりにdenylistとallowlistを使用してください。\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "プラグイン"
+    # smartling.sltrans = notranslate
+        category: 3
+    # smartling.sltrans = translate
+        description: "**ACME プラグイン**\n\nauth_method構成パラメータのデフォルト値はtokenになりました。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "注意：アップグレード後、`auth_method` は (この設定を利用しない場合) `null` として保持され、\n新しいバージョンのデフォルト設定である `token` とは異なります。\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "プラグイン"
+    # smartling.sltrans = notranslate
+        category: 3
+    # smartling.sltrans = translate
+        description: "**AWS Lambda プラグイン**\n\n *AWSリージョンが必須になりました。aws_regionフィールドパラメータまたは環境変数を使用してプラグイン設定を通じて設定できます。\n* プラグインでは、ホストとaws_regionフィールドを同時に設定できるようになり、常に SigV4 署名が適用されます。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "設定を確認するか、Kongサポートチームにお問い合わせください。\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "プラグイン"
+    # smartling.sltrans = notranslate
+        category: 3
+    # smartling.sltrans = translate
+        description: "**HTTPログ(http-log)プラグイン**\n\nheaders` フィールドは、以前は値の配列を受け取っていたが、\nヘッダー名ごとに単一の文字列のみを受け取るようになりました。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "設定を確認するか、Kongサポートチームにお問い合わせください。\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "プラグイン"
+    # smartling.sltrans = notranslate
+        category: 3
+    # smartling.sltrans = translate
+        description: "**プロメテウスプラグイン**\n\nプラグインの完全なオーバーホール：\n*カーディナリティの高いメトリクスはデフォルトで無効になりました。\n* メトリックを収集する際のプロキシトラフィックのパフォーマンスペナルティが減少しました。\n* 以下のメトリクス名は、可能な限り標準化するために単位を追加するように調整されました：\n* http_status` を `http_requests_total` に変更。\n* 'latency' から 'kong_request_latency_ms' (HTTP)、'kong_upstream_latency_ms'、'kong_kong_latency_ms'、'session_duration_ms' (ストリーム) へ。Kong の遅延とアップストリームの遅延は、異なる大きさで動作できます。メモリのオーバーヘッドを削減するには、これらのバケットを分離します。\n\n*kong_bandwidth からkong_bandwidth_bytes 。\n *nginx_http_current_connectionsとnginx_stream_current_connectionsはnginx_hconnections_totalに統合されました\n *request_countとconsumer_statusは http_requests_total に統合されました。\n\nper_consumer設定がfalseに設定されている場合、 consumerラベルは空になります。per_consumer設定がtrueの場合、 consumerラベルが入力されます。\n\n* 以下のメトリクスを削除： `http_consumer_status`\n* 新しいメトリクス：\n* `session_duration_ms`: ストリーム接続を監視します。\n*node_info : ノードの ID と Kong Gateway のバージョンを出力する、1 に設定された単一のゲージ。\n\n*http_requests_totalに新しいラベルsourceが追加されました。exit 、 error 、またはserviceに設定できます。\n* すべてのメモリメトリックに新しいラベル「node_id」が付きました。\n* Kongに同梱されているGrafanaダッシュボードを更新しました"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "データを見逃さないようにするには、新しい設定を使用するようにプラグインの設定を調整してください。\n\nカスタム・ダッシュボードがある場合、またはカスタムPromQLを記述している場合は、それらを確認し、名前の変更でエラーが出ていないことをご確認ください。\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "プラグイン"
+    # smartling.sltrans = notranslate
+        category: 3
+    # smartling.sltrans = translate
+        description: "**StatsD Advanced プラグイン**\n\nStatsD Advancedプラグインは非推奨となり、4.0で削除されます。\nすべての機能がStatsDプラグインで利用可能になりました。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "StatsDプラグインへの移行をお勧めしますが、StatsD Advancedは3.4でも機能します。\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "プラグイン"
+    # smartling.sltrans = notranslate
+        category: 3
+    # smartling.sltrans = translate
+        description: "**サーバーレス関数 (`post-function` または `pre-function`)** 非推奨の `config.functions` を削除しました。\n\nServerless Functions\nプラグインのスキーマから設定パラメータを取得します。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "「config.access」を使用し代わりにフェーズを実行します。\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "DB設定"
+    # smartling.sltrans = notranslate
+        category: 3
+    # smartling.sltrans = translate
+        description: "デフォルトの PostgreSQL SSL バージョンが TLS 1.2 に引き上げられました。「kong.conf」では：\n\n* デフォルトの ['pg_ssl_version'](/gateway/latest/reference/configuration/#postgres-settings)\nは 'tlsv1_2' になりました。* この構成オプションの有効な値を以下のように制限しました： `tlsv1_1`、`tlsv1_2`、`tlsv1_3`、`any`\n\nこれは、PostgreSQL 12.x 以降の ssl_min_protocol_version 設定を反映します。\nこのパラメータについての詳細は[PostgreSQLドキュメント]\n(https://postgresqlco.nf/doc/en/param/ssl_min_protocol_version/)をご確認ください。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "「kong.conf」の値を変更するかまたは環境変数をtlsv1_0からtlsv1_2に変更します。\n\n'kong.conf' のデフォルト設定を使用するには、PostgresサーバーがTLS 1.2以上のバージョンをサポートしていることを確認するか、TLSのバージョンを自分で設定してください。\ntlsv1_2`より低いTLSバージョンは既に非推奨であり、PostgreSQL 12.x以降では安全でないと考えられています。"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "Admin API"
+    # smartling.sltrans = notranslate
+        category: 3
+    # smartling.sltrans = translate
+        description: "consumer_groups/:id/overridesエンドポイントは非推奨となり、より一般的なプラグインスコープの仕組みが採用されます。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "オーバーライドを設定する代わりに、プラグイン・インスタンスをコンシューマ・グループ・エンティティに適用できます。詳しくは \n[Rate Limiting Advanced](/hub/kong-inc/rate-limiting-advanced/how-to/) のドキュメントをご参照ください。\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "Admin API"
+    # smartling.sltrans = notranslate
+        category: 3
+    # smartling.sltrans = translate
+        description: "admin_api_uriプロパティは非推奨となり、今後のKong Gatewayバージョンでは完全に削除される予定です。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "構成プロパティ admin_api_uriの名前を admin_gui_api_url に変更します。\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "プラグイン"
+    # smartling.sltrans = notranslate
+        category: 4
+    # smartling.sltrans = translate
+        description: "3.0では、Kong Gatewayのスキーマライブラリの`process_auto_fields`関数は、与えられたコンテキストが`select`のときに渡されるデータのディープコピーを作成しません。\nこれは、`pgmoon`や`lmdb`のようなドライバからデータが来ることが多いと思われるテーブルの過剰なディープコピーを避けるために行われました。\n\nカスタムプラグインが `process_auto_fields` に依存していた場合、与えられたテーブルをオーバーライドしないため、関数に渡す前に独自のコピーを作成する必要があります。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "カスタムプラグインがディープコピーによってデータを取得する必要がある場合は、関数を呼び出す前に `select` コンテキストでそれを実行します。\n\nディープコピーのトリガーとなる `context = 「select」` を定義します：\n\n```lua\nlocal is_select = context == \"select\"\n  if not is_select then\n    data = tablex.deepcopy(data)\nend\n```\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "プラグイン"
+    # smartling.sltrans = notranslate
+        category: 4
+    # smartling.sltrans = translate
+        description: "サーバー上で利用可能な報告済みプラグインのリストは、ブール値 `true` の代わりにプラグインごとのメタデータのテーブルを返すようになりました。\n例：\n\n```json\nplugins\": {\n  \"available_on_server\": {\n      \"acl\": \"3.0.1\",\n      \"acme\": \"0.4.0\",\n      \"aws-lambda\": \"3.6.3\",\n      \"azure-functions\": \"1.0.1\",\n      \"basic-auth\": \"2.2.0\",\n      \"bot-detection\": \"2.0.0\",\n  ...\n```\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "ブール値の代わりに新しいメタデータを使用するように適応します。\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "PDK"
+    # smartling.sltrans = notranslate
+        category: 5
+    # smartling.sltrans = translate
+        description: "PDKのバージョン管理は終了しました。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "いいえ\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "DB設定"
+    # smartling.sltrans = notranslate
+        category: 5
+    # smartling.sltrans = translate
+        description: "移行ヘルパーライブラリ (主にカサンドラの移行に使用) は、Kong Gateway では提供されなくなりました。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "いいえ\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "DB設定"
+    # smartling.sltrans = notranslate
+        category: 5
+    # smartling.sltrans = translate
+        description: "PostgreSQL の移行では、Cassandra の移行と同様に、呼び出す関数を指定する up_f 部分を持つことができるようになりました。\nup_f 部分は、データベースに対して up 部分が実行された後に呼び出されます。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "いいえ\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "プラグイン"
+    # smartling.sltrans = notranslate
+        category: 5
+    # smartling.sltrans = translate
+        description: "Kong プラグインは個別にバージョン管理されなくなりました。\n3.0.0 から、すべての Kong プラグインのバージョンが Kong Gateway のバージョンに合わせて更新されました。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "いいえ\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "プラグイン"
+    # smartling.sltrans = notranslate
+        category: 5
+    # smartling.sltrans = translate
+        description: "**HTTP ログプラグイン** \n\nログサーバーが 3xx HTTPステータスコードで応答した場合、プラグインはそれを次のように認識するようになります \nエラーが発生し、再試行設定に従って再試行します。以前は、3xxのステータスコードが解釈されていました \nが成功すると、ログエントリが削除されます。 \n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "いいえ\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "プラグイン"
+    # smartling.sltrans = notranslate
+        category: 5
+    # smartling.sltrans = translate
+        description: "**サーバーレス関数 (ポスト関数またはプレ関数)**\n\n  kong.cacheキャッシュインスタンスを指している\nServerless Functions プラグイン専用ですグローバル Kong Gateway キャッシュへのアクセスは提供されません。\n「kong.conf」の特定のフィールドへのアクセス も制限されています。"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "いいえ\n"# smartling.sltrans = notranslate
+
+    # smartling.sltrans = translate
+    - 
+        area: "プラグイン"
+    # smartling.sltrans = notranslate
+        category: 5
+    # smartling.sltrans = translate
+        description: "**Zipkinプラグイン**\n\nこのプラグインは現在、内部バッファリングにキューを使用しています。 \nキューイング動作を制御するために、標準キューパラメータセットを使用できます。\n"# smartling.sltrans = notranslate
+    # smartling.sltrans = translate
+        action: "いいえ\n"# smartling.sltrans = notranslate
