@@ -1,0 +1,154 @@
+# smartling.sltrans = notranslate
+---
+_packages: 
+    alpine: 
+        os: "Alpine"
+        version: 3
+        package: true
+        arm: false
+        fips: false
+        graviton: false
+    amazonlinux1: 
+        os: "Amazon Linux"
+        version: 1
+        package: true
+        arm: false
+        fips: false
+        graviton: false
+    # smartling.sltrans = translate
+        eol: "2020年12月"
+    # smartling.sltrans = notranslate
+    amazonlinux2: 
+        os: "Amazon Linux"
+        version: 2
+        package: true
+        arm: false
+        fips: false
+        graviton: false
+    amazonlinux2023: 
+        os: "Amazon Linux"
+        version: 2023
+        package: true
+        arm: false
+        fips: false
+        graviton: false
+    centos7: 
+        os: "CentOS"
+        version: 7
+        package: true
+        arm: false
+        fips: false
+        graviton: false
+    # smartling.sltrans = translate
+        eol: "2024年6月"
+    # smartling.sltrans = notranslate
+    centos8: 
+        os: "CentOS"
+        version: 8
+        package: true
+        arm: false
+        fips: false
+        graviton: false
+    # smartling.sltrans = translate
+        eol: "2021年12月"
+    # smartling.sltrans = notranslate
+    debian8: 
+        os: "Debian"
+        version: 8
+        package: true
+        arm: false
+        fips: false
+        graviton: false
+    # smartling.sltrans = translate
+        eol: "2020年6月"
+    # smartling.sltrans = notranslate
+    debian9: 
+        os: "Debian"
+        version: 9
+        package: true
+        arm: false
+        fips: false
+        graviton: false
+    # smartling.sltrans = translate
+        eol: "2022年6月"
+    # smartling.sltrans = notranslate
+    debian10: 
+        os: "Debian"
+        version: 10
+        package: true
+        arm: false
+        fips: false
+        graviton: false
+    debian11: 
+        os: "Debian"
+        version: 11
+        package: true
+        arm: false
+        fips: false
+        graviton: false
+    debian12: 
+        os: "Debian"
+        version: 12
+        package: true
+        arm: false
+        fips: false
+        graviton: false
+    debian-stable: 
+        os: "Debian"
+        version: "stable"
+        package: true
+        arm: false
+        fips: false
+        graviton: false
+    rhel7: 
+        os: "RHEL"
+        version: "7.x"
+        package: true
+        arm: false
+        fips: false
+        graviton: false
+    rhel8: 
+        os: "RHEL"
+        version: "8.x"
+        package: true
+        arm: false
+        fips: false
+        graviton: false
+    rhel9: 
+        os: "RHEL"
+        version: "9.x"
+        package: true
+        arm: false
+        fips: false
+        graviton: false
+    ubuntu1604: 
+        os: "Ubuntu"
+        version: 16.04
+        package: true
+        arm: false
+        fips: false
+        graviton: false
+    ubuntu1804: 
+        os: "Ubuntu"
+        version: 18.04
+        package: true
+        arm: false
+        fips: false
+        graviton: false
+    # smartling.sltrans = translate
+        eol: "2023年4月"
+    # smartling.sltrans = notranslate
+    ubuntu2004: 
+        os: "Ubuntu"
+        version: 20.04
+        package: true
+        arm: false
+        fips: false
+        graviton: false
+    ubuntu2204: 
+        os: "Ubuntu"
+        version: 22.04
+        package: true
+        arm: false
+        fips: false
+        graviton: false

@@ -1,0 +1,339 @@
+---
+ja: 
+    _layouts: 
+        landing-page: 
+            title: "ようこそ"
+            subtitle: "Kongのプラットフォームとプロジェクトを使用するために必要なすべての情報をご覧いただけます。"
+            cards: 
+                konnect: 
+                    description: "クラウドネイティブ時代向けに設計されたエンドツーエンドのSaaS APIライフサイクル管理プラットフォームで、Kong Gatewayを使い始める最も簡単な方法を提供します。"
+                    links: 
+                        overview: "Konnectの概要"
+                        get_started: "Konnectを始めましょう"
+                        plugins: "Konnect互換プラグイン"
+                gateway: 
+                    description: "軽量、高速、柔軟なクラウドネイティブAPIゲートウェイです。"
+                    links: 
+                        overview: "Kong Gatewayの概要"
+                        get_started: "Kong Gatewayの使用を開始する"
+                        plugins: "プラグイン"
+                        admin_api: "Admin API"
+                mesh: 
+                    description: "Kubernetes と VM の両方でマルチクラウドおよびマルチクラスターを実現する Kuma ベースのエンタープライズサービスメッシュ。"
+                    links: 
+                        overview: "Kong Meshの概要"
+                        quickstart: "Kong Mesh クイックスタート"
+                        kuma: "Kuma (オープンソース)"
+        docs-v2: 
+            contribution_guidelines: "貢献ガイドライン"
+            latest: "(最新)"
+            switch_to: "次に切り替える："
+            browsing_versioned_documentation: "<strong>%{label}</strong>ドキュメントを閲覧しています。"
+            browsing_unreleased_documentation: "<strong>未発表の</strong>ドキュメントを閲覧しています。"
+            browsing_outdated_documentation: "旧バージョンのドキュメントを参照しています。"
+            latest_documentation_here: "最新のドキュメントはこちら"
+            see_latest_documentation: "%{latest_documentation_link}をご参照ください。\n"
+            tech_preview: "この機能は%{tech_preview_link}（アルファ品質）としてリリースされており、本番環境では依存すべきではありません。\n"
+            beta: "この機能は%{beta_link}としてリリースされており、本番環境では依存すべきではありません。\n"
+            konnect_cta_card: 
+                too_much_on_your_plate: "情報が多すぎる場合"
+                description: "Kong Konnectを使用すると、より多くの機能とより少ないインフラストラクチャを実現できます。月額1Mリクエストが無料。"
+                try_it: "無料でお試しください"
+        plugins: 
+            configuration_examples: 
+                title: "基本構成例"
+            configuration: 
+                title: "構成"
+                dbless: 
+                    compatible: "このプラグインはDBレスモードに<strong>対応して</strong>います。"
+                    partially_compatible: "このプラグインはDB-lessモードと<strong>部分的に互換性</strong>があります。"
+                    not_compatible: "このプラグインはDBレスモードには<strong>対応していません</strong>。"
+                compatible_protocols: 
+                    title: "互換性のあるプロトコル"
+                    description: "%{name}プラグインは以下のプロトコルに対応しています："
+                parameters: 
+                    title: "パラメータ"
+                    description: "このプラグインの設定で使用できるすべてのパラメータのリストは次のとおりです。 "
+            show: 
+                browsing_labeled_version: "<strong>%{label}</strong>ドキュメントを閲覧しています。"
+                browsing_outdated_version: "古いプラグインバージョンのドキュメントを閲覧しています。"
+                latest_documentation_here: "最新のドキュメントはこちら"
+                see_latest_documentation: "%{latest_documentation_link}をご参照ください。\n"
+                alpha: "このプラグインは%{tech_preview_link}（アルファ品質）としてリリースされており、本番環境では依存すべきではありません。\n"
+                beta: "このプラグインは%{beta_link}としてリリースされており、実稼働環境にデプロイしないでください。\n"# END _layouts
+  # START _includes
+    _includes: 
+        nav-v2: 
+            skip_main: "コンテンツにスキップ"
+            navbar: 
+                docs: "ドキュメント"
+                plugin_hub: "Plugin Hub"
+                support: "サポート"
+                community: "コミュニティ"
+                kong_academy: "Kongアカデミー"
+                buttons: 
+                    top_cta: "デモを見る"
+                    konnect_cta: "無料トライアルを開始"
+            explore_the_api_specs: "API仕様を確認する"
+            view_all_api_specs: "すべてのAPI仕様を表示"
+            documentation: "ドキュメンテーション"
+            explore_the_plugin_hub: "Plugin Hubを探索する"
+            view_all_plugins: "すべてのプラグインを表示"
+            functionality: "機能性"
+            view_all: "すべて表示"
+        missing_translation_banner: 
+            text: "このページは、まだ日本語ではご利用いただけません。翻訳中です。\n"
+        do_not_translate_banner: 
+            text: "このページは翻訳されていません。\n"
+        lts-changes: 
+            thead: 
+                change: "変更"
+                category: "カテゴリー"
+                action_required: "アクションが必要です"
+        gateway-support: 
+            tab_description: "Kong Gateway%{version}は、OSベンダーのサポート終了日（EOL）が明記されていない限り、%{eol}まで次の展開ターゲットをサポートします。"
+            thead: 
+                os: "OS"
+                version: "バージョン"
+                artifacts: "アーティファクト"
+                arm_support: "ARMサポート"
+                fips_compliant: "FIPS準拠"
+                aws_graviton_support: "AWS Gravitonのサポート"
+                eol: "EOL"
+        gateway-support-third-party: 
+            data_stores: 
+                title: "データストア"
+                description: "Kong は通常の操作中に複数のデータストアと対話します。以下の店舗はKongによってテストされています。"
+            vaults: 
+                title: "金庫"
+                description: "Kongでは、秘密の値を外部vaultに保存できます。次のバージョンはKongによってテストされています。"
+            service_mesh: 
+                title: "サービスメッシュ"
+                description: "Kong Ingress Controllerは、次のサービスメッシュバージョンに対してテストされています。"
+            metrics: 
+                title: "メトリクス"
+                description: "Kong Ingress Controllerは、次のメトリックプロバイダーに対してテストされています。"
+            log_providers: 
+                title: "ログプロバイダー"
+                description: "Kong Ingress Controllerは、次のログプロバイダーに対してテストされています。"
+            s3_compatible_apis: 
+                title: "S3互換API"
+                description: "リモートファイルストレージを操作する場合は、S3 互換の API を使用できます。Kongによって次のものがテストされています。"
+            identity_providers: 
+                title: "アイデンティティプロバイダ"
+                description: "Kongは、OpenID Connect (OIDC) プラグインを使用する場合、次のサードパーティ ID プロバイダー (IDP) と連携することが期待されます。"
+            ai_providers: 
+                title: "AIプロバイダー"
+                ai_plugins: "sAIプラグイン"
+                description: "Kong AI Gateway は、 %{ai_category_link}を通じて次の AI プロバイダーと統合できます。\n"
+        footer: 
+            title: "APIの世界を動かす"
+            description: "APIマネジメント、サービスメッシュ、イングレスコントローラーの統合プラットフォームにより、開発者の生産性、セキュリティ、パフォーマンスを大幅に向上します。"
+            email_placeholder: "電子メール"
+            submit_button: "購読する"
+            categories: 
+                products: "製品"
+                documentation: "ドキュメンテーション"
+                open_source: "オープンソース"
+                company: "会社概要"
+            links: 
+                terms: "利用規約"
+                privacy: "プライバシー"
+                compliance: "信頼とコンプライアンス"
+                product_updates: "製品アップデート"
+                contact_sales: "始める"
+                about_us: "Kongについて"
+                customers: "お客様"
+                careers: "キャリア"
+                press_room: "プレス"
+                events: "イベント"
+                contact_us: "お問い合わせ"
+                community: "Kongコミュニティ"
+                docs: 
+                    konnect: "Kong Konnectドキュメント"
+                    gateway: "Kong Gatewayドキュメント"
+                    kong_enterprise: "Kong Gateway Enterprise Docs"
+                    mesh: "Kong Meshドキュメント"
+                    insomnia: "Kong Insomniaドキュメント"
+                    hub: "Kong Konnect Plugin Hub"
+        docs-sidebar: 
+            version: "バージョン"
+            latest: "(最新)"
+            contribution_guidelines: "ドキュメント投稿ガイドライン"
+            archive: "アーカイブ (2.6より前)"
+        book: 
+            previous: "前へ"
+            next: "次へ"
+        header: 
+            nav-links: 
+                edit_page: "このページを編集"
+                report_an_issue: "問題を報告する"
+        plugins: 
+            about_this: 
+                version_compatibility: "バージョンの互換性"
+                see_all: "すべて見る"
+            priority_table: 
+                plugin: "プラグイン"
+                priority: "優先順位"
+            schema: 
+                fields: 
+                    endpoint: "エンドポイント"
+                    name_or_plugin: 
+                        description: "プラグイン名。この場合は<code>%{plugin_name}</code> 。"
+                        children: 
+                            api: "Kong Admin API、Kong Konnect API、宣言型構成、または decK ファイルを使用する場合、フィールドは<code>%{name}</code>です。"
+                            kubernetes: "Kubernetes で KongPlugin オブジェクトを使用する場合、フィールドは<code>%{plugin}</code>です。"
+                    instance_name: 
+                        description: 
+                            optional_custom_name: "プラグインのインスタンスを識別するための任意のカスタム名 (例: <code>%{extn_slug}_my-service</code> 。\n"
+                            kong_manager: "インスタンス名はKong Managerと%{konnect_short_name}に表示されるので、\n例えば複数のサービスで同じプラグインを複数のコンテキストで実行する場合に便利です。また、Kong Admin API経由で特定のプラグインインスタンスに\nアクセスするためにも使用できます。\n"
+                            must_be_unique: 
+                                text: "インスタンス名は、次のコンテキスト内で一意である必要があります。"
+                                within_workspace: "%{ee_product_name}のワークスペース内"
+                                within_control_plane: "%{konnect_short_name}のコントロールプレーン（CP）またはコントロールプレーン（CP）グループ内"
+                                globally: "%{ce_product_name}の全世界"
+                    service_name_or_id: 
+                        description: "プラグインが対象とするサービス名または ID。最上位の %{create_plugin_link} からプラグインをサービスに追加する場合は、これらのパラメータのいずれかを設定してください\n<code>%{services_endpoint}</code> を使用する場合は必要ありません。\n"
+                    route_name_or_id: 
+                        description: "プラグインがターゲットとするルート名または ID。最上位の %{create_plugin_link} を通るルートにプラグインを追加する場合は、これらのパラメータのいずれかを設定してください\n<code>%{routes_endpoint}</code> を使用する場合は必要ありません。\n"
+                    consumer_name_or_id: 
+                        description: "プラグインがターゲットとするコンシューマーの名前または ID。\n最上位の %{create_plugin_link} からコンシューマーにプラグインを追加する場合は、これらのパラメーターのいずれかを設定してください\n<code>%{consumers_endpoint}</code>を使用する場合は必要ありません。\n"
+                    consumer_group_name_or_id: 
+                        description: "プラグインが対象とするコンシューマグループの名前または ID。\n設定されている場合、プラグインは指定されたグループが認証されているリクエストに対してのみアクティブになります%{create_plugin_link}\n <code>%{consumer_groups_endpoint}</code>を使用する場合は必要ありません。\n"
+                    enabled: 
+                        description: "このプラグインが適用されるかどうか。"
+                    api_id: 
+                        description: "プラグインが対象とするAPIのID。\n<br><br><strong>注:</strong>%{api_entity_link} は %{changelog_013_link} と %{changelog_032_link}以降はサービスが優先され、非推奨になりました。\n"
+            create-consumer: 
+                yaml: 
+                    auth_plugin_description: "これは認証プラグインであるため、コンシューマを作成し、それにクレデンシャルをアタッチする必要があります。"
+                    create_a_consumer: "コンシューマを作る"
+                    add_the_above_to_your_config: "上記を宣言型構成に追加し、実行中の Kong インスタンスに適用します。"
+                    documentation: "ドキュメント"
+                    you_can_now_authenticate: "リクエストを行う際に、 <code>%{username}</code>として認証できるようになりました。詳細については、 %{documentation_link} をご参照ください。\n"
+                terraform: 
+                    auth_plugin_description: "これは認証プラグインであるため、コンシューマを作成し、それにクレデンシャルをアタッチする必要があります。"
+                    create_a_consumer: "コンシューマを作成："
+                    create_a_credential: "このコンシューマに接続された %{plugin_name}の認証情報を作成します"
+                kubernetes: 
+                    auth_plugin_description: "これは認証プラグインなので、プラグインの資格情報を作成する必要があります。次のコマンドでシークレットを作成します。"
+                    create_a_consumer: "最後に、この資格情報を使用するコンシューマを作成します。"
+                    documentation: "ドキュメント"
+                    you_can_now_authenticate: "リクエストを行う際に、 <code>%{username}</code>として認証できるようになりました。 詳細については、 %{documentation_link} をご参照ください。\n"
+                konnect: 
+                    auth_plugin_description: "これは認証プラグインであるため、コンシューマを作成し、それにクレデンシャルをアタッチする必要があります。"
+                    create_a_consumer: "コンシューマを作る"
+                    create_a_credential: "このコンシューマに接続された %{plugin_name}の認証情報を作成します"
+                    documentation: "ドキュメント"
+                    you_can_now_authenticate: "リクエストを行う際に、 <code>%{username}</code>として認証できるようになりました。 詳細については、 %{documentation_link} をご参照ください。\n"
+                curl: 
+                    auth_plugin_description: "これは認証プラグインであるため、コンシューマを作成し、それにクレデンシャルをアタッチする必要があります。"
+                    create_a_consumer: "コンシューマを作る"
+                    create_a_credential: "このコンシューマに接続された %{plugin_name}の認証情報を作成します"
+                    documentation: "ドキュメント"
+                    you_can_now_authenticate: "リクエストを行う際に、 <code>%{username}</code>として認証できるようになりました。 詳細については、 %{documentation_link} をご参照ください。\n"
+            hub-examples: 
+                enable_on_a_resource: "%{resource}で有効にする"
+                enable_globally: "グローバルに有効にする"
+                terraform: 
+                    prerequisite: "前提条件："
+                    configure_your_pat: "パーソナルアクセストークンの設定"
+                    add_the_following_to_your_config: "Kong Konnectゲートウェイプラグインを作成するには、Terraform 構成に以下を追加します。"
+                service: 
+                    intro_text: "以下の例では、<code>%{plugin_name}</code>プラグインを%{link}で有効にするための一般的な設定をご紹介します。\n"
+                    make_the_following_request: "次のリクエストを行います。"
+                    replace_service_name_or_id_with: "%{service_name}を、このプラグイン構成の対象となるサービスの %{id}または%{name}に置き換えてください。"
+                    make_the_following_request_substituting: "独自のアクセストークン、リージョン、コントロールプレーンID、サービスIDを代入して、次のリクエストを行ってください。"
+                    see_konnect_api_reference: "地域固有のURLと個人アクセストークンの詳細については、 %{link}をご参照ください。\n"
+                    create_a_kong_plugin: "まず、%{link}\nリソースを作成します：\n"
+                    apply_the_resource: "次に、次のように%{service}に注釈を付けて、%{kong_plugin}リソースをイングレスに適用します。\n"
+                    replace_service_name_with: "%{service_name}を、このプラグイン構成が対象とするサービスの名前に置き換えます。\n%{command}を実行すると、利用可能なイングレスを確認できます。\n"
+                    note: "注："
+                    kong_plugin_resource_note: "%{kong_plugin}リソースは一度だけ定義するだけで、ネームスペース内の任意のサービス、コンシューマー、またはルートに適用できます。プラグインをクラスター全体で利用可能にしたい場合は、<code>%{kong_plugin}</code>の代わりに<code>%{kong_cluster_plugin}</code>としてリソースを作成してください。\n"
+                    add_this_to_your_declarative_config_file: "このセクションを宣言型構成ファイルに追加します。"
+                route: 
+                    intro_text: "以下の例では、<code>%{plugin_name}</code>プラグインを%{link}で有効にするための一般的な設定をご紹介します。\n"
+                    make_the_following_request: "次のリクエストを行います。"
+                    replace_route_name_or_id_with: "%{route_name}を、このプラグイン構成が対象とするルートの%{id} または%{name}に置き換えてください。"
+                    make_the_following_request_substituting: "独自のアクセストークン、リージョン、コントロールプレーン（CP）ID、ルートIDを代入して、次のリクエストをしてください。"
+                    see_konnect_api_reference: "地域固有のURLと個人アクセストークンの詳細については、 %{link}をご参照ください。\n"
+                    create_a_kong_plugin: "まず、%{link}\nリソースを作成します：\n"
+                    apply_the_resource: "次に、次のように%{ingress}に注釈を付けて、%{kong_plugin}リソースをイングレスに適用します。\n"
+                    replace_ingress_name_with: "%{ingress_name}を、このプラグイン構成がターゲットとするイングレス名に置き換えます。\n%{command}を実行すると、利用可能なイングレスを確認できます。\n"
+                    note: "注："
+                    kong_plugin_resource_note: "%{kong_plugin}リソースは一度だけ定義するだけで、ネームスペース内の任意のサービス、コンシューマー、またはルートに適用できます。プラグインをクラスター全体で利用可能にしたい場合は、<code>%{kong_plugin}</code>の代わりに<code>%{kong_cluster_plugin}</code>としてリソースを作成してください。\n"
+                    add_this_to_your_declarative_config_file: "このセクションを宣言型構成ファイルに追加します。"
+                global: 
+                    cant_be_enabled_globally: "このプラグインはグローバルに有効にすることはできません。別のタブを選択してください。"
+                    intro_text: "どのサービス、ルート、コンシューマー、コンシューマーグループにも関連しないプラグインは_global_とみなされ、\nすべてのリクエストで実行されます。\n"
+                    in_enterprise_applies_to_workspace: "自己管理型の%{ee_product_name}では、プラグインは特定のワークスペース内のすべてのエンティティに適用されます。"
+                    in_oss_applies_to_environment: "セルフマネージド%{ce_product_name}では、プラグインは環境全体に適用されます。"
+                    in_konnect_applies_to: "%{konnect_short_name}では、プラグインは特定のコントロールプレーン（CP）内のすべてのエンティティに適用されます。"
+                    plugin_reference: "プラグインリファレンス"
+                    plugin_precedence: "プラグインの優先順位"
+                    read_the_plugin_reference: "詳しくは%{plugin_reference_link}と%{plugin_precedence_link}の\nセクションをご覧ください。\n"
+                    the_following_examples_provide_typical_configurations: "以下の例では、<code>%{page_name}</code>プラグインをグローバルに有効にするための典型的な設定をいくつかご紹介します。\n"
+                    make_the_following_request: "次のリクエストを行います。"
+                    make_the_following_request_substituting: "独自のアクセストークン、リージョン、コントロールプレーン（CP）IDを代入して、次のリクエストをしてください。"
+                    see_konnect_api_reference: "地域固有のURLと個人アクセストークンの詳細については、 %{link}をご参照ください。\n"
+                    create_kong_cluster_plugin_resource: "%{link}作成する\nリソースを作成し、グローバルとしてラベル付けします。\n"
+                    add_plugins_to_declarative_config_file: "宣言型構成ファイルに<code>%{plugins}</code>エントリを追加します。"
+                consumer_groups: 
+                    intro_text: "以下の例では、<code>%{plugin_name}</code>プラグインを%{link}で有効にするための一般的な設定をご紹介します。\n"
+                    make_the_following_request: "次のリクエストを行います。"
+                    replace_consumer_group_name_or_id_with: "%{consumer_group}を、このプラグイン構成の対象となるコンシューマグループの%{id}または%{name}に置き換えてください。"
+                    make_the_following_request_substituting: "独自のアクセストークン、リージョン、コントロールプレーンID、コンシューマーグループIDを代入して、次のリクエストをします："
+                    see_konnect_api_reference: "地域固有のURLと個人アクセストークンの詳細については、 %{link}をご参照ください。\n"
+                    create_a_kong_plugin: "まず、%{link}\nリソースを作成します：\n"
+                    apply_the_resource: "次に、次のように%{kong_consumer_group}オブジェクトに注釈を付けて、%{kong_plugin}リソースをイングレスに適用します。\n"
+                    replace_consumer_group_name_with: "%{consumer_group_name}を、このプラグイン構成が対象とするコンシューマグループの名前に置き換えます。\n%{command}を実行すると、利用可能なコンシューマグループを確認できます。\n"
+                    note: "注："
+                    kong_plugin_resource_note: "%{kong_plugin}リソースは一度だけ定義する必要があり、\n名前空間内の任意のサービス、コンシューマ、コンシューマグループ、またはルートに適用できます。プラグインをクラスタ全体で利用できるようにする場合は、<code>%{kong_plugin}</code>の代わりに<code>%{kong_cluster_plugin}</code>リソースを作成します。\n"
+                    add_this_to_your_declarative_config_file: "このセクションを宣言型構成ファイルに追加します。"
+                consumer: 
+                    intro_text: "以下の例では、<code>%{plugin_name}</code>プラグインを%{link}で有効にするための一般的な設定をご紹介します。\n"
+                    make_the_following_request: "次のリクエストを行います。"
+                    replace_consumer_name_or_id_with: "%{consumer}を、このプラグイン構成の対象となるコンシューマの%{id}または%{name}に置き換えてください。"
+                    make_the_following_request_substituting: "独自のアクセストークン、リージョン、コントロールプレーンID、コンシューマーIDを代入して、次のリクエストをしてください。"
+                    see_konnect_api_reference: "地域固有のURLと個人アクセストークンの詳細については、 %{link}をご参照ください。\n"
+                    create_a_kong_plugin: "まず、%{link}\nリソースを作成します：\n"
+                    apply_the_resource: "次に、次のように%{kong_consumer}オブジェクトに注釈を付けて、%{kong_plugin}リソースをイングレスに適用します。\n"
+                    replace_consumer_name_with: "%{consumer_name}を、このプラグイン構成が対象とするコンシューマーの名前に置き換えます。\n%{command}を実行すると、利用可能なコンシューマを確認できます。\n"
+                    provisioning_consumers_and_credential: "コンシューマと認証情報のプロビジョニング"
+                    to_learn_more: "%{kong_consumer}オブジェクトの詳細については、 %{link}をご参照ください。\n"
+                    note: "注："
+                    kong_plugin_resource_note: "%{kong_plugin}リソースは一度だけ定義するだけで、ネームスペース内の任意のサービス、コンシューマー、またはルートに適用できます。プラグインをクラスター全体で利用可能にしたい場合は、<code>%{kong_plugin}</code>の代わりに<code>%{kong_cluster_plugin}</code>としてリソースを作成してください。\n"
+                    add_this_to_your_declarative_config_file: "このセクションを宣言型構成ファイルに追加します。"
+  # END _includes
+    hub: 
+        index: 
+            title: "Kong Plugin Hubへようこそ"
+            subtitle: "強力なプラグインと簡単な統合で %{base_gateway} と %{konnect_product_name} を拡張\n"
+            plugin_overview: "プラグインの概要"
+            compatibility: "互換性"
+            license_tiers: "ライセンス階層"
+            contact_3rd_party: "サポートについては第三者に連絡する"
+            labels: 
+                tiers: "ティア"
+                functionality: "機能性"
+                support_by: "サポート提供："
+                compatibility: "互換性"
+        sidebar: 
+            basic_config_examples: "基本的な構成例"
+            changelog: "変更履歴"
+            configuration: "構成リファレンス"
+            introduction: "導入"
+            troubleshooting: "トラブルシューティング"
+            using_the_plugin: "プラグインの使用"
+        page_title: 
+            api_reference: "%{plugin_name}APIリファレンス"
+            basic_config_examples: "%{plugin_name}の基本構成例"
+            changelog: "%{plugin_name}変更履歴"
+            configuration: "%{plugin_name}設定"
+            how_to: "%{plugin_name}プラグインの使用"
+        breadcrumbs: 
+            api_reference: "%{plugin_name}APIリファレンス"
+            basic_config_examples: "基本的な構成例"
+            changelog: "変更履歴"
+            configuration: "構成"
+            introduction: "導入"
