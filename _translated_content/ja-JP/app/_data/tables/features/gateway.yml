@@ -1,0 +1,151 @@
+columns:
+  - name: オープンソース
+    cta: 開始
+    cta_link: /gateway/latest/install/
+    key: oss
+  - name: Kong Gateway Enterprise
+    cta: 営業担当までお問い合わせください
+    cta_link: http://konghq.com/contact-sales
+    key: enterprise
+features:
+  - name: APIインフラストラクチャの近代化
+    items:
+      - name: 高速、軽量、クラウドネイティブなAPIゲートウェイ
+        oss: true
+        enterprise: true
+      - name: エンドツーエンドの自動化
+        tooltip: APIの設計と実行におけるGitOpsフローの推進
+        oss: true
+        enterprise: true
+      - name: Kong Ingress Controller
+        tooltip: KubernetesへのネイティブなAPIのデプロイ
+        oss: true
+        enterprise: true
+      - name: Gateway Mocking
+        tooltip: API ゲートウェイ上で直接 API レスポンスをモックする
+        oss: false
+        enterprise: true
+      - name: "Kong Manager: Admin GUI"
+        tooltip: Kong クラスタ、プラグイン、API、およびコンシューマーを視覚的に管理
+        oss: true
+        enterprise: true
+  - name: トラフィック管理と変換
+    items:
+      - name: 基本的なトラフィック制御プラグイン
+        tooltip: ACME証明書、基本的なレート制限、軽量キャッシュの管理
+        oss: true
+        enterprise: true
+      - name: シンプルなデータ変換
+        tooltip: ヘッダー、JSONデータ、クエリー文字列の追加と削除
+        oss: true
+        enterprise: true
+      - name: gRPC Transformations
+        tooltip: gRPC-Web と REST からのリクエストをバックエンドの gRPC サービスに変換する
+        oss: true
+        enterprise: true
+      - name: GraphQL
+        tooltip: GraphQL クエリを REST リクエストに変換します。GraphQL クエリのレート制限とキャッシュ。
+        oss: false
+        enterprise: true
+      - name: リクエスト検証
+        tooltip: Kong独自のスキーマバリデータ、またはJSON Schema Draft 4準拠のバリデータを使用してリクエストを検証します。
+        oss: false
+        enterprise: true
+      - name: jq Transformations
+        tooltip: リクエストまたはレスポンスの高度なJSON変換と変換のチェーン機能
+        oss: false
+        enterprise: true
+      - name: 高度なキャッシュ
+        tooltip: レスポンスをキャッシュし、分散バックエンドを統合することで高スケールに最適化する
+        oss: false
+        enterprise: true
+      - name: 高度なレート制限
+        tooltip: スライドウィンドウ制御によるエンタープライズグレードのレート制限
+        oss: false
+        enterprise: true
+  - name: セキュリティとガバナンス
+    items:
+      - name: 認証
+        tooltip: API 認証の一般的な方法 - ベーシック認証、HMAC、JWT キー認証、制限付き OAuth 2.0、制限付き LDAP
+        oss: true
+        enterprise: true
+      - name: 高度な認証
+        tooltip: エンタープライズグレードの API 認証 - 完全な OAuth 2.0、OpenID Connect、Vault、相互 TLS、JWT の署名/再署名、完全な LDAP
+        oss: false
+        enterprise: true
+      - name: ロールベースのアクセス制御 (RBAC)
+        tooltip: 組織内でのユーザーの役割に基づくゲートウェイ構成の制御
+        oss: false
+        enterprise: true
+      - name: 基本認証（ボット検出、CORS 制御、ACL)
+        tooltip: ユーザーの行動と制御リストのルールによって API へのアクセスを制御
+        oss: true
+        enterprise: true
+      - name: 高度な認証 (OPA)
+        tooltip: 複雑な、プログラム可能な、企業全体にわたるルールによって API へのアクセスを制御
+        oss: false
+        enterprise: true
+      - name: 機密管理
+        tooltip: 機密性の高いキー、証明書、パスワードを暗号化
+        oss: false
+        enterprise: true
+      - name: FIPS 140-2 サポート
+        tooltip: Kong Gateway は現在、暗号化操作に FIPS 140-2 準拠の BoringCrypto を使用する FIPS モードを提供します。
+        oss: false
+        enterprise: true
+      - name: 署名付き Kong イメージ
+        tooltip: Kong Gateway コンテナイメージは SLSA ガイドラインに従って署名され、検証可能です。
+        oss: false
+        enterprise: true
+      - name: Kong Images Build Provenance
+        tooltip: Kong Gateway コンテナイメージはビルドレベルの由来を生成し、SLSAガイドラインに従って検証可能です。
+        oss: false
+        enterprise: true
+  - name: オブザーバビリティ
+    items:
+      - name: 簡易ログ記録
+        tooltip: 基本的な API ゲートウェイログの送信 - ファイルログ記録、HTTP ログ記録、基本 StatsD、TCP/UDP ログ記録
+        oss: true
+        enterprise: true
+      - name: API アナリティクス
+        tooltip: API ゲートウェイを通過するリクエストとレスポンスをネイティブに分析
+        oss: false
+        enterprise: true
+      - name: ゲートウェイイベントフック
+        tooltip: 管理者の追加や流量制限の超過など、ゲートウェイへの変更時に自動的にログアウトするか、ウェブフックを送信する
+        oss: false
+        enterprise: true
+  - name: AI Gateway
+    items:
+      - name: Multi-LLMサポート
+        tooltip: アプリケーションコードを変更することなく、異なるAIプロバイダーとモデルを切り替えます
+        oss: true
+        enterprise: true
+      - name: AI traffic control
+        tooltip: Kong Gatewayを介してAIトラフィックをプロキシし、AIプラグインで管理します
+        oss: true
+        enterprise: true
+      - name: AI prompt security
+        tooltip: AI Prompt Decorator、AI Prompt Guard、AI Prompt Template プラグインを使用して、安全でコンプライアンスに準拠した AI プロンプトを実装
+        oss: true
+        enterprise: true
+      - name: AI オブザーバビリティ
+        tooltip: AI トラフィックからメトリクスを収集し、任意の Kong Gateway ログ記録プラグインを使用して、選択したログ記録プロバイダに送信
+        oss: true
+        enterprise: true
+  - name: Enterpriseサポートとサービス
+    items:
+      - name: Enterpriseサポート
+        tooltip: 24/7 x 365 technical support SLAs
+        oss: false
+        enterprise: true
+      - name: セキュリティ CVEとバグフィックスのバックポート
+        oss: false
+        enterprise: true
+      - name: パフォーマンスチューニングガイダンス
+        oss: false
+        enterprise: true
+      - name: カスタマーサクセスパッケージ - アドオン
+        tooltip: 専任のテクニカルアカウントマネージャーとフィールドエンジニアが価値実現までの時間を短縮
+        oss: false
+        enterprise: true
