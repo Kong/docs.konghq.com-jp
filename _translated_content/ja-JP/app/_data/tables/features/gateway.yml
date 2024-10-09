@@ -1,10 +1,10 @@
 columns:
   - name: オープンソース
-    cta: 開始
+    cta: スタート
     cta_link: /gateway/latest/install/
     key: oss
   - name: Kong Gateway Enterprise
-    cta: 営業担当までお問い合わせください
+    cta: お問い合わせ
     cta_link: http://konghq.com/contact-sales
     key: enterprise
 features:
@@ -47,8 +47,8 @@ features:
         tooltip: GraphQL クエリを REST リクエストに変換します。GraphQL クエリのレート制限とキャッシュ。
         oss: false
         enterprise: true
-      - name: リクエスト検証
-        tooltip: Kong独自のスキーマバリデータ、またはJSON Schema Draft 4準拠のバリデータを使用してリクエストを検証します。
+      - name: リクエストの検証
+        tooltip: Kong独自のスキーマバリデータ、またはJSON スキーマのドラフト 4、コンプライアンスバリデーターを使用してリクエストを検証します。
         oss: false
         enterprise: true
       - name: jq Transformations
@@ -70,7 +70,7 @@ features:
         oss: true
         enterprise: true
       - name: 高度な認証
-        tooltip: エンタープライズグレードの API 認証 - 完全な OAuth 2.0、OpenID Connect、Vault、相互 TLS、JWT の署名/再署名、完全な LDAP
+        tooltip: エンタープライズグレードの API 認証 - 完全な OAuth 2.0、OpenID Connect、Vault、相互TLS(mTLS)、JWTの署名/再署名、完全なLDAP
         oss: false
         enterprise: true
       - name: ロールベースのアクセス制御 (RBAC)
@@ -104,7 +104,7 @@ features:
   - name: オブザーバビリティ
     items:
       - name: 簡易ログ記録
-        tooltip: 基本的な API ゲートウェイログの送信 - ファイルログ記録、HTTP ログ記録、基本 StatsD、TCP/UDP ログ記録
+        tooltip: 基本的な API ゲートウェイログの送信 - ファイルログ記録、HTTPのログ記録、StatsD、TCPとUDPのログ記録
         oss: true
         enterprise: true
       - name: API アナリティクス
