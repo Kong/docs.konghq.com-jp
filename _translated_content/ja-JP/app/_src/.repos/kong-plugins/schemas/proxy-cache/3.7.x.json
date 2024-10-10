@@ -1,0 +1,175 @@
+{
+  "fields" : [
+  {
+    "protocols" : {
+      "type" : "set",
+      "required" : true,
+      "elements" : {
+        "type" : "string",
+        "description" : "HTTPやHTTPSなどのプロトコルを表す文字列。",
+        "one_of" : ["grpc", "grpcs", "http", "https", "tcp", "tls", "tls_passthrough", "udp", "ws", "wss"]
+      },
+      "description" : "プロトコルを表す文字列のセット。",
+      "default" : ["grpc", "grpcs", "http", "https"]
+    }
+  },
+
+  {
+    "config" : {
+      "fields" : [
+      {
+        "response_code" : {
+          "len_min" : 1,
+          "description" : "キャッシュ可能とみなされるアップストリーム応答コンテンツステータスコード。",
+          "required" : true,
+          "elements" : {
+            "type" : "integer",
+            "between" : [100, 900]
+          },
+          "type" : "array",
+          "default" : [200, 301, 404]
+        }
+      },
+
+      {
+        "request_method" : {
+          "description" : "キャッシュ可能とみなされるダウンストリームリクエストメソッド。",
+          "required" : true,
+          "elements" : {
+            "type" : "string",
+            "one_of" : ["HEAD", "GET", "POST", "PATCH", "PUT"]
+          },
+          "type" : "array",
+          "default" : ["GET", "HEAD"]
+        }
+      },
+
+      {
+        "content_type" : {
+          "description" : "キャッシュ可能とみなされるアップストリーム応答コンテンツ タイプ。 プラグインは指定された各値に対して**完全一致**を実行します。",
+          "required" : true,
+          "elements" : {
+            "type" : "string"
+          },
+          "type" : "array",
+          "default" : ["text/plain", "application/json"]
+        }
+      },
+
+      {
+        "cache_ttl" : {
+          "default" : 300,
+          "type" : "integer",
+          "description" : "キャッシュエンティティのTTL（秒単位）。",
+          "gt" : 0
+        }
+      },
+
+      {
+        "strategy" : {
+          "required" : true,
+          "type" : "string",
+          "description" : "キャッシュエンティティを保持するバッキングデータストア。",
+          "one_of" : ["memory"]
+        }
+      },
+
+      {
+        "cache_control" : {
+          "required" : true,
+          "type" : "boolean",
+          "description" : "有効にすると、RFC7234で定義されているCache-Controlの動作が尊重されます。",
+          "default" : false
+        }
+      },
+
+      {
+        "ignore_uri_case" : {
+          "required" : false,
+          "type" : "boolean",
+          "default" : false
+        }
+      },
+
+      {
+        "storage_ttl" : {
+          "type" : "integer",
+          "description" : "ストレージバックエンドにリソースを保持する秒数。この値は、Cache-Control動作によって定義される`cache_ttl`またはリソースTTLとは無関係です。"
+        }
+      },
+
+      {
+        "memory" : {
+          "fields" : [
+          {
+            "dictionary_name" : {
+              "required" : true,
+              "type" : "string",
+              "description" : "メモリストラテジが選択されたときにキャッシュエンティティを保持する共有ディクショナリの名前。このディクショナリは現在、Kong Nginxテンプレートで手動で定義する必要があることに注意してください。",
+              "default" : "kong_db_cache"
+            }
+          }],
+          "type" : "record",
+          "required" : true
+        }
+      },
+
+      {
+        "vary_query_params" : {
+          "elements" : {
+            "type" : "string"
+          },
+          "type" : "array",
+          "description" : "キャッシュキーに考慮される関連のクエリパラメータ。未定義の場合、すべてのパラメータが考慮されます。"
+        }
+      },
+
+      {
+        "vary_headers" : {
+          "elements" : {
+            "type" : "string"
+          },
+          "type" : "array",
+          "description" : "キャッシュキーに考慮される関連ヘッダー。未定義の場合、どのヘッダーも考慮されません。"
+        }
+      },
+
+      {
+        "response_headers" : {
+          "fields" : [
+          {
+            "age" : {
+              "type" : "boolean",
+              "default" : true
+            }
+          },
+
+          {
+            "X-Cache-Status" : {
+              "type" : "boolean",
+              "default" : true
+            }
+          },
+
+          {
+            "X-Cache-Key" : {
+              "type" : "boolean",
+              "default" : true
+            }
+          }],
+          "description" : "キャッシュされた応答に含めるべきキャッシュ関連の診断ヘッダー",
+          "type" : "record",
+          "required" : true
+        }
+      }],
+      "type" : "record",
+      "required" : true
+    }
+  }],
+  "entity_checks" : [
+  {
+    "custom_entity_check" : {
+      "field_sources" : ["config"]
+    }
+  }]
+}

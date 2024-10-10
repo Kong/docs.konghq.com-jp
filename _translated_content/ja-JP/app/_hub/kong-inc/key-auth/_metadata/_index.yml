@@ -1,0 +1,24 @@
+# smartling.sltrans = notranslate
+---
+name: "Key Auth"
+search_aliases: 
+    - "key authentication"
+    - "key-auth"
+dbless_compatible: "partially"
+# smartling.sltrans = translate
+dbless_explanation: "コンシューマと認証情報は、宣言型構成で作成できます。\n\n認証情報でPOST、PUT、PATCH、DELETEを行うAdmin APIエンドポイントは、DB-lessモードでは使用できません。\n"
+# smartling.sltrans = notranslate
+free: true
+enterprise: true
+paid: true
+konnect: true
+network_config_opts: "All"
+# smartling.sltrans = translate
+notes: "Time-to-live （TTL）はKonnectモードまたはハイブリッドモードでは機能しません。この設定により認証情報の有効期間が決定されます。\n"
+# smartling.sltrans = notranslate
+categories: 
+    - "authentication"
+publisher: "Kong Inc."
+# smartling.sltrans = translate
+desc: "サービスにKey Authenticationを追加する"
+# smartling.sltrans = notranslate

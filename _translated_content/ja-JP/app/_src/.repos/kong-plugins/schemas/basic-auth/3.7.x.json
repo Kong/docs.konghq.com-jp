@@ -1,0 +1,65 @@
+{
+  "fields" : [
+  {
+    "consumer" : {
+      "reference" : "consumers",
+      "type" : "foreign",
+      "description" : "null 値が許可されている外部キーを表すカスタム型。",
+      "eq" : null
+    }
+  },
+
+  {
+    "protocols" : {
+      "required" : true,
+      "elements" : {
+        "type" : "string",
+        "one_of" : ["grpc", "grpcs", "http", "https", "ws", "wss"]
+      },
+      "type" : "set",
+      "default" : ["grpc", "grpcs", "http", "https", "ws", "wss"]
+    }
+  },
+
+  {
+    "consumer_group" : {
+      "reference" : "consumer_groups",
+      "type" : "foreign",
+      "description" : "null 値が許可されている外部キーを表すカスタム型。",
+      "eq" : null
+    }
+  },
+
+  {
+    "config" : {
+      "fields" : [
+      {
+        "anonymous" : {
+          "description" : "認証に失敗した場合に「匿名」コンシューマとして使用するオプションの文字列（消費者のUUIDまたはユーザー名）の値。空の場合（デフォルトはnull）、リクエストは認証失敗 `4xx` で失敗します。この値はコンシューマの`custom_id`**ではなく**、`id`または`username`属性を参照している必要があることに注意してください。",
+          "type" : "string"
+        }
+      },
+
+      {
+        "hide_credentials" : {
+          "required" : true,
+          "type" : "boolean",
+          "description" : "アップストリームサービスの認証情報を表示または非表示にするようにプラグインに指示するオプションのブール値。`true`の場合、プラグインはリクエストをプロキシする前にリクエストから認証情報（つまり、`Authorization`ヘッダー）を削除します。",
+          "default" : false
+        }
+      },
+
+      {
+        "realm" : {
+          "required" : true,
+          "type" : "string",
+          "description" : "認証が失敗すると、プラグインは`realm`属性値を含む`WWW-Authenticate`ヘッダーを送信します。",
+          "default" : "service"
+        }
+      }],
+      "type" : "record",
+      "required" : true
+    }
+  }],
+  "entity_checks" : []
+}

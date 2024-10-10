@@ -1,0 +1,85 @@
+{
+  "fields" : [
+  {
+    "consumer" : {
+      "reference" : "consumers",
+      "type" : "foreign",
+      "description" : "null 値が許可されている外部キーを表すカスタム型。",
+      "eq" : null
+    }
+  },
+
+  {
+    "consumer_group" : {
+      "reference" : "consumer_groups",
+      "type" : "foreign",
+      "description" : "null 値が許可されている外部キーを表すカスタム型。",
+      "eq" : null
+    }
+  },
+
+  {
+    "protocols" : {
+      "type" : "set",
+      "required" : true,
+      "elements" : {
+        "type" : "string",
+        "one_of" : ["grpc", "grpcs", "http", "https"]
+      },
+      "description" : "HTTP プロトコルを表す文字列のセット。",
+      "default" : ["grpc", "grpcs", "http", "https"]
+    }
+  },
+
+  {
+    "config" : {
+      "fields" : [
+      {
+        "allow" : {
+          "elements" : {
+            "type" : "string"
+          },
+          "type" : "array",
+          "description" : "サービスまたはルートの使用が許可されている任意のグループ名。`config.allow` または `config.deny`のいずれかを指定する必要があります。"
+        }
+      },
+
+      {
+        "deny" : {
+          "elements" : {
+            "type" : "string"
+          },
+          "type" : "array",
+          "description" : "サービスまたはルートの使用が許可されていない任意のグループ名。`config.allow` または `config.deny`のいずれかを指定する必要があります。"
+        }
+      },
+
+      {
+        "hide_groups_header" : {
+          "required" : true,
+          "type" : "boolean",
+          "description" : "有効にすると（`true`）、`X-Consumer-Groups` ヘッダーがアップストリームサービスへのリクエストで送信されなくなります。",
+          "default" : false
+        }
+      },
+
+      {
+        "include_consumer_groups" : {
+          "required" : false,
+          "type" : "boolean",
+          "default" : false
+        }
+      }],
+      "type" : "record",
+      "required" : true
+    }
+  }],
+  "entity_checks" : [
+  {
+    "only_one_of" : ["config.allow", "config.deny"]
+  },
+
+  {
+    "at_least_one_of" : ["config.allow", "config.deny"]
+  }]
+}

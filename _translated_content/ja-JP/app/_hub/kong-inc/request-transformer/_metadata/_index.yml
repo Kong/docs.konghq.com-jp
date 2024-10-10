@@ -1,0 +1,19 @@
+# smartling.sltrans = notranslate
+---
+name: "Request Transformer"
+search_aliases: 
+    - "request-transformer"
+dbless_compatible: yes
+free: true
+enterprise: true
+konnect: true
+network_config_opts: "All"
+# smartling.sltrans = translate
+notes: "--"
+# smartling.sltrans = notranslate
+categories: 
+    - "transformations"
+publisher: "Kong Inc."
+# smartling.sltrans = translate
+desc: "正規表現、変数、テンプレートを使用してリクエストを変換する"
+# smartling.sltrans = notranslate
