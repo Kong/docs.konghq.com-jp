@@ -2,7 +2,7 @@
 title: "Kong Gateway"
 breadcrumb: "概要"
 subtitle: "ハイブリッドクラウドとマルチクラウド向けに構築され、マイクロサービスと分散アーキテクチャに最適化されたAPIゲートウェイ"
-description: "Kong Gateway is a lightweight, fast, and flexible cloud-native API gateway. Kong is a reverse proxy that lets you manage, configure, and route requests"
+description: "Kong Gateway は、軽量で高速、かつ柔軟なクラウドネイティブ API ゲートウェイです。 Kongはリクエストを管理、設定、ルーティングできるリバースプロキシです"
 konnect_cta_card: true
 ---
 <blockquote class="note"> <p><strong>{{ site.konnect_product_name }} で 5 分以内にゲートウェイをセットアップしましょう。</strong></p> <p> <a href="/konnect/">{{ site.konnect_product_name }}</a>は、クオリティ、スピード、安全性に優れた方法で最新アプリケーションを構築できるAPIライフサイクルマネジメントプラットフォームです。 </p> <p><a href="https://konghq.com/products/kong-konnect/register?utm_medium=referral&utm_source=docs&utm_campaign=gateway-konnect&utm_content=install-gateway" class="no-link-icon">無料で始める →</a></p> </blockquote> 
@@ -21,19 +21,19 @@ konnect_cta_card: true
 {{site.base_gateway}}は軽量、高速、柔軟なクラウドネイティブAPIゲートウェイです。APIゲートウェイは、リクエストの管理、設定、APIへのルーティングを可能にするリバースプロキシです。
 
 
-{{site.base_gateway}} runs in front of any RESTful API and can be extended through
-modules and plugins. It's designed to run on decentralized architectures, including
-hybrid\-cloud and multi\-cloud deployments.
+{{site.base_gateway}}は任意のRESTful APIの前で実行され、
+モジュールとプラグイン。 次のような分散型アーキテクチャで動作するように設計されています
+ハイブリッドクラウドとマルチクラウドの展開。
 
 {{site.base_gateway}}を使用すると、次の目的を実現できます。
 
 * ワークフローの自動化と最新の GitOps プラクティスを活用する
 * アプリケーション/サービスの分散化と、マイクロサービスへの移行
-* Create a thriving API developer ecosystem
+* 繁栄するAPI開発者エコシステムの構築
 * API関連の異常と脅威をプロアクティブに特定
 * API/サービスを保護および管理し、組織全体でAPIの可視性を向上させます。 
 
-<blockquote class="note no-icon" id="nurture-signup"> <p>追加のサポートが必要ですか？あなただけの無料トレーニングと厳選されたコンテンツ：</p> <form action="https://go.konghq.com/l/392112/2022-09-19/cfr97r" method="post"> <input class="button" name="email" placeholder="you@yourcompany.com" /> <button class="button" type="submit">Sign up now</button> </form> </blockquote> 
+<blockquote class="note no-icon" id="nurture-signup"> <p>追加のサポートが必要ですか？あなただけの無料トレーニングと厳選されたコンテンツ：</p> <form action="https://go.konghq.com/l/392112/2022-09-19/cfr97r" method="post"> <input class="button" name="email" placeholder="you@yourcompany.com" /> <button class="button" type="submit">今すぐ登録</button> </form> </blockquote> 
 
 {{site.base_gateway}}の拡張
 ---------
@@ -46,31 +46,30 @@ hybrid\-cloud and multi\-cloud deployments.
 
 Kongは、Gatewayデプロイメントで使用できる多くの[プラグイン](#kong-gateway-plugins)を提供しています。独自のカスタムプラグインを作成することもできます。詳細については、[プラグイン開発ガイド](/gateway/{{page.release}}/plugin-development)、[PDKリファレンス](/gateway/{{page.release}}/plugin-development/pdk/)、および他の言語（[JavaScript](/gateway/{{page.release}}/plugin-development/pluginserver/javascript)、[Go](/gateway/{{page.release}}/plugin-development/pluginserver/go)、[Python](/gateway/{{page.release}}/plugin-development/pluginserver/python/)）でのプラグイン作成に関するガイドを参照してください。
 
-Packages and modes
-------------------
+パッケージとモード
+---------
 
 {{site.base_gateway}}をデプロイするには、{{ site.konnect_saas }}での管理と自己管理の2つの方法があります。初めて{{site.base_gateway}}を試す場合は、[{{ site.konnect_saas }}](https://konghq.com/products/kong-konnect/register?utm_medium=referral&utm_source=docs&utm_campaign=gateway-konnect&utm_content=gateway-mode-overview)から始めることをおすすめします。
 
 ### {{site.konnect_short_name}}
 
 
-{{site.konnect_short_name}} provides the easiest way to get started
-with {{site.base_gateway}}.
-The global control plane is hosted in the cloud by Kong, and you manage the
-individual data plane nodes within your preferred network environment.
+{{site.konnect_short_name}}{{site.base_gateway}}0\}は を始める最も簡単な方法を提供します。
+1\}で始める最も簡単な方法を提供します。グローバルコントロールプレーンはKongによってクラウドでホストされ、あなたが管理します
+お好みのネットワーク環境内の個々のデータプレーンノード。
 
 
 {{site.konnect_short_name}}の価格パッケージは2通りあります。
 
-* **Plus** : Our self\-serve pay\-as\-you\-go pricing model, giving you access to the
+* **Plus** ：当社のセルフサービスの従量課金制価格モデルでは、次の機能にアクセスできます
   
-{{site.konnect_short_name}} platform in its entirety while offering the flexibility
-  to only pay for the services your organization uses.
+{{site.konnect_short_name}} プラットフォーム全体でありながら柔軟性も備えている
+  あなたの組織が使用するサービスの分だけを支払います。
 
-* **Enterprise** : With an Enterprise subscription,
-  you have access to the entire {{ site.konnect_saas }} suite and:
+* **Enterprise** : エンタープライズサブスクリプションでは、
+  {{ site.konnect_saas }}スイート全体にアクセスでき、次のことができます:
 
-  * 24x7x365 technical support
+  * 24x7x365テクニカルサポート
   * お客様の環境に合わせた専用ソリューションを作成するプロフェッショナルサービス
 
 詳細については、[料金ページ](https://konghq.com/pricing)をご覧ください。
@@ -93,7 +92,7 @@ individual data plane nodes within your preferred network environment.
 **{{site.ee_product_name}}** （[無料モードまたはEnterpriseモード](https://konghq.com/pricing)で利用可能）：KongのAPIゲートウェイ機能が追加されたもの。
 
 * <span class="badge free"></span> **フリーモード** では、このパッケージは、[Kong Manager](#kong-manager)を基本的なオープンソース機能に追加します。
-* <span class="badge enterprise"></span> With an **Enterprise** subscription, it also includes:
+* <span class="badge enterprise"></span> **Enterprise** サブスクリプションでは、 以下も含まれます:
   {% if_version lte:3.4.x -%}
   * [Dev Portal](#kong-dev-portal)
   * [Vitals](#kong-vitals)
@@ -123,16 +122,16 @@ individual data plane nodes within your preferred network environment.
 
 {:.note}
 > 
-> **Note** : If you are running Kong in traditional mode, increased traffic could
-> lead to potential performance with Kong Proxy.
-> Server\-side sorting and filtering large quantities of entities will also cause increased CPU usage in both Kong CP and database.
+> **注** ：Kongを従来モードで実行している場合、トラフィックが増加するとKong Proxyのパフォーマンスが低下する可能性があります。
+> Kong Proxyのパフォーマンスが低下する可能性があります。
+> サーバー側で大量のエンティティを並べ替えたりフィルタリングしたりすると、Kong CP とデータベースの両方で CPU 使用率が増加します。
 
 [Kong Manager](/gateway/{{page.release}}/kong-manager/) は {{site.base_gateway}} のグラフィカルユーザーインターフェイス（GUI）です。内部的には Kong Admin API を使用して {{site.base_gateway}} を管理および制御します。
 
 Kong Managerでできることを以下にいくつか挙げます。
 
 * 新しいルートとサービスの作成
-* Activate or deactivate plugins with a couple of clicks
+* 数回のクリックでプラグインをアクティブ化または非アクティブ化します
 * チーム、サービス、プラグイン、コンシューマ管理、その他すべてを望みどおりにグループ化します。
 {% if_version lte:3.4.x -%}
 * パフォーマンスの監視：クラスタ全体、ワークスペースレベルで、または オブジェクトレベルの正常性を直感的でカスタマイズ可能なダッシュボードを使って視覚化 {% endif_version %}
@@ -173,19 +172,19 @@ Kongは、{{site.base_gateway}}で使用できるAPIライフサイクルマネ�
 [decK](/deck/)は、宣言的な方法で{{site.base_gateway}}の構成を管理するのに役立ちます。つまり、開発者はサービス、ルート、プラグインなど、{{site.base_gateway}}または
 {{site.konnect_short_name}}の望ましい状態を定義し、Kong Admin APIのように各ステップを手動で実行する必要がなく、decKに実装を任せることができます。
 
-Get started with {{site.base_gateway}}
------------------------
+{{site.base_gateway}}を使い始める
+------------
 
 [{{site.base_gateway}}をダウンロードしてインストールします](/gateway/{{page.release}}/install/)。
 テストするには、オープンソースパッケージを選択するか、{{site.ee_product_name}}を無料モードで実行してKong Managerを試してみるかの、いずれかを選ぶことができます。
 
-After installation, get started with the introductory [quickstart guide](/gateway/{{page.release}}/get-started/).
+インストール後、入門[クイックスタート ガイド](/gateway/{{page.release}}/get-started/)から始めましょう。
 
 ### {{site.konnect_short_name}}で試す
 
 [{{site.konnect_product_name}}](/konnect/)は{{site.base_gateway}}インスタンスを管理できます。この設定では、Kongがコントロールプレーン（CP）をホストし、あなたは独自のデータプレーンをホストします。
 
-There are a few ways to test out the Gateway's Enterprise features:
+ゲートウェイのエンタープライズ機能をテストする方法はいくつかあります。
 
 * [{{site.konnect_product_name}}](https://konghq.com/products/kong-konnect/register?utm_medium=referral&utm_source=docs&utm_campaign=gateway-konnect&utm_content=gateway-overview)にサインアップします。
 * [Kong Academy]({{site.links.learn}})の学習ラボを参照してください。

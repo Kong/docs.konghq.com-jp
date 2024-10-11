@@ -11,19 +11,18 @@ title: "Kong Gatewayでサービスを公開"
 サービスおよびルートとは
 ------------
 
-**Service** and **Route** objects let you expose your services to clients with
-
-{{site.base_gateway}}. When configuring access to your API, you’ll start by specifying a
-Service. In {{site.base_gateway}}, a Service is an entity representing an external
-upstream API or microservice — for example, a data transformation
-microservice, a billing API, and so on.
+サービスとルートオブジェクトを使用すると、サービスをクライアントに公開できます
+{{site.base_gateway}} 。API へのアクセスを設定するときは、まず
+サービス。 {{site.base_gateway}}では、サービスは外部を表すエンティティです。
+上流APIまたはマイクロサービス（例：データ変換）
+マイクロサービス、課金 API など。
 
 サービスの主な属性は、サービスがリクエストをリッスンする **URL** です。URLは単一の文字列で指定することも、プロトコル、ホスト、ポート、パスを個別に指定することもできます。
 
 サービスに対してリクエストを開始する前に、ルートを追加する必要があります。ルートは、リクエストが{{site.base_gateway}}に到達した後にサービスに送信される方法（および送信されるかどうか）を決定します。1つのサービスに複数のルートを含めることができます。
 
-After configuring the Service and the Route, you’ll be able to start making
-requests through {{site.base_gateway}}.
+サービスとルートを設定したら、
+{{site.base_gateway}}経由でリクエストします。
 
 この図は、サービスを通して、リクエストとレスポンスがバックエンドAPIにルーティングされるフローを示しています。
 
@@ -72,7 +71,7 @@ curl -i -X POST http://localhost:8001/services/example_service/routes \
 ルートがリクエストをサービスに転送していることを確認します。
 ------------------------------
 
-By default, {{site.base_gateway}} handles proxy requests on port `8000`. The proxy is often referred to as the data plane.
+デフォルトでは、 {{site.base_gateway}}ポート`8000`でプロキシ要求を処理します。 プロキシは、多くの場合、データ プレーンと呼ばれます。
 
 ```sh
 curl -i -X GET http://localhost:8000/mock/anything

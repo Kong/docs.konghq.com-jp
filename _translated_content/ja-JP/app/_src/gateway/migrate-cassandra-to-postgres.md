@@ -21,10 +21,10 @@ Kongでは、宣言型コンフィギュレーション管理ツールの[decK](
 このドキュメントには大まかなガイドラインが記載されていますが、実際の移行手順は次の要因によって異なる場合があります。
 
 * Kongデプロイ環境の複雑さ
-* Kong plugins
+* Kongプラグイン
 * カスタムプラグイン
 * ゲートウェイへの外部タッチポイント（外部IdPを備えたOIDCなど）
-* Number of configuration entities, for example services and routes
+* 構成エンティティの数 \(サービスやルートなど\)
 * {{site.base_gateway}}の古いバージョンを実行している場合は、データベースの移行前に{{site.base_gateway}}バージョンへのアップグレードを実行することをお勧めします。これにより、アップグレード手順の移行部分が軽減されます。
 * Cassandra を使用している場合は、従来のデプロイメントを使用している可能性があります。この機会に {{site.base_gateway}} の[デプロイメントトポロジーのオプション](/gateway/{{page.release}}/production/deployment-topologies/)を確認し、可能であればハイブリッドモードのデプロイメントに変換することをお勧めします。
 
@@ -64,8 +64,8 @@ style id2 stroke-dasharray:3,rx:10,ry:10
 * {{site.base_gateway}}ブルー環境 \(Cassandra を使用\) とグリーン環境 \(PostgreSQL を使用\) は、同じゲートウェイバージョンを実行しています。
 * 次の例では、ブルーは従来モードでデプロイされ、グリーンはハイブリッドモードでデプロイされます。従来のデプロイメントに移行したい場合でも、手順に従うことはできますが、コントロールプレーンとデータプレーンのタスクを別々に実行する必要はありません。
 
-Migration approach
-------------------
+移行アプローチ
+-------
 
 次の手順は、非本番環境でテストする必要があります。ターゲット状態のギャップは、本番環境で実行する前に特定して修正する必要があります。
 
@@ -78,24 +78,24 @@ Migration approach
 準備
 ---
 
-| 手順 |        名前        |                                                説明                                                 |
-|----|------------------|---------------------------------------------------------------------------------------------------|
-| 1  | Change embargo   | Place a change embargo on the old environment preventing new deployments or configuration changes |
-| 2  | ブルー環境のバックアップ     | ブルー環境の Cassandra データベースのバックアップを作成し、冗長ストレージに配置します。                                                 |
-| 3  | 監視のセットアップ        | Create dashboards to track the health of the new environment                                      |
-| 4  | Go/No Goチェックポイント | 移行実行の Go/No Go 決定ポイント                                                                             |
+| 手順 |        名前        |                        説明                         |
+|----|------------------|---------------------------------------------------|
+| 1  | 禁輸措置の変更          | 古い環境に変更禁止措置を課し、新しい展開や構成の変更を防止します。                 |
+| 2  | ブルー環境のバックアップ     | ブルー環境の Cassandra データベースのバックアップを作成し、冗長ストレージに配置します。 |
+| 3  | 監視のセットアップ        | 新しい環境の正常性を追跡するためのダッシュボードを作成する                     |
+| 4  | Go/No Goチェックポイント | 移行実行の Go/No Go 決定ポイント                             |
 
-Execution
----------
+実行
+---
 
 このフェーズの目標は、ブルー環境で{{site.base_gateway}}構成を再現し、ライブトラフィックの切り替え前に回帰テストとスモークテストを実行することです。
 
-| 手順 |        名前        |                                                                                                                                                                                                                                      説明                                                                                                                                                                                                                                       |
-|----|------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1  | 構成ダンプ            | \- Execute the `deck gateway dump` command against the blue environment for each workspace to build a YAML representation of the Kong estate<br>\- Execute `deck gateway dump --rbac-resources-only` against the blue environment for each workspace to build a YAML representation of any RBAC resources created<br>\- If using the Kong Dev Portal, run the `portal fetch` command via the Portal CLI to build a representation of the Dev Portal assets for a workspace |
-| 2  | 構成の同期            | \- decK をグリーン環境で動作するように変更し、 `deck gateway sync`を実行して構成をグリーン環境にプッシュします。<br> \- ポータル CLI をグリーン環境に対して動作するように変更し、 `portal deploy`を実行して、Dev Portal 構成を新しい環境にプッシュします。                                                                                                                                                                                                                                                                                                             |
-| 3  | 回帰テスト            | PostgreSQLを基盤としたグリーン環境に対して回帰テストを実行します                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| 4  | Go/No Goチェックポイント | すべてのテストに合格したら、トラフィックの切り替えを実施します。                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| 手順 |        名前        |                                                                                                                                              説明                                                                                                                                              |
+|----|------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1  | 構成ダンプ            | \- 各ワークスペースのブルー環境に対して`deck gateway dump`コマンドを実行し、Kong エステートの YAML 表現を構築します。<br> \- 各ワークスペースのブルー環境に対して`deck gateway dump --rbac-resources-only`を実行し、作成されたRBACリソースのYAML表現を構築します。<br> \- Kong Dev Portal を使用している場合は、Portal CLI 経由で`portal fetch`コマンドを実行して、ワークスペースの Dev Portal アセットの表現を構築します。 |
+| 2  | 構成の同期            | \- decK をグリーン環境で動作するように変更し、 `deck gateway sync`を実行して構成をグリーン環境にプッシュします。<br> \- ポータル CLI をグリーン環境に対して動作するように変更し、 `portal deploy`を実行して、Dev Portal 構成を新しい環境にプッシュします。                                                                                                                            |
+| 3  | 回帰テスト            | PostgreSQLを基盤としたグリーン環境に対して回帰テストを実行します                                                                                                                                                                                                                                                        |
+| 4  | Go/No Goチェックポイント | すべてのテストに合格したら、トラフィックの切り替えを実施します。                                                                                                                                                                                                                                                             |
 
 トラフィックのカットオーバー
 --------------
@@ -114,9 +114,9 @@ Execution
 次の手順
 ----
 
-* If using the Basic Authentication plugin, the passwords are hashed and encrypted in the database. A decK dump doesn't export these credentials, so it is impossible to get the passwords out of the database in the cleartext. You must migrate these credentials using the Admin Api or Kong Manager.
+* 基本認証プラグインを使用している場合、パスワードはデータベースでハッシュ化および暗号化されます。 decKダンプはこれらの資格情報をエクスポートしないので、平文でデータベースからパスワードを取り出すことはできません。 これらの資格情報は、Admin Api または Kong Manager を使用して移行する必要があります。
 
-* Admin users on the {{site.base_gateway}} control plane are not propagated using decK. Migrate them using the Kong Admin API.
+* {{site.base_gateway}}コントロール プレーン上の管理者ユーザーは、decK を使用して伝播されません。 Kong Admin APIを使用して移行します。
 
 移行後、ベーシック認証情報はdecKで管理できます。decKでシークレットを管理する方法については、以下のトピックを参照してください。
 

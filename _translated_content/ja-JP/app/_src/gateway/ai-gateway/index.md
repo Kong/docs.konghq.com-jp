@@ -2,11 +2,11 @@
 title: "Kong AI Gateway"
 content-type: "explanation"
 ---
-Kong AI Gateway is a powerful set of features built on top of [{{site.base_gateway}}](/gateway/latest/),
-designed to help developers and organizations effectively adopt AI capabilities quickly and securely.
+Kong AI Gatewayは、 [{{site.base_gateway}}](/gateway/latest/)の上に構築された強力な機能セットです。
+開発者や組織が AI 機能を迅速かつ安全に効果的に導入できるように設計されています。
 
-How to get started
-------------------
+始め方
+---
 
 <div class="docs-grid-install docs-grid-install__bottom max-3"> <a href="/gateway/{{page.release}}/get-started/ai-gateway/" class="docs-grid-install-block docs-grid-install-block__bottom"> <img class="install-icon no-image-expand small" src="/assets/images/icons/documentation/icn-flag.svg" alt=""> <div class="install-block-column"> <div class="install-text">使用開始</div> <div class="install-description">ガイドを使って1分で開始</div> </div> </a> <a href="https://konghq.com/products/kong-ai-gateway#videos" class="docs-grid-install-block docs-grid-install-block__bottom no-link-icon"> <img class="install-icon no-image-expand small" src="/assets/images/icons/documentation/icn-learning.svg" alt=""> <div class="install-block-column"> <div class="install-text">動画</div> <div class="install-description">ビデオチュートリアルを見る</div> </div> </a> <a href="/hub/?category=ai" class="docs-grid-install-block docs-grid-install-block__bottom"> <img class="install-icon no-image-expand small" src="/assets/images/icons/documentation/icn-api-plugins-color.svg" alt=""> <div class="install-block-column"> <div class="install-text">AI プラグイン</div> <div class="install-description">Kong Plugin Hub 上の AI プラグインを確認してください</div> </div> </a> </div> 
 
@@ -18,12 +18,12 @@ Kong AI Gatewayとは？
 AIプロバイダーは標準API仕様に準拠していませんが、AI Gatewayが標準化された APIレイヤーを提供することで、クライアントは同じクライアントコードベースから複数のAIサービスを利用できるようになります。
 AI Gatewayは、迅速なエンジニアリングによって、認証情報管理、AI使用の監視、ガバナンス、チューニングのための追加機能を提供します。開発者はコード不要のAIプラグインを使用して、既存のAPIトラフィックを強化し、既存のアプリケーション機能を簡単に強化できます。
 
-You can enable the AI Gateway features through a set of modern and specialized plugins,
-using the same model you use for any other {{site.base_gateway}} plugin.
-When deployed alongside existing [{{site.base_gateway}} plugins](/hub/?category=ai),
+AIゲートウェイ機能は、最新の専用プラグインを通じて有効にすることができます。
+他の{{site.base_gateway}}プラグインで使用するのと同じモデルを使用します。
+既存の[{{site.base_gateway}}プラグイン](/hub/?category=ai)と一緒にデプロイすると、
 
-{{site.base_gateway}} users can quickly assemble a sophisticated AI management platform
-without custom code or deploying new and unfamiliar tools.
+{{site.base_gateway}}ユーザーは洗練されたAI管理プラットフォームを素早く構築できる
+カスタムコードや新しい馴染みのないツールを導入する必要はありません。
 
 ![AI Gateway](/assets/images/products/gateway/getting-started-guide/ai-gateway.png)
 
@@ -41,7 +41,7 @@ AI Gatewayのコアとなるのは、プロバイダーに依存しないAPIを�
 * 一元化されたAIプロバイダーの認証情報管理
 * AI Gatewayは、開発者や組織にAIデータとその使用状況のガバナンスと監視を一元的に提供します。
 * リクエストルーティングは動的に実行できるため、コスト、使用状況、応答精度などのさまざまなメトリックに基づいてAIの使用を最適化できます。
-* AI services can be used by other {{site.base_gateway}} plugins to augment non\-AI API traffic
+* AI サービスは、他の{{site.base_gateway}}プラグインによって非 AI API トラフィックを拡張するために使用できます。
 
 このコアAI Gateway機能は、上記の開始スクリプトでデフォルトでデプロイされる[AI Proxy](/hub/kong-inc/ai-proxy/)プラグインで有効化されます。
 
@@ -107,7 +107,7 @@ KongのAI Gatewayを使用すると、AI技術を使用してその他のAPIト�
 
 * [AI Rate Limiting Advanced](/hub/kong-inc/ai-rate-limiting-advanced) プラグインは LLM のレスポンスを調査して、トークンのコストを計算し、LLM バックエンドサービスの流量制限を有効にします。LLM サービスがレスポンスを返すと、これが流量制限を計算するためのコストとして使用されます。 分析の形式に関する詳細は、[AI 分析](/gateway/{{ page.release }}/production/logging/ai-analytics)を参照してください。
 
-#### Content safety and moderation
+#### コンテンツの安全性とモデレーション
 {:.badge .enterprise}
 
 KongのAI Gatewayは、コンテンツをモデレートするためのメカニズムを提供します。

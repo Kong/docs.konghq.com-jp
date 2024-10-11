@@ -28,8 +28,7 @@ Kong Manager Enterprise（または無料モード）エディションと OSS �
 
 {:.note}
 > 
-> **Note** : If you are running Kong in [traditional mode](/gateway/{{page.release}}/production/deployment-topologies/traditional/), increased traffic could lead to potential performance issues for the Kong proxy.
-> Server\-side sorting and filtering large quantities of entities can also cause increased CPU usage in both {{site.base_gateway}} and its database.
+> **注** : Kong を [従来型モードで](/gateway/{{page.release}}/production/deployment-topologies/traditional/)実行している場合、トラフィックが増加すると、Kong プロキシのパフォーマンスに問題が生じる可能性があります。サーバー側で大量のエンティティを並べ替えたりフィルタリングしたりすると、 {{site.base_gateway}}とそのデータベースの両方で CPU 使用率が増加する可能性があります。
 
 Kong Managerにアクセスするには、{{site.ce_product_name}}のインストール後に次のURLに移動します：[http://localhost:8002](http://localhost:8002)。
 
@@ -48,28 +47,28 @@ Kong Managerインターフェース
 ![Kong Managerインターフェース](/assets/images/products/gateway/km_workspace_3.5.png)
 {% endif_version %}
 > 
-> *Figure 1: Kong Manager individual workspace dashboard* 
+> *図 1: Kong Manager の個別のワークスペース ダッシュボード* 
 
 ### トップメニュー
 
 {% if_version gte:3.5.x %}
 
-|      アイテム      |                        説明                         |
-|----------------|---------------------------------------------------|
-| **Workspaces** | クラスタ内のすべてのワークスペースのダッシュボード。                        |
-| **チーム**        | RBAC を使用してチームの役割と権限を管理したり、グループを IdP にマッピングしたりします。 |
+|    アイテム     |                        説明                         |
+|-------------|---------------------------------------------------|
+| **ワークスペース** | クラスタ内のすべてのワークスペースのダッシュボード。                        |
+| **チーム**     | RBAC を使用してチームの役割と権限を管理したり、グループを IdP にマッピングしたりします。 |
 
 {% endif_version %}
 
 {% if_version gte:3.1.x lte:3.4.x %}
 
-| 番号 |      アイテム       |                                                                              説明                                                                               |
-|----|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1  | **Workspaces**  | クラスタ内のすべてのワークスペースのダッシュボード。                                                                                                                                    |
-| 2  | **Dev Portals** | Overview of all Dev Portals in the cluster. At a glance, see which workspaces have active Dev Portals and access their URLs, or set up a Dev Portal instance. |
-| 3  | **Vitals**      | クラスタ全体の監視のためのダッシュボード。ダッシュボードを使用して次のことを行います。<br>• リクエストアクティビティを表示する <br>• プロキシとアップストリームのレイテンシーを経時的に追跡する <br>• データストアのキャッシュにいつアクセスされたか、アクセスが成功したかどうかを確認する       |
-| 4  | **チーム**         | RBAC を使用してチームの役割と権限を管理したり、グループを IdP にマッピングしたりします。                                                                                                             |
-| 5  | **アカウント設定**     | パスワードとRBACトークンを管理します。                                                                                                                                         |
+| 番号 |      アイテム       |                                                                           説明                                                                            |
+|----|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1  | **ワークスペース**     | クラスタ内のすべてのワークスペースのダッシュボード。                                                                                                                              |
+| 2  | **Dev Portals** | クラスター内のすべての Dev Portal の概要。 どのワークスペースにアクティブなデベロッパーポータルがあり、そのURLにアクセスしているか、デベロッパーポータルのインスタンスを設定しているかが一目でわかります。                                           |
+| 3  | **Vitals**      | クラスタ全体の監視のためのダッシュボード。ダッシュボードを使用して次のことを行います。<br>• リクエストアクティビティを表示する <br>• プロキシとアップストリームのレイテンシーを経時的に追跡する <br>• データストアのキャッシュにいつアクセスされたか、アクセスが成功したかどうかを確認する |
+| 4  | **チーム**         | RBAC を使用してチームの役割と権限を管理したり、グループを IdP にマッピングしたりします。                                                                                                       |
+| 5  | **アカウント設定**     | パスワードとRBACトークンを管理します。                                                                                                                                   |
 
 {% endif_version %}
 
@@ -116,12 +115,12 @@ Kong Managerインターフェース
 13 \| **時間枠セレクタ** \| トラフィックグラフの時間枠を、過去5分間から過去12時間まで選択します。{% endif_version %}
 
 {% if_version gte:3.1.x %}
-Number \| Item \| Description
+番号 \| 項目 \| 説明
 \-\-\-\-\-\-\-\|\-\-\-\-\-\-\|\-\-\-\-\-\-\-\-\-\-\-\-
-11 \| **Settings** \| Edit the workspace avatar or delete the workspace.
-12 \| **Overview panel** \| Overview of key statistics for the workspace: number of services, consumers, and API requests, as well as the license validity information.
-13 \| **Total traffic graph** \| Total traffic in the workspace by status code within a selected time frame.
-14 \| **Time frame selector** \| Choose the time frame for the traffic graph, from the last 5 minutes to the last 12 hours.
+11 \| **設定** \| ワークスペースのアバターを編集するか、ワークスペースを削除します。
+12｜ **概要パネル** ｜ワークスペースの主な統計情報（サービス数、コンシューマ数、APIリクエスト数、ライセンス有効期限情報）の概要。
+13 \| **総トラフィック グラフ** ｜選択した時間枠内のワークスペース内の総トラフィックをステータス コード別に表示します。
+14 \| **時間枠セレクター** \| トラフィックグラフの時間枠を、過去5分間から過去12時間まで選択してください。
 {% endif_version %}
 {% endif_version %}
 

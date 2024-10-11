@@ -1,5 +1,5 @@
 ---
-title: "Audit Logs"
+title: "監査ログ"
 badge: "enterprise"
 ---
 Admin APIを介してリクエストおよびデータベース監査ログにアクセスできます。

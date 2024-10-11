@@ -16,10 +16,10 @@ Admin APIへのリクエストはクラスタ内のどのノードにも送信�
 
 Kong Admin APIはOpenAPI形式で文書化されています。
 
-|                          仕様                          |                                                                                                                                               Insomnia のリンク                                                                                                                                                |
-|------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [Enterprise API](/gateway/api/admin-ee/latest/){:target="_blank"} | <a href="https://insomnia.rest/run/?label=Kong%20Gateway%20Enterprise%203.4&uri=https%3A%2F%2Fraw.githubusercontent.com%2FKong%2Fdocs.konghq.com%2Fmain%2Fapi-specs%2FGateway-EE%2F3.4%2Fkong-ee-3.4.json" target="_blank"><img src="https://insomnia.rest/images/run.svg" alt="Run in Insomnia"></a>      |
-| [オープンソース API](/gateway/api/admin-oss/latest/) {:target="_blank"}  | <a href="https://insomnia.rest/run/?label=Kong%20Gateway%20Open%20Source%203.4&uri=https%3A%2F%2Fraw.githubusercontent.com%2FKong%2Fdocs.konghq.com%2Fmain%2Fapi-specs%2FGateway-OSS%2F3.4%2Fkong-oss-3.4.json" target="_blank"><img src="https://insomnia.rest/images/run.svg" alt="Run in Insomnia"></a> |
+|                          仕様                          |                                                                                                                                             Insomnia のリンク                                                                                                                                              |
+|------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [Enterprise API](/gateway/api/admin-ee/latest/){:target="_blank"} | <a href="https://insomnia.rest/run/?label=Kong%20Gateway%20Enterprise%203.4&uri=https%3A%2F%2Fraw.githubusercontent.com%2FKong%2Fdocs.konghq.com%2Fmain%2Fapi-specs%2FGateway-EE%2F3.4%2Fkong-ee-3.4.json" target="_blank"><img src="https://insomnia.rest/images/run.svg" alt="Insomniaで走る"></a>      |
+| [オープンソース API](/gateway/api/admin-oss/latest/) {:target="_blank"}  | <a href="https://insomnia.rest/run/?label=Kong%20Gateway%20Open%20Source%203.4&uri=https%3A%2F%2Fraw.githubusercontent.com%2FKong%2Fdocs.konghq.com%2Fmain%2Fapi-specs%2FGateway-OSS%2F3.4%2Fkong-oss-3.4.json" target="_blank"><img src="https://insomnia.rest/images/run.svg" alt="Insomniaで走る"></a> |
 
 個々のエンティティのドキュメントについては、次のリンクを参照してください。
 
@@ -55,14 +55,14 @@ DB レスモード
 
 {{site.base_gateway}}をDBレスモードで実行する場合、Admin APIは宣言型構成の処理に関連するタスクのみを実行できます。
 
-* [Validating configurations against schemas](/gateway/api/admin-oss/latest/#/Information/post-schemas-entity-validate)
+* [スキーマに対する構成の検証](/gateway/api/admin-oss/latest/#/Information/post-schemas-entity-validate)
 * [スキーマに対するプラグイン設定の検証](/gateway/api/admin-oss/latest/#/Information/post-schemas-plugins-validate)
 * [宣言型構成の再読み込み](/gateway/{{page.release}}/admin-api/declarative-configuration/)
 
 サポートされているコンテンツタイプ
 -----------------
 
-The Admin API accepts 3 content types on every endpoint:
+Admin API は、すべてのエンドポイントで 3 つのコンテンツ タイプを受け入れます。
 
 ### application/json
 
@@ -95,7 +95,7 @@ The Admin API accepts 3 content types on every endpoint:
 指定する場合は1インデックスで、連続している必要があります）
 を使用してください。
 
-Here's an example route added to a service named `test-service`:
+以下は、 `test-service`という名前のサービスに追加されたルートの例です。
 
 ```sh
 curl -i -X POST http://localhost:8001/services/test-service/routes \
@@ -142,14 +142,14 @@ HTTPステータス応答コード
 
 HTTPレスポンスでは、以下のステータスコードが返されます。
 
-| HTTPコード |   HTTPの説明    |                                                                                 注記                                                                                 |             Request method             |
+| HTTPコード |   HTTPの説明    |                                                                                 注記                                                                                 |                リクエスト方法                 |
 |---------|--------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------|
 | 200     | OK           | リクエストは成功しました。`200`リクエストの結果は、リクエストの種類によって異なります。<br> \- `GET`：リソースが取得され、メッセージ本文で送信されました。<br> \- `PUT`または`POST`：アクションの結果を説明するリソースがメッセージ本文で送信されます。<br> \- `PATCH`：？ | `GET`, `POST`, `PATCH`, `PUT`          |
-| 201     | Created      | リクエストが成功し、新しいリソースが作成されました。                                                                                                                                         | `POST`                                 |
+| 201     | 作成           | リクエストが成功し、新しいリソースが作成されました。                                                                                                                                         | `POST`                                 |
 | 204     | No Content   | 送信する要求にコンテンツがありません。                                                                                                                                                | `DELETE`                               |
 | 400     | Bad Request  | クライアントのエラーのため、サーバーはリクエストを送信できないか、送信しません。                                                                                                                           | `POST`、`PATCH`、`PUT`                   |
 | 401     | Unauthorized | クライアントは認証されていません。                                                                                                                                                  | `GET`, `POST`, `DELETE`, `PATCH`,`PUT` |
-| 404     | 見つかりません      | The server can't find the resource you requested. With an API, this can mean that the endpoint is valid but the resource doesn't exist.                            | `GET`、`PATCH`、`PUT`                    |
+| 404     | 見つかりません      | リクエストしたリソースがサーバーで見つかりません。 API の場合、エンドポイントは有効だがリソースが存在しないことを意味する場合があります。                                                                                            | `GET`、`PATCH`、`PUT`                    |
 | 405     | 許可されていないメソッド | サーバーはリクエストメソッドを認識していますが、リソースではサポートされていません。                                                                                                                         | `PUT`                                  |
 | 409     | Conflict     | リクエストがサーバーの現在の状態と競合しています。                                                                                                                                          | `POST`                                 |
 
