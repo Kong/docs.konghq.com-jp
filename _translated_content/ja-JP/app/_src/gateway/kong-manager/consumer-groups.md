@@ -22,8 +22,8 @@ content_type: "tutorial"
 * `enforce_consumer_groups`および`consumer_groups`パラメータを使用して Rate Limiting Advancedプラグインをグローバルに設定し、プラグインが受け入れるコンシューマグループの リストを設定します。
 * 各コンシューマグループに流量制限ポリシーを設定し、プラグインの グローバル構成を上書きします。
 
-For all possible requests, see the
-[Consumer Groups reference](/gateway/api/admin-ee/3.3.0.x/#/consumer_groups/get-consumer_groups).
+すべてのリクエストについては、
+[消費者グループのリファレンス](/gateway/api/admin-ee/3.3.0.x/#/consumer_groups/get-consumer_groups)。
 
 コンシューマを含むコンシューマグループの設定
 ----------------------
@@ -35,7 +35,7 @@ For all possible requests, see the
 3. **新しいコンシューマグループ** をクリックします。
 4. コンシューマグループ名として `Bronze` を入力し、 **作成** をクリックします。
 5. メニューの **コンシューマ** をクリックし、 **新規コンシューマ** をクリックします。
-6. Enter a **Username** and **Custom ID** . For this example, you can use `Amal` for each field.
+6. **ユーザー名** と **カスタム ID** を入力します。この例では、各フィールドに `Amal` を使用できます。
 7. **作成** をクリックします。
 8. メニューから **グループ** タブをクリックします。
 9. 作成した `Bronze` コンシューマグループをクリックします。
@@ -57,7 +57,7 @@ For all possible requests, see the
    **Scoped** に切り替えると、流量制限はプラグインを1つのサービス、ルート、またはコンシューマだけに適用します。
 
    デフォルトでは、フォームが送信されるとプラグインは自動的に有効になります。また、 **このプラグインは有効になっています** ボタンを切り替えて、プラグインを有効にせずに構成することもできます。この例では、プラグインを有効のままにします。
-5. Complete only the following fields with the following parameters.
+5. 次のフィールドのみに、次のパラメータを入力します。
 
    1. config.limit：`5`
    2. config.window\_size: `30`
@@ -77,7 +77,7 @@ For all possible requests, see the
 1. **デフォルト** のワークスペースを開きます。
 2. メニューから **コンシューマ** を開き、 **グループ** タブをクリックします。
 3. 作成した `Bronze` コンシューマグループをクリックします。
-4. Click the **Policy** tab.
+4. **Policy** タブをクリックします。
 5. 次のパラメータを使用して、次のフィールドのみを入力してください。 
    1. config.limit：`6`
    2. config.window\_size: `30`

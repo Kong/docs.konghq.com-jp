@@ -41,8 +41,8 @@ Rate Limiting プラグイン
 
 1. **流量制限を有効にする** 
 
-   The rate limiting plugin is installed by default on {{site.base_gateway}}, and can be enabled
-   by sending a `POST` request to the [plugins](/gateway/latest/admin-api/#add-plugin) object on the Admin API:
+   レート制限プラグインはデフォルトで{{site.base_gateway}}にインストールされており、有効にすることができます。
+   Admin API の[プラグイン](/gateway/latest/admin-api/#add-plugin)オブジェクトに`POST`リクエストを送信します。
 
    ```sh
    curl -i -X POST http://localhost:8001/plugins \
@@ -74,7 +74,7 @@ Rate Limiting プラグイン
 {% navtabs %}
 {% navtab Command Line %}
 
-Run the following command to quickly send 6 mock requests:
+次のコマンドを実行して、6 つの模擬リクエストをすばやく送信します。
 
 ```sh
 for _ in {1..6}; do curl -s -i localhost:8000/mock/anything; echo; sleep 1; done
@@ -137,8 +137,8 @@ curl -X POST http://localhost:8001/routes/example_route/plugins \
 
 2. **コンシューマの流量制限を有効にする** 
 
-   Using the consumer id, enable rate limiting for all routes and services for
-   the `jsmith` consumer.
+   消費者IDを使用して、すべてのルートとサービスのレート制限を有効にします
+   `jsmith` コンシューマー。
 
    ```sh
    curl -X POST http://localhost:8001/plugins \

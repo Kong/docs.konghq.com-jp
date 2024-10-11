@@ -6,7 +6,7 @@ Kongが複数のバックエンドサービスに対するリクエストをロ�
 DNSロードバランサーはデフォルトで有効になっていますが、ラウンドロビン方式のロードバランシングに限定されます。
 `upstream`エンティティには、最小接続数などのより高度なアルゴリズム、コンシステントハッシング、最小レイテンシに加え、ヘルスチェックとサーキットブレーカーがあります。
 
-Refer to the [DNS caveats](#dns-caveats) depending on your infrastructure .
+インフラストラクチャに応じて[DNS の注意事項](#dns-caveats)を参照してください。
 
 DNSベースのロードバランシング
 ----------------
@@ -17,7 +17,7 @@ DNSレコード`ttl`設定（有効期間）によって、情報が更新され
 
 重みづけの有無にかかわらず、ホスト名のDNSレコードタイプに応じてラウンドロビンアルゴリズムが使用されます。
 
-### A records
+### DNS Aレコード
 
 Aレコードには1つ以上のIPアドレスが含まれます。したがって、ホスト名がAレコードに解決される場合、各バックエンドサービスには独自のIPアドレスが必要です。
 
@@ -39,17 +39,17 @@ SRVレコードは`priority`プロパティも特徴です。Kongは優先順位
 
 * Kong はネームサーバーを信頼します。これは、DNSクエリ経由で取得された情報が、設定された値よりも優先されることを意味します。これは主に、`port` と `weight` の情報を保持する SRV レコードに関連します。
 
-* Whenever the DNS record is refreshed a list is generated to handle the
-  weighting properly. Try to keep the weights as multiples of each other to keep
-  the algorithm performant, e.g., 2 weights of 17 and 31 would result in a structure
-  with 527 entries, whereas weights 16 and 32 \(or their smallest relative
-  counterparts 1 and 2\) would result in a structure with merely 3 entries. This is
-  especially relevant with a very small \(or even 0\) `ttl` value.
+* DNSレコードが更新されるたびに、処理するためのリストが生成されます。
+  適切に重み付けします。 重みを互いの倍数にして維持するようにしてください
+  アルゴリズムの性能は、たとえば、17と31の2つの重みがあると構造になります
+  527エントリ、ウェイトは16と32（またはそれらの親戚が最小です）
+  対応するもの1と2）では、エントリが3つしかない構造になります。 これは
+  特に、 `ttl`値が非常に小さい \(または 0\) 場合に関連します。
 
 * DNS は UDP を通して伝送され、デフォルトの制限は 512 バイトです。返されるエントリが多い場合、DNSサーバーは部分的なデータで応答し、未送信のエントリが他にまだあることを示すトランケートフラグを設定します。Kong を含む DNS クライアントは、エントリの完全なリストを取得するために TCP 上で 2 回目のリクエストを送信します。
 
-* Some nameservers by default do not respond with the truncate flag, but trim the response
-  to be under 512 byte UDP size.
+* 一部のネームサーバーは、デフォルトでは切り捨てフラグで応答せず、応答を切り詰めます。
+  UDP サイズは 512 バイト未満である必要があります。
 
   * Consulはその一例です。Consulは、デフォルトの設定では、最初の3つのエントリのみを返し、未送信のエントリが残っていることを示すtruncateフラグを設定しません。Consulには切り捨てフラグを有効にするオプションが含まれています。詳細については、[Consulのドキュメント](https://www.consul.io/docs/agent/options.html#enable_truncate)を参照してください。
 
@@ -79,8 +79,8 @@ Kong によって処理され、DNSの更新は必要ありません。Kongは�
 
 ### アップストリーム
 
-Each `upstream` can have many `target` entries attached to it, and requests proxied
-to the 'virtual hostname' will be load balanced over the targets.
+各 `upstream` には多くの `target` エントリを添付でき、リクエストはプロキシされます
+「仮想ホスト名」に、ターゲット間で負荷分散されます。
 
 ターゲットの追加と削除はAdmin APIで単純なHTTPリクエストを使用して実行できます。
 この操作は比較的低コストですが、アップストリームの変更自体は、たとえばスロット数が変更する場合はバランサーを再構築する必要があるため、コストが高くなります。
@@ -88,7 +88,7 @@ to the 'virtual hostname' will be load balanced over the targets.
 アップストリーム追加と操作に関する詳細情報は、
 [Admin APIリファレンス](/gateway/{{page.release}}/admin-api#upstream-object)の `upstream` セクションをご覧ください。
 
-### Target
+### ターゲット
 
 ターゲットは、バックエンドサービスのインスタンスを識別するポート付きのIPアドレス/ホスト名です。各アップストリームは多くのターゲットを持つことができます。ターゲットの追加と操作に関する詳細な情報は、
 [Admin APIリファレンス](/gateway/{{page.release}}/admin-api#target-object)の`target`セクションを参照してください。
@@ -138,9 +138,8 @@ Kong ロードバランサーと DNS ベースのツールは、競合するこ�
 
 * `round-robin`
 * `consistent-hashing`
-* `least-connections`
-{% if_version gte:3.2.x -%}
-* `latency` {% endif_version %}
+* `least-connections`{% if_version gte:3.2.x -%}
+* `latency`{% endif_version %}
 
 これらのアルゴリズムは、`upstream`エンティティを使用する場合にのみ利用可能です。[高度ロードバランシング](#advanced-load-balancing)を参照してください。
 
@@ -173,10 +172,10 @@ Kong ロードバランサーと DNS ベースのツールは、競合するこ�
 サポートされているハッシュ属性は次のとおりです。
 
 * `none`: `consistent-hashing`を使用せず、代わりに`round-robin`を使用してください \(デフォルト\)。
-* `consumer`: Use the Consumer ID as the hash input. If no Consumer ID is available, it will fall back on the Credential ID \(for example, in case of an external authentication mechanism like LDAP\).
+* `consumer`: コンシューマ ID をハッシュ入力として使用します。 消費者IDが利用できない場合は、 資格情報 ID にフォールバックします \(たとえば、LDAP などの外部認証メカニズムの場合\)。
 * `ip`：発信元IPアドレスをハッシュ入力として使用します。これを使用するときは、 [実際のIPを決定する](/gateway/{{page.release}}/reference/configuration/#real_ip_header)ための構成の設定を確認してください。
 * `header`：指定したヘッダーをハッシュ入力として使用します。ヘッダー名は `hash_on_header`または`hash_fallback_header`で指定します。これは、`header`がそれぞれプライマリ属性かフォールバック属性かによります。
-* `cookie`: Use a specified cookie with a specified path as the hash input. The cookie name is specified in the `hash_on_cookie` field and the path is specified in the `hash_on_cookie_path` field. If the specified cookie is not present in the request, it will be set by the response. Hence, the `hash_fallback` setting is invalid if `cookie` is the primary hashing mechanism. The generated cookie will have a random UUID value. So the first assignment will be random, but then sticks because it is preserved in the cookie.
+* `cookie`: 指定されたパスを持つ指定された Cookie をハッシュ入力として使用します。 クッキー名は`hash_on_cookie`フィールドに指定され、パスは `hash_on_cookie_path`フィールドに指定されています。 指定されたCookieが リクエスト内に存在する場合、応答によって設定されます。 したがって、 `hash_fallback` `cookie`が主要なハッシュ メカニズムである場合、設定は無効です。 生成された Cookie にはランダムな UUID 値が設定されます。 最初の課題は ランダムですが、Cookie に保存されるため、保持されます。
 
 コンシステントハッシュバランサーは、単一ノードとの併用およびクラスタ内の両方で機能するように設計されています。
 ハッシュベースのアルゴリズムを使用する場合、すべてのノードでまったく同じバランサーレイアウトを構築して、同一機能を確保することが重要です。そのためには、バランサーは予測可能な方法で構築される必要があります。

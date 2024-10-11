@@ -1,8 +1,8 @@
 ---
 title: "Kong Gateway 3.x.x のアップグレード"
 ---
-Upgrade to major, minor, and patch {{site.base_gateway}}
-releases using the `kong migrations` commands.
+メジャー、マイナー、パッチへのアップグレード{{site.base_gateway}}
+`kong migrations`コマンドを使用してリリースします。
 
 コマンドを使用して、すべての{{site.base_gateway}}オープンソースエンティティを
 {{site.base_gateway}}（Enterprise）へ移行することもできます。[{{site.ce_product_name}}から{{site.base_gateway}}への移行](/gateway/{{page.release}}/migrate-ce-to-ke/)を参照してください。
@@ -19,10 +19,10 @@ Kongは、製品のバージョン管理において、メジャーバージョ�
 
 {:.important}
 > 
-> **Important** : Blue\-green migration in traditional mode for versions below 2\.8\.2 to 3\.0\.x is not supported.
-> The 2\.8\.2 release includes blue\-green migration support. If you want
-> to perform migrations for traditional mode with no downtime,
-> upgrade to 2\.8\.2, [then migrate to {{page.release}}](#migrate-db).
+> **重要** : 2\.8\.2以下のバージョンから3\.0\.xへのトラディショナルモードでのブルーグリーンマイグレーションはサポートされていません。
+> 2\.8\.2 リリースには、ブルーグリーン移行のサポートが含まれています。 あなたが望むなら
+> ダウンタイムなしで従来のモードへの移行を実行するには、
+> 2\.8\.2 にアップグレードして[から、 {{page.release}}に移行します](#migrate-db)。
 
 最新バージョンに直接アップグレードすることもできますが、
 このドキュメントに記載されている2\.xシリーズおよび3\.xシリーズ間における下位互換性のない変更
@@ -68,14 +68,14 @@ Kongは、製品のバージョン管理において、メジャーバージョ�
 | 2\.x—2\.7\.x               | 従来        | 不可               | [2\.8\.2\.xにアップグレード](/gateway/2.8.x/install-and-run/upgrade-enterprise/)（ブルーグリーンデプロイメントにのみ必要）し、[3\.0\.xにアップグレード](/gateway/3.0.x/upgrade/)し、[3\.1\.xにアップグレード](/gateway/3.1.x/upgrade/#migrate-db)し、その後、[3\.2\.xにアップグレード](#migrate-db)します。 |
 | 2\.x—2\.7\.x               | ハイブリッドモード | 不可               | [2\.8\.2\.xにアップグレード](/gateway/2.8.x/install-and-run/upgrade-enterprise/)し、[3\.0\.xにアップグレード](/gateway/3.0.x/upgrade/)し、[3\.1\.xにアップグレード](/gateway/3.1.x/upgrade/#migrate-db)し、その後、[3\.2\.xにアップグレードします](#migrate-db)。                      |
 | 2\.x—2\.7\.x               | DBレスモード   | 不可               | [3\.0\.xにアップグレード](/gateway/3.0.x/upgrade/)し、[3\.1\.xにアップグレード](/gateway/3.1.x/upgrade/#migrate-db)し、その後、[3\.2\.xにアップグレードします](#migrate-db)。                                                                                                   |
-| 2\.8\.x                     | 従来        | 不可               | [Upgrade to 3\.1\.1\.3](/gateway/3.1.x/upgrade/#migrate-db), and then [upgrade to 3\.2\.x](#migrate-db).                                                                                                                                     |
-| 2\.8\.x                     | ハイブリッドモード | 不可               | [Upgrade to 3\.1\.1\.3](/gateway/3.1.x/upgrade/#migrate-db), and then [upgrade to 3\.2\.x](#migrate-db).                                                                                                                                     |
-| 2\.8\.x                     | DBレスモード   | 不可               | [Upgrade to 3\.1\.1\.3](/gateway/3.1.x/upgrade/#migrate-db), and then [upgrade to 3\.2\.x](#migrate-db).                                                                                                                                     |
+| 2\.8\.x                     | 従来        | 不可               | [3\.1\.1\.3にアップグレードし](/gateway/3.1.x/upgrade/#migrate-db)、 その後、 [3\.2\.x にアップグレードします](#migrate-db)。                                                                                                                                          |
+| 2\.8\.x                     | ハイブリッドモード | 不可               | [3\.1\.1\.3にアップグレードし](/gateway/3.1.x/upgrade/#migrate-db)、 その後、 [3\.2\.x にアップグレードします](#migrate-db)。                                                                                                                                          |
+| 2\.8\.x                     | DBレスモード   | 不可               | [3\.1\.1\.3にアップグレードし](/gateway/3.1.x/upgrade/#migrate-db)、 その後、 [3\.2\.x にアップグレードします](#migrate-db)。                                                                                                                                          |
 | 3\.0\.x                     | 従来        | 不可               | [3\.1\.xにアップグレード](/gateway/3.1.x/upgrade/#migrate-db)し、その後、[3\.2\.xにアップグレード](#migrate-db)します。                                                                                                                                                 |
 | 3\.0\.x                     | ハイブリッドモード | 不可               | [3\.1\.xにアップグレード](/gateway/3.1.x/upgrade/#migrate-db)し、その後、[3\.2\.xにアップグレード](#migrate-db)します。                                                                                                                                                 |
 | 3\.0\.x                     | DBレスモード   | 不可               | [3\.1\.xにアップグレード](/gateway/3.1.x/upgrade/#migrate-db)し、その後、[3\.2\.xにアップグレード](#migrate-db)します。                                                                                                                                                 |
 | 3\.1\.x                     | 従来        | 可能               | [3\.2\.xにアップグレード](#migrate-db)します。                                                                                                                                                                                                              |
-| 3\.1\.0\.x\-3\.1\.1\.2 | ハイブリッドモード | 不可               | [Upgrade to 3\.1\.1\.3](/gateway/3.1.x/upgrade/#migrate-db), and then [upgrade to 3\.2\.x](#migrate-db).                                                                                                                                     |
+| 3\.1\.0\.x\-3\.1\.1\.2 | ハイブリッドモード | 不可               | [3\.1\.1\.3にアップグレードし](/gateway/3.1.x/upgrade/#migrate-db)、 その後、 [3\.2\.x にアップグレードします](#migrate-db)。                                                                                                                                          |
 | 3\.1\.1\.3                 | ハイブリッドモード | 可能               | [3\.2\.xにアップグレード](#migrate-db)します。                                                                                                                                                                                                              |
 | 3\.1\.x                     | DBレスモード   | 可能               | [3\.2\.xにアップグレード](#migrate-db)します。                                                                                                                                                                                                              |
 
@@ -87,7 +87,7 @@ Kongは、製品のバージョン管理において、メジャーバージョ�
 |-------------------------------|-----------|------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | 2\.x—2\.7\.x               | 従来        | 不可               | [2\.8\.2\.xにアップグレード](/gateway/2.8.x/install-and-run/upgrade-enterprise/)（ブルーグリーンデプロイメントにのみ必要）し、[3\.0\.xにアップグレード](/gateway/3.0.x/upgrade/)し、[3\.1\.xにアップグレード](/gateway/3.1.x/upgrade/#migrate-db)し、[3\.2\.xにアップグレード](#migrate-db)し、その後、[3\.3\.xにアップグレードします](#migrate-db)。 |
 | 2\.x—2\.7\.x               | ハイブリッドモード | 不可               | [2\.8\.2\.xにアップグレード](/gateway/2.8.x/install-and-run/upgrade-enterprise/)し、[3\.0\.xにアップグレード](/gateway/3.0.x/upgrade/)し、[3\.1\.xにアップグレード](/gateway/3.1.x/upgrade/#migrate-db)し、[3\.2\.xにアップグレード](#migrate-db)し、その後、[3\.3\.xにアップグレードします](#migrate-db)。                      |
-| 2\.x—2\.7\.x               | DBレスモード   | 不可               | [Upgrade to 3\.0\.x](/gateway/3.0.x/upgrade/), [upgrade to 3\.1\.x](/gateway/3.1.x/upgrade/#migrate-db), [upgrade to 3\.2\.x](#migrate-db), and then [upgrade to 3\.3\.x](#migrate-db).                                                                                     |
+| 2\.x—2\.7\.x               | DBレスモード   | 不可               | [3\.0\.xにアップグレードし](/gateway/3.0.x/upgrade/)、 [3\.1\.x にアップグレードし](/gateway/3.1.x/upgrade/#migrate-db)、 [3\.2\.xにアップグレードし](#migrate-db)、 その後、 [3\.3\.x にアップグレードします](#migrate-db)。                                                                                             |
 | 2\.8\.x                     | 従来        | 不可               | [3\.1\.1\.3にアップグレード](/gateway/3.1.x/upgrade/#migrate-db)し、[3\.2\.xにアップグレード](#migrate-db)し、その後、[3\.3\.xにアップグレードします](#migrate-db)。                                                                                                                                             |
 | 2\.8\.x                     | ハイブリッドモード | 不可               | [3\.1\.1\.3にアップグレード](/gateway/3.1.x/upgrade/#migrate-db)し、[3\.2\.xにアップグレード](#migrate-db)し、その後、[3\.3\.xにアップグレードします](#migrate-db)。                                                                                                                                             |
 | 2\.8\.x                     | DBレスモード   | 不可               | [3\.1\.1\.3にアップグレード](/gateway/3.1.x/upgrade/#migrate-db)し、[3\.2\.xにアップグレード](#migrate-db)し、その後、[3\.3\.xにアップグレードします](#migrate-db)。                                                                                                                                             |
@@ -109,24 +109,24 @@ Kongは、製品のバージョン管理において、メジャーバージョ�
 |         **現在のバージョン**          | **トポロジー** | **直接アップグレードの可否** |                                                                                                                                                    **アップグレードパス**                                                                                                                                                     |
 |-------------------------------|-----------|------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | 2\.x—2\.7\.x               | 従来        | 不可               | [2\.8\.2\.xにアップグレード](/gateway/2.8.x/install-and-run/upgrade-enterprise/)（ブルーグリーンデプロイメントにのみ必要）し、[3\.0\.xにアップグレード](/gateway/3.0.x/upgrade/)し、[3\.1\.xにアップグレード](/gateway/3.1.x/upgrade/#migrate-db)し、[3\.2\.xにアップグレード](#migrate-db)し、[3\.3\.xにアップグレード](#migrate-db)してから、[3\.4\.xにアップグレード](#migrate-db)します。 |
-| 2\.x—2\.7\.x               | ハイブリッドモード | 不可               | [Upgrade to 2\.8\.2\.x](/gateway/2.8.x/install-and-run/upgrade-enterprise/), [upgrade to 3\.0\.x](/gateway/3.0.x/upgrade/), [upgrade to 3\.1\.x](/gateway/3.1.x/upgrade/#migrate-db), [upgrade to 3\.2\.x](#migrate-db), [upgrade to 3\.3\.x](#migrate-db), and then [upgrade to 3\.4\.x](#migrate-db). |
+| 2\.x—2\.7\.x               | ハイブリッドモード | 不可               | [2\.8\.2\.x にアップグレード](/gateway/2.8.x/install-and-run/upgrade-enterprise/)、 [3\.0\.x にアップグレード](/gateway/3.0.x/upgrade/)、 [3\.1\.x にアップグレードし](/gateway/3.1.x/upgrade/#migrate-db)、 [3\.2\.xにアップグレードし](#migrate-db)、 [3\.3\.xにアップグレードし](#migrate-db)、 その後、 [3\.4\.x にアップグレードします](#migrate-db)。             |
 | 2\.x—2\.7\.x               | DBレスモード   | 不可               | [3\.0\.xにアップグレード](/gateway/3.0.x/upgrade/)してから、[3\.1\.x にアップグレード](/gateway/3.1.x/upgrade/#migrate-db)してから、[3\.2\.xにアップグレード](#migrate-db)してから、[3\.3\.xにアップグレード](#migrate-db)してから、[3\.4\.xにアップグレード](#migrate-db)します。                                                                                         |
-| 2\.8\.x                     | 従来        | 不可               | [Upgrade to 3\.1\.1\.3](/gateway/3.1.x/upgrade/#migrate-db), [upgrade to 3\.2\.x](#migrate-db), [upgrade to 3\.3\.x](#migrate-db), and then [upgrade to 3\.4\.x](#migrate-db).                                                                                                                              |
-| 2\.8\.x                     | ハイブリッドモード | 不可               | [Upgrade to 3\.1\.1\.3](/gateway/3.1.x/upgrade/#migrate-db), [upgrade to 3\.2\.x](#migrate-db), [upgrade to 3\.3\.x](#migrate-db), and then [upgrade to 3\.4\.x](#migrate-db).                                                                                                                              |
-| 2\.8\.x                     | DBレスモード   | 不可               | [Upgrade to 3\.1\.1\.3](/gateway/3.1.x/upgrade/#migrate-db), [upgrade to 3\.2\.x](#migrate-db), [upgrade to 3\.3\.x](#migrate-db), and then [upgrade to 3\.4\.x](#migrate-db).                                                                                                                              |
-| 3\.0\.x                     | 従来        | 不可               | [Upgrade to 3\.1\.x](/gateway/3.1.x/upgrade/#migrate-db), [upgrade to 3\.2\.x](#migrate-db), [upgrade to 3\.3\.x](#migrate-db), and then [upgrade to 3\.4\.x](#migrate-db).                                                                                                                                  |
-| 3\.0\.x                     | ハイブリッドモード | 不可               | [Upgrade to 3\.1\.x](/gateway/3.1.x/upgrade/#migrate-db), [upgrade to 3\.2\.x](#migrate-db), [upgrade to 3\.3\.x](#migrate-db), and then [upgrade to 3\.4\.x](#migrate-db).                                                                                                                                  |
-| 3\.0\.x                     | DBレスモード   | 不可               | [Upgrade to 3\.1\.x](/gateway/3.1.x/upgrade/#migrate-db), [upgrade to 3\.2\.x](#migrate-db), [upgrade to 3\.3\.x](#migrate-db), and then [upgrade to 3\.4\.x](#migrate-db).                                                                                                                                  |
+| 2\.8\.x                     | 従来        | 不可               | [3\.1\.1\.3にアップグレードし](/gateway/3.1.x/upgrade/#migrate-db)、 [3\.2\.xにアップグレードし](#migrate-db)、 [3\.3\.xにアップグレードし](#migrate-db)、 その後、 [3\.4\.x にアップグレードします](#migrate-db)。                                                                                                                                       |
+| 2\.8\.x                     | ハイブリッドモード | 不可               | [3\.1\.1\.3にアップグレードし](/gateway/3.1.x/upgrade/#migrate-db)、 [3\.2\.xにアップグレードし](#migrate-db)、 [3\.3\.xにアップグレードし](#migrate-db)、 その後、 [3\.4\.x にアップグレードします](#migrate-db)。                                                                                                                                       |
+| 2\.8\.x                     | DBレスモード   | 不可               | [3\.1\.1\.3にアップグレードし](/gateway/3.1.x/upgrade/#migrate-db)、 [3\.2\.xにアップグレードし](#migrate-db)、 [3\.3\.xにアップグレードし](#migrate-db)、 その後、 [3\.4\.x にアップグレードします](#migrate-db)。                                                                                                                                       |
+| 3\.0\.x                     | 従来        | 不可               | [3\.1\.xにアップグレードし](/gateway/3.1.x/upgrade/#migrate-db)、 [3\.2\.xにアップグレードし](#migrate-db)、 [3\.3\.xにアップグレードし](#migrate-db)、 その後、 [3\.4\.x にアップグレードします](#migrate-db)。                                                                                                                                           |
+| 3\.0\.x                     | ハイブリッドモード | 不可               | [3\.1\.xにアップグレードし](/gateway/3.1.x/upgrade/#migrate-db)、 [3\.2\.xにアップグレードし](#migrate-db)、 [3\.3\.xにアップグレードし](#migrate-db)、 その後、 [3\.4\.x にアップグレードします](#migrate-db)。                                                                                                                                           |
+| 3\.0\.x                     | DBレスモード   | 不可               | [3\.1\.xにアップグレードし](/gateway/3.1.x/upgrade/#migrate-db)、 [3\.2\.xにアップグレードし](#migrate-db)、 [3\.3\.xにアップグレードし](#migrate-db)、 その後、 [3\.4\.x にアップグレードします](#migrate-db)。                                                                                                                                           |
 | 3\.1\.x                     | 従来        | 不可               | [3\.2\.xにアップグレード](#migrate-db)し、[3\.3\.xにアップグレード](#migrate-db)してから、その後、[3\.4\.xにアップグレード](#migrate-db)します。                                                                                                                                                                                                      |
-| 3\.1\.0\.x\-3\.1\.1\.2 | ハイブリッドモード | 不可               | [Upgrade to 3\.1\.1\.3](/gateway/3.1.x/upgrade/#migrate-db), [upgrade to 3\.2\.x](#migrate-db), [upgrade to 3\.3\.x](#migrate-db), and then [upgrade to 3\.4\.x](#migrate-db).                                                                                                                              |
+| 3\.1\.0\.x\-3\.1\.1\.2 | ハイブリッドモード | 不可               | [3\.1\.1\.3にアップグレードし](/gateway/3.1.x/upgrade/#migrate-db)、 [3\.2\.xにアップグレードし](#migrate-db)、 [3\.3\.xにアップグレードし](#migrate-db)、 その後、 [3\.4\.x にアップグレードします](#migrate-db)。                                                                                                                                       |
 | 3\.1\.1\.3                 | ハイブリッドモード | 不可               | [3\.2\.xにアップグレード](#migrate-db)し、[3\.3\.xにアップグレード](#migrate-db)してから、その後、[3\.4\.xにアップグレード](#migrate-db)します。                                                                                                                                                                                                      |
 | 3\.1\.x                     | DBレスモード   | 不可               | [3\.2\.xにアップグレード](#migrate-db)し、[3\.3\.xにアップグレード](#migrate-db)してから、その後、[3\.4\.xにアップグレード](#migrate-db)します。                                                                                                                                                                                                      |
-| 3\.2\.x                     | 従来        | 不可               | [Upgrade to 3\.3\.x](#migrate-db), and then [upgrade to 3\.4\.x](#migrate-db).                                                                                                                                                                                                                                   |
-| 3\.2\.x                     | ハイブリッドモード | 不可               | [Upgrade to 3\.3\.x](#migrate-db), and then [upgrade to 3\.4\.x](#migrate-db).                                                                                                                                                                                                                                   |
-| 3\.2\.x                     | DBレスモード   | 不可               | [Upgrade to 3\.3\.x](#migrate-db), and then [upgrade to 3\.4\.x](#migrate-db).                                                                                                                                                                                                                                   |
-| 3\.3\.x                     | 従来        | 可能               | [Upgrade to 3\.4\.x](#migrate-db).                                                                                                                                                                                                                                                                                 |
-| 3\.3\.x                     | ハイブリッドモード | 可能               | [Upgrade to 3\.4\.x](#migrate-db).                                                                                                                                                                                                                                                                                 |
-| 3\.3\.x                     | DBレスモード   | 可能               | [Upgrade to 3\.4\.x](#migrate-db).                                                                                                                                                                                                                                                                                 |
+| 3\.2\.x                     | 従来        | 不可               | [3\.3\.xにアップグレードし](#migrate-db)、 その後、 [3\.4\.x にアップグレードします](#migrate-db)。                                                                                                                                                                                                                                        |
+| 3\.2\.x                     | ハイブリッドモード | 不可               | [3\.3\.xにアップグレードし](#migrate-db)、 その後、 [3\.4\.x にアップグレードします](#migrate-db)。                                                                                                                                                                                                                                        |
+| 3\.2\.x                     | DBレスモード   | 不可               | [3\.3\.xにアップグレードし](#migrate-db)、 その後、 [3\.4\.x にアップグレードします](#migrate-db)。                                                                                                                                                                                                                                        |
+| 3\.3\.x                     | 従来        | 可能               | [3\.4\.x にアップグレードします](#migrate-db)。                                                                                                                                                                                                                                                                                |
+| 3\.3\.x                     | ハイブリッドモード | 可能               | [3\.4\.x にアップグレードします](#migrate-db)。                                                                                                                                                                                                                                                                                |
+| 3\.3\.x                     | DBレスモード   | 可能               | [3\.4\.x にアップグレードします](#migrate-db)。                                                                                                                                                                                                                                                                                |
 
 {% endif_version %}
 
@@ -143,7 +143,7 @@ Kongは、製品のバージョン管理において、メジャーバージョ�
 | 3\.0\.x                     | ハイブリッドモード | 不可               | 3\.4\.xにアップグレードし、その後、3\.5\.xにアップグレードします。                                                                                                                                                 |
 | 3\.0\.x                     | DBレスモード   | 不可               | 3\.4\.xにアップグレードし、その後、3\.5\.xにアップグレードします。                                                                                                                                                 |
 | 3\.1\.x                     | 従来        | 不可               | 3\.4\.xにアップグレードし、その後、3\.5\.xにアップグレードします。                                                                                                                                                 |
-| 3\.1\.0\.x\-3\.1\.1\.2 | ハイブリッドモード | 不可               | [Upgrade to 3\.1\.1\.3](/gateway/3.1.x/upgrade/#migrate-db), upgrade to 3\.2\.x, upgrade to 3\.3\.x, upgrade to 3\.4\.x, and then upgrade to 3\.5\.x.                             |
+| 3\.1\.0\.x\-3\.1\.1\.2 | ハイブリッドモード | 不可               | [3\.1\.1\.3にアップグレードし](/gateway/3.1.x/upgrade/#migrate-db)、 3\.2\.x にアップグレードし、 3\.3\.x にアップグレードし、 3\.4\.x にアップグレードし、 その後、3\.5\.x にアップグレードします。                                      |
 | 3\.1\.1\.3                 | ハイブリッドモード | 不可               | 3\.4\.xにアップグレードし、その後、3\.5\.xにアップグレードします。                                                                                                                                                 |
 | 3\.1\.x                     | DBレスモード   | 不可               | 3\.4\.xにアップグレードし、その後、3\.5\.xにアップグレードします。                                                                                                                                                 |
 | 3\.2\.x                     | 従来        | 不可               | 3\.4\.xにアップグレードし、その後、3\.5\.xにアップグレードします。                                                                                                                                                 |
@@ -219,13 +219,13 @@ PostgreSQL 15は、以前のバージョンのPostgreSQLとは異なる権限を
 
 `kong.conf`のデフォルト設定を使用するには、PostgresサーバーがTLS 1\.2以降のバージョンをサポートしていることを確認するか、TLSのバージョンを自分で設定します。
 
-TLS versions lower than `tlsv1_2` are already deprecated and are considered insecure from PostgreSQL 12\.x onward.
+`tlsv1_2`より前の TLS バージョンはすでに非推奨になっており、PostgreSQL 12\.x 以降では安全ではないと見なされます。
 
 ### Kong\-Debugヘッダーの変更
 
 [`allow_debug_header`](/gateway/latest/reference/configuration/#allow_debug_header)構成プロパティを`kong.conf`に追加して、デバッグのために`Kong-Debug`ヘッダーを制約します。このオプションのデフォルトは`off`です。
 
-If you were previously relying on the `Kong-Debug` header to provide debugging information, set `allow_debug_header: on` in `kong.conf` to continue doing so.
+これまで `Kong-Debug` ヘッダーを使用してデバッグ情報を提供していた場合は、`kong.conf` に `allow_debug_header: on` を設定して引き続き使用してください。
 
 ### JWTプラグイン
 
@@ -260,12 +260,12 @@ If you were previously relying on the `Kong-Debug` header to provide debugging i
 
 * `cookie_lifetime`を置き換える新しいパラメータ`idling_timeout`のデフォルト値は900です。 違う設定をしないかぎり、セッションはアイドリング状態が900秒（15分）続くと期限切れになります。
 * 新しいパラメータ`absolute_timeout`のデフォルト値は86400です。 違う設定をしないかぎり、セッションは86400秒（24時間）後に期限切れになります。
-* All renamed parameters will still work by their old names.
+* 名前が変更されたすべてのパラメータは、古い名前でも引き続き機能します。
 * 削除されたパラメータは機能しなくなります。設定を壊すことはなく、セッションは機能し続けますが、構成には何も寄与しません。
 
 既存のセッション構成は、古いパラメータで構成されたとおりに引き続き機能します。
 
-**Do not** change any parameters to the new ones until all CP and DP nodes are upgraded.
+すべてのCPノードとDPノードがアップグレードされるまで、 **パラメーターを新しいものに変更しないでください** 。
 
 すべてのCPおよびDPノードを3\.2にアップグレードし、環境が安定していることを確認したら、
 パラメータを新しい名前に変更したバージョンに更新し、予期しない動作を回避するために
@@ -273,8 +273,7 @@ If you were previously relying on the `Kong-Debug` header to provide debugging i
 
 #### Sessionプラグイン
 
-The following parameters and the values that they accept have changed.
-For details on the new accepted values, see the [Session plugin](/hub/kong-inc/session/) documentation.
+次のパラメータと、それらが受け入れる値が変更されました。新しく受け入れられる値の詳細については、[Session プラグイン](/hub/kong-inc/session/)のドキュメントを参照してください。
 
 |     古いパラメータ名      |      新しいパラメータ名      |
 |-------------------|---------------------|
@@ -307,8 +306,7 @@ For details on the new accepted values, see the [Session plugin](/hub/kong-inc/s
 
 #### OpenID Connectプラグイン
 
-The following parameters and the values that they accept have changed.
-For details on the new accepted values, see the [OpenID Connect plugin](/hub/kong-inc/openid-connect/) documentation.
+次のパラメータと、それらが受け入れる値が変更されました。新しく受け入れられる値の詳細については、 [OpenID Connect プラグイン](/hub/kong-inc/openid-connect/)のドキュメントを参照してください。
 
 |                古いパラメータ名                 |                新しいパラメータ名                 |
 |-----------------------------------------|------------------------------------------|
@@ -340,8 +338,8 @@ Helmチャートはアップグレード移行プロセスを自動化します�
 
 必須ではありませんが、ユーザーはチャートのバージョンと{{site.base_gateway}}バージョンを個別にアップグレードする必要があります。問題が発生した場合、これは問題がKubernetesリソースの変更に起因するものか、{{site.base_gateway}}の変更変更に起因するものかを明確にするのに役立ちます。
 
-For specific Kong for Kubernetes version upgrade considerations, see
-[Upgrade considerations](https://github.com/Kong/charts/blob/main/charts/kong/UPGRADE.md)
+Kong for Kubernetesのバージョンアップグレードに関する具体的な考慮事項については、以下を参照してください。
+[アップグレードの考慮事項](https://github.com/Kong/charts/blob/main/charts/kong/UPGRADE.md)
 
 #### Kongデプロイメントは複数のリリースに分割されています
 
@@ -381,8 +379,8 @@ For specific Kong for Kubernetes version upgrade considerations, see
 
 {:.important}
 > 
-> **Important:** If you are currently running in [hybrid mode](/gateway/{{page.release}}/production/deployment-topologies/hybrid-mode/),
-> upgrade the control plane first, and then the data planes.
+> **重要:** [現在ハイブリッドモードで実行している場合は](/gateway/{{page.release}}/production/deployment-topologies/hybrid-mode/)、
+> 最初にコントロールプレーンをアップグレードし、次にデータプレーンをアップグレードしてください。
 
 * 現在、クラシック（従来モード）で以前のバージョンを実行している場合で、ハイブリッドモードの実行に切り替えたい場合は、移行を行った後、ハイブリッドモード [インストール手順](/gateway/{{page.release}}/production/deployment-topologies/hybrid-mode/setup/) に従ってください。
 * カスタムプラグイン（独自のプラグインまたは{{site.base_gateway}}に付属していないサードパーティ製プラグイン）は、ハイブリッドモードでコントロールプレーン（CP）とデータプレーン（DP）の両方にインストールする必要があります。プラグインは、最初にコントロールプレーン（CP）にインストールし、次にデータプレーン（DP）にインストールします。
@@ -405,7 +403,7 @@ For specific Kong for Kubernetes version upgrade considerations, see
     cd kong
     git diff -w 2.0.0 {{page.versions.ce}} kong/templates/nginx_kong*.lua
 
-Adjust the starting version number \(2\.0\.0 in the example\) to the version number you are currently using.
+開始バージョン番号 \(例では 2\.0\.0\) を現在使用しているバージョン番号に調整します。
 
 パッチファイルを生成するには、次のコマンドを使用します。
 
@@ -431,18 +429,18 @@ Adjust the starting version number \(2\.0\.0 in the example\) to the version num
 
 このワークフローでの`kong migrations`の実行は取り消し不能であるため、変更を加える前にデータをバックアップすることをお勧めします。
 
-A database dump is recommended so that you can recover from migrations failure at the database level.
+データベース レベルで移行の失敗から回復できるように、データベース ダンプを実行することをお勧めします。
 
 さらに、{{site.base_gateway}}は`kong config db_export`を使用したYAML形式でのデータエクスポートに対応しています。これは後で
 `kong config db_import`でインポートし直すことができます。詳細については、
 [kong config CLI](/gateway/latest/reference/cli/#kong-config)を参照してください。
 
-### Traditional mode
+### トラディショナルモード
 
 1. データベースをクローンします。
 2. アップグレードする{{site.base_gateway}}のバージョンをダウンロードして、クローンのデータストアを指すように構成します。 `kong migrations up`と`kong migrations finish`を実行します。
 3. 新しい{{site.base_gateway}}バージョンのクラスタを起動します。
-4. Now both the old and new clusters can now run simultaneously. Start provisioning the new {{site.base_gateway}} version nodes.
+4. 今では古いものも新しいものも クラスターを同時に実行できるようになりました。 新しい{{site.base_gateway}}バージョン ノードのプロビジョニングを開始します。
 5. 徐々に、古いノードから 新しいクラスタへトラフィックを移行します。トラフィックを監視し、移行がスムーズに行われているか 確認します。
 6. トラフィックが新しいクラスタに完全に移行されると、古いノードを廃止します。
 
@@ -450,8 +448,7 @@ A database dump is recommended so that you can recover from migrations failure a
 
 {:.important}
 > 
-> Do not make any changes to Kong configuration \(`kong.conf`\) or use the Admin API
-> in the middle of an upgrade. This can cause incompatibilities between data plane nodes.
+> Kong の設定 \( `kong.conf` \) を変更したり、Admin API を使用したりしないでください。アップグレードの途中です。これにより、データ プレーン ノード間の非互換性が発生する可能性があります。
 
 クラスタのローリングアップデートを次の手順で実行します。
 
@@ -459,7 +456,7 @@ A database dump is recommended so that you can recover from migrations failure a
 2. 既存のコントロールプレーンを廃止します。この間、既存のデータ プレーン（DP）は、コントロールプレーン（CP）が有効 ではない状態でもプロキシトラフィックを処理し続けることができます。
 3. 新しい{{site.base_gateway}}バージョンのコントロールプレーンが、古いコントロールプレーンと同じデータストアを指すように構成します。`kong migrations up`と`kong migrations finish`を実行します。
 4. 新しいコントロールプレーンを開始します。
-5. Start new data planes.
+5. 新しいデータ プレーンを開始します。
 6. 徐々に、古いデータプレーン（DP）から 新しいデータプレーン（DP）へトラフィックを移行します。トラフィックを監視し、移行がスムーズに行われているか 確認します。
 7. トラフィックが新しいクラスタに完全に移行されると、古いデータプレーン（DP）を廃止します。
 
