@@ -1,0 +1,1781 @@
+# smartling.sltrans = notranslate
+---
+product: "gateway"
+release: "3.4.x"
+generate: true
+assume_generated: true
+items: 
+
+    # smartling.sltrans = translate
+    - 
+        title: "導入"
+    # smartling.sltrans = notranslate
+        icon: "/assets/images/icons/documentation/icn-flag.svg"
+        items: 
+
+        # smartling.sltrans = translate
+            - 
+                text: "Kong Gatewayの概要"
+        # smartling.sltrans = notranslate
+                url: "/gateway/3.4.x/"
+                absolute_url: true
+
+        # smartling.sltrans = translate
+            - 
+                text: "サポート"
+        # smartling.sltrans = notranslate
+                items: 
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "バージョンサポートポリシー"
+            # smartling.sltrans = notranslate
+                        url: "/support-policy/"
+                        src: "/gateway/support/index"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "サードパーティの依存関係"
+            # smartling.sltrans = notranslate
+                        url: "/support/third-party"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "ブラウザサポート"
+            # smartling.sltrans = notranslate
+                        url: "/support/browser"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "脆弱性パッチ適用プロセス"
+            # smartling.sltrans = notranslate
+                        url: "/support/vulnerability-patching-process"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "ソフトウェア部品表"
+            # smartling.sltrans = notranslate
+                        url: "/support/sbom"
+
+        # smartling.sltrans = translate
+            - 
+                text: "安定性"
+        # smartling.sltrans = notranslate
+                url: "/stability"
+
+        # smartling.sltrans = translate
+            - 
+                text: "リリースノート"
+        # smartling.sltrans = notranslate
+                url: "/gateway/changelog"
+                absolute_url: true
+
+        # smartling.sltrans = translate
+            - 
+                text: "互換性のない変更"
+        # smartling.sltrans = notranslate
+                items: 
+            # smartling.sltrans = translate
+                    - 
+                        text: "Kong Gateway 3.4.x"
+            # smartling.sltrans = notranslate
+                        url: "/breaking-changes/34x/"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "Kong Gateway 3.3.x"
+            # smartling.sltrans = notranslate
+                        url: "/breaking-changes/33x/"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "Kong Gateway 3.2.x"
+            # smartling.sltrans = notranslate
+                        url: "/breaking-changes/32x/"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "Kong Gateway 3.1.x"
+            # smartling.sltrans = notranslate
+                        url: "/breaking-changes/31x/"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "Kong Gateway 3.0.x"
+            # smartling.sltrans = notranslate
+                        url: "/breaking-changes/30x/"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "Kong Gateway 2.8.x またはそれ以前"
+            # smartling.sltrans = notranslate
+                        url: "/breaking-changes/28x/"
+
+        # smartling.sltrans = translate
+            - 
+                text: "キーコンセプト"
+        # smartling.sltrans = notranslate
+                items: 
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "サービス"
+            # smartling.sltrans = notranslate
+                        url: "/key-concepts/services"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "ルート"
+            # smartling.sltrans = notranslate
+                        url: "/key-concepts/routes"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "コンシューマ"
+            # smartling.sltrans = notranslate
+                        url: "/key-concepts/consumers"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "アップストリーム"
+            # smartling.sltrans = notranslate
+                        url: "/key-concepts/upstreams"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "プラグイン"
+            # smartling.sltrans = notranslate
+                        url: "/key-concepts/plugins"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "コンシューマグループ"
+            # smartling.sltrans = notranslate
+                        url: "/key-concepts/consumer-groups"
+                        src: "/gateway/kong-enterprise/consumer-groups/index"
+
+        # smartling.sltrans = translate
+            - 
+                text: "Kongの仕組み"
+        # smartling.sltrans = notranslate
+                items: 
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "トラフィックのルーティング"
+            # smartling.sltrans = notranslate
+                        url: "/how-kong-works/routing-traffic"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "ロードバランシング"
+            # smartling.sltrans = notranslate
+                        url: "/how-kong-works/load-balancing"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "ヘルスチェックとサーキットブレーカー"
+            # smartling.sltrans = notranslate
+                        url: "/how-kong-works/health-checks"
+
+        # smartling.sltrans = translate
+            - 
+                text: "用語集"
+        # smartling.sltrans = notranslate
+                url: "/glossary"
+
+    # smartling.sltrans = translate
+    - 
+        title: "Kongを始めましょう"
+    # smartling.sltrans = notranslate
+        icon: "/assets/images/icons/documentation/icn-learning.svg"
+        items: 
+
+        # smartling.sltrans = translate
+            - 
+                text: "Kongを入手"
+        # smartling.sltrans = notranslate
+                url: "/get-started/"
+
+        # smartling.sltrans = translate
+            - 
+                text: "サービスとルート"
+        # smartling.sltrans = notranslate
+                url: "/get-started/services-and-routes"
+
+        # smartling.sltrans = translate
+            - 
+                text: "Rate Limiting"
+        # smartling.sltrans = notranslate
+                url: "/get-started/rate-limiting"
+
+        # smartling.sltrans = translate
+            - 
+                text: "プロキシキャッシュ"
+        # smartling.sltrans = notranslate
+                url: "/get-started/proxy-caching"
+
+        # smartling.sltrans = translate
+            - 
+                text: "Key Authentication"
+        # smartling.sltrans = notranslate
+                url: "/get-started/key-authentication"
+
+        # smartling.sltrans = translate
+            - 
+                text: "ロードバランシング"
+        # smartling.sltrans = notranslate
+                url: "/get-started/load-balancing"
+
+    # smartling.sltrans = translate
+    - 
+        title: "Kongのインストール"
+    # smartling.sltrans = notranslate
+        icon: "/assets/images/icons/documentation/icn-deployment-color.svg"
+        items: 
+
+        # smartling.sltrans = translate
+            - 
+                text: "概要"
+        # smartling.sltrans = notranslate
+                url: "/install/"
+
+        # smartling.sltrans = translate
+            - 
+                text: "Kubernetes"
+        # smartling.sltrans = notranslate
+                items: 
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "概要"
+            # smartling.sltrans = notranslate
+                        url: "/install/kubernetes/"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "Kong Gatewayのインストール"
+            # smartling.sltrans = notranslate
+                        url: "/install/kubernetes/proxy/"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "Admin APIを構成する"
+            # smartling.sltrans = notranslate
+                        url: "/install/kubernetes/admin/"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "Kong Managerのインストール"
+            # smartling.sltrans = notranslate
+                        url: "/install/kubernetes/manager/"
+
+        # smartling.sltrans = translate
+            - 
+                text: "Docker"
+        # smartling.sltrans = notranslate
+                items: 
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "docker runの使用"
+            # smartling.sltrans = notranslate
+                        url: "/install/docker"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "独自の Docker イメージをビルドする"
+            # smartling.sltrans = notranslate
+                        url: "/install/docker/build-custom-images/"
+
+        # smartling.sltrans = translate
+            - 
+                text: "Linux"
+        # smartling.sltrans = notranslate
+                items: 
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "Amazon Linux"
+            # smartling.sltrans = notranslate
+                        url: "/install/linux/amazon-linux"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "Debian"
+            # smartling.sltrans = notranslate
+                        url: "/install/linux/debian"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "Red Hat"
+            # smartling.sltrans = notranslate
+                        url: "/install/linux/rhel"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "Ubuntu"
+            # smartling.sltrans = notranslate
+                        url: "/install/linux/ubuntu"
+
+        # smartling.sltrans = translate
+            - 
+                text: "インストール後"
+        # smartling.sltrans = notranslate
+                items: 
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "データストアの設定"
+            # smartling.sltrans = notranslate
+                        url: "/install/post-install/set-up-data-store/"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "エンタープライズライセンスを適用する"
+            # smartling.sltrans = notranslate
+                        url: "/install/post-install/enterprise-license/"
+                        generate: false
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "Kong Managerを有効にする"
+            # smartling.sltrans = notranslate
+                        url: "/install/post-install/kong-manager/"
+                        generate: false
+
+    # smartling.sltrans = translate
+    - 
+        title: "本番環境のKong"
+    # smartling.sltrans = notranslate
+        icon: "/assets/images/icons/documentation/icn-deployment-color.svg"
+        items: 
+
+        # smartling.sltrans = translate
+            - 
+                text: "デプロイメントトポロジー"
+        # smartling.sltrans = notranslate
+                items: 
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "概要"
+            # smartling.sltrans = notranslate
+                        url: "/production/deployment-topologies/"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "ハイブリッドモード"
+            # smartling.sltrans = notranslate
+                        items: 
+
+                # smartling.sltrans = translate
+                            - 
+                                text: "概要"
+                # smartling.sltrans = notranslate
+                                url: "/production/deployment-topologies/hybrid-mode/"
+
+                # smartling.sltrans = translate
+                            - 
+                                text: "Kong Gatewayをハイブリッドモードでデプロイする"
+                # smartling.sltrans = notranslate
+                                url: "/production/deployment-topologies/hybrid-mode/setup"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "DBレスデプロイメント"
+            # smartling.sltrans = notranslate
+                        url: "/production/deployment-topologies/db-less-and-declarative-config"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "伝統的な"
+            # smartling.sltrans = notranslate
+                        url: "/production/deployment-topologies/traditional"
+
+        # smartling.sltrans = translate
+            - 
+                text: "実行中のKong"
+        # smartling.sltrans = notranslate
+                items: 
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "非rootユーザーとしてKongを実行する"
+            # smartling.sltrans = notranslate
+                        url: "/production/running-kong/kong-user"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "Admin APIの保護"
+            # smartling.sltrans = notranslate
+                        url: "/production/running-kong/secure-admin-api"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "systemdの使用"
+            # smartling.sltrans = notranslate
+                        url: "/production/running-kong/systemd"
+
+        # smartling.sltrans = translate
+            - 
+                text: "アクセス制御"
+        # smartling.sltrans = notranslate
+                items: 
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "Kong Gatewayを安全に起動する"
+            # smartling.sltrans = notranslate
+                        url: "/production/access-control/start-securely"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "プログラムによる管理者の作成"
+            # smartling.sltrans = notranslate
+                        url: "/production/access-control/register-admin-api"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "RBACを有効にする"
+            # smartling.sltrans = notranslate
+                        url: "/production/access-control/enable-rbac"
+
+        # smartling.sltrans = translate
+            - 
+                text: "ライセンス"
+        # smartling.sltrans = notranslate
+                items: 
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "概要"
+            # smartling.sltrans = notranslate
+                        url: "/licenses/"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "ライセンスのダウンロード"
+            # smartling.sltrans = notranslate
+                        url: "/licenses/download"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "エンタープライズライセンスのデプロイ"
+            # smartling.sltrans = notranslate
+                        url: "/licenses/deploy"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "ライセンス APIの使用"
+            # smartling.sltrans = notranslate
+                        url: "/licenses/examples"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "ライセンス使用状況の監視"
+            # smartling.sltrans = notranslate
+                        url: "/licenses/report"
+                        src: "/gateway/licenses/report-v2"
+
+        # smartling.sltrans = translate
+            - 
+                text: "ネットワーキング"
+        # smartling.sltrans = notranslate
+                items: 
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "デフォルトポート"
+            # smartling.sltrans = notranslate
+                        url: "/production/networking/default-ports"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "DNSに関する考慮事項"
+            # smartling.sltrans = notranslate
+                        url: "/production/networking/dns-considerations"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "ネットワークとファイアウォール"
+            # smartling.sltrans = notranslate
+                        url: "/production/networking/firewall"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "フォワードプロキシ経由のCP/DP通信"
+            # smartling.sltrans = notranslate
+                        url: "/production/networking/cp-dp-proxy"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "PostgreSQL TLS"
+            # smartling.sltrans = notranslate
+                        items: 
+
+                # smartling.sltrans = translate
+                            - 
+                                text: "PostgreSQL TLSの構成"
+                # smartling.sltrans = notranslate
+                                url: "/production/networking/configure-postgres-tls"
+
+                # smartling.sltrans = translate
+                            - 
+                                text: "PostgreSQL TLSのトラブルシューティング"
+                # smartling.sltrans = notranslate
+                                url: "/production/networking/troubleshoot-postgres-tls"
+
+        # smartling.sltrans = translate
+            - 
+                text: "Kong設定ファイル"
+        # smartling.sltrans = notranslate
+                url: "/production/kong-conf"
+
+        # smartling.sltrans = translate
+            - 
+                text: "環境変数"
+        # smartling.sltrans = notranslate
+                url: "/production/environment-variables"
+
+        # smartling.sltrans = translate
+            - 
+                text: "KongからのウェブサイトとAPIの提供"
+        # smartling.sltrans = notranslate
+                url: "/production/website-api-serving"
+
+        # smartling.sltrans = translate
+            - 
+                text: "モニタリング"
+        # smartling.sltrans = notranslate
+                items: 
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "概要"
+            # smartling.sltrans = notranslate
+                        url: "/production/monitoring/"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "Prometheus"
+            # smartling.sltrans = notranslate
+                        url: "/production/monitoring/prometheus"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "StatsD"
+            # smartling.sltrans = notranslate
+                        url: "/production/monitoring/statsd"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "Datadog"
+            # smartling.sltrans = notranslate
+                        url: "/production/monitoring/datadog"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "ヘルスチェックプローブ"
+            # smartling.sltrans = notranslate
+                        url: "/production/monitoring/healthcheck-probes"
+
+        # smartling.sltrans = translate
+            - 
+                text: "トレーシング"
+        # smartling.sltrans = notranslate
+                items: 
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "概要"
+            # smartling.sltrans = notranslate
+                        url: "/production/tracing/"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "カスタムトレースエクスポーターの記述"
+            # smartling.sltrans = notranslate
+                        url: "/production/tracing/write-custom-trace-exporter"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "トレース APIリファレンス"
+            # smartling.sltrans = notranslate
+                        url: "/production/tracing/api"
+
+        # smartling.sltrans = translate
+            - 
+                text: "リソースサイジングのガイドライン"
+        # smartling.sltrans = notranslate
+                url: "/production/sizing-guidelines"
+
+        # smartling.sltrans = translate
+            - 
+                text: "ブルーグリーンデプロイメント"
+        # smartling.sltrans = notranslate
+                url: "/production/blue-green"
+
+        # smartling.sltrans = translate
+            - 
+                text: "カナリアデプロイメント"
+        # smartling.sltrans = notranslate
+                url: "/production/canary"
+
+        # smartling.sltrans = translate
+            - 
+                text: "クラスタリングリファレンス"
+        # smartling.sltrans = notranslate
+                url: "/production/clustering"
+
+        # smartling.sltrans = translate
+            - 
+                text: "パフォーマンスベンチマークの確立"
+        # smartling.sltrans = notranslate
+                url: "/production/performance/benchmark"
+                src: /gateway/production/performance/benchmark
+
+        # smartling.sltrans = translate
+            - 
+                text: "ログとデバッグ"
+        # smartling.sltrans = notranslate
+                items: 
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "ログ参照"
+            # smartling.sltrans = notranslate
+                        url: "/production/logging/log-reference"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "動的ログレベルの更新"
+            # smartling.sltrans = notranslate
+                        url: "/production/logging/update-log-level-dynamically"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "ゲートウェイログのカスタマイズ"
+            # smartling.sltrans = notranslate
+                        url: "/production/logging/customize-gateway-logs"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "デバッグリクエスト"
+            # smartling.sltrans = notranslate
+                        url: "/production/debug-request"
+                url: "/production/logging"
+
+        # smartling.sltrans = translate
+            - 
+                text: "gRPCサービスを構成する"
+        # smartling.sltrans = notranslate
+                url: "/production/configuring-a-grpc-service"
+
+        # smartling.sltrans = translate
+            - 
+                text: "Expressionsルーターを使用する"
+        # smartling.sltrans = notranslate
+                url: "/key-concepts/routes/expressions"
+
+        # smartling.sltrans = translate
+            - 
+                text: "アップグレードと移行"
+        # smartling.sltrans = notranslate
+                items: 
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "Kong Gateway 3.x.xのアップグレード"
+            # smartling.sltrans = notranslate
+                        url: "/upgrade/"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "バックアップと復元"
+            # smartling.sltrans = notranslate
+                        url: "/upgrade/backup-and-restore/"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "アップグレード戦略"
+            # smartling.sltrans = notranslate
+                        items: 
+
+                # smartling.sltrans = translate
+                            - 
+                                text: "デュアルクラスターのアップグレード"
+                # smartling.sltrans = notranslate
+                                url: "/upgrade/dual-cluster/"
+
+                # smartling.sltrans = translate
+                            - 
+                                text: "インプレースアップグレード"
+                # smartling.sltrans = notranslate
+                                url: "/upgrade/in-place/"
+
+                # smartling.sltrans = translate
+                            - 
+                                text: "ブルーグリーンアップグレード"
+                # smartling.sltrans = notranslate
+                                url: "/upgrade/blue-green/"
+
+                # smartling.sltrans = translate
+                            - 
+                                text: "ローリングアップグレード"
+                # smartling.sltrans = notranslate
+                                url: "/upgrade/rolling-upgrade/"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "2.8 LTS から 3.4 LTS へのアップグレード"
+            # smartling.sltrans = notranslate
+                        url: "/upgrade/lts-upgrade/"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "OSS から Enterprise への移行"
+            # smartling.sltrans = notranslate
+                        url: "/migrate-ce-to-ke/"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "Cassandra から PostgreSQL への移行ガイドライン"
+            # smartling.sltrans = notranslate
+                        url: "/migrate-cassandra-to-postgres/"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "互換性のない変更"
+            # smartling.sltrans = notranslate
+                        url: "/production/breaking-changes/"
+                        generate: false
+
+    # smartling.sltrans = translate
+    - 
+        title: "Kong Gateway Enterprise"
+    # smartling.sltrans = notranslate
+        icon: "/assets/images/icons/documentation/icn-enterprise-blue.svg"
+        items: 
+
+        # smartling.sltrans = translate
+            - 
+                text: "概要"
+        # smartling.sltrans = notranslate
+                url: "/kong-enterprise/"
+
+            - text: Kong Vitals
+              items:
+                - text: Overview
+                  url: /kong-enterprise/analytics/
+                - text: Metrics
+                  url: /kong-enterprise/analytics/metrics
+                - text: Analytics with InfluxDB
+                  url: /kong-enterprise/analytics/influx-strategy
+                - text: Analytics with Prometheus
+                  url: /kong-enterprise/analytics/prometheus-strategy
+                - text: Estimate Analytics Storage in PostgreSQL
+                  url: /kong-enterprise/analytics/estimates
+
+        # smartling.sltrans = translate
+            - 
+                text: "シークレット管理"
+        # smartling.sltrans = notranslate
+                items: 
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "概要"
+            # smartling.sltrans = notranslate
+                        url: "/kong-enterprise/secrets-management/"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "はじめる"
+            # smartling.sltrans = notranslate
+                        url: "/kong-enterprise/secrets-management/getting-started"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "シークレットローテーション"
+            # smartling.sltrans = notranslate
+                        url: "/kong-enterprise/secrets-management/secrets-rotation"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "高度な使用法"
+            # smartling.sltrans = notranslate
+                        url: "/kong-enterprise/secrets-management/advanced-usage"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "バックエンド"
+            # smartling.sltrans = notranslate
+                        items: 
+
+                # smartling.sltrans = translate
+                            - 
+                                text: "概要"
+                # smartling.sltrans = notranslate
+                                url: "/kong-enterprise/secrets-management/backends"
+
+                # smartling.sltrans = translate
+                            - 
+                                text: "環境変数"
+                # smartling.sltrans = notranslate
+                                url: "/kong-enterprise/secrets-management/backends/env"
+
+                # smartling.sltrans = translate
+                            - 
+                                text: "AWS Secrets Manager"
+                # smartling.sltrans = notranslate
+                                url: "/kong-enterprise/secrets-management/backends/aws-sm"
+
+                # smartling.sltrans = translate
+                            - 
+                                text: "Azure Key Vault"
+                # smartling.sltrans = notranslate
+                                url: "/kong-enterprise/secrets-management/backends/azure-key-vaults"
+
+                # smartling.sltrans = translate
+                            - 
+                                text: "Google Cloud Secret Manager"
+                # smartling.sltrans = notranslate
+                                url: "/kong-enterprise/secrets-management/backends/gcp-sm"
+
+                # smartling.sltrans = translate
+                            - 
+                                text: "HashiCorp Vault"
+                # smartling.sltrans = notranslate
+                                url: "/kong-enterprise/secrets-management/backends/hashicorp-vault"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "ハウツー"
+            # smartling.sltrans = notranslate
+                        items: 
+
+                # smartling.sltrans = translate
+                            - 
+                                text: "AWS Secrets Manager によるデータベースの保護"
+                # smartling.sltrans = notranslate
+                                url: "/kong-enterprise/secrets-management/how-to/aws-secrets-manager"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "参照形式"
+            # smartling.sltrans = notranslate
+                        url: "/kong-enterprise/secrets-management/reference-format"
+
+        # smartling.sltrans = translate
+            - 
+                text: "動的なプラグインの順序"
+        # smartling.sltrans = notranslate
+                items: 
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "概要"
+            # smartling.sltrans = notranslate
+                        url: "/kong-enterprise/plugin-ordering/"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "動的プラグインの注文を開始する"
+            # smartling.sltrans = notranslate
+                        url: "/kong-enterprise/plugin-ordering/get-started"
+
+            - text: Dev Portal
+              items:
+                - text: Overview
+                  url: /kong-enterprise/dev-portal/
+                - text: Enable the Dev Portal
+                  url: /kong-enterprise/dev-portal/enable
+                - text: Publish an OpenAPI Spec
+                  url: /kong-enterprise/dev-portal/publish-spec
+                - text: Structure and File Types
+                  url: /kong-enterprise/dev-portal/structure-and-file-types
+                - text: Themes Files
+                  url: /kong-enterprise/dev-portal/themes
+                - text: Working with Templates
+                  url: /kong-enterprise/dev-portal/working-with-templates
+                - text: Using the Editor
+                  url: /kong-enterprise/dev-portal/using-the-editor
+                - text: Authentication and Authorization
+                  items:
+                    - text: Basic Auth
+                      url: /kong-enterprise/dev-portal/authentication/basic-auth
+                    - text: Key Auth
+                      url: /kong-enterprise/dev-portal/authentication/key-auth
+                    - text: OIDC
+                      url: /kong-enterprise/dev-portal/authentication/oidc
+                    - text: Sessions
+                      url: /kong-enterprise/dev-portal/authentication/sessions
+                    - text: Adding Custom Registration Fields
+                      url: /kong-enterprise/dev-portal/authentication/adding-registration-fields
+                    - text: Manage Developers
+                      url: /kong-enterprise/dev-portal/authentication/managing-developers
+                    - text: Developer Roles and Content Permissions
+                      url: /kong-enterprise/dev-portal/authentication/developer-permissions
+                - text: Application Registration
+                  items:
+                    - text: Authorization Provider Strategy
+                      url: /kong-enterprise/dev-portal/applications/auth-provider-strategy
+                    - text: Enable Application Registration
+                      url: /kong-enterprise/dev-portal/applications/enable-application-registration
+                    - text: Enable Key Authentication for Application Registration
+                      url: /kong-enterprise/dev-portal/applications/enable-key-auth-plugin
+                    - text: Enable External Authentication
+                      items:
+                        - text: External OAuth2 Support
+                          url: /kong-enterprise/dev-portal/authentication/3rd-party-oauth
+                        - text: Set up Okta and Kong for External Oauth
+                          url: /kong-enterprise/dev-portal/authentication/okta-config
+                        - text: Set up Azure AD and Kong for External Authentication
+                          url: /kong-enterprise/dev-portal/authentication/azure-oidc-config
+                    - text: Manage Applications
+                      url: /kong-enterprise/dev-portal/applications/managing-applications
+                - text: Customize Dev Portal
+                  items:
+                    - text: Theme Editing
+                      url: /kong-enterprise/dev-portal/customize/theme-editing
+                    - text: Migrating Templates Between Workspaces
+                      url: /kong-enterprise/dev-portal/customize/migrating-templates
+                    - text: Markdown Rendering Module
+                      url: /kong-enterprise/dev-portal/customize/markdown-extended
+                    - text: Customizing Portal Emails
+                      url: /kong-enterprise/dev-portal/customize/emails
+                    - text: Adding and Using JavaScript Assets
+                      url: /kong-enterprise/dev-portal/customize/adding-javascript-assets
+                    - text: Single Page App in Dev Portal
+                      url: /kong-enterprise/dev-portal/customize/single-page-app
+                    - text: Alternate OpenAPI Renderer
+                      url: /kong-enterprise/dev-portal/customize/alternate-openapi-renderer
+                - text: SMTP
+                  url: /kong-enterprise/dev-portal/smtp
+                - text: Workspaces
+                  url: /kong-enterprise/dev-portal/workspaces
+                - text: Helpers CLI
+                  url: /kong-enterprise/dev-portal/cli
+                - text: Portal API Documentation
+                  url: /dev-portal/api/v1/
+                  absolute_url: true
+                  generate: false
+
+        # smartling.sltrans = translate
+            - 
+                text: "監査ログ"
+        # smartling.sltrans = notranslate
+                url: "/kong-enterprise/audit-log"
+
+        # smartling.sltrans = translate
+            - 
+                text: "キーリングとデータ暗号化"
+        # smartling.sltrans = notranslate
+                url: "/kong-enterprise/db-encryption"
+
+        # smartling.sltrans = translate
+            - 
+                text: "ワークスペース"
+        # smartling.sltrans = notranslate
+                url: "/kong-enterprise/workspaces"
+
+        # smartling.sltrans = translate
+            - 
+                text: "コンシューマグループ"
+        # smartling.sltrans = notranslate
+                url: "/kong-enterprise/consumer-groups"
+
+        # smartling.sltrans = translate
+            - 
+                text: "イベントフック"
+        # smartling.sltrans = notranslate
+                url: "/kong-enterprise/event-hooks"
+
+        # smartling.sltrans = translate
+            - 
+                text: "データプレーン（DP）のレジリエンスの構成"
+        # smartling.sltrans = notranslate
+                url: "/kong-enterprise/cp-outage-handling"
+
+        # smartling.sltrans = translate
+            - 
+                text: "コントロールプレーン（CP）の停止管理について"
+        # smartling.sltrans = notranslate
+                url: "/kong-enterprise/cp-outage-handling-faq"
+
+        # smartling.sltrans = translate
+            - 
+                text: "FIPS 140-2"
+        # smartling.sltrans = notranslate
+                items: 
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "概要"
+            # smartling.sltrans = notranslate
+                        url: "/kong-enterprise/fips-support/"
+                        src: "/gateway/kong-enterprise/fips-support/index"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "FIPS 準拠パッケージのインストール"
+            # smartling.sltrans = notranslate
+                        url: "/kong-enterprise/fips-support/install"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "FIPS 140-2準拠のプラグイン"
+            # smartling.sltrans = notranslate
+                        url: "/kong-enterprise/fips-support/plugins"
+
+        # smartling.sltrans = translate
+            - 
+                text: "AWS IAMを使用してKong Gateway Amazon RDSデータベースを認証する"
+        # smartling.sltrans = notranslate
+                url: "/kong-enterprise/aws-iam-auth-to-rds-database"
+
+        # smartling.sltrans = translate
+            - 
+                text: "署名付き Kong イメージのビルド来歴を確認"
+        # smartling.sltrans = notranslate
+                url: "/kong-enterprise/provenance-verification"
+
+    # smartling.sltrans = translate
+    - 
+        title: "Kong Manager"
+    # smartling.sltrans = notranslate
+        icon: "/assets/images/icons/documentation/icn-manager-color.svg"
+        items: 
+
+        # smartling.sltrans = translate
+            - 
+                text: "概要"
+        # smartling.sltrans = notranslate
+                url: "/kong-manager/"
+
+        # smartling.sltrans = translate
+            - 
+                text: "Kong Managerを有効にする"
+        # smartling.sltrans = notranslate
+                url: "/kong-manager/enable"
+
+        # smartling.sltrans = translate
+            - 
+                text: "Kong Managerの使用を開始する"
+        # smartling.sltrans = notranslate
+                items: 
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "サービスとルート"
+            # smartling.sltrans = notranslate
+                        url: "/kong-manager/get-started/services-and-routes"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "Rate Limiting"
+            # smartling.sltrans = notranslate
+                        url: "/kong-manager/get-started/rate-limiting"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "プロキシキャッシュ"
+            # smartling.sltrans = notranslate
+                        url: "/kong-manager/get-started/proxy-caching"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "コンシューマによる認証"
+            # smartling.sltrans = notranslate
+                        url: "/kong-manager/get-started/consumers"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "ロードバランシング"
+            # smartling.sltrans = notranslate
+                        url: "/kong-manager/get-started/load-balancing"
+
+        # smartling.sltrans = translate
+            - 
+                text: "認証と承認"
+        # smartling.sltrans = notranslate
+                items: 
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "概要"
+            # smartling.sltrans = notranslate
+                        url: "/kong-manager/auth/"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "スーパー管理者を作成する"
+            # smartling.sltrans = notranslate
+                        url: "/kong-manager/auth/super-admin"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "ワークスペースとチーム"
+            # smartling.sltrans = notranslate
+                        url: "/kong-manager/auth/workspaces-and-teams"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "パスワードと RBAC トークンのリセット"
+            # smartling.sltrans = notranslate
+                        url: "/kong-manager/auth/reset-password"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "Basic Auth"
+            # smartling.sltrans = notranslate
+                        url: "/kong-manager/auth/basic"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "LDAP"
+            # smartling.sltrans = notranslate
+                        items: 
+
+                # smartling.sltrans = translate
+                            - 
+                                text: "LDAPの設定"
+                # smartling.sltrans = notranslate
+                                url: "/kong-manager/auth/ldap/configure"
+
+                # smartling.sltrans = translate
+                            - 
+                                text: "LDAP サービスディレクトリマッピング"
+                # smartling.sltrans = notranslate
+                                url: "/kong-manager/auth/ldap/service-directory-mapping"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "OIDC"
+            # smartling.sltrans = notranslate
+                        items: 
+
+                # smartling.sltrans = translate
+                            - 
+                                text: "OIDC を構成する"
+                # smartling.sltrans = notranslate
+                                url: "/kong-manager/auth/oidc/configure"
+
+                # smartling.sltrans = translate
+                            - 
+                                text: "OIDC 認証済みグループマッピング"
+                # smartling.sltrans = notranslate
+                                url: "/kong-manager/auth/oidc/mapping"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "セッション"
+            # smartling.sltrans = notranslate
+                        url: "/kong-manager/auth/sessions"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "RBAC"
+            # smartling.sltrans = notranslate
+                        items: 
+
+                # smartling.sltrans = translate
+                            - 
+                                text: "概要"
+                # smartling.sltrans = notranslate
+                                url: "/kong-manager/auth/rbac"
+
+                # smartling.sltrans = translate
+                            - 
+                                text: "RBACを有効にする"
+                # smartling.sltrans = notranslate
+                                url: "/kong-manager/auth/rbac/enable"
+
+                # smartling.sltrans = translate
+                            - 
+                                text: "ロールと権限を追加する"
+                # smartling.sltrans = notranslate
+                                url: "/kong-manager/auth/rbac/add-role"
+
+                # smartling.sltrans = translate
+                            - 
+                                text: "ユーザーの作成"
+                # smartling.sltrans = notranslate
+                                url: "/kong-manager/auth/rbac/add-user"
+
+                # smartling.sltrans = translate
+                            - 
+                                text: "管理者の作成"
+                # smartling.sltrans = notranslate
+                                url: "/kong-manager/auth/rbac/add-admin"
+
+        # smartling.sltrans = translate
+            - 
+                text: "ネットワーク構成"
+        # smartling.sltrans = notranslate
+                url: "/kong-manager/networking"
+
+        # smartling.sltrans = translate
+            - 
+                text: "ワークスペース"
+        # smartling.sltrans = notranslate
+                url: "/kong-manager/workspaces"
+
+        # smartling.sltrans = translate
+            - 
+                text: "コンシューマグループを作成する"
+        # smartling.sltrans = notranslate
+                url: "/kong-manager/consumer-groups"
+
+        # smartling.sltrans = translate
+            - 
+                text: "メールの送信"
+        # smartling.sltrans = notranslate
+                url: "/kong-manager/configuring-to-send-email"
+
+        # smartling.sltrans = translate
+            - 
+                text: "トラブルシューティング"
+        # smartling.sltrans = notranslate
+                url: "/kong-manager/troubleshoot/"
+
+    # smartling.sltrans = translate
+    - 
+        title: "カスタムプラグインの開発"
+    # smartling.sltrans = notranslate
+        icon: "/assets/images/icons/documentation/icn-dev-portal-color.svg"
+        items: 
+
+        # smartling.sltrans = translate
+            - 
+                text: "概要"
+        # smartling.sltrans = notranslate
+                url: "/plugin-development/"
+
+        # smartling.sltrans = translate
+            - 
+                text: "ファイル構成"
+        # smartling.sltrans = notranslate
+                url: "/plugin-development/file-structure"
+
+        # smartling.sltrans = translate
+            - 
+                text: "カスタムロジックの実装"
+        # smartling.sltrans = notranslate
+                url: "/plugin-development/custom-logic"
+
+        # smartling.sltrans = translate
+            - 
+                text: "プラグインの設定"
+        # smartling.sltrans = notranslate
+                url: "/plugin-development/configuration"
+
+        # smartling.sltrans = translate
+            - 
+                text: "データストアへのアクセス"
+        # smartling.sltrans = notranslate
+                url: "/plugin-development/access-the-datastore"
+
+        # smartling.sltrans = translate
+            - 
+                text: "カスタムエンティティの保存"
+        # smartling.sltrans = notranslate
+                url: "/plugin-development/custom-entities"
+
+        # smartling.sltrans = translate
+            - 
+                text: "カスタムエンティティのキャッシュ"
+        # smartling.sltrans = notranslate
+                url: "/plugin-development/entities-cache"
+
+        # smartling.sltrans = translate
+            - 
+                text: "Admin APIの拡張"
+        # smartling.sltrans = notranslate
+                url: "/plugin-development/admin-api"
+
+        # smartling.sltrans = translate
+            - 
+                text: "テストを書く"
+        # smartling.sltrans = notranslate
+                url: "/plugin-development/tests"
+
+        # smartling.sltrans = translate
+            - 
+                text: "インストールと配布"
+        # smartling.sltrans = notranslate
+                url: "/plugin-development/distribution"
+
+        # smartling.sltrans = translate
+            - 
+                text: "Proxy-Wasmフィルタ"
+        # smartling.sltrans = notranslate
+                items: 
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "proxy-wasm フィルターの作成"
+            # smartling.sltrans = notranslate
+                        url: "/plugin-development/wasm/filter-development-guide"
+
+        # smartling.sltrans = translate
+            - 
+                text: "プラグイン開発キット"
+        # smartling.sltrans = notranslate
+                items: 
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "概要"
+            # smartling.sltrans = notranslate
+                        url: "/plugin-development/pdk/"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "kong.client"
+            # smartling.sltrans = notranslate
+                        url: "/plugin-development/pdk/kong.client"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "kong.client.tls"
+            # smartling.sltrans = notranslate
+                        url: "/plugin-development/pdk/kong.client.tls"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "kong.cluster"
+            # smartling.sltrans = notranslate
+                        url: "/plugin-development/pdk/kong.cluster"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "kong.ctx"
+            # smartling.sltrans = notranslate
+                        url: "/plugin-development/pdk/kong.ctx"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "kong.ip"
+            # smartling.sltrans = notranslate
+                        url: "/plugin-development/pdk/kong.ip"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "kong.jwe"
+            # smartling.sltrans = notranslate
+                        url: "/plugin-development/pdk/kong.jwe"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "kong.log"
+            # smartling.sltrans = notranslate
+                        url: "/plugin-development/pdk/kong.log"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "kong.nginx"
+            # smartling.sltrans = notranslate
+                        url: "/plugin-development/pdk/kong.nginx"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "kong.node"
+            # smartling.sltrans = notranslate
+                        url: "/plugin-development/pdk/kong.node"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "kong.plugin"
+            # smartling.sltrans = notranslate
+                        url: "/plugin-development/pdk/kong.plugin"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "kong.request"
+            # smartling.sltrans = notranslate
+                        url: "/plugin-development/pdk/kong.request"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "kong.response"
+            # smartling.sltrans = notranslate
+                        url: "/plugin-development/pdk/kong.response"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "kong.router"
+            # smartling.sltrans = notranslate
+                        url: "/plugin-development/pdk/kong.router"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "kong.service"
+            # smartling.sltrans = notranslate
+                        url: "/plugin-development/pdk/kong.service"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "kong.service.request"
+            # smartling.sltrans = notranslate
+                        url: "/plugin-development/pdk/kong.service.request"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "kong.service.response"
+            # smartling.sltrans = notranslate
+                        url: "/plugin-development/pdk/kong.service.response"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "kong.table"
+            # smartling.sltrans = notranslate
+                        url: "/plugin-development/pdk/kong.table"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "kong.tracing"
+            # smartling.sltrans = notranslate
+                        url: "/plugin-development/pdk/kong.tracing"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "kong.vault"
+            # smartling.sltrans = notranslate
+                        url: "/plugin-development/pdk/kong.vault"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "kong.websocket.client"
+            # smartling.sltrans = notranslate
+                        url: "/plugin-development/pdk/kong.websocket.client"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "kong.websocket.upstream"
+            # smartling.sltrans = notranslate
+                        url: "/plugin-development/pdk/kong.websocket.upstream"
+
+        # smartling.sltrans = translate
+            - 
+                text: "他の言語のプラグイン"
+        # smartling.sltrans = notranslate
+                items: 
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "Go"
+            # smartling.sltrans = notranslate
+                        url: "/plugin-development/pluginserver/go"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "Javascript"
+            # smartling.sltrans = notranslate
+                        url: "/plugin-development/pluginserver/javascript"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "Python"
+            # smartling.sltrans = notranslate
+                        url: "/plugin-development/pluginserver/python"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "コンテナ内でプラグインを実行する"
+            # smartling.sltrans = notranslate
+                        url: "/plugin-development/pluginserver/plugins-kubernetes"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "外部プラグインのパフォーマンス"
+            # smartling.sltrans = notranslate
+                        url: "/plugin-development/pluginserver/performance"
+
+    # smartling.sltrans = translate
+    - 
+        title: "Kong Plugins"
+    # smartling.sltrans = notranslate
+        icon: "/assets/images/icons/documentation/icn-api-plugins-color.svg"
+        items: 
+
+        # smartling.sltrans = translate
+            - 
+                text: "概要"
+        # smartling.sltrans = notranslate
+                url: "/kong-plugins/"
+
+        # smartling.sltrans = translate
+            - 
+                text: "認証リファレンス"
+        # smartling.sltrans = notranslate
+                url: "/kong-plugins/authentication/reference"
+
+        # smartling.sltrans = translate
+            - 
+                text: "複数の認証プラグインを許可する"
+        # smartling.sltrans = notranslate
+                url: "/kong-plugins/authentication/allowing-multiple-authentication-methods/"
+
+        # smartling.sltrans = translate
+            - 
+                text: "プラグインキューイング"
+        # smartling.sltrans = notranslate
+                items: 
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "概要"
+            # smartling.sltrans = notranslate
+                        url: "/kong-plugins/queue"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "プラグインキューイングリファレンス"
+            # smartling.sltrans = notranslate
+                        url: "/kong-plugins/queue/reference"
+
+    # smartling.sltrans = translate
+    - 
+        title: "Admin API"
+    # smartling.sltrans = notranslate
+        icon: "/assets/images/icons/documentation/icn-admin-api-color.svg"
+        items: 
+
+        # smartling.sltrans = translate
+            - 
+                text: "概要"
+        # smartling.sltrans = notranslate
+                url: "/admin-api/"
+
+        # smartling.sltrans = translate
+            - 
+                text: "インフォメーションルート"
+        # smartling.sltrans = notranslate
+                url: /admin-api/#information-routes
+
+        # smartling.sltrans = translate
+            - 
+                text: "ヘルスルート"
+        # smartling.sltrans = notranslate
+                url: /admin-api/#health-routes
+
+        # smartling.sltrans = translate
+            - 
+                text: "タグ"
+        # smartling.sltrans = notranslate
+                url: /admin-api/#tags
+
+        # smartling.sltrans = translate
+            - 
+                text: "ルートのデバッグ"
+        # smartling.sltrans = notranslate
+                url: /admin-api/#debug-routes
+
+        # smartling.sltrans = translate
+            - 
+                text: "サービス"
+        # smartling.sltrans = notranslate
+                url: /admin-api/#service-object
+
+        # smartling.sltrans = translate
+            - 
+                text: "ルート"
+        # smartling.sltrans = notranslate
+                url: /admin-api/#route-object
+
+        # smartling.sltrans = translate
+            - 
+                text: "コンシューマ"
+        # smartling.sltrans = notranslate
+                url: /admin-api/#consumer-object
+
+        # smartling.sltrans = translate
+            - 
+                text: "プラグイン"
+        # smartling.sltrans = notranslate
+                url: /admin-api/#plugin-object
+
+        # smartling.sltrans = translate
+            - 
+                text: "証明書"
+        # smartling.sltrans = notranslate
+                url: /admin-api/#certificate-object
+
+        # smartling.sltrans = translate
+            - 
+                text: "CA 証明書"
+        # smartling.sltrans = notranslate
+                url: /admin-api/#ca-certificate-object
+
+        # smartling.sltrans = translate
+            - 
+                text: "SNI"
+        # smartling.sltrans = notranslate
+                url: /admin-api/#sni-object
+
+        # smartling.sltrans = translate
+            - 
+                text: "アップストリーム"
+        # smartling.sltrans = notranslate
+                url: /admin-api/#upstream-object
+
+        # smartling.sltrans = translate
+            - 
+                text: "ターゲット"
+        # smartling.sltrans = notranslate
+                url: /admin-api/#target-object
+
+        # smartling.sltrans = translate
+            - 
+                text: "金庫"
+        # smartling.sltrans = notranslate
+                url: /admin-api/#vaults-object
+
+        # smartling.sltrans = translate
+            - 
+                text: "鍵"
+        # smartling.sltrans = notranslate
+                url: /admin-api/#keys-object
+
+        # smartling.sltrans = translate
+            - 
+                text: "フィルターチェーン"
+        # smartling.sltrans = notranslate
+                url: /admin-api/#filter-chain-object
+
+        # smartling.sltrans = translate
+            - 
+                text: "ライセンス"
+        # smartling.sltrans = notranslate
+                url: /admin-api/licenses/reference
+
+        # smartling.sltrans = translate
+            - 
+                text: "ワークスペース"
+        # smartling.sltrans = notranslate
+                url: /admin-api/workspaces/reference
+
+        # smartling.sltrans = translate
+            - 
+                text: "RBAC"
+        # smartling.sltrans = notranslate
+                url: /admin-api/rbac/reference
+
+        # smartling.sltrans = translate
+            - 
+                text: "アドミン"
+        # smartling.sltrans = notranslate
+                url: /admin-api/admins/reference
+
+        # smartling.sltrans = translate
+            - 
+                text: "コンシューマグループ"
+        # smartling.sltrans = notranslate
+                url: /gateway/api/admin-ee/3.3.0.x/#/consumer_groups/get-consumer_groups
+                absolute_url: true
+                generate: false
+
+        # smartling.sltrans = translate
+            - 
+                text: "イベントフック"
+        # smartling.sltrans = notranslate
+                url: /admin-api/event-hooks/reference
+
+        # smartling.sltrans = translate
+            - 
+                text: "キーリングとデータ暗号化"
+        # smartling.sltrans = notranslate
+                url: /admin-api/db-encryption
+
+        # smartling.sltrans = translate
+            - 
+                text: "監査ログ"
+        # smartling.sltrans = notranslate
+                url: /admin-api/audit-logs
+
+        # smartling.sltrans = translate
+            - 
+                text: "ステータスAPI"
+        # smartling.sltrans = notranslate
+                url: "/gateway/api/status/v1/"
+                absolute_url: true
+                generate: false
+
+    # smartling.sltrans = translate
+    - 
+        title: "リファレンス"
+    # smartling.sltrans = notranslate
+        icon: "/assets/images/icons/documentation/icn-references-color.svg"
+        items: 
+
+        # smartling.sltrans = translate
+            - 
+                text: "kong.conf"
+        # smartling.sltrans = notranslate
+                url: "/reference/configuration"
+                src: "/gateway/reference/configuration/configuration-3.4.x"
+
+        # smartling.sltrans = translate
+            - 
+                text: "Nginxディレクティブの挿入"
+        # smartling.sltrans = notranslate
+                url: "/reference/nginx-directives"
+
+        # smartling.sltrans = translate
+            - 
+                text: "CLI"
+        # smartling.sltrans = notranslate
+                url: "/reference/cli"
+
+        # smartling.sltrans = translate
+            - 
+                text: "キー管理"
+        # smartling.sltrans = notranslate
+                url: "/reference/key-management"
+
+            - text: Performance Testing Framework
+              url: /reference/performance-testing-framework
+
+        # smartling.sltrans = translate
+            - 
+                text: "表現言語"
+        # smartling.sltrans = notranslate
+                items: 
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "概要"
+            # smartling.sltrans = notranslate
+                        url: "/reference/expressions-language"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "言語リファレンス"
+            # smartling.sltrans = notranslate
+                        url: "/reference/expressions-language/language-references"
+
+            # smartling.sltrans = translate
+                    - 
+                        text: "パフォーマンスの最適化"
+            # smartling.sltrans = notranslate
+                        url: "/reference/expressions-language/performance"
+
+        # smartling.sltrans = translate
+            - 
+                text: "Rate Limitingライブラリ"
+        # smartling.sltrans = notranslate
+                url: "/reference/rate-limiting/"
+
+        # smartling.sltrans = translate
+            - 
+                text: "Webアセンブリ"
+        # smartling.sltrans = notranslate
+                url: "/reference/wasm"
+
+        # smartling.sltrans = translate
+            - 
+                text: "FAQ"
+        # smartling.sltrans = notranslate
+                url: "/reference/faq"
