@@ -39,20 +39,20 @@ chapter: 4
 
 * **[HTTPモジュール](https://github.com/openresty/lua-nginx-module)** *は、HTTP/HTTPSリクエスト用に記述されるプラグインで使用されます* {% if_version lte: 3.3.x %}
 
-|         機能名         |                                              フェーズ                                               |         リクエストプロトコル          |                                                                                                                  説明                                                                                                                  |
-|---------------------|-------------------------------------------------------------------------------------------------|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `init_worker`       | [init\_worker](https://github.com/openresty/lua-nginx-module#init_worker_by_lua_block)         | \*                         | すべてのNginxワーカープロセスの起動時に実行されます。                                                                                                                                                                                                        |
-| `certificate`       | [ssl\_certificate](https://github.com/openresty/lua-nginx-module#ssl_certificate_by_lua_block) | `https`、`grpcs`、`wss`       | SSLハンドシェイクのSSL証明書提供フェーズ中に実行されます。                                                                                                                                                                                                     |
-| `rewrite`           | [rewrite](https://github.com/openresty/lua-nginx-module#rewrite_by_lua_block)                   | \*                         | リライトフェーズハンドラとして、クライアントからリクエストを受信するたびに実行されます。<br>このフェーズでは、`Service`も`Consumer`も特定されていないため、このハンドラは、プラグインがグローバルプラグインとして構成されている場合にのみ実行されます。                                                                                              |
-| `access`            | [access](https://github.com/openresty/lua-nginx-module#access_by_lua_block)                     | `http(s)`、`grpc(s)`、`ws(s)` | クライアントからのすべてのリクエストに対して、アップストリームサービスにプロキシされる前に実行されます。                                                                                                                                                                                 |
-| `ws_handshake`      | [access](https://github.com/openresty/lua-nginx-module#access_by_lua_block)                     | `ws(s)`                     | WebSocket ハンドシェイクが完了する直前に、WebSocket サービスへのすべてのリクエストに対して実行されます。                                                                                                                                                                       |
-| `response`          | [access](https://github.com/openresty/lua-nginx-module#access_by_lua_block)                     | `http(s)`、`grpc(s)`         | `header_filter()` と `body_filter()`の両方を置き換えます。アップストリームサービスから応答全体が受信された後に、その一部をクライアントに送信する前に実行されます。                                                                                                                                   |
-| `header_filter`     | [header\_filter](https://github.com/openresty/lua-nginx-module#header_filter_by_lua_block)     | `http(s)`、`grpc(s)`         | アップストリームサービスからすべての応答ヘッダーバイトが受信されたときに実行されます。                                                                                                                                                                                          |
-| `ws_client_frame`   | [content](https://github.com/openresty/lua-nginx-module#content_by_lua_block)                   | `ws(s)`                     | クライアントから受信したWebSocketメッセージごとに実行されます。                                                                                                                                                                                                 |
-| `ws_upstream_frame` | [content](https://github.com/openresty/lua-nginx-module#content_by_lua_block)                   | `ws(s)`                     | アップストリームサービスから受信したWebSocketメッセージごとに実行されます。                                                                                                                                                                                           |
-| `body_filter`       | [body\_filter](https://github.com/openresty/lua-nginx-module#body_filter_by_lua_block)         | `http(s)`、`grpc(s)`         | アップストリームサービスから受信した応答本文の各チャンクに対して実行されます。応答はクライアントにストリーミングされるので、バッファサイズを超えて、チャンクごとにストリーミングされる可能性があります。応答が大きい場合、この関数は複数回呼び出される可能性があります。詳細については、 [lua\-nginx\-module の](https://github.com/openresty/lua-nginx-module)ドキュメントを参照してください。 |
-| `log`               | [ログ](https://github.com/openresty/lua-nginx-module#log_by_lua_block)                            | `http(s)`、`grpc(s)`         | 最後のレスポンスバイトがクライアントに送信されたときに実行されます。                                                                                                                                                                                                   |
-| `ws_close`          | [ログ](https://github.com/openresty/lua-nginx-module#log_by_lua_block)                            | `ws(s)`                     | WebSocket接続が終了した後に実行されます。                                                                                                                                                                                                            |
+|                            機能名                             |     Kong Phase      |                                                                                        Nginx Directives                                                                                        |         リクエストプロトコル          |                                                                                                                  説明                                                                                                                  |
+|------------------------------------------------------------|---------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `init_worker`                                              | `init_worker`       | [`init_worker_by_*`](https://github.com/openresty/lua-nginx-module#init_worker_by_lua_block)                                                                                                   | \*                         | すべてのNginxワーカープロセスの起動時に実行されます。                                                                                                                                                                                                        |
+| `certificate`                                              | `certificate`       | [`ssl_certificate_by_*`](https://github.com/openresty/lua-nginx-module#ssl_certificate_by_lua_block)                                                                                           | `https`、`grpcs`、`wss`       | SSLハンドシェイクのSSL証明書提供フェーズ中に実行されます。                                                                                                                                                                                                     |
+| `rewrite`                                                  | `rewrite`           | [`rewrite_by_*`](https://github.com/openresty/lua-nginx-module#rewrite_by_lua_block)                                                                                                           | \*                         | リライトフェーズハンドラとして、クライアントからリクエストを受信するたびに実行されます。<br>このフェーズでは、`Service`も`Consumer`も特定されていないため、このハンドラは、プラグインがグローバルプラグインとして構成されている場合にのみ実行されます。                                                                                              |
+| `access`                                                   | `access`            | [`access_by_*`](https://github.com/openresty/lua-nginx-module#access_by_lua_block)                                                                                                             | `http(s)`、`grpc(s)`、`ws(s)` | クライアントからのすべてのリクエストに対して、アップストリームサービスにプロキシされる前に実行されます。                                                                                                                                                                                 |
+| `response`                                                 | `response`          | [`header_filter_by_*`](https://github.com/openresty/lua-nginx-module#header_filter_by_lua_block), [`body_filter_by_*`](https://github.com/openresty/lua-nginx-module#body_filter_by_lua_block) | `http(s)`、`grpc(s)`         | `header_filter()` と `body_filter()`の両方を置き換えます。アップストリームサービスから応答全体が受信された後に、その一部をクライアントに送信する前に実行されます。                                                                                                                                   |
+| `header_filter`                                            | `header_filter`     | [`header_filter_by_*`](https://github.com/openresty/lua-nginx-module#header_filter_by_lua_block)                                                                                               | `http(s)`、`grpc(s)`         | アップストリームサービスからすべての応答ヘッダーバイトが受信されたときに実行されます。                                                                                                                                                                                          |
+| `body_filter`                                              | `body_filter`       | [`body_filter_by_*`](https://github.com/openresty/lua-nginx-module#body_filter_by_lua_block)                                                                                                   | `http(s)`、`grpc(s)`         | アップストリームサービスから受信した応答本文の各チャンクに対して実行されます。応答はクライアントにストリーミングされるので、バッファサイズを超えて、チャンクごとにストリーミングされる可能性があります。応答が大きい場合、この関数は複数回呼び出される可能性があります。詳細については、 [lua\-nginx\-module の](https://github.com/openresty/lua-nginx-module)ドキュメントを参照してください。 |
+| `ws_handshake`                                             | `ws_handshake`      | [`access_by_*`](https://github.com/openresty/lua-nginx-module#access_by_lua_block)                                                                                                             | `ws(s)`                     | WebSocket ハンドシェイクが完了する直前に、WebSocket サービスへのすべてのリクエストに対して実行されます。                                                                                                                                                                       |
+| `ws_client_frame` <span class="badge enterprise"></span>   | `ws_client_frame`   | [`content_by_*`](https://github.com/openresty/lua-nginx-module#content_by_lua_block)                                                                                                           | `ws(s)`                     | クライアントから受信したWebSocketメッセージごとに実行されます。                                                                                                                                                                                                 |
+| `ws_upstream_frame` <span class="badge enterprise"></span> | `ws_upstream_frame` | [`content_by_*`](https://github.com/openresty/lua-nginx-module#content_by_lua_block)                                                                                                           | `ws(s)`                     | アップストリームサービスから受信したWebSocketメッセージごとに実行されます。                                                                                                                                                                                           |
+| `log`                                                      | `log`               | [`log_by_*`](https://github.com/openresty/lua-nginx-module#log_by_lua_block)                                                                                                                   | `http(s)`、`grpc(s)`         | 最後のレスポンスバイトがクライアントに送信されたときに実行されます。                                                                                                                                                                                                   |
+| `ws_close` <span class="badge enterprise"></span>          | `ws_close`          | [`log_by_*`](https://github.com/openresty/lua-nginx-module#log_by_lua_block)                                                                                                                   | `ws(s)`                     | WebSocket接続が終了した後に実行されます。                                                                                                                                                                                                            |
 
 {:.note}
 > 
@@ -62,31 +62,31 @@ chapter: 4
 
 * **[ストリームモジュール](https://github.com/openresty/stream-lua-nginx-module)** *は、TCPおよびUDPストリーム接続用に記述されたプラグインに使用されます* 
 
-|      機能名      |                                              フェーズ                                               |                説明                |
-|---------------|-------------------------------------------------------------------------------------------------|----------------------------------|
-| `init_worker` | [init\_worker](https://github.com/openresty/lua-nginx-module#init_worker_by_lua_block)         | すべてのNginxワーカープロセスの起動時に実行されます。    |
-| `preread`     | [preread](https://github.com/openresty/stream-lua-nginx-module#preread_by_lua_block)            | 接続ごとに 1 回実行されます。                 |
-| `log`         | [ログ](https://github.com/openresty/stream-lua-nginx-module#log_by_lua_block)                     | 接続が閉じられた後、接続ごとに 1 回実行されます。       |
-| `certificate` | [ssl\_certificate](https://github.com/openresty/lua-nginx-module#ssl_certificate_by_lua_block) | SSLハンドシェイクのSSL証明書提供フェーズ中に実行されます。 |
+|      機能名      |  Kong Phase   |                                           Nginx Directives                                           |                説明                |
+|---------------|---------------|------------------------------------------------------------------------------------------------------|----------------------------------|
+| `init_worker` | `init_worker` | [`init_worker_by_*`](https://github.com/openresty/lua-nginx-module#init_worker_by_lua_block)         | すべてのNginxワーカープロセスの起動時に実行されます。    |
+| `preread`     | `preread`     | [`preread_by_*`](https://github.com/openresty/stream-lua-nginx-module#preread_by_lua_block)          | 接続ごとに 1 回実行されます。                 |
+| `log`         | `log`         | [`log_by_*`](https://github.com/openresty/lua-nginx-module#log_by_lua_block)                         | 接続が閉じられた後、接続ごとに 1 回実行されます。       |
+| `certificate` | `certificate` | [`ssl_certificate_by_*`](https://github.com/openresty/lua-nginx-module#ssl_certificate_by_lua_block) | SSLハンドシェイクのSSL証明書提供フェーズ中に実行されます。 |
 
 {% endif_version %}
 
 {% if_version gte: 3.4.x %}
-\| 関数名       \| フェーズ               \| リクエストプロトコル              \| 説明
-\|\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\|\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\|\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\|\-\-\-\-\-\-\-\-\-\-\-\-
-\| `init_worker`       \| [init\_worker](https://github.com/openresty/lua-nginx-module#init_worker_by_lua_block)       \| \*                             \| すべてのNginxワーカープロセスの起動時に実行されます。
-\| `configure`         \| [init\_worker](https://github.com/openresty/lua-nginx-module#init_worker_by_lua_block)/timer \| \*                             \| Kongのプラグインイテレータが再構築されるたびに実行されます（プラグインの構成を変更した後）。
-\| `certificate`       \| [ssl\_certificate](https://github.com/openresty/lua-nginx-module#ssl_certificate_by_lua_block)   \| `https`、`grpcs`、`wss`       \| SSLハンドシェイクのSSL証明書提供フェーズ中に実行されます。
-\| `rewrite`           \| [rewrite](https://github.com/openresty/lua-nginx-module#rewrite_by_lua_block)           \| \*                             \| リライトフェーズのハンドラとして、クライアントからのリクエストの受信時にすべてのリクエストに対して実行されます。<br>このフェーズでは、`Service`も`Consumer`も識別されていないので、このハンドラはプラグインがグローバルプラグインとして構成されている場合にのみ実行されます。
-\| `access`            \| [access](https://github.com/openresty/lua-nginx-module#access_by_lua_block)            \| `http(s)`、`grpc(s)`、`ws(s)` \| クライアントからのすべてのリクエストに対して、アップストリームサービスにプロキシされる前に実行されます。
-\| `ws_handshake`      \| [access](https://github.com/openresty/lua-nginx-module#access_by_lua_block)            \| `ws(s)`                       \| WebSocketハンドシェイクが完了する直前に、WebSocketサービスへのすべてのリクエストに対して実行されます。
-\| `response`          \| [access](https://github.com/openresty/lua-nginx-module#access_by_lua_block)            \| `http(s)`、`grpc(s)`          \| `header_filter()`と`body_filter()`の両方を置き換えます。アップストリームサービスから応答全体が受信された後に、その一部をクライアントに送信する前に実行されます。
-\| `header_filter`     \| [header\_filter](https://github.com/openresty/lua-nginx-module#header_filter_by_lua_block)     \| `http(s)`、`grpc(s)`          \| アップストリームサービスからすべての応答ヘッダーバイトが受信されたときに実行されます。
-\| `ws_client_frame`   \| [content](https://github.com/openresty/lua-nginx-module#content_by_lua_block)           \| `ws(s)`                       \| クライアントから受信したWebSocketメッセージごとに実行されます。
-\| `ws_upstream_frame` \| [content](https://github.com/openresty/lua-nginx-module#content_by_lua_block)           \| `ws(s)`                       \| アップストリームサービスから受信したWebSocketメッセージごとに実行されます。
-\| `body_filter`       \| [body\_filter](https://github.com/openresty/lua-nginx-module#body_filter_by_lua_block)       \| `http(s)`、`grpc(s)`          \| アップストリームサービスから受信した応答本文の各チャンクに対して実行されます。応答はクライアントにストリーミングされるので、バッファサイズを超えて、チャンクごとにストリーミングされる可能性があります。応答が大きい場合、この関数は複数回呼び出される可能性があります。詳細については、[lua\-nginx\-module](https://github.com/openresty/lua-nginx-module)のドキュメントを参照してください。
-\| `log`               \| [log](https://github.com/openresty/lua-nginx-module#log_by_lua_block)               \| `http(s)`、`grpc(s)`          \| 最後の応答バイトがクライアントに送信されたときに実行されます。
-\| `ws_close`          \| [log](https://github.com/openresty/lua-nginx-module#log_by_lua_block)               \| `ws(s)`                       \| WebSocket接続が終了した後に実行されます。
+\| Function name       \| Kong Phase            \| Nginx Directives         \| Request Protocol              \| Description
+\|\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\|\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\|\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\|\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\|\-\-\-\-\-\-\-\-\-\-\-\-
+\| `init_worker`       \| `init_worker`         \| [`init_worker_by_*`](https://github.com/openresty/lua-nginx-module#init_worker_by_lua_block)     \| \*                             \| Executed upon every Nginx worker process's startup.
+\| `configure`         \| `init_worker`/`timer` \| [`init_worker_by_*`](https://github.com/openresty/lua-nginx-module#init_worker_by_lua_block)     \| \*                             \| Executed every time the Kong plugin iterator is rebuilt \(after changes to configure plugins\).
+\| `certificate`       \| `certificate`         \| [`ssl_certificate_by_*`](https://github.com/openresty/lua-nginx-module#ssl_certificate_by_lua_block) \| `https`, `grpcs`, `wss`       \| Executed during the SSL certificate serving phase of the SSL handshake.
+\| `rewrite`           \| `rewrite`             \| [`rewrite_by_*`](https://github.com/openresty/lua-nginx-module#rewrite_by_lua_block)         \| \*                             \| Executed for every request upon its reception from a client as a rewrite phase handler. <br> In this phase, neither the `Service` nor the `Consumer` have been identified, hence this handler will only be executed if the plugin was configured as a global plugin.
+\| `access`            \| `access`              \| [`access_by_*`](https://github.com/openresty/lua-nginx-module#access_by_lua_block)          \| `http(s)`, `grpc(s)`, `ws(s)` \| Executed for every request from a client and before it is being proxied to the upstream service.
+\| `response`          \| `response`            \| [`header_filter_by_*`](https://github.com/openresty/lua-nginx-module#header_filter_by_lua_block), [`body_filter_by_*`](https://github.com/openresty/lua-nginx-module#body_filter_by_lua_block) \| `http(s)`, `grpc(s)` \| Replaces both `header_filter()` and `body_filter()`. Executed after the whole response has been received from the upstream service, but before sending any part of it to the client.
+\| `header_filter`     \| `header_filter`       \| [`header_filter_by_*`](https://github.com/openresty/lua-nginx-module#header_filter_by_lua_block)   \| `http(s)`, `grpc(s)`          \| Executed when all response headers bytes have been received from the upstream service.
+\| `body_filter`       \| `body_filter`         \| [`body_filter_by_*`](https://github.com/openresty/lua-nginx-module#body_filter_by_lua_block)     \| `http(s)`, `grpc(s)`          \| Executed for each chunk of the response body received from the upstream service. Since the response is streamed back to the client, it can exceed the buffer size and be streamed chunk by chunk. This function can be called multiple times if the response is large. See the [lua\-nginx\-module](https://github.com/openresty/lua-nginx-module) documentation for more details.
+\| `ws_handshake`      \| `ws_handshake`     \| [`access_by_*`](https://github.com/openresty/lua-nginx-module#access_by_lua_block)          \| `ws(s)`                       \| Executed for every request to a WebSocket service just before completing the WebSocket handshake.
+\| `ws_client_frame` <span class="badge enterprise"></span> \| `ws_client_frame`  \| [`content_by_*`](https://github.com/openresty/lua-nginx-module#content_by_lua_block)         \| `ws(s)`                       \| Executed for each WebSocket message received from the client.
+\| `ws_upstream_frame` <span class="badge enterprise"></span> \| `ws_upstream_frame`\| [`content_by_*`](https://github.com/openresty/lua-nginx-module#content_by_lua_block)         \| `ws(s)`                       \| Executed for each WebSocket message received from the upstream service.
+\| `log`               \| `log`              \| [`log_by_*`](https://github.com/openresty/lua-nginx-module#log_by_lua_block)             \| `http(s)`, `grpc(s)`          \| Executed when the last response byte has been sent to the client.
+\| `ws_close` <span class="badge enterprise"></span> \| `ws_close`         \| [`log_by_*`](https://github.com/openresty/lua-nginx-module#log_by_lua_block)             \| `ws(s)`                       \| Executed after the WebSocket connection has been terminated.
 
 {:.note}
 > 
@@ -96,13 +96,13 @@ chapter: 4
 
 * **[ストリームモジュール](https://github.com/openresty/stream-lua-nginx-module)** *は、TCPおよびUDPストリーム接続用に記述されたプラグインに使用されます* 
 
-|      機能名      |                                              フェーズ                                               |                      説明                       |
-|---------------|-------------------------------------------------------------------------------------------------|-----------------------------------------------|
-| `init_worker` | [init\_worker](https://github.com/openresty/lua-nginx-module#init_worker_by_lua_block)         | すべてのNginxワーカープロセスの起動時に実行されます。                 |
-| `configure`   | [init\_worker](https://github.com/openresty/lua-nginx-module#init_worker_by_lua_block)/timer   | Kongプラグインイテレータが再構築されるたびに（プラグイン構成の変更後に）実行されます。 |
-| `preread`     | [preread](https://github.com/openresty/stream-lua-nginx-module#preread_by_lua_block)            | 接続ごとに 1 回実行されます。                              |
-| `log`         | [ログ](https://github.com/openresty/stream-lua-nginx-module#log_by_lua_block)                     | 接続が閉じられた後、接続ごとに 1 回実行されます。                    |
-| `certificate` | [ssl\_certificate](https://github.com/openresty/lua-nginx-module#ssl_certificate_by_lua_block) | SSLハンドシェイクのSSL証明書提供フェーズ中に実行されます。              |
+|      機能名      |      Kong Phase       |                                           Nginx Directives                                           |                      説明                       |
+|---------------|-----------------------|------------------------------------------------------------------------------------------------------|-----------------------------------------------|
+| `init_worker` | `init_worker`         | [`init_worker_by_*`](https://github.com/openresty/lua-nginx-module#init_worker_by_lua_block)         | すべてのNginxワーカープロセスの起動時に実行されます。                 |
+| `configure`   | `init_worker`/`timer` | [`init_worker_by_*`](https://github.com/openresty/lua-nginx-module#init_worker_by_lua_block)         | Kongプラグインイテレータが再構築されるたびに（プラグイン構成の変更後に）実行されます。 |
+| `preread`     | `preread`             | [`preread_by_*`](https://github.com/openresty/stream-lua-nginx-module#preread_by_lua_block)          | 接続ごとに 1 回実行されます。                              |
+| `log`         | `log`                 | [`log_by_*`](https://github.com/openresty/lua-nginx-module#log_by_lua_block)                         | 接続が閉じられた後、接続ごとに 1 回実行されます。                    |
+| `certificate` | `certificate`         | [`ssl_certificate_by_*`](https://github.com/openresty/lua-nginx-module#ssl_certificate_by_lua_block) | SSLハンドシェイクのSSL証明書提供フェーズ中に実行されます。              |
 
 `init_worker` と `configure` を除くすべての関数は、{{site.base_gateway}} の呼び出し時に指定されたパラメータ（プラグインの構成）を受け取ります。このパラメータは Lua テーブルであり、プラグインのスキーマ（`schema.lua` モジュールに記述）に従ってユーザーが定義した値が含まれます。プラグインのスキーマについて、[次の章]({{page.book.next.url}})で詳しく説明します。`configure` は、特定のプラグインで有効になっているすべてのプラグイン構成の配列で呼び出されます（プラグインのアクティブな構成がない場合は、`nil` が渡されます）。`init_worker` と `configure` はリクエストまたはフレームの外側で実行されますが、残りのフェーズは受信したリクエストやフレームにバインドされます。
 
@@ -297,12 +297,8 @@ local CustomHandler = {
 
 WebSocketプラグイン開発
 ----------------
-{:.badge .enterprise}
 
-{:.warning}
-> 
-> **警告** : WebSocket PDK は現在開発中であり、現時点では不安定と
-> されています。これらの関数には、後方互換性のない変更がなされる可能性があります。
+{:.badge .enterprise}
 
 ### ハンドラ関数
 
@@ -325,10 +321,8 @@ WebSocketプラグイン開発
 
 以下のハンドラは、WebSocket サービス *と* 非 WebSocket サービスの両方で実行されます。
 
-* `init_worker`
-{% if_version gte:3.4.x -%}
-* `configure`
-{% endif_version -%}
+* `init_worker` {% if_version gte:3.4.x -%}
+* `configure` {% endif_version -%}
 * `certificate`（TLS/SSLリクエストのみ）
 * `rewrite`
 
@@ -439,4 +433,3 @@ CustomHandler.PRIORITY = 10
 
 {% endnavtab %}
 {% endnavtabs %}
-

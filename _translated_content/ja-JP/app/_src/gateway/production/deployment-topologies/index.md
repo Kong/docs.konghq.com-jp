@@ -25,7 +25,7 @@ content_type: "explanation"
 
 {% include_cached /md/gateway/deployment-topologies.md topology='konnect' %}
 > 
-> *図 1: {{ site.konnect_short_name }} では、Kong はコントロールプレーン（CP）と、すべての関連アプリケーション（Dev Portal、Gateway Manager、Analytics、Service Hub など）をホストします。データプレーン（DP）を {{ site.konnect_short_name }} にアタッチしてトラフィックを処理し、それによりすべての設定をコントロールプレーン（CP）から取得します。* 
+> _図1: {{ site.konnect_short_name }}において、Kongはコントロールプレーンと関連するすべてのアプリケーションをホス トしています：Dev Portal、Gateway Manager、Analytics、 {{site.service_catalog_name}}など。トラフィックを処理するためにデータプレーンを{{ site.konnect_short_name }}に接続し、コントロールプレーンからすべての設定を取得します。_
 
 構成の変更は、 {{ site.konnect_short_name }} UI と構成ウィザードを使用して行うことも、[decK](/deck/latest/) を使用して自動的に適用することもできます。
 

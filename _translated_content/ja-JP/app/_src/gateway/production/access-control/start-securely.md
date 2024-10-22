@@ -16,10 +16,12 @@ Admin APIまたはKong Managerを保護するために、スーパー管理者�
 [{{site.base_gateway}}をインストールした](/gateway/{{page.release}}/install/)後、
 設定ファイルを変更するか、次のプロパティで環境変数を設定します。
 
+{% if_version gte: 3.8.x %}
+* RBAC 認証と認証を有効にするには kong.conf: database=postgresとenforce_rbac=onに以下の設定を追加します。
+{% endif_version %}
 * `enforce_rbac`は、すべてのAdmin APIリクエストに `Kong-Admin-Token` を要求するように強制します。`Kong-Admin-Token`に関連付けられている管理者は、リクエストを成功させるために適切な権限を持っている必要があります。
 
 * Kong Managerを使用する場合は、管理者がログインに使用する認証の種類を選択します。このガイドの目的では、`admin_gui_auth`を`basic-auth`に設定することができます。他のタイプの認証については、[Kong Managerの保護](/gateway/{{page.release}}/kong-manager/auth/)を参照してください。
-
 ベーシック認証を使用して RBAC を構成します。
 
 {% include_cached /md/admin-listen.md desc='long' release=page.release %}

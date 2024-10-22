@@ -1,5 +1,5 @@
 ---
-title: "Kong を入手"
+title: "Kongを入手"
 content-type: "tutorial"
 book: "get-started"
 chapter: 1

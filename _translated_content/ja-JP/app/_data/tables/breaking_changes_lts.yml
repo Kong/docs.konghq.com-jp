@@ -130,9 +130,9 @@ entries:
     # smartling.sltrans = notranslate
         category: 2
     # smartling.sltrans = translate
-        description: "Debian 8 (Jessie) コンテナおよびパッケージの生産を非推奨とし、停止しました。\n"# smartling.sltrans = notranslate
+        description: "Deprecated and stopped producing Debian 8 (Jessie) and Debian 10 (Buster) containers and packages.\n"# smartling.sltrans = notranslate
     # smartling.sltrans = translate
-        action: "Debian10と11が利用可能です。Kong 3.4にアップグレードする前に、これらのバージョンのいずれかにアップグレードしてください。\n"# smartling.sltrans = notranslate
+        action: "Debian 11 and 12 are available. Upgrade to one of these versions before \nupgrading to Kong 3.4.\n"# smartling.sltrans = notranslate
 
     # smartling.sltrans = translate
     - 

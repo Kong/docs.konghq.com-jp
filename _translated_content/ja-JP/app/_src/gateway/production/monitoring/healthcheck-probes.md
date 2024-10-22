@@ -4,7 +4,7 @@ content_type: "tutorial"
 ---
 このチュートリアルでは、{{site.base_gateway}}がユーザーのリクエストに対応する準備ができているかどうかを確実に判断できるノードのreadinessエンドポイントの使用方法を説明します。
 
-Readinessチェックエンドポイントは、{{site.base_gateway}}が準備できたら`200 OK`を返し、準備が整っていない場合は`503 Service Temporarily Unavailable`を返します。これは、Kongインスタンスの準備状況を監視する必要があるロードバランサーやその他のツールに役立ちます。Kongの準備ができていない場合、エンドポイントは準備できていない理由を`message`フィールドで返します。これは、ユーザーがノードの準備が整っていると予測しているのに、まだ準備ができていない状況をデバッグするのに役立ちます。
+準備状況チェックエンドポイントは、 {{site.base_gateway}} の準備ができたときに 200 OK 応答を返します。そうでないときには 503 サービスが一時的に利用できません 応答を返します。 これはロードバランサや、 {{site.base_gateway}} インスタンスの準備状況を監視する必要があるその他のツールに便利です。 {{site.base_gateway}} の準備ができていない場合、エンドポイントは message フィールドで応答し、準備ができていない理由が返されます。 これは、ユーザーがノードの準備ができているべきではないことを期待する状況をデバッグするのに役立ちます。
 
 {:.note}
 > 
@@ -15,7 +15,7 @@ Readinessチェックエンドポイントは、{{site.base_gateway}}が準備�
 
 {{site.base_gateway}} ノードごとに、2 つの異なるヘルスチェック（「プローブ」とも呼ばれる）があります。
 
-* **Liveness** : Kongが実行されている場合、`/status`エンドポイントは`200 OK`ステータスで応答します。Kongが実行されていない場合、リクエストは`500 Internal Server Error`で失敗するか、応答しません。GETリクエストを送信して、{{site.base_gateway}}インスタンスの稼働状態を確認できます。
+* **Liveness** : {{site.base_gateway}} が実行されている場合`/status`エンドポイントは200 OKステータスで応答します。リクエストは 500 Internal Server Errorで失敗するか、{{site.base_gateway}} が実行されていない場合は応答がありません。 GETリクエストを送信して、{{site.base_gateway}}インスタンスのライブ性を確認できます。
 
   ```sh
   # Replace localhost:8100 with the appropriate host and port for
@@ -24,7 +24,7 @@ Readinessチェックエンドポイントは、{{site.base_gateway}}が準備�
   curl -i http://localhost:8100/status
   ```
 
-* **準備状況** ：Kongが有効な構成を正常に読み込み、トラフィックをプロキシする準備ができている場合、 `/status/ready`エンドポイントは`200 OK`ステータスで応答します。Kongがトラフィックをプロキシする準備ができていない場合、リクエストは`500 Internal Server Error`で失敗するか、応答がありません。GETリクエストを送信して、{{site.base_gateway}}インスタンスの準備状況を確認できます。
+* **Readiness** : {{site.base_gateway}} が有効な設定をロードし、プロキシトラフィックの準備ができている場合、`/status/ready`エンドポイントは200 OKステータスで応答します。リクエストは `503 Service Temporarily Unavailable`で失敗するか、{{site.base_gateway}} がまだプロキシトラフィックの準備ができていない場合は応答しません。 GETリクエストを送信して、{{site.base_gateway}} インスタンスの準備状況を確認できます。
 
   ```sh
   # Replace localhost:8100 with the appropriate host and port for
@@ -45,7 +45,7 @@ liveness ヘルスチェックは、readiness ヘルスチェックよりも先�
 ノードのReadinessエンドポイントの理解
 -----------------------
 
-手順に進む前に、ノードのreadinessエンドポイントの目的と、これがKongインスタンスの準備具合を決定する方法について理解しておくことが重要です。エンドポイントはノードのタイプによって動作が異なります。
+ステップに飛び込む前に ノード準備エンドポイントの目的と、 {{site.base_gateway}} インスタンスが準備可能かどうかを決定する方法を理解することが重要です。 エンドポイントはノードの種類によって異なります。
 
 {% navtabs %}
 {% navtab Traditional mode %}
@@ -53,7 +53,7 @@ liveness ヘルスチェックは、readiness ヘルスチェックよりも先�
 [従来モード](/gateway/{{page.release}}/production/deployment-topologies/traditional/)で次の条件がすべて満たされる場合、エンドポイントは`200 OK`を返します。
 
 1. データベースへの接続が成功しました
-2. すべてのKongワーカーはリクエストをルーティングする準備ができています
+2. すべての {{site.base_gateway}} ワーカーはリクエストをルーティングする準備ができています
 3. すべてのルートとサービスは、そのプラグインでリクエストを処理する準備が整っていること
 
 {% endnavtab %}
@@ -61,9 +61,9 @@ liveness ヘルスチェックは、readiness ヘルスチェックよりも先�
 
 [ハイブリッドモード](/gateway/{{page.release}}/production/deployment-topologies/hybrid-mode/)（`data_plane`ロール）または[DB\-lessモード](/gateway/{{page.release}}/production/deployment-topologies/db-less-and-declarative-config/)では、次の条件が満たされるとエンドポイントは`200 OK`を返します。
 
-1. Kong は有効で空でない構成（ `kong.yaml` ）をロードしました
-2. すべてのKongワーカーはリクエストをルーティングする準備ができています
-3. すべてのルートとサービスは、そのプラグインでリクエストを処理する準備が整っていること
+1. {{site.base_gateway}} は有効かつ空でない設定をロードしました `kong.yaml`
+2. すべての {{site.base_gateway}} ワーカーはリクエストをルーティングする準備ができています
+3. すべてのルートとサービスは、要求を処理するためのプラグインの準備ができています
 
 {% endnavtab %}
 {% navtab Hybrid mode (control plane role) %}
@@ -196,11 +196,10 @@ readinessProbe:
 関連項目
 ----
 
-Kong および関連トピックの詳細については、以下のリソースを参照してください。
+{{site.base_gateway}} と関連トピックの詳細については、以下のリソースを参照してください。
 
 * [ヘルスチェックとモニタリングの概要](/gateway/latest/production/monitoring/)
 * [Kong Admin APIドキュメント](/gateway/latest/admin-api/)
 * [{{site.kic_product_name}}を使い始める](/kubernetes-ingress-controller/latest/deployment/overview/)
 * [Kong Helmチャート](https://github.com/Kong/charts/tree/main/charts/kong)
 * [Kongハイブリッドモード](/gateway/latest/production/deployment-topologies/hybrid-mode/)
-
