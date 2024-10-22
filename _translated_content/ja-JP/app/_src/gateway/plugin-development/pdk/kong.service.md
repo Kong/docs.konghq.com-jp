@@ -52,13 +52,12 @@ end
 kong.service.set\_target\(host, port\)
 -----------------------------------------
 
-リクエストをプロキシするために接続するホストとポートを設定します。
-この方法を使用することは、Kongにこのリクエストでロードバランシングフェーズを
-実行しないよう依頼するのに等しく、手書きで上書きされたとみなします。
-再試行やヘルスチェックなどのロードバランシングコンポーネントも
-このリクエストで無視されます。
+{% if_version gte:3.8.x %}
+このメソッドを使用することは、このリクエストに対して負荷分散 フェーズを実行しないようにKongに要求するのと同等であり、手動でオーバーライドすることを検討します。 再試行やヘルスチェックのような負荷分散コンポーネントも、このリクエストでは 無視される。 の再試行数を上書きするには、 kong.service.set_retries を使用します。 {% endif_version %} {% if_version lte:3.7.x %} リクエストをプロキシするために接続するホストとポートを設定します。 このメソッドを使用することは、このリクエストに対して負荷分散 フェーズを実行しないようにKongに要求するのと同等であり、手動でオーバーライドすることを検討します。 再試行やヘルスチェックのような負荷分散コンポーネントも、このリクエストでは 無視される。
+{% endif_version %}
 
-`host` 引数にはアップストリームサーバーのホスト名または IP アドレスを指定し、`port` 引数にはポート番号を指定します。
+The `host` argument expects the hostname or IP address of the upstream
+server, and the `port` expects a port number.
 
 **フェーズ** 
 
@@ -75,6 +74,55 @@ kong.service.set\_target\(host, port\)
 kong.service.set_target("service.local", 443)
 kong.service.set_target("192.168.130.1", 80)
 ```
+
+{% if_version gte:3.8.x %}
+
+kong.service.set\_retries\(retries\)
+---------------------------------------
+
+現在のリクエストのリトライ回数を設定します。 これにより、上流のエンティティに設定されている のデフォルトの再試行回数が上書きされます。
+
+引数`retries`は0から`32767`の間の整数を期待します。
+
+**フェーズ** 
+
+* access
+
+**パラメータ** 
+
+* **retries** \(`number`\):
+
+**使用法** 
+
+```lua
+kong.service.set_retries(233)
+```
+
+kong.service.set\_timeouts\(connect\_timeout, write\_timeout, read\_timeout\)
+-----------------------------------------------------------------------------------
+
+現在のリクエストのタイムアウトを設定。 これにより、上流のエンティティで設定された のデフォルトタイムアウトが上書きされます。
+
+`connect_timeout` 、 `write_timeout` 、 および `read_timeout` 引数は、
+は 1 から 2147483646 の整数を期待します。
+
+**フェーズ** 
+
+* access
+
+**パラメータ** 
+
+* **connect\_timeout** \(`number`\):
+* **write\_timeout** \(`number`\):
+* **read\_timeout** \(`number`\):
+
+**使用法** 
+
+```lua
+kong.service.set_timeouts(233, 233, 233)
+```
+
+{% endif_version %}
 
 kong.service.set\_tls\_cert\_key\(chain, key\)
 ---------------------------------------------------
@@ -237,4 +285,3 @@ if not ok then
   -- do something with error
 end
 ```
-

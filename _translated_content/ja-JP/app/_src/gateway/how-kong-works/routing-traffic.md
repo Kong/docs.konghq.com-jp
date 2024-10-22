@@ -836,7 +836,10 @@ Host: example.com
 
 2. 正確には何がエラーになるのか：ここで{{site.base_gateway}}はNginxのデフォルトを使用しています。これは、サーバーとの接続を確立したり、サーバーにリクエストを渡したり、レスポンスヘッダーを読み取ったりする間に､エラー又はタイムアウトが発生することを意味します。
 
-2番目のオプションはNginxの\[proxy\_next\_upstream\]\[proxy\_next\_upstream\]ディレクティブに基づいています。このオプションは{{site.base_gateway}}を通じて直接構成することができませんが、カスタムのNginxを使用して追加できます。詳細については、[構成リファレンス](/gateway/{{page.release}}/reference/configuration/)を参照してください。
+{% if_version gte:3.8.x %}
+二つ目のオプションは、Nginxの[`proxy_next_upstream`](https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_next_upstream)ディレクティブに基づいています。このオプションは {{site.base_gateway}}から直接設定することはできませんが、Nginx のカスタム設定を使って追加することができます。 詳細は[設定リファレンス](/gateway/{{page.release}}/reference/configuration/)を参照してください。
+{% endif_version %}
+
 
 ### 応答
 
@@ -1104,6 +1107,7 @@ services:
 ```
 
 #### WS\(S\) サービスとルート
+
 {:.badge .enterprise}
 
 HTTPサービスとルートに加え、 {{site.ee_product_name}}には、

@@ -43,7 +43,13 @@ AI Gatewayのコアとなるのは、プロバイダーに依存しないAPIを�
 * リクエストルーティングは動的に実行できるため、コスト、使用状況、応答精度などのさまざまなメトリックに基づいてAIの使用を最適化できます。
 * AI サービスは、他の{{site.base_gateway}}プラグインによって非 AI API トラフィックを拡張するために使用できます。
 
-このコアAI Gateway機能は、上記の開始スクリプトでデフォルトでデプロイされる[AI Proxy](/hub/kong-inc/ai-proxy/)プラグインで有効化されます。
+{% if_version lte:3.7.x %}
+このAI Gatewayのコア機能は、[AI Proxy](/hub/kong-inc/ai-proxy/)プラグインで有効になります。このプラグインは、
+、上記で参照した getting started スクリプトでデフォルトで導入されています。
+{% endif_version %}
+{% if_version gte:3.8.x %}
+このコアAIゲートウェイ機能は、[AI Proxy](/hub/kong-inc/ai-proxy/) と[AI Proxy Advanced](/hub/kong-inc/ai-proxy-advanced/) プラグインで有効になります。上記のquickstartスクリプトは、基本的なAIプロキシプラグインを使用します。 ロードバランシングとセマンティックルーティング機能については、AI Proxy Advanced プラグインを参照してください。 
+{% endif_version %}
 
 AI Proxyは、次の2種類のLLMリクエストをサポートします。
 
@@ -73,7 +79,13 @@ KongのAI Gatewayは、開発者がAIデータと使用状況を制御できる�
 
 #### データガバナンス
 
-AI Gatewayは、[AI Prompt Guard](/hub/kong-inc/ai-prompt-guard)を介して発信AIプロンプトをコントロールする機能を提供します。このプラグインを使用すると、許可/拒否リストの構成に従って正規表現の設定が可能です。プロンプトが拒否されると、クライアントへの`4xx`HTTPコード応答が返され、問題のあるリクエストの出力が妨げられます。
+AI Gatewayは、送信する AI プロンプトを許可/拒否リスト設定で管理する機能を提供します。プロンプトが拒否されると、クライアントへの 4xx HTTPコード応答が返され、 問題のリクエストの回避が妨げられます。
+
+* [AI Prompt Guard](/hub/kong-inc/ai-prompt-guard) プラグインは正規表現を使用して許可/拒否リストを設定できます。
+
+{% if_version gte:3.8.x %}
+
+* [AI Semantic Prompt Guard](/hub/kong-inc/ai-semantic-prompt-guard)プラグインでは、意味的に類似したプロンプトを使用して許可/拒否リストを設定できます。{% endif_version %}
 
 #### 迅速なエンジニアリング
 
@@ -101,6 +113,7 @@ KongのAI Gatewayを使用すると、AI技術を使用してその他のAPIト�
 {% if_version gte:3.7.x %}
 
 #### 流量制限
+
 {:.badge .enterprise}
 
 また、KongのAI Gatewayを使用すると、LLM APIへのトラフィックの管理も可能になります。KongのAI Gatewayは、AIリクエストトラフィックで流量制限を実装するために使用するAI Rate Limiting Advancedプラグインを提供します。
@@ -108,6 +121,7 @@ KongのAI Gatewayを使用すると、AI技術を使用してその他のAPIト�
 * [AI Rate Limiting Advanced](/hub/kong-inc/ai-rate-limiting-advanced) プラグインは LLM のレスポンスを調査して、トークンのコストを計算し、LLM バックエンドサービスの流量制限を有効にします。LLM サービスがレスポンスを返すと、これが流量制限を計算するためのコストとして使用されます。 分析の形式に関する詳細は、[AI 分析](/gateway/{{ page.release }}/production/logging/ai-analytics)を参照してください。
 
 #### コンテンツの安全性とモデレーション
+
 {:.badge .enterprise}
 
 KongのAI Gatewayは、コンテンツをモデレートするためのメカニズムを提供します。
@@ -116,6 +130,16 @@ KongのAI Gatewayは、コンテンツをモデレートするためのメカニ
 
 {% endif_version %}
 
+{% if_version gte:3.8.x %}
+
+#### Semantic caching
+
+{:.badge .enterprise}
+
+KongのAIゲートウェイでは、セマンティックキャッシュを設定できます。
+
+* The [AI Semantic Cache plugin](/hub/kong-inc/ai-semantic-cache/) allows you to semantically cache responses from LLMs. {% endif_version %}
+
 {% if_version gte:3.7.x %}
 
 ### AIオブザーバビリティ
@@ -123,6 +147,7 @@ KongのAI Gatewayは、コンテンツをモデレートするためのメカニ
 KongのAI Gatewayを使用すると、ロギングとメトリクスといった機能を通じてAIサービスを包括的に観察できるようになります。これらの機能を活用してAIの使用状況、パフォーマンス、コストに関するインサイトを取得することで、AIの運用を最適化し、効率的に監視できるようになります。
 
 #### ログ記録
+
 {:.badge .enterprise}
 
 Kong の AI Gateway は、AI プラグインの標準化されたログ形式を提供し、さまざまなプロバイダー間で AI の使用状況を一貫して追跡および分析できるようにします。
@@ -132,6 +157,7 @@ Kong の AI Gateway は、AI プラグインの標準化されたログ形式を
 {% if_version gte:3.8.x %}
 
 #### メトリクスとPrometheus
+
 {:.badge .enterprise}
 
 KongのAI GatewayではPrometheusとGrafanaを通じてAIメトリクスを開示、可視化できます。AIメトリクスの例として、AIリクエスト数、AIサービスの付随コスト、プロバイダーとモデルあたりのトークン使用量などを挙げることができます。メトリクスはPrometheusサーバーでスクレイピングし、Grafanaダッシュボードを使用して可視化できます。このセットアップではAIの運用状況がリアルタイムで表示されるため、パフォーマンスとコストを効果的に監視できます。

@@ -25,7 +25,7 @@ Azure Key Vaultの構成
 * `vault_URI`
 * Azureクライアントシークレット：この値は環境変数としてのみ構成できます。
 
-{{site.base_gateway}}を起動する前に、環境変数を使用してこれらの値を構成できます。
+{{site.base_gateway}} を起動する前に、これらの値を環境変数で設定できます.Instance Managed Identity Tokenを使用している場合は、環境変数を設定する必要はありません。
 
 ```bash
 export KONG_VAULT_AZURE_VAULT_URI=https://my-vault.vault.azure.com
@@ -36,7 +36,8 @@ export AZURE_CLIENT_SECRET=client_secret
 
 {:.note}
 > 
-> `Instance Managed Identity Token`では、環境変数を設定する必要はありません。
+> Azure Vault 経由の Secrets 管理は Azure Instance (VM) および Azure Function App でサポートされています。
+> Azure Container App では現在サポートされていません
 
 ### 例：
 
