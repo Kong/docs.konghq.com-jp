@@ -72,8 +72,8 @@ chapter: 4
 {% endif_version %}
 
 {% if_version gte: 3.4.x %}
-\| Function name       \| Kong Phase            \| Nginx Directives         \| Request Protocol              \| Description
-\|\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\|\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\|\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\|\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\|\-\-\-\-\-\-\-\-\-\-\-\-
+| Function name       | Kong Phase            | Nginx Directives         | Request Protocol              | Description
+|-------|-------|-------|-------|------- |
 \| `init_worker`       \| `init_worker`         \| [`init_worker_by_*`](https://github.com/openresty/lua-nginx-module#init_worker_by_lua_block)     \| \*                             \| Executed upon every Nginx worker process's startup.
 \| `configure`         \| `init_worker`/`timer` \| [`init_worker_by_*`](https://github.com/openresty/lua-nginx-module#init_worker_by_lua_block)     \| \*                             \| Executed every time the Kong plugin iterator is rebuilt \(after changes to configure plugins\).
 \| `certificate`       \| `certificate`         \| [`ssl_certificate_by_*`](https://github.com/openresty/lua-nginx-module#ssl_certificate_by_lua_block) \| `https`, `grpcs`, `wss`       \| Executed during the SSL certificate serving phase of the SSL handshake.
