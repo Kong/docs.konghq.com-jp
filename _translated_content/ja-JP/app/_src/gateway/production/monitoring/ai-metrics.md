@@ -47,8 +47,8 @@ AIコスト: LLMプロバイダーが請求するAIコスト。
 AI トークン: LLMプロバイダーによってカウントされるAIトークン。 これらは、以前にリストされているオプションに加えて、トークンタイプごとにも使用できます。
 AI LLM Latency: LLM providersによるレスポンスを返すまでの時間。
 AI Cache Fetch Latency: キャッシュから応答を返すまでの時間。
-AI Cache Embedding Latency: キャッシュ中に埋め込みを生成するのにかかる時間。 {% endif_version %}
-AI メトリクスは、メトリクスのカーディナリティが高くなり、 パフォーマンスの問題を引き起こす可能性があるため、デフォルトでは無効になっています。 これを有効にするには、Prometheus プラグインの設定で ai_metrics を true に設定します。{% endif_version %}
+AI Cache Embedding Latency: キャッシュ中に埋め込みを生成するのにかかる時間
+{% endif_version %}
 
 AI メトリクスは、メトリクスのカーディナリティが高くなり、 パフォーマンスの問題を引き起こす可能性があるため、デフォルトでは無効になっています。 これを有効にするには、Prometheus プラグインの設定で ai_metrics を true に設定します。
 
