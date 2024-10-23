@@ -584,7 +584,7 @@ kong:{{page.versions.ce}}
 ノードが接続されていることを確認する
 ------------------
 
-コントロールプレーンのCluster Status APIを使用して、データプレーンを監視します。以下の内容が提供されます。
+コントロールプレーンの[Cluster Status API](/gateway/api/admin-ee/latest/#/clustering) を使用してデータプレーンを監視します。以下の内容が提供されます。
 
 * ノードの名前
 * ノードが最後にコントロールプレーンと同期した時刻

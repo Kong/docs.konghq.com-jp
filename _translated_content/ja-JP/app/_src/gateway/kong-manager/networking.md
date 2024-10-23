@@ -5,9 +5,14 @@ badge: "enterprise"
 デフォルト構成
 -------
 
+{% if_version gte:3.8.x %}
+デフォルトでは、Kong Managerは認証なしで起動し（ admin_gui_authを参照）、Admin APIがKong Managerを提供する同じホストのポート8001で利用可能であると仮定します。
+{% endif_version %}
+{% if_version lte: 3.7.x %}
 デフォルトでは、Kong Manager は認証なしで起動し（
 [`admin_gui_auth`](/gateway/{{page.release}}/reference/configuration/#admin_gui_auth)を参照）、Kong Manager を処理する同じホストのポート 8001（[デフォルトのポート](/gateway/{{page.release}}/production/networking/default-ports/)を参照）で Admin API が利用可能
 であることを前提としています。
+{% endif_version %}
 
 カスタム構成
 ------

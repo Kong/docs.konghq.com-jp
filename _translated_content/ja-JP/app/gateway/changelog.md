@@ -8,6 +8,553 @@ Kong Gateway OSSについては、[GitHubのOSS変更履歴](https://github.com/
 
 提供終了が終了した製品バージョンについては、[変更履歴のアーカイブ](https://legacy-gateway--kongdocs.netlify.app/enterprise/changelog/)を参照してください。
 
+## 3.8.0.0
+
+**リリース日** 2024/09/11
+
+### 破壊的な変更と非推奨の変更
+
+**配置**
+
+- Debian 10 と RHEL 7 は 20 年 6 月 30 日に終了しました (EOL) 日付.
+  バージョン3.8.0.0以降、Kongはこれらのオペレーティングシステム用にインストールパッケージやDockerイメージを構築していません。
+  Kongは、これらのシステム上で実行されているすべてのKongバージョンの公式サポートを提供していません。
+  [#13468](https://github.com/Kong/kong/issues/13468)
+
+**Redis 標準化の変更**
+
+- プラグイン間でRedis設定を標準化しました。 Redis構成は他のプラグインと共有される一般的なスキーマに従うようになりました。 この変更の影響:
+  - SAML
+  - OpenID Connect
+- PDK: Redis `kong/enterprise_edition/redis/init.lua` の共有構成は、 `kong/enterprise_edition/tools/redis/v2/init.lua` を支持して非推奨になりました。
+- 次のパラメータは非推奨です:
+
+  - `cluster_address` は非推奨になり、`cluster_nodes` に置き換えられました。
+  - `sentinel_cluster`は廃止され、`sentinel_nodes`に置き換えられました。
+  - Redis 設定の `timeout` 設定フィールドは廃止され、`connect_timeout` 、 `send_timeout` 、 そして `read_timeout` に置き換えられました。
+    廃止予定の `timeout` フィールドは、今後のメジャーバージョンで削除されます。
+
+  これらの非推奨は以下のプラグインに影響します：
+
+  - AIレート制限の詳細設定
+  - GraphQLプロキシキャッシュの詳細設定
+  - GraphQLレート制限詳細設定
+  - プロキシキャッシュ詳細設定
+  - Rate limiting Advanced
+
+  Redis 標準化の変更についての詳細は、[3.8 Breaking Changes](/gateway/3.8.x/breaking-changes/)を参照してください。
+
+### 特徴
+
+#### Admin API
+
+- Admin API 経由でマップフィールドの設定用の括弧構文をサポートしました。
+  [#13313](https://github.com/Kong/kong/issues/133)
+
+#### CLI
+
+- `kong debug` CLI ツールに新しいサブコマンド `status` を追加しました。
+
+#### 設定
+
+- Wasmが有効になったときにWasmtimeモジュールキャッシュを設定できるようになりました。
+  [#12930](https://github.com/Kong/kong/issues/12930)
+- `admin_gui_auth_change_password_attempts` (デフォルト値 `0`) と
+  `admin_gui_auth_change_password_ttl` (デフォルト値 `86400`)の2つの設定オプションを追加しました。
+
+#### コア
+
+- 新しい設定パラメータ [`concurrency_limit`](/gateway/3.8.x/reference/configuration/#concurrency_limit)
+  (integer, defaulted to 1) を追加しました。これにより、キュー内の配信タイマーの数を指定できます。
+  `concurrency_limit`を`-1`に設定すると、全く制限がなく、HTTPログエントリごとに送信するタイマーが個別に作成されることに注意してください。
+  [#13332](https://github.com/Kong/kong/issues/13332)
+- Kong Gateway は上流の `Via` ヘッダーに `1.1 kong/3.8 形式のゲートウェイ情報を追加します。 `、必要に応じて、`2 kong/3.8.0`形式で、`kong.conf`の[`headers`](/gateway/3.8.x/reference/configuration/#headers) の設定に存在する場合は、
+  レスポンスの`Via`ヘッダに返します。
+  これは [RFC7230](https://datatracker.ietf.org/doc/html/rfc7230) および [RFC9110](https://datatracker.ietf.org/doc/html/rfc9110) で定義されている規格に従います。
+  [#12733](https://github.com/Kong/kong/issues/12733)
+- Kong Gateway 3.8.x に、新しい DNS クライアントライブラリが追加されました。
+  このライブラリはデフォルトで無効になっており、[`new_dns_client`](/gateway/3.8.x/reference/configuration/#new_dns_client) パラメータを `on` に設定することで有効にできます。
+  新しいDNSクライアント・ライブラリには、以下のものがあります。
+  - ワーカー全体のDNSレコードのグローバルキャッシュにより、DNSサーバーのクエリ負荷が大幅に低減されました。
+  - 新しいDNSクライアントの観測可能な統計情報と、それらを取得するための新しいStatus API「/status/dns」。
+  - 簡素化され標準化されたロジック。
+    format@@0(/gateway/3.8.x/migratto-new-dns-client/)の新しいDNSクライアントライブラリの有効化と使用について詳しくはこちらをご覧ください。
+    [#12305](https://github.com/Kong/kong/issues/12305)
+- **分析**:
+  - レイテンシーとキャッシュに関するAIアナリティクスをKonnectに送信するためのサポートを追加しました。
+  - AI分析のキャッシュデータをKonnectに送信する機能を追加しました。
+- 設定フィールド [`connection_is_proxied`](/gateway/3.8.x/reference/configuration/#connection_is_proxied) を介した Redis プロキシ経由の接続サポートを追加しました (例えば、Envoy Redis プロキシまたは twemproxy)。
+- `pg_iam_auth_assume_role_arn` 、 `pg_iam_auth_assume_role_arn` 、 `pg_iam_auth_role_session_name` 、 `pg_ro_iam_auth_assume_role_arn` 、 `pg_ro_iam_role_arn` 、 `pg_ro_iam_iam_auth_role_session_name` などの新しい設定項目を使用して、AWS IAM の役割を想定するためのサポートを追加しました。
+  詳細については、[PostgreSQL 設定セクション](/gateway/3.8.x/reference/configuration/#postgres-settings) を参照してください。
+- [ライセンス データベース エンティティ payloads](/gateway/3.8.x/kong-enterprise/db-encryption/#configure-license-payload-encryption)にキーリング 暗号化のサポートを追加しました。
+- `pg_iam_auth_sts_endpoint_url` と `pg_ro_iam_auth_sts_endpoint_url` の設定可能な STSエンドポイントのサポートを追加しました。
+  詳細については、[PostgreSQL 設定セクション](/gateway/3.8.x/reference/configuration/#postgres-settings) を参照してください。
+- AWS Vaultの設定可能なSTSエンドポイントのサポートを追加。 これは、グローバル設定として[`vault_aws_sts_endpoint_url`](/gateway/3.8.x/reference/configuration/#vault_aws_sts_endpoint_url) によって設定することができます。/gateway/3.8.x/kong-enterprise/secrets-management/backends/aws-sm/) カスタムAWS保管庫エンティティの [`sts_end_url`](/gatews_end_url) によって設定することができます。
+
+#### Kong Manager
+
+- Kong Manager のアクセシビリティの向上。
+- エンハンスされたエンティティリストで、リスト列のサイズを変更または非表示にできます。
+- SNIフィールドを証明書フォームに追加しました。
+- **Kong Manager Enterprise**:
+  - ワークスペースを削除しながら、Kong Managerは操作を妨げる管理者を一覧表示するようになりました。
+  - Kong Manager にプラグインの詳細ページで、スコープエンティティをリンクとして表示するようになりました。
+  - プラグインの参照可能なフィールドを設定しながら、格納域リファレンスを構築する UI コンポーネントを追加しました。
+- Kong Manager には、証明書の作成中に任意でSNIを作成できる入力ボックスが表示されるようになりました。
+
+#### PDK
+
+- 無制限のボディサイズをサポートするために `0` を追加しました。
+  パラメータ `max_allowed_file_size` が `0` の場合、`get_raw_body` は本体全体、
+  を返しますが、この本体のサイズは Nginx の `client_max_body_size` で制限されています。
+  [#13431](https://github.com/Kong/kong/issues/13431)
+- `kong.request.get_body` と `kong.request.get_raw_body` を拡張してバッファされたファイルを読み込みます。
+  [#13158](https://github.com/Kong/kong/issues/13158)
+- Added the new PDK module `kong.telemetry` and the function `kong.telemetry.log`
+  to generate log entries to be reported via the OpenTelemetry plugin.
+  [#13329](https://github.com/Kong/kong/issues/13329)
+
+#### プラグイン
+
+**新しいプラグイン**:
+
+- [**AI Proxy Advanced**](/hub/kong-inc/ai-proxy-advanced/): LLMサービス間のロードバランシングをサポートする高度なAIプロキシ。
+- [**AI Semantic Cache**](/hub/kong-inc/ai-semantic-cache/): LLM 応答用の埋め込み型キャッシュシステムを設定します。
+- [**AI Semantic Prompt Guard**](/hub/kong-inc/ai-semantic-prompt-guard/): AI Proxyで意味類似のプロンプトガードを使用します。
+- [**上流OAuth**](/hub/kong-inc/upstream-oauth/): 上流APIを消費するOAuth2トークンを取得できるプラグイン。
+- [**Confluent**](/hub/kong-inc/confluent/): ConfluentトピックのKafkaメッセージにリクエストを変換します。
+- [**Standard Webhooks**](/hub/kong-inc/standard-webhooks/): 着信するWebhookが[Standard Webhooks](https://github.com/standard-webhooks/standard-webhooks)
+  仕様に従っていることを確認します。
+- [**Header Cert Authentication**](/hub/kong-inc/header-cert-auth/): WAF または load balancer によってヘッダに渡された mTLS 証明書でクライアントを認証します。
+- [**JSON 脅威保護**](/hub/kong-inc/json-threat-protection/): JSON ネスト深度、配列要素、オブジェクトエントリ、
+  キー長、文字列長を検証し、違反リクエストをログまたは終了します。
+
+**既存のプラグイン**:
+
+- [**ACL**](/hub/kong-inc/acl/) (`acl`)
+  - Added the new configuration parameter `always_use_authenticated_groups` to support using authenticated groups even
+    when an authenticated consumer already exists.
+    [#13184](https://github.com/Kong/kong/issues/13184)
+
+- [**すべてのAIプラグイン**](/hub/?category=ai):
+  - レイテンシーデータがログとメトリックにプッシュされるようになりました。
+    [#13428](https://github.com/Kong/kong/issues/13428)
+  - Kong AI Gateway ですべての AWS Bedrock Converse API モデルがサポートされるようになりました。
+    [#12948](https://github.com/Kong/kong/issues/12948)
+  - Kong AI GatewayはGoogle Geminiチャット(`generateContent`)インターフェースに対応しました。
+    [#12948](https://github.com/Kong/kong/issues/12948)
+
+- [**AI Proxy**](/hub/kong-inc/ai-proxy/) (`ai-proxy`)
+  - `allow_override` オプションを追加し、呼び出し元のリクエストからアップストリームモデルの認証パラメータまたはヘッダーを上書きすることができます。
+    [#13158](https://github.com/Kong/kong/issues/13158)
+  - ライブラリを置き換え、`request_table` オブジェクトに `cycle_aware_deep_copy` を使用します。
+    [#13582](https://github.com/Kong/kong/issues/13582)
+  - Mistral プロバイダは、 `upstream_url` を省略することで、 mistral.ai-managed サービスを使用できるようになりました。
+    [#13481](https://github.com/Kong/kong/issues/13481)
+  - 新しいレスポンスヘッダー `X-Kong-LLM-Model` が追加され、AI Proxy プラグインで使用される言語モデルの名前が表示されます。
+    [#13472](https://github.com/Kong/kong/issues/13472)
+
+- [**AI Rate Limiting Advanced**](/hub/kong-inc/ai-limiting-advanced/) (`ai-rate-limiting-advanced`)
+  - Redis `cluster_max_redirections` 設定オプションを追加。
+  - 制限に達し、AIレート制限プラグインを終了するための統計を追加しました。
+  - AIレート制限プラグインにコスト戦略を追加します。
+  - サポートされているプロバイダリストに `bedrock` と `gemini` プロバイダを追加しました。
+
+- [**AI プロンプトガード**](/hub/kong-inc/ai-prompt-guard/) (`ai-prompt-guard`)
+  - `user`に加えて、すべてのロールに一致することを許可する、 `match_all_roles`オプションを追加しました。
+    [#13183](https://github.com/Kong/kong/issues/13183)
+
+- [**AppDynamics**](/hub/kong-inc/app-dynamics/) (`app-dynamics`)
+  - 新しいフラグ「ANALYTICS_ENABLE」を追加しました。 このプラグインは、ランタイムでより多くのスナップショットユーザーデータを収集するようになりました。
+
+- [**AWS Lambda**](/hub/kong-inc/aws-lambda) (`aws-lambda`)
+  - 新しい設定フィールド `aws_sts_endpoint_url` を使用して構成可能なSTSエンドポイントのサポートを追加しました。
+    [#13388](https://github.com/Kong/kong/issues/13388)
+  - Added the configuration field `empty_arrays_mode` to control whether Kong should send `[]` empty arrays
+    (returned by Lambda function) as `[]` empty arrays or `{}` empty objects in JSON responses.
+    [#13084](https://github.com/Kong/kong/issues/13084)
+
+- [**JWT Signer**](/hub/kong-inc/jwt-signer/) (`jwt-signer`)
+  - このプラグインはDB-less モードで `/jwt-signer/jwks/:jwt_signer_jwks` エンドポイントの使用をサポートします。
+
+- [**LDAP Authentication Advanced**](/hub/kong-inc/ldap-auth-advanced/) (`ldap-auth-advanced`)
+  - このプラグインは、空のシーケンスのデコード、または長いフォーム長で表されるセットをサポートします。
+
+- [**OpenID Connect**](/hub/kong-inc/openid-connect/) (`openid-connect`)
+  - `cluster_cache_strategy`と`cluster_cache_redis`の新しいフィールドで、Redis キャッシュのイントロスペクション結果のサポートを追加しました。
+    設定すると、プラグインは同じ Redis データベースを使用するように設定されたノード間でトークンイントロスペクションレスポンスキャッシュを共有します。
+  - アクセスを制限するために `claims_forbidden` プロパティを追加しました。
+
+- [**Prometheus**](/hub/kong-inc/prometheus/) (`prometheus`)
+  - Added `ai_requests_total`, `ai_cost_total`, and `ai_tokens_total` metrics to
+    the Prometheus plugin to start counting AI usage.
+    [#13148](https://github.com/Kong/kong/issues/13148)
+
+- [**OpenTelemetry**](/hub/kong-inc/opentelemetry/) (`opentelemetry`)
+  - OpenTelemetry形式のログをサポートしました。
+    [#13291](https://github.com/Kong/kong/issues/13291)
+
+- [**GraphQLプロキシキャッシュAdvanced**](/hub/kong-inc/graphql-proxy-cache-advanced/) (`graphql-proxy-cache-advanced`),
+  [**GraphQLレート制限Advanced**](/hub/kong-inc/graphql-rate-limiting-advanced`),
+  [**proxy Cache Advanced**](/hub/kong-inc.ache-advanced`),
+  [**Rate Limiting Advanced**](/hub/kong-inc/rate-limiting-advanced///) (`rate-limiting-advanced`) (
+  - Redis `cluster_max_redirections` 設定オプションを追加。
+
+- [**Response Transformer**](/hub/kong-inc/response-transformer/) (`response-transformer`)
+  - `json_body` の名前変更をサポートしました。
+    [#13131](https://github.com/Kong/kong/issues/13131)
+
+### 修正
+
+#### Admin API
+
+- リクエスト本文に `snis` フィールドが存在すると、証明書スキーマの検証が失敗する問題を修正しました。
+  [#13357](https://github.com/Kong/kong/issues/13357)
+- `rbac_token_enabled` の無効化中にトークンのリセットが許可された問題を修正しました。
+- `rbac_roles`を更新する際に、 `is_default`フィールドが変更不能になる問題を修正しました。
+- LambdaとKafkaプラグインで必須でないフィールドが指定されていない場合、ライセンスレポートが500エラーコードを返す問題を修正しました。
+- 関連付けられた管理者がワークスペースをカスケード削除できない場合、Kong Gatewayが詳細なエラーメッセージを返すようになりました。
+
+#### CLI
+
+- CLI でデバッグレベルエラーログが表示されない問題を修正しました。
+  [#13143](https://github.com/Kong/kong/issues/13143)
+
+#### クラスタリング
+
+- プロキシパスワードに特殊文字`#`が含まれている場合、ハイブリッドモードが機能しない問題を修正しました。
+  `proxy_server` 設定パラメータは引き続きURLエンコードが必要です。
+  [#13457](https://github.com/Kong/kong/issues/13457)
+
+#### 設定
+
+- `proxy-wasm`からLua DNSリゾルバをデフォルトで再度有効にしました。
+  [#13424](https://github.com/Kong/kong/issues/13424)
+- 設定オプション `analytics_flush_interval` の動作は、分析メッセージをより頻繁にフラッシュすることによってメモリ
+  リソースを節約するように変更されました。
+  これにより、設定されたバックエンドへの2つの分析メッセージの間の最大時間間隔を制御します。
+  は、十分な (`analytics_buffer_size_limit` より小さい) メッセージがすでにバッファされている場合、
+  は設定された間隔の前にフラッシュが発生します。
+  以前は、Kong は常に、バッファ内の
+  メッセージの数に関係なく、設定された間隔の後にメッセージをフラッシュしようとしました。
+- `status_listen`のSSL関連設定が`debug_listen`で誤って使用される問題を修正しました。
+
+#### コア
+
+- `luaocks-admin`が/usr/local/bin\`で使用できない問題を修正しました。
+  [#13372](https://github.com/Kong/kong/issues/13372)
+- `read`が常にPostgreSQLの読み取り専用データベース操作に渡されない問題を修正しました。
+  [#13530](https://github.com/Kong/kong/issues/13530)
+- 非推奨のフィールドを記述するために使用される短縮形のフィールドの動作を修正しました。
+  - 両方が指定された場合に置換フィールドよりも優先順位を取らないように、非推奨の略式フィールドに関する問題を修正しました。
+    [#13486](https://github.com/Kong/kong/issues/13486)
+  - 非推奨の短縮形の項目が新しい項目で使用されるように変更されました。
+    新しいフィールドに `null` が含まれている場合、非推奨フィールドは、両方がリクエストに存在する場合にそれを上書きします。
+    [#13592](https://github.com/Kong/kong/issues/13592)
+  - 両方のフィールドがリクエストで送信され、値が一致しない場合、リクエストは拒否されます。
+    [#13594](https://github.com/Kong/kong/issues/13594)
+- `ngx.send_header()`が`filter_finalize`をトリガーした場合、`lua-nginx-module`コンテキストがクリアされる問題を修正しました。
+  [openresty/lua-nginx-module#2323](https://github.com/openresty/lua-nginx-module/pull/2323).
+  [#13316](https://github.com/Kong/kong/issues/13316)
+- 400件の不正なリクエストを受け取ったときに不要な初期化されていない変数エラーログが報告された問題を修正しました。
+  [#13201](https://github.com/Kong/kong/issues/13201)
+- 最初のキャプチャグループが存在しない場合、URI キャプチャが使用できない問題を修正しました。
+  [#13024](https://github.com/Kong/kong/issues/13024)
+- `router_flavor` を `expressions` として設定した場合、従来のモード経路で優先フィールドを設定できる問題を修正しました。
+  [#13142](https://github.com/Kong/kong/issues/13142)
+- `tls_verify` を `false` に設定すると、グローバルレベル `proxy_ssl_verify` が上書きされない問題を修正しました。
+  [#13470](https://github.com/Kong/kong/issues/13470)
+- SNIが更新されたときにSNIキャッシュが無効化されなかった問題を修正しました。
+  [#13165](https://github.com/Kong/kong/issues/13165)
+- `kong.logrotate`設定ファイルはアップグレード中に上書きされなくなりました。
+
+  この変更は、 `apt` と `deb` パッケージを経由してアップグレードするための追加のプロンプトを表示します。
+  パッケージ内でKongが提供するデフォルトを受け入れるには、次のコマンドを使用します。
+  アーキテクチャとアップグレード中のバージョンに調整します:
+
+  ```sh
+  DEBIAN_FRONTEND=非対話型apt upgrade kong-enterprise-edition_3.8.0.0_arm64.deb.
+  ```
+
+[#13348](https://github.com/Kong/kong/issues/13348)
+
+- `rewart_ttl`の時間中にVaultの秘密のキャッシュが更新され、他のワーカーが取得できなかった問題を修正しました。
+  [#13561](https://github.com/Kong/kong/issues/13561)
+- Vaultの秘密のローテーション中に生成されたエラーログは、`warn`の代わりに`notice`レベルで記録されるようになりました。
+  [#13540](https://github.com/Kong/kong/issues/13540)
+- 接続再試行中に上流エンティティの `host_header` 属性がホストヘッダー
+  として正しく設定されない問題を修正しました。
+  [#13135](https://github.com/Kong/kong/issues/13135)
+- Kong prefix のサブディレクトリ (`sockets` ) に内部の Unix ソケットを移動しました。
+  [#13409](https://github.com/Kong/kong/issues/13409)
+- DNS 応答の `ADDITIONAL SECTION` を無視する元の動作に DNS クライアントをリバートしました。
+  [#13278](https://github.com/Kong/kong/issues/13278)
+- ソケット名制限を超えないようにするために内部Unixソケットの短い名前。
+  [#13571](https://github.com/Kong/kong/issues/13571)
+- 管理者に対するRBACの組み込みロール（デフォルトのワークスペースでは`admin`、非デフォルトのワークスペースでは`workspace-admin`）
+  が`/groups`と`/groups/*`エンドポイントに対するCRUDアクションを禁止するようになりました。
+- `/usr/local/bin`でluaocks-adminが使用できない問題を修正しました。
+- HashiCorp Vault参照を含むデータベース構成でのKong CLIコマンドの実行に失敗する問題を修正しました。
+- キーリングの回復後、CPが設定プッシュをトリガーしない問題を修正しました。
+- 認証時にネットワーク障害が発生した場合、Azure Managed Identity トークンが回転しない問題を修正しました。
+- ライセンスが更新された場合でも、古いライセンスの期限切れ警告が引き続き記録される問題を修正しました。
+- ライセンス期限切れの警告がログに記録されなくなり、Konnect の `/metrics` からライセンス情報が削除されました。
+
+#### Kong Manager
+
+- 様々なUI関連の問題を修正することで、Kong Managerでのユーザーエクスペリエンスを改善しました。
+  [#232](https://github.com/Kong/kong-manager/issues/232) [#233](https://github.com/Kong/kong-manager/issues/233) [#234](https://github.com/Kong/kong-manager/issues/237) [#238](https://github.com/Kong/kong-manager/issues/238) [#240](https://github.com/Kong/kong-manager/issues/240) [#244](https:///kong/kong-manager/issues/244) [#252](http
+- 消費者および/または消費者グループが範囲を定めるプラグインで動的な順序付けが設定できる問題を修正しました。
+  これらのプラグインは動的な順序をサポートしていません。
+- 以前ブラウザーのローカルストレージに保存されていた冗長データを削除しました。
+- Redisクラスタをサポートするプラグインの`cluster_addresses`と`sentinel_addresses`フィールドの問題を修正しました。
+- Dev Portal の概要ページが正しくレンダリングされない問題を修正しました。
+- アクティブな管理者が更新された後、ユーザー情報が更新されなかった問題を修正しました。
+
+#### PDK
+
+- **PDK**: サブリクエストを含むリクエストでログシリアライザが `upstream_status` を nil として記録した問題を修正しました。
+  [#12953](https://github.com/Kong/kong/issues/12953)
+- **Vault**: 解析時にスラッシュで終わる参照はキーを返しません。
+  [#13538](https://github.com/Kong/kong/issues/13538)
+- `serialize_value`で設定されたJSONエンティティに`json.null`が含まれている場合、`pdk.log.serialize()`がエラーを発生する問題を修正しました。
+  [#13376](https://github.com/Kong/kong/issues/13376)
+
+#### プラグイン
+
+- **共有Redisスキーマを持つプラグイン**: `connect_timeout`でRedisスキーマの問題を修正しました。 廃止予定の `timeout` が `null` の場合、 `read_timeout` 、 `send_timeout`
+  は `null` にリセットされました。
+
+- [**AI Proxy**](/hub/kong-inc/ai-proxy/) (`ai-proxy`)
+
+  - 応答ストリーミングモードで一部の Azure モデルが部分的なトークン/単語を返す問題を修正しました。
+  - Cohere と Anthropic プロバイダが、呼び出し元のリクエストボディから `model` パラメータを正しく読み込まなかった問題を修正しました。
+  - OpenAI機能推論要求がリクエストエラーをログに記録し、タイムアウトするまでハングする問題を修正しました。
+  - プラグイン構成のモデル名を無視して、AI Proxy で独自のモデルを指定できる問題を修正しました。
+  - AIプロキシがプラグインの設定されたモデルチューニングオプションをユーザーのLLMリクエストよりも優先しない問題を修正しました。
+  - OpenAI SDK モデル パラメータ `null` を設定すると、分析がロギングプラグインに書き込まれなくなる問題を修正しました。
+
+  [#13000](https://github.com/Kong/kong/issues/13000)
+
+  - クライアントがフォーマットを受け入れなくても応答が gzip された場合の問題を修正しました。
+    [#13155](https://github.com/Kong/kong/issues/13155)
+  - オブジェクトコンストラクタがインスタンスの代わりにクラスにデータを設定する問題を修正しました。
+    [#13028](https://github.com/Kong/kong/issues/13028)
+  - 統計情報をサポートしていないプロバイダで `log_statistics` が有効化されないようにする設定検証を追加しました。
+    従って、`log_statistics` のデフォルトは `true` から `false` に変更されました。 そして、サポートされていないプロバイダがすでに有効になっている場合、データベースの移行が
+    無効になっている場合に追加されました。
+    [#12860](https://github.com/Kong/kong/issues/12860)
+
+- [**AI plugins**](/hub/?category=ai)
+  - 特定のAIプラグインが消費者やサービスごとに適用できなかった問題を修正しました。
+    [#13209](https://github.com/Kong/kong/issues/13209)
+  - マルチモーダル入力が正しく検証され計算されなかった問題を修正しました。
+    [#13445](https://github.com/Kong/kong/issues/13445)
+
+- [**AI プロンプトガード**](/hub/kong-inc/ai-prompt-guard/) (`ai-prompt-guard`)
+  - `allow_all_conversation_history` が false に設定されている場合に発生する問題を修正しました。 そして、最初の
+    ユーザーリクエストが最後のユーザーではなく選択される原因になりました。
+    [#13183](https://github.com/Kong/kong/issues/13183)
+
+- [**AI Request Transformer**](/hub/kong-inc/ai-request-transformer/) (`ai-request-transformer`) and
+  [**AI Response Transformer**](/hub/kong-inc/ai-response-transformer/) (`ai-response-transformer`)
+  - `ai-request-transformer` および `ai-response-transformer` プラグインでCloud Identity 認証が使用されない問題を修正しました。
+
+- [**Prometheus**](/hub/kong-inc/prometheus/) (`prometheus`)
+  - 一貫性のないラベル数を持つときのエラーログを改善しました。
+    [#13020](https://github.com/Kong/kong/issues/13020)
+  - 新しい設定フィールド `ai_metrics` の CP/DP 互換性チェックが欠落していた問題を修正しました。
+    [#13417](https://github.com/Kong/kong/issues/13417)
+
+- [**ACME**](/hub/kong-inc/acme/) (`acme`)
+  - 設定がCPからプッシュされた際に非推奨の設定項目が使用されていたことをDPが報告する問題を修正しました。
+    [#13069](https://github.com/Kong/kong/issues/13069)
+  - ユーザー名とパスワードが有効な認証方法として受け入れられない問題を修正。
+    [#13496](https://github.com/Kong/kong/issues/13496)
+
+- [**AWS Lambda**](/hub/kong-inc/aws-lambda) (`aws-lambda`)
+  - プロキシ統合で定義された `multiValueHeaders` とレガシーの `empty_arrays_mode` でプラグインが動作しない問題を修正しました。
+    [#13381](https://github.com/Kong/kong/issues/13381)
+  - `awsgateway_compatible` が有効になっている場合、リクエスト ペイロードで `version` フィールドが設定されていない問題を修正しました。
+    [#13018](https://github.com/Kong/kong/issues/13018)
+
+- [**CORS**](/hub/kong-inc/cors/) (`cors`)
+  - `conf.origins` に複数のエントリがあり、`*` が含まれている場合、`Access-Control-Allow-Origin` ヘッダーが送信されなかった問題を修正しました。
+    [#13334](https://github.com/Kong/kong/issues/13334)
+
+- [**相互関係ID**](/hub/kong-inc/correlation-id/) (`correlation-id`)
+  - 明示的に `generator` を `null` に設定すると、プラグインが動作しない問題を修正しました。
+    [#13439](https://github.com/Kong/kong/issues/13439)
+
+- [**gRPC-Gateway**](/hub/kong-inc/grpc-gateway/) (`grpc-gateway`)
+  - JSONデコードエラーが発生した場合、ステータス500の代わりにステータス400とエラー情報を本文に返すようになりました。
+    [#12971](https://github.com/Kong/kong/issues/12971)
+
+- [**HMAC 認証**](/hub/kong-inc/hmac-auth/) (`hmac-auth`), [**JWT**](/hub/kong-inc/jwt/) (`jwt`), [**LDAP認証**](/hub/kong-inc/ldap-auth/) (`ldap-auth`), [**OAuth2**](/hub/kong-inc/oauth2/) (\`oauth2)
+  - 401応答にWWW-Authenticateヘッダーを追加。
+    [#11791](https://github.com/Kong/kong/issues/11791)
+    [#11792](https://github.com/Kong/kong/issues/11792)
+    [#11820](https://github.com/Kong/kong/issues/11820)
+    [#11833](https://github.com/kong/kong/issues/11833)
+
+- [**HTTP ログ**](/hub/kong-inc/http-log/) (`http-log`)
+  - ログサーバーへのリクエスト送信時に、プラグインが HTTP ホストヘッダーにポート情報を含まない問題を修正しました。
+    [#13116](https://github.com/Kong/kong/issues/13116)
+
+- [**OAS Validation**](/hub/kong-inc/oas-validation/) (`oas-validation`)
+  - パスパラメータ名にハイフン文字が含まれている場合、プラグインが値を取得できない問題を修正しました。
+  - パラメータのシリアライズが OpenAPI 仕様と同じ動作をしない問題を修正しました。
+  - OpenAPI仕様のバージョンがv3.1.0であった場合、URLクエリで渡された非文字列プリミティブ型が文字列に予期せずキャストされる問題を修正しました。
+
+- [**OpenTelemetry**](/hub/kong-inc/opentelemetry/) (`opentelemetry`)
+  - 3.3.x より前のバージョンから 3.7.x にアップグレードすると、移行に失敗する問題を修正しました。
+    [#13391](https://github.com/Kong/kong/issues/13391)
+  - 冗長非推奨の警告を削除しました。
+    [#13220](https://github.com/Kong/kong/issues/13220)
+  - サンプリング決定の精度を向上させました。
+    [#13275](https://github.com/Kong/kong/issues/13275)
+
+- [**Zipkin**](/hub/kong-inc/zipkin/) (`zipkin`)
+  - 冗長非推奨の警告を削除しました。
+    [#13220](https://github.com/Kong/kong/issues/13220)
+  - サンプリング決定の精度を向上させました。
+    [#13275](https://github.com/Kong/kong/issues/13275)
+
+- [**リクエストトランスフォーマー**](/hub/kong-inc/request-transformer/) (`request-transformer`)
+  - クエリパラメータの名前を変更すると、URL エンコードされた本体パラメータの問題を修正しました。 リクエストのソース名と同じ名前の場合、
+    と JSON のボディパラメータは適切に処理されませんでした。
+    [#13358](https://github.com/Kong/kong/issues/13358)
+
+- [**Basic Auth**](/hub/kong-inc/basic-auth/) (`basic-auth`)
+  - Realm フィールドが旧バージョンの Kong Gateway で認識されなかった問題を修正しました(3.6.x より前)。
+    [#13042](https://github.com/Kong/kong/issues/13042)
+  - 全ての401レスポンスとレルムオプションにWWW-Authenticateヘッダーを追加しました。
+    [#11833](https://github.com/Kong/kong/issues/11833)
+
+- [**Key Auth**](/hub/kong-inc/key-auth/) (`key-auth`)
+  - Realm フィールドが旧バージョンの Kong Gateway で認識されなかった問題を修正しました(3.7 より前)。
+    [#13042](https://github.com/Kong/kong/issues/13042)
+
+- [**リクエストサイズ制限**](/hub/kong-inc/request-size-limiting/) (`request-size-limiting`)
+  - リクエストボディが一時ファイルにバッファリングされたときにbodyサイズがチェックされなかった問題を修正しました。
+    [#13303](https://github.com/Kong/kong/issues/13303)
+
+- [**応答レート制限**](/hub/kong-inc/response-ratelimiting/) (`response-ratelimiting`)
+  - 設定がCPからプッシュされた際に非推奨の設定項目が使用されていたことをDPが報告する問題を修正しました。
+    [#13069](https://github.com/Kong/kong/issues/13069)
+
+- [**レート制限**](/hub/kong-inc/rate-limiting/) (`rate-limiting`)
+  - 設定がCPからプッシュされた際に非推奨の設定項目が使用されていたことをDPが報告する問題を修正しました。
+    [#13069](https://github.com/Kong/kong/issues/13069)
+
+- [**Rate Limiting Advanced**](/hub/kong-inc/rate-limiting-advanced/) (`rate-limiting-advanced`)
+  - 中央データストアでネットワークが不安定になった場合、タイマーのスパイクが発生しなくなりました。
+  - Fixed an issue where, if the `window_size` in the consumer group overriding config was different
+    from the `window_size` in the default config, the rate limiting of that consumer group would fall back to local strategy.
+  - 競合状態によって同期タイマーが動作を停止する問題を修正しました。
+
+- [**プロキシキャッシュ**](/hub/kong-inc/proxy-cache/) (`proxy-cache`)
+  - キャッシュされたレスポンスを提供する際に、Age ヘッダーが正しく更新されない問題を修正しました。
+    [#13387](https://github.com/Kong/kong/issues/13387)
+
+- [**OAuth 2.0 Introspection**](/hub/kong-inc/oauth2-introspection/) (`oauth2-introspection`)
+  - OAuth2 Introspection プラグインが `consumer_by`として`client_id`を使用した場合、コンシューマのキャッシュが無効化されない問題を修正しました。
+
+- [**OpenID Connect**](/hub/kong-inc/openid-connect/) (`openid-connect`)
+  - 匿名の消費者が特定の条件下で nil としてキャッシュされる問題を修正しました。
+  - 最後の発見に失敗した場合、短い有効期間 (5s) を使用するように再発見を更新しました。
+  - `PATCH` リクエストを送信する際に `using_pseudo_issuer` が動作しなかった問題を修正しました。
+
+- [**AI Rate Limiting Advanced**](/hub/kong-inc/ai-limiting-advanced/) (`ai-rate-limiting-advanced`)
+  - ウィンドウ調整のロジックを編集し、パスウィンドウのミッシングを共有メモリに変更しました。
+
+- [**TLS メタデータヘッダ**](/hub/kong-inc/tls-metadata/headers/) (`tls-metadata-headers`)
+  - 中間証明書の詳細がリクエストヘッダーに追加されなかった問題を修正しました。
+
+- [**Key Authentication Encrypted**](/hub/kong-inc/key-auth-enc/) (`key-auth-enc`)
+  - すべての401応答にWWW-Authenticateヘッダーを追加。
+
+- [**LDAP Authentication Advanced**](/hub/kong-inc/ldap-auth-advanced/) (`ldap-auth-advanced`)
+  - すべての401応答にWWW-Authenticateヘッダーを追加。
+
+- [**DeGraphQL**](/hub/kong-inc/degraphql/) (`degraphql`)
+  - クエリパラメータを変換する際に複数のパラメータタイプが正しく処理されない問題を修正しました。
+
+- [**プロキシキャッシュ Advanced**](/hub/kong-inc/proxy-cache-advanced/) (`proxy-cache-advanced`)
+  - キャッシュされたリクエストを送信する際に Age ヘッダーが正しく更新されない問題を修正しました。
+
+- [**Request Validator**](/hub/kong-inc/request-validator/) (`request-validator`)
+  - `param_schema` が `$ref スキーマ` のときにプラグインがリクエストを処理できない問題を修正しました。
+  - Content-Type パラメータの検証を有効にするかどうかを決定する新しい設定フィールド `content_type_parameter_validation` を追加しました。
+
+- [**StatsD**](/hub/kong-inc/statsd/) (`statsd`)
+  - ワークスペースの識別子がワークスペース名に設定されている場合、エクスポートされたワークスペースが常に `default` になっていた問題を修正しました。
+
+### パフォーマンス
+
+- Luajitハッシュアルゴリズムにおける非効率な問題を修正しました。
+  [#13240](https://github.com/Kong/kong/issues/13240)
+- 不要なDNSクライアントの初期化を削除しました。
+  [#13479](https://github.com/Kong/kong/issues/13479)
+- 大容量データ(CP/DP設定データなど)をgzipping/gunzip処理する際のレイテンシーパフォーマンスが向上しました。
+  [#13338](https://github.com/Kong/kong/issues/13338)
+- Rate Limitingコンテキストをより効率的に取得することで、Konnect Analyticsのパフォーマンスを向上しました。
+- バッファリングメカニズムを最適化することで、Konnect Analyticsのパフォーマンスを向上させました。
+
+### 依存関係
+
+- Redisでのユーザー名/パスワード認証をサポートするため、`lua-resty-acme` を 0.15.0 にバインドしました。
+  [#12909](https://github.com/Kong/kong/issues/12909)
+- 悪意者の地域エンドポイントに関連するバグを修正するために、`lua-resty-aws`を1.5.3にバインドしました。
+  [#12846](https://github.com/Kong/kong/issues/12846)
+- `lua-resty-events` を 0.3.0 にバインドしました。
+  [#13097](https://github.com/Kong/kong/issues/13097)
+- アクティブヘルスチェックタイマーの使用量を減らすために、`lua-resty-healthcheck` を 3.0.1 から 3.1.0 にバインドしました。
+  [#13038](https://github.com/Kong/kong/issues/13038)
+- `lua-resty-lmdb` を 1.4.3 (lmdb 0.9.33)
+  [#12786](https://github.com/Kong/kong/issues/12786) にバンプしました
+- `lua-resty-openssl` を 1.5.1 にバインドしました。
+  [#12665](https://github.com/Kong/kong/issues/12665)
+- OpenResty を 1.25.3.2
+  [#12327](https://github.com/Kong/kong/issues/12327) にバンプしました
+- いくつかのバグを修正し、リリースを整理するために PCRE2 を 10.44 にバンプしました。
+  [#12366](https://github.com/Kong/kong/issues/12366)
+- `lua-resty-simdjson` の JSON ライブラリである
+  が導入され、レイテンシが大幅に向上しました。
+  [#13421](https://github.com/Kong/kong/issues/13421)
+- `lua-probuf` を 0.5.2
+  [#12834](https://github.com/Kong/kong/issues/12834) にバンプしました
+- Bumped LuaRocks from 3.11.0 to 3.11.1
+  [#12662](https://github.com/Kong/kong/issues/12662)
+- `ngx_wasm_module` を `96b4e27e10c63b07ed40ea88a91c22f23981db35`
+  [#12011](https://github.com/Kong/kong/issues/12011)
+- Bumped `Wasmtime` version to 23.0.2
+  [#12011](https://github.com/Kong/kong/issues/12011)
+- デフォルトのプレフィックスが `/` に設定された RPM パッケージの再配置が可能になりました。
+  [#13468](https://github.com/Kong/kong/issues/13468)
+
+* `libxml2` を 2.12.9 にバインドしました。
+* `libxslt` を 1.1.42 にバインドしました。
+* `msgpack-c`を6.1.0にバインドしました。
+* `kong-lua-resty-kafka` を 0.20 にバインドし、TCP ソケットの keepliving をサポートし、Kafka クライアントに `client_id`
+  を設定します。
+* `lua-resty-jsonschema-rs`を0.1.5にバインドしました
+* `lua-resty-cookie` を 0.3.0 にバインドしました
+* より多くのAzure認証方式をサポートするため、`lua-resty-azure`を1.6.0にバインドしました。
+* `luaexpat`を1.5.2にバインドしました。
+* `kong-redis-cluster` を 1.5.4 にバインドしました。以下の問題を修正しました。
+  - Kubernetes環境で、一部またはすべてのポッドが新しいIPで復元された場合、Kong Gatewayが回復できなかった問題を修正しました。
+  - マスターノードのキャッシュがリフレッシュ時に無限に拡張されるメモリリークの問題を修正しました。
+  - 複数のクラスターインスタンスが誤ってフラッシュされた問題を修正。
+
+### 既知の問題
+
+- In the [JSON Threat Protection plugin](/hub/kong-inc/json-threat-protection/configuration/), the default value of `-1`
+  for any of the `max_*` parameters indicates unlimited.
+  一部の環境 (ARM64 ベースの環境など) では、デフォルト値は正しく解釈されません。
+  プラグインは、パラメータのいずれかがデフォルト値で継続する場合、誤って有効なリクエストをブロックできます。
+  この問題を軽減するために、すべてのパラメータの制限を持つ JSON 脅威保護プラグインを設定します。
+
 3\.7\.1\.2
 -------------
 

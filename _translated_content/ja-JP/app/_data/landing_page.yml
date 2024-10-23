@@ -4,27 +4,23 @@ features:
         title: "主な特徴"
         items: 
             - 
-                name: "Service Hub"
-                description: "サービスの包括的なカタログを構築し、アーキテクチャ全体にわたってあらゆるAPIの発見、消費、管理を可能にします。"
+                name: "サービスカタログ"
+                description: "組織内で実行されているすべてのサービスの包括的なカタログを作成します Konnect-internalアプリケーション (Gateway ManagerやMesh Managerなど) と外部アプリケーション (GitHub や PagerDutyなど) の両方"
                 icon: "/assets/images/landing-page/card-icons/service-hub.svg"
                 links: 
                     - 
                         text: "概要"
                         icon: "/assets/images/icons/icn-doc.svg"
-                        url: "/konnect/servicehub/"
+                        url: "/konnect/service-catalog/"
             - 
                 name: "Dev Portal"
                 description: "セルフサービスの開発者経験によって開発者のオンボーディングを合理化し、開発者が公開サービスを発見、登録、利用できるようにします。"
                 icon: "/assets/images/landing-page/card-icons/dev-portal.svg"
                 links: 
                     - 
-                        text: "概要（クラウド）"
+                        text: "概要"
                         icon: "/assets/images/icons/icn-doc.svg"
                         url: "/konnect/dev-portal/"
-                    - 
-                        text: "自主管理型"
-                        icon: "/assets/images/icons/icn-doc.svg"
-                        url: "/gateway/latest/kong-enterprise/dev-portal/"
             - 
                 name: "Advanced Analytics"
                 description: "Konnect Advanced Analyticsを使用して詳細な分析を表示し、環境とクラスターの健全性を監視します。サービス、ルート、アプリケーションの使用状況に関する詳細な情報を得ることができます。"

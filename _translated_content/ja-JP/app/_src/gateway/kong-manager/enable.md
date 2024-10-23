@@ -5,6 +5,20 @@ title: "Kong Managerを有効にする"
 またはハイブリッドモード）を使用して実行している場合は、Kong Managerで{{site.base_gateway}}のグラフィカルユーザーインターフェース（GUI）を
 有効にできます。
 
+{% if_version gte:3.9.x %}
+
+{:.note}
+> 注意: 複数のドメインからアクセスできるようにKong Managerを設定するには コンマで区切られた値として、コンマで区切られたドメインを、香港設定の admin_gui_url パラメータにリストできます。 例:
+
+`admin_gui_url = http://localhost:8002, http://127.0.0.1:8002 `
+`admin_gui_path も設定されている場合は、以下の設定を更新してください。`
+
+`admin_gui_url = http://localhost:8002/manager, http://127.0.0.1:8002/manager`
+`admin_gui_path = /manager `
+各ドメインに適切な DNS レコードがあり、指定されたすべてのドメインから Kong インスタンスにアクセスできることを確認します。
+
+{% endif_version %}
+
 {% navtabs %}
 {% navtab Docker %}
 

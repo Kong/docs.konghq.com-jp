@@ -44,7 +44,8 @@ AWS IAM認証を有効にする前に、AWS RDSデータベースと{{site.base_
   {:.warning}
   > 
   > **警告：** AWS認証情報の提供に使用した環境変数の値は、{{site.base_gateway}}の起動後には変更 **できません** 。すべての変更は無視されます。{% if_version gte:3.8.x %}
-  * ロールを引き受ける場合は、Kongが使用する元のIAMロールにターゲットIAMロールのロールを引き受けるための正しい権限があること、およびターゲットIAMロールにIAM認証を使用してデータベースに接続するための正しい権限があることを確認します。 {% endif_version %}
+  * If you want to assume a role, make sure the original IAM role that Kong uses has the correct permission to assume the role of the target IAM role, and the target IAM role has the correct permission to connect to the database using IAM authentication.
+  * If you have users with non\-public VPC networks and private VPC endpoints \(without private DNS names enabled\), you can configure an AWS Service Token Service \(STS\) endpoint globally with `vault_aws_sts_endpoint_url` or on a custom AWS Vault entity with `sts_endpoint_url`. {% endif_version %}
 
 * **IAM ポリシーを {{site.base_gateway}} IAM ロールに割り当てます** 。詳細については、Amazon RDS ドキュメントの「[IAM データベースアクセス用の IAM ポリシーの作成と使用](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.IAMPolicy.html)」を参照してください。
 
@@ -93,9 +94,19 @@ KONG_PG_RO_IAM_AUTH=on
 KONG_PG_IAM_AUTH_ASSUME_ROLE_ARN=<role_arn id="sl-md0000000">
 KONG_PG_IAM_AUTH_ROLE_SESSION_NAME=<role_session_name id="sl-md0000000">
 
+# Optional, specify the custom STS endpoint URL used for the IAM assume role
+# This value will override the default STS endpoint URL, which should be
+# `https://sts.amazonaws.com`, or `https://sts.<region id="sl-md0000000">.amazonaws.com` if
+# `AWS_STS_REGIONAL_ENDPOINTS` is set to `regional`(by default).
+# If you are not using a private VPC endpoint for STS service, you should
+# not specify this value
+KONG_PG_IAM_AUTH_STS_ENDPOINT_URL=https://your.endpoint.to.aws.sts.service.amazonaws.com
+
 # For read-only connections, if you need a different role than for read-write
 KONG_PG_RO_IAM_AUTH_ASSUME_ROLE_ARN=<role_arn id="sl-md0000000">
 KONG_PG_RO_IAM_AUTH_ROLE_SESSION_NAME=<role_session_name id="sl-md0000000">
+# Optional, same as KONG_PG_IAM_AUTH_STS_ENDPOINT_URL
+KONG_PG_RO_IAM_AUTH_STS_ENDPOINT_URL=https://your.endpoint.to.aws.sts.service.amazonaws.com
 ```
 
 {% endif_version %}
@@ -124,10 +135,19 @@ pg_ro_iam_auth=on
 # For read-write connections
 pg_iam_auth_assume_role_arn=<role_arn id="sl-md0000000">
 pg_iam_auth_role_session_name=<role_session_name id="sl-md0000000">
+# Optional, specify the custom STS endpoint URL used for the IAM assume role
+# This value will override the default STS endpoint URL, which should be
+# `https://sts.amazonaws.com`, or `https://sts.<region id="sl-md0000000">.amazonaws.com` if
+# `AWS_STS_REGIONAL_ENDPOINTS` is set to `regional`(by default).
+# If you are not using a private VPC endpoint for STS service, you should
+# not specify this value
+pg_iam_auth_sts_endpoint_url=https://your.endpoint.to.aws.sts.service.amazonaws.com
 
 # For read-only connections, if you need a different role than for read-write
 pg_ro_iam_auth_assume_role_arn=<role_arn id="sl-md0000000">
 pg_ro_iam_auth_role_session_name=<role_session_name id="sl-md0000000">
+# Optional, same as `pg_iam_auth_sts_endpoint_url`
+pg_ro_iam_auth_sts_endpoint_url=https://your.endpoint.to.aws.sts.service.amazonaws.com
 ```
 
 {% endif_version %}

@@ -169,14 +169,34 @@ HTTPリクエストで構成されます。
 
 **説明：** Redisを使用し、いずれかのプラグインが有効になっている場合は、Redisがボトルネックになっていないことを確認してください。通常、CPUはRedisのボトルネックとなるため、まずCPUの使用状況を確認してください。この場合は、追加のCPUを追加してRedisを垂直方向に拡張します。
 
-#### DNS
+{% if_version gte:3.8.x %}
 
-**アクション：** `dns_stale_ttl`を`300`または最大`86400`まで増やします。
+#### DNS クライアント
+
+**アクション:** 新しい DNS クライアントに移行します。
+
+**説明** 新しいDNSクライアントは、以前のものよりもパフォーマンスが高いように設計されているため、移行はパフォーマンスを向上させます。
+
+{% endif_version %}
+
+#### DNS TTL
+
+{% if_version lte:3.7.x %}
+**アクション:** `dns_stale_ttl` を `300` または `86400` に増やします。
+{% endif_version %}
+{% if_version gte:3.8.x %}
+**アクション:**`dns_stale_ttl` を `300` または `86400` に増やします。
+{% endif_version %}
 
 **説明：** {{site.base_gateway}}はリクエストの送信先を決定するためにDNSに依存しているため、DNSサーバーが{{site.base_gateway}}のボトルネックになる可能性があります。
 
-Kubernetesの場合、DNS TTLの長さは5秒のため、問題が発生する可能性があります。
-DNSを問題として除外するために、`dns_stale_ttl`を`300`または`86400`まで増やすことができます。
+In the case of Kubernetes, DNS TTLs are 5 seconds long and can cause problems.
+{% if_version lte:3.7.x %}
+`dns_stale_ttl`を`300`に、または最大`86400`をチケットとしてDNSを除外できます。
+{% endif_version %}
+{% if_version gte:3.8.x %}
+`dns_stale_ttl` または `resolver_stale_ttl` を増やすことができます。 使用しているDNSクライアントに応じて、`300`または`86400`までのDNSを問題として除外します。
+{% endif_version %}
 
 DNSサーバーが根本原因である場合、CPUでボトルネックを発生させているポッドが`coredns`個あることがわかります。
 
@@ -237,10 +257,11 @@ KONG_DNS_STALE_TTL="3600"
 Helm チャートを通して構成を適用する場合は、以下を使用します。
 
 ```yaml
-# The value of 4 for nginx_worker_processes is a suggested value. You can use 8 as well.
+# The value of 1 for nginx_worker_processes is a suggested value. 
+# Change nginx_worker_processes to a number matching the CPU limit. We recommend 4 or 8.
 # Allocate the same amount of CPU and appropriate memory to avoid OOM killer.
 env:
-  nginx_worker_processes: "4"
+  nginx_worker_processes: "1"
   upstream_keepalive_max_requests: "100000"
   nginx_http_keepalive_requests: "100000"
   proxy_access_log: "off"
@@ -248,11 +269,8 @@ env:
 
 resources:
   requests:
-    cpu: 4
-    memory: ""
-  limits:
-    cpu: 4
-    memory: ""
+    cpu: 1
+    memory: "2Gi"
 ```
 
 {% endnavtab %}

@@ -20,9 +20,15 @@ kong.service.request.enable\_buffering\(\)
 
 **フェーズ** 
 
-* `rewrite`, `access`
+{% if_version gte:3.8.x %}
 
-**戻り値** 
+* `rewrite`, `access`, `balancer`
+  {% endif_version %}
+  {% if_version lte:3.7.x %}
+
+* `rewrite`, `access`
+  {% endif_version %}
+  **Returns** 
 
 * 何も起こりません。
 
@@ -39,9 +45,15 @@ kong.service.request.set\_scheme（スキーム）
 
 **フェーズ** 
 
-* `access`
+{% if_version gte:3.8.x %}
 
-**パラメータ** 
+* `access`, `rewrite`, `balancer` {% endif_version %}
+
+{% if_version lte:3.7.x %}
+
+* `access`
+  {% endif_version %}
+  **Parameters** 
 
 * **スキーム** （`string`）: 使用するスキーム。サポートされている値は`"http"`または `"https"`です。
 
@@ -68,11 +80,18 @@ kong.service.request.set\_path\(path\)
 
 **フェーズ** 
 
+{% if_version gte:3.8.x %}
+
+* `access`, `rewrite`, `balancer`
+  {% endif_version %}
+  {% if_version lte:3.7.x %}
+
 * `access`
+  {% endif_version %}
+  **Parameters** 
 
-**パラメータ** 
-
-* **パス** \( `string` \): パス文字列。特殊文字とUTF\-8 文字は許可されます。例: `"/v2/movies"`または`"/foo/😀"` 。
+* **パス** \( `string` \): パス文字列。特殊文字とUTF\-8
+  文字は許可されます。例: `"/v2/movies"`または`"/foo/😀"` 。
 
 **戻り値** 
 
@@ -317,11 +336,17 @@ kong.service.request.set\_raw\_body\(body\)
 
 **フェーズ** 
 
-* `rewrite`, `access`
+{% if_version gte:3.8.x %}
 
-**パラメータ** 
+* `access`, `rewrite`, `balancer`
+  {% endif_version %}
+  {% if_version lte:3.7.x %}
 
-* **body** \(`string`\): 生のボディ部。
+* `access`, `rewrite`
+  {% endif_version %}
+  **Parameters** 
+
+* **body** \(`string`\):  生のボディ部。
 
 **戻り値** 
 
@@ -360,11 +385,19 @@ MIMEタイプが上記のいずれでもない場合は、この関数は`nil`�
 
 **フェーズ** 
 
-* `rewrite`, `access`
+{% if_version gte:3.8.x %}
 
-**パラメータ** 
+* `access`, `rewrite`, `balancer`
+  {% endif_version %}
+  {% if_version lte:3.7.x %}
 
-* **args** \(`table`\): 適切な形式に変換すされるデータ表で ボディに保管されます。
+* `access`, `rewrite`
+  {% endif_version %}
+  **Parameters** 
+
+* **args** \(`table`\): 適切な形式に変換すされるデータ表で
+  ボディに保管されます。
+
 * **mimetype** （`string`、 *オプション* ）：次のいずれかになります。
 
 **戻り値** 
@@ -423,4 +456,3 @@ if not ok then
   -- do something with error
 end
 ```
-
