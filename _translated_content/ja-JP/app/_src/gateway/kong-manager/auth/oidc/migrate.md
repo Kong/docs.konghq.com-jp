@@ -12,8 +12,8 @@ admin\_gui\_auth\_conf
 
 以下の `admin_gui_auth_conf` の属性に対する変更の概要を参照し、詳細については個々のリンクに従ってください。
 
-パラメータ \| 古い動作 \| 新しい動作
-\-\-\-\|\-\-\-\|\-\-\-\|\-\-\-\|\-\-\-
+|パラメータ \| 古い動作 \| 新しい動作|
+|-------|-------|-------|
 [`scopes`](#scopes) \| 古いデフォルト：`["openid", "profile", "email"]` \| 新しいデフォルト：`["openid", "email", "offline_access"]`
 [`admin_claim`](#admin_claim) \| 必須 \| オプション（デフォルト：`"email"`）
 [`authenticated_groups_claim`](#authenticated_groups_claim) \| 必須 \| オプション（デフォルト：`["groups"]`）
@@ -87,11 +87,11 @@ OpenID Connectプラグインにセッション管理メカニズムが組み込
 さらに、一部のパラメータのデフォルト値が変更されました。
 詳細については、以下を参照してください。
 
-古いパラメータ名と場所 \| 新しいパラメータ名と場所 \| 古いデフォルト \| 新しいデフォルト
-\-\-\-\|\-\-\-\|\-\-\-\|\-\-\-\|\-\-\-
-[`admin_gui_session_conf.secret`](#secret) \| `admin_gui_auth_conf.session_secret` \| \-\- \| \-\- \|
-[`admin_gui_session_conf.cookie_secure`](#cookie_secure) \| `admin_gui_auth_conf.session_cookie_secure`\| `true` \| `false` \|
-[`admin_gui_session_conf.cookie_samesite`](#cookie_samesite) \| `admin_gui_auth_conf.session_cookie_same_site` \| `Strict` \| `Lax` \|
+|古いパラメータ名と場所 \| 新しいパラメータ名と場所 \| 古いデフォルト \| 新しいデフォルト|
+|-------|-------|-------|-------|
+|[`admin_gui_session_conf.secret`](#secret) \| `admin_gui_auth_conf.session_secret` \| --| --|
+|[`admin_gui_session_conf.cookie_secure`](#cookie_secure) \| `admin_gui_auth_conf.session_cookie_secure`\| `true` \| `false` \|
+|[`admin_gui_session_conf.cookie_samesite`](#cookie_samesite) \| `admin_gui_auth_conf.session_cookie_same_site` \| `Strict` \| `Lax` \|
 
 ### シークレット
 
