@@ -55,9 +55,9 @@ Please visit <a href="{{portal.url}}/login" id="sl-md0000000">{{portal.url}}/log
 
 {% raw %}
 |パス	|サポートされているトークン	|必要なトークン	|説明|
-|\-\-\- 	|\-\-\-	|\-\-\-	|\-\-\-	|
+|-------|-------|-------|-------|
 |emails/invite.txt	| `{{portal.gui_url}}` `{{email.developer_email}}` | `{{portal.gui_url}}` |マネージャーからポータルに招待された開発者へメールを送信	|
-|\-\-\-	|\-\-\-	|\-\-\-	|\-\-\-	|
+|-------|-------|-------|-------|
 |emails/request\-access.txt	|`{{portal.gui_url}}` `{{email.developer_email}}` `{{email.developer_name}}` `{{email.developer_meta.*}}` `{{email.admin_url}}`	|`{{portal.gui_url}}` `{{email.developer_email}}`	|開発者がポータルにサインアップしたときに、開発者を承認するために管理者に送信されるメール	|
 |emails/approved\-access.txt	 |`{{portal.url}}` `{{email.developer_email}}` `{{email.developer_name}}` `{{email.developer_meta.*}}`	|`{{portal.gui_url}}`	|アカウントが承認されたときに開発者に送信されるメール |
 |emails/password\-reset.txt	|`{{portal.url}}` `{{email.developer_email}}` `{{email.developer_name}}` `{{email.developer_meta.*}}` `{{email.token}}` `{{email.token_exp}}` `{{email.reset_url}}`	|`{{portal.url}}` `{{email.token}}`または`{{email.reset_url}}`|パスワードのリセットが要求されたときに開発者に送信されるメール（basic\-authのみ） |
@@ -72,9 +72,9 @@ Please visit <a href="{{portal.url}}/login" id="sl-md0000000">{{portal.url}}/log
 
 {% raw %}
 |トークン	|説明	|
-|\-\-\- |\-\-\- |
+|-------|-------|
 | `{{portal.url}}`	|ワークスペースの開発ポータルURL	|
-|\-\-\-	|\-\-\-	|
+|-------|-------|
 | `{{email.developer_email}}`	|開発者のメール	|
 | `{{email.developer_name}}`	|開発者のフルネーム。この値はデフォルトで登録の一部として収集されます。 メタフィールドがfull\_nameを含まないように編集された場合、これはemailにフォールバックします	|
 | `{{email.developer_meta.*}}`	|開発者のメタフィールド。これらの値は登録の一部として収集されます。これらは、登録前に構成する必要があります。値が存在しないかオプションで空白の場合は、空の文字列として表示されます。`developer_meta`構成でフィールドが指定されていない場合は、置換されずにそのまま表示されます。例：`{{email.developer_meta.preferred_name}}`|
