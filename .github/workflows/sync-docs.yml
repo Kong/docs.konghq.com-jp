@@ -20,7 +20,7 @@ jobs:
         with:
           token: ${{ secrets.PAT }}
           path: docs.konghq.com
-          ref: i18n-spike
+          ref: main
           pr_branch: automated-docs-update
           base_branch: main
           target_branch: main
