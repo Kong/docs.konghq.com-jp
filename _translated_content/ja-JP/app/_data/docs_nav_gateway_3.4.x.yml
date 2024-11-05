@@ -764,17 +764,17 @@ items:
         # smartling.sltrans = notranslate
                 url: "/kong-enterprise/"
 
-            - text: Kong Vitals
+            - text: Kong バイタル
               items:
-                - text: Overview
+                - text: 概要
                   url: /kong-enterprise/analytics/
-                - text: Metrics
+                - text: メトリクス
                   url: /kong-enterprise/analytics/metrics
-                - text: Analytics with InfluxDB
+                - text: InfluxDBによる分析
                   url: /kong-enterprise/analytics/influx-strategy
-                - text: Analytics with Prometheus
+                - text: Prometheusによる分析
                   url: /kong-enterprise/analytics/prometheus-strategy
-                - text: Estimate Analytics Storage in PostgreSQL
+                - text: PostgreSQLにおける分析ストレージの見積もり
                   url: /kong-enterprise/analytics/estimates
 
         # smartling.sltrans = translate
@@ -889,19 +889,19 @@ items:
               items:
                 - text: Overview
                   url: /kong-enterprise/dev-portal/
-                - text: Enable the Dev Portal
+                - text: ポータルを有効にする
                   url: /kong-enterprise/dev-portal/enable
-                - text: Publish an OpenAPI Spec
+                - text: OpenAPI仕様の公開
                   url: /kong-enterprise/dev-portal/publish-spec
-                - text: Structure and File Types
+                - text: 構造とファイルタイプ
                   url: /kong-enterprise/dev-portal/structure-and-file-types
-                - text: Themes Files
+                - text: テーマファイル
                   url: /kong-enterprise/dev-portal/themes
-                - text: Working with Templates
+                - text: テンプレートを使う
                   url: /kong-enterprise/dev-portal/working-with-templates
-                - text: Using the Editor
+                - text: エディターの使用
                   url: /kong-enterprise/dev-portal/using-the-editor
-                - text: Authentication and Authorization
+                - text: 認証と認可
                   items:
                     - text: Basic Auth
                       url: /kong-enterprise/dev-portal/authentication/basic-auth
@@ -909,55 +909,55 @@ items:
                       url: /kong-enterprise/dev-portal/authentication/key-auth
                     - text: OIDC
                       url: /kong-enterprise/dev-portal/authentication/oidc
-                    - text: Sessions
+                    - text: セッション
                       url: /kong-enterprise/dev-portal/authentication/sessions
-                    - text: Adding Custom Registration Fields
+                    - text: カスタム登録フィールドの追加
                       url: /kong-enterprise/dev-portal/authentication/adding-registration-fields
-                    - text: Manage Developers
+                    - text: 開発者の管理
                       url: /kong-enterprise/dev-portal/authentication/managing-developers
-                    - text: Developer Roles and Content Permissions
+                    - text: 開発者の役割とコンテンツ権限
                       url: /kong-enterprise/dev-portal/authentication/developer-permissions
-                - text: Application Registration
+                - text: アプリケーション登録
                   items:
-                    - text: Authorization Provider Strategy
+                    - text: 認可プロバイダー戦略
                       url: /kong-enterprise/dev-portal/applications/auth-provider-strategy
-                    - text: Enable Application Registration
+                    - text: アプリケーション登録を有効にする
                       url: /kong-enterprise/dev-portal/applications/enable-application-registration
-                    - text: Enable Key Authentication for Application Registration
+                    - text: アプリケーション登録のための鍵認証を有効にする
                       url: /kong-enterprise/dev-portal/applications/enable-key-auth-plugin
-                    - text: Enable External Authentication
+                    - text: 外部認証を有効にする
                       items:
-                        - text: External OAuth2 Support
+                        - text: 外部OAuth2サポート
                           url: /kong-enterprise/dev-portal/authentication/3rd-party-oauth
-                        - text: Set up Okta and Kong for External Oauth
+                        - text: 外部認証のためのOktaとKongのセットアップ
                           url: /kong-enterprise/dev-portal/authentication/okta-config
-                        - text: Set up Azure AD and Kong for External Authentication
+                        - text: 外部認証のためのAzure ADとKongのセットアップ
                           url: /kong-enterprise/dev-portal/authentication/azure-oidc-config
-                    - text: Manage Applications
+                    - text: アプリケーションの管理
                       url: /kong-enterprise/dev-portal/applications/managing-applications
-                - text: Customize Dev Portal
+                - text: 開発ポータルのカスタマイズ
                   items:
-                    - text: Theme Editing
+                    - text: テーマ編集
                       url: /kong-enterprise/dev-portal/customize/theme-editing
-                    - text: Migrating Templates Between Workspaces
+                    - text: ワークスペース間でのテンプレートの移行
                       url: /kong-enterprise/dev-portal/customize/migrating-templates
-                    - text: Markdown Rendering Module
+                    - text: Markdownレンダリングモジュール
                       url: /kong-enterprise/dev-portal/customize/markdown-extended
-                    - text: Customizing Portal Emails
+                    - text: ポータルメールのカスタマイズ
                       url: /kong-enterprise/dev-portal/customize/emails
-                    - text: Adding and Using JavaScript Assets
+                    - text: JavaScriptアセットの追加と使用
                       url: /kong-enterprise/dev-portal/customize/adding-javascript-assets
-                    - text: Single Page App in Dev Portal
+                    - text: 開発ポータルのシングルページアプリ
                       url: /kong-enterprise/dev-portal/customize/single-page-app
-                    - text: Alternate OpenAPI Renderer
+                    - text: 代替OpenAPIレンダラー
                       url: /kong-enterprise/dev-portal/customize/alternate-openapi-renderer
                 - text: SMTP
                   url: /kong-enterprise/dev-portal/smtp
                 - text: Workspaces
                   url: /kong-enterprise/dev-portal/workspaces
-                - text: Helpers CLI
+                - text: ヘルパーCLI
                   url: /kong-enterprise/dev-portal/cli
-                - text: Portal API Documentation
+                - text: ポータルAPIドキュメント
                   url: /dev-portal/api/v1/
                   absolute_url: true
                   generate: false
@@ -1735,7 +1735,7 @@ items:
         # smartling.sltrans = notranslate
                 url: "/reference/key-management"
 
-            - text: Performance Testing Framework
+            - text: パフォーマンステストのフレームワーク
               url: /reference/performance-testing-framework
 
         # smartling.sltrans = translate
