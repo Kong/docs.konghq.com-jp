@@ -3,6 +3,7 @@ locale: ja-JP
 links:
   web: https://docs.jp.konghq.com
   share: https://docs.jp.konghq.com
+  issues: https://github.com/Kong/docs.konghq.com-jp/issues
 
 disable_search: true
 
