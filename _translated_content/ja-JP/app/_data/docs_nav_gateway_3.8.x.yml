@@ -435,7 +435,7 @@ items:
             text: はじめに
             url: /kong-enterprise/secrets-management/getting-started
           - 
-            text: シークレット回転
+            text: ローテーション
             url: /kong-enterprise/secrets-management/secrets-rotation
           - 
             text: 高度な使い方

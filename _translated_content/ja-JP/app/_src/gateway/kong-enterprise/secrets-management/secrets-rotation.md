@@ -19,7 +19,7 @@ Kongはリクエストを処理するためおよび他のシステムとクラ�
 
 シークレットをローテーションする方法は主に2つあります。
 
-* TTLを使用して定期的に回転します（例：1日に1回新規TLS証明書を確認）
+* TTLを使用して定期的にローテーションします（例：1日に1回新規TLS証明書を確認）
 * 失敗時にローテーションします（たとえば、データベース認証に失敗した場合、シークレットが更新されているかどうかを確認して、もう一度やり直してください）
 
 Kong は、シークレットのローテーションについて両方の方法をサポートしています。失敗時のローテーションにはコードを書く必要があるため、その点において Kong でのサポート（現時点で Postgres の認証情報）は限られています。失敗時にシークレットをローテーションに使用できる実験的な Kong PDK API（[kong.vault.try](/gateway/{{page.release}}/plugin-development/pdk/kong.vault/#kongvaulttrycallback-options)）が用意されています。
@@ -89,7 +89,7 @@ curl -i -X PUT http://HOSTNAME:8001/vaults/aws-certs  \
 {vault://aws-certs/certs/web-site}
 ```
 
-`aws-certs` vaultで参照されるシークレット （この場合は証明書）は、同じ6時間のTTLを共有し、有効期限が切れる1分前に回転します。
+`aws-certs` vaultで参照されるシークレット （この場合は証明書）は、同じ6時間のTTLを共有し、有効期限が切れる1分前にローテーションします。
 
 ### TTLを使用してGCP Secret Managerシークレットのローテーションを構成する
 
@@ -131,7 +131,7 @@ curl -i -X PUT http://HOSTNAME:8001/vaults/gcp-certs  \
 {vault://gcp-certs/certs/web-site}
 ```
 
-`gcp-certs` vaultで参照されるシークレット （この場合は証明書）は、同じ6時間のTTLを共有し、有効期限が切れる1分前に回転します。
+`gcp-certs` vaultで参照されるシークレット （この場合は証明書）は、同じ6時間のTTLを共有し、有効期限が切れる1分前にローテーションします。
 
 ### TTLを使用したHashiCorp Vaultシークレットのローテーションの設定
 
@@ -173,5 +173,5 @@ curl -i -X PUT http://HOSTNAME:8001/vaults/hcv-certs  \
 {vault://hcv-certs/certs/web-site}
 ```
 
-`hcv-certs` vaultで参照されるシークレット （この場合は証明書）は、同じ6時間のTTLを共有し、有効期限が切れる1分前に回転します。
+`hcv-certs` vaultで参照されるシークレット （この場合は証明書）は、同じ6時間のTTLを共有し、有効期限が切れる1分前にローテーションします。
 
